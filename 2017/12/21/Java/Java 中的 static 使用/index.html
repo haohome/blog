@@ -75,6 +75,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="靖风行'S blog" type="application/atom+xml" />
+
 
 
 
@@ -382,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  
+                  798
                 </span>
               
 
@@ -425,8 +427,6 @@
 <li>1.静态方法中可以直接调用同类中的静态成员，但不能直接调用非静态成员。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">  String name=<span class="string">"小明"</span>;<span class="comment">//费静态变量</span></span><br><span class="line">  <span class="keyword">static</span> String hobby=<span class="string">"唱歌"</span>;<span class="comment">//静态变量hobby</span></span><br><span class="line">  <span class="comment">//在静态方法中调用非静态变量</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// System.out.println("欢迎:"+name+"!");报错,不能直接调用非静态变量</span></span><br><span class="line">    System.out.println(<span class="string">"爱好:"</span>+hobby+<span class="string">"!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</blockquote>
-<blockquote>
 <p>如果希望在静态方法中调用非静态变量，可以通过创建类的对象，然后通过对象来访问非静态变量<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//创建类的对象</span></span><br><span class="line">  HelloWorld hello=<span class="keyword">new</span> HelloWorld();</span><br><span class="line">  <span class="comment">//通过对象来实现在静态方法中调用非静态变量</span></span><br><span class="line">    System.out.println(<span class="string">"欢迎:"</span>+hello.name+<span class="string">"!"</span>);</span><br><span class="line">    System.out.println(<span class="string">"爱好:"</span>+hobby+<span class="string">"!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <ul>
@@ -507,8 +507,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/01/Java/Java中的多态/" rel="prev" title="Java中的多态">
-                Java中的多态 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/01/Java/Java中super关键字的使用/" rel="prev" title="Java中super关键字的使用">
+                Java中super关键字的使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -652,6 +652,13 @@ var jiathis_config={
           </nav>
 
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
 
           
             <div class="links-of-author motion-element">
@@ -706,7 +713,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#static静态变量的使用"><span class="nav-number">1.</span> <span class="nav-text">static静态变量的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static静态方法的使用"><span class="nav-number">2.</span> <span class="nav-text">static静态方法的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#static静态变量的使用"><span class="nav-number">1.</span> <span class="nav-text"><a href="#static&#x9759;&#x6001;&#x53D8;&#x91CF;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="static&#x9759;&#x6001;&#x53D8;&#x91CF;&#x7684;&#x4F7F;&#x7528;"></a>static&#x9759;&#x6001;&#x53D8;&#x91CF;&#x7684;&#x4F7F;&#x7528;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static静态方法的使用"><span class="nav-number">2.</span> <span class="nav-text"><a href="#static&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="static&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x7684;&#x4F7F;&#x7528;"></a>static&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x7684;&#x4F7F;&#x7528;</span></a></li></ol></div>
             
 
           </div>

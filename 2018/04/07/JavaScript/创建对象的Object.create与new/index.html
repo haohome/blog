@@ -75,6 +75,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="靖风行'S blog" type="application/atom+xml" />
+
 
 
 
@@ -384,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  
+                  495
                 </span>
               
 
@@ -437,7 +439,7 @@
 </ol>
 <p>​    1. 创建空对象{} </p>
 <p>​    2. 指定空对象{}继承自参数的原型对象,即空对象的    <code>__proto__</code> 指向Object.create()参数的原型对象。</p>
-<ol start="2">
+<ol>
 <li><p><code>var obj1=new M({name:&#39;xiaowang&#39;})</code> 的实现方式:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义构造函数Person </span></span><br><span class="line"><span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = firstName;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//定义Person原型对象的新方法</span></span><br><span class="line">Person.prototype.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Hello, I'm "</span> + <span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//实例化对象</span></span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">"Alice"</span>);</span><br><span class="line"><span class="comment">//对象调用method</span></span><br><span class="line">person1.sayHello(); <span class="comment">// logs "Hello, I'm Alice"</span></span><br></pre></td></tr></table></figure>
 <p>由此可以总结<code>new</code>做了： </p>
@@ -676,6 +678,13 @@ var jiathis_config={
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           

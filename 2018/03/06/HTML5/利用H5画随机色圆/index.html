@@ -75,6 +75,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="靖风行'S blog" type="application/atom+xml" />
+
 
 
 
@@ -384,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  
+                  411
                 </span>
               
 
@@ -434,7 +436,7 @@
 <li>生成随机数和随机颜色方法</li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*获取指定范围内的随机数字*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomNum</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n=<span class="built_in">Math</span>.random()*(max-min)+min;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(n)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*生成随机色*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomColor</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> r=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> g=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> b=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> a=<span class="built_in">Math</span>.random();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`rgba(<span class="subst">$&#123;r&#125;</span>,<span class="subst">$&#123;g&#125;</span>,<span class="subst">$&#123;b&#125;</span>,<span class="subst">$&#123;a&#125;</span>)`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
+<ol>
 <li>利用svg绘图</li>
 </ol>
 <p>html:</p>
@@ -650,6 +652,13 @@ var jiathis_config={
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
