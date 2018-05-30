@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 频率请求   接下来我们根据这些场景来分析下; 场景">
+<meta name="description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 问卷答题   接下来我们根据这些场景来分析下;">
 <meta name="keywords" content="JavaScript,event">
 <meta property="og:type" content="article">
 <meta property="og:title" content="点击事件重复请求">
 <meta property="og:url" content="http://blog.haohome.top/2018/05/29/JavaScript/点击事件重复请求/index.html">
 <meta property="og:site_name" content="靖风行&#39;S blog">
-<meta property="og:description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 频率请求   接下来我们根据这些场景来分析下; 场景">
+<meta property="og:description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 问卷答题   接下来我们根据这些场景来分析下;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T07:03:09.367Z">
+<meta property="og:updated_time" content="2018-05-30T07:07:16.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="点击事件重复请求">
-<meta name="twitter:description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 频率请求   接下来我们根据这些场景来分析下; 场景">
+<meta name="twitter:description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 问卷答题   接下来我们根据这些场景来分析下;">
 
 
 
@@ -415,10 +415,11 @@
 <blockquote>
 <ol>
 <li>ajax请求;</li>
-<li>频率请求</li>
+<li>问卷答题</li>
 </ol>
 </blockquote>
 <p>接下来我们根据这些场景来分析下;</p>
+<a id="more"></a>
 <h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><h3 id="1-ajax提交"><a href="#1-ajax提交" class="headerlink" title="1. ajax提交"></a>1. ajax提交</h3><script async src="//jsrun.net/ejZKp/embed/all/light/"></script>
 
 <p>当用户短时间内重复点击登录按钮时,会触发多次的表单提交;<br>解决方案: 当点击提交按钮后,给按钮添加disabled属性,事件完成后再<code>removeAttr(&#39;disabled&#39;)</code></p>
