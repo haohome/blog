@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="靖风行&#39;S blog">
 <meta property="og:description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 问卷答题   接下来我们根据这些场景来分析下;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T07:22:56.460Z">
+<meta property="og:updated_time" content="2018-05-30T13:27:34.623Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="点击事件重复请求">
 <meta name="twitter:description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 问卷答题   接下来我们根据这些场景来分析下;">
@@ -420,15 +420,15 @@
 </blockquote>
 <p>接下来我们根据这些场景来分析下;</p>
 <a id="more"></a>
-<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><h3 id="1-ajax提交"><a href="#1-ajax提交" class="headerlink" title="1. ajax提交"></a>1. ajax提交</h3><iframe width="100%" height="auto" src="//jsrun.net/rjZKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><h3 id="1-ajax提交"><a href="#1-ajax提交" class="headerlink" title="1. ajax提交"></a>1. ajax提交</h3><iframe width="100%" height="200px" src="//jsrun.net/ejZKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 <p>当用户短时间内重复点击登录按钮时,会触发多次的表单提交;<br>解决方案: 当点击提交按钮后,给按钮添加disabled属性,事件完成后再<code>removeAttr(&#39;disabled&#39;)</code></p>
-<iframe width="100%" height="auto" src="//jsrun.net/RjZKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="200px" src="//jsrun.net/tjZKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-<h3 id="2-问卷答题"><a href="#2-问卷答题" class="headerlink" title="2. 问卷答题"></a>2. 问卷答题</h3><iframe width="100%" height="auto" src="//jsrun.net/ejZKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<h3 id="2-问卷答题"><a href="#2-问卷答题" class="headerlink" title="2. 问卷答题"></a>2. 问卷答题</h3><iframe width="100%" height="200px" src="//jsrun.net/RjZKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 <p>当选择一个答案时,重复点击,机会造成num重复增加,可能会造成中间某些选题未答直接跳到后面的答题，而添加一个name数组判断是否重复就可以避免该问题;</p>
-<iframe width="100%" height="auto" src="//jsrun.net/tjZKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="200px" src="//jsrun.net/rjZKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>解决重复点击问题可以归结为标记作用位点，有两种方法:</p>
 <ol>
