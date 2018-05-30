@@ -289,6 +289,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/05/29/JavaScript/点击事件重复请求/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daniel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/29/JavaScript/点击事件重复请求/" itemprop="url">点击事件重复请求</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T00:00:00+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/05/29/JavaScript/点击事件重复请求/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://blog.haohome.top/2018/05/29/JavaScript/点击事件重复请求/" class="cy_cmt_count" data-xid="2018/05/29/JavaScript/点击事件重复请求/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  392
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br><span class="line">$(<span class="string">'ele'</span>).on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	num++;</span><br><span class="line">    <span class="comment">//执行的业务逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这样num值会不断增加，依赖于num值的业务逻辑就会出错；<br>一般出现的场景有：</p>
+<blockquote>
+<ol>
+<li>ajax请求;</li>
+<li>频率请求</li>
+</ol>
+</blockquote>
+<p>接下来我们根据这些场景来分析下;</p>
+<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><h3 id="1-ajax提交"><a href="#1-ajax提交" class="headerlink" title="1. ajax提交"></a>1. ajax提交</h3><script async src="//jsrun.net/ejZKp/embed/all/light/"></script>
+
+<p>当用户短时间内重复点击登录按钮时,会触发多次的表单提交;<br>解决方案: 当点击提交按钮后,给按钮添加disabled属性,事件完成后再<code>removeAttr(&#39;disabled&#39;)</code></p>
+<script async src="//jsrun.net/tjZKp/embed/all/light/"></script>
+
+<h3 id="2-问卷答题"><a href="#2-问卷答题" class="headerlink" title="2. 问卷答题"></a>2. 问卷答题</h3><script async src="//jsrun.net/RjZKp/embed/all/light/"></script>
+
+<p>当选择一个答案时,重复点击,机会造成num重复增加,可能会造成中间某些选题未答直接跳到后面的答题，而添加一个name数组判断是否重复就可以避免该问题;</p>
+<script async src="//jsrun.net/rjZKp/embed/all/light/"></script>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>解决重复点击问题可以归结为标记作用位点，有两种方法:</p>
+<ol>
+<li>点击触发请求后，作用点设为disabled属性，请求（或者包括请求后具体的业务流程处理）后，移除disabled属性；</li>
+<li>记录作用点，判断作用点是否重复，重复则直接return</li>
+</ol>
+<p>其实ajax还有一个更好的方法来避免重复提交,我们知道js是单线程执行事件的,所以可以根据此原理定义事件序列，重新封装ajax方法来避免。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/05/14/JavaScript/Vuex入门基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -828,183 +1025,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="靖风行'S blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/07/Web/跨域请求的jsonp处理/" itemprop="url">跨域请求的jsonp处理</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T00:00:00+08:00">
-                2018-04-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/04/07/Web/跨域请求的jsonp处理/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/" class="cy_cmt_count" data-xid="2018/04/07/Web/跨域请求的jsonp处理/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  366
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p>
-<p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/07/Web/跨域请求的jsonp处理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1142,6 +1162,183 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/07/JavaScript/创建对象的Object.create与new/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daniel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/07/Web/跨域请求的jsonp处理/" itemprop="url">跨域请求的jsonp处理</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T00:00:00+08:00">
+                2018-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/04/07/Web/跨域请求的jsonp处理/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/" class="cy_cmt_count" data-xid="2018/04/07/Web/跨域请求的jsonp处理/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  366
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p>
+<p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/07/Web/跨域请求的jsonp处理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1912,193 +2109,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/03/05/Web/一道简单的JavaScript面试题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="靖风行'S blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/05/Web/一道简单的JavaScript面试题/" itemprop="url">一道简单的setTimeout面试题</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-05T23:48:00+08:00">
-                2018-03-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/03/05/Web/一道简单的JavaScript面试题/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/03/05/Web/一道简单的JavaScript面试题/" class="cy_cmt_count" data-xid="2018/03/05/Web/一道简单的JavaScript面试题/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  425
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这是一道很入门的js面试题，考察JavaScript的单线程事件执行机制:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)	<span class="comment">//10*10</span></span><br><span class="line">  &#125;, <span class="number">10</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>不理解原因的可能会认为输出0,1,2,3,4,5,6,7,8,9。事实并不是这样，原因很简单：</p>
-<p>先看下JavaScript的单线程和异步：</p>
-<p><img src="https://haohome.top/18-3-5/89406852.jpg" width="80%"></p>
-<blockquote>
-<ul>
-<li>JS是单线程语言，浏览器只分配给JS一个主线程用来执行任务（函数）；</li>
-<li>任务一次只能一次，任务会形成队列排队执行；</li>
-<li>浏览器会为setTimeout（定时器，异步）单独开一个线程，异步任务完成后会触发回调函数，这时就把回调函数放到主线程任务队列等待执行</li>
-</ul>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/05/Web/一道简单的JavaScript面试题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2153,7 +2163,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2175,7 +2185,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

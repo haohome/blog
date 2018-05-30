@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="web,blog" />
+  <meta name="keywords" content="JavaScript,event," />
 
 
 
@@ -82,16 +82,18 @@
 
 
 
-<meta name="description" content="独立 自由 分享 感悟">
-<meta property="og:type" content="website">
-<meta property="og:title" content="靖风行&#39;S blog">
-<meta property="og:url" content="http://blog.haohome.top/tags/学习记录/index.html">
+<meta name="description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 频率请求   接下来我们根据这些场景来分析下; 场景">
+<meta name="keywords" content="JavaScript,event">
+<meta property="og:type" content="article">
+<meta property="og:title" content="点击事件重复请求">
+<meta property="og:url" content="http://blog.haohome.top/2018/05/29/JavaScript/点击事件重复请求/index.html">
 <meta property="og:site_name" content="靖风行&#39;S blog">
-<meta property="og:description" content="独立 自由 分享 感悟">
+<meta property="og:description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 频率请求   接下来我们根据这些场景来分析下; 场景">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-30T07:03:09.367Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="靖风行&#39;S blog">
-<meta name="twitter:description" content="独立 自由 分享 感悟">
+<meta name="twitter:title" content="点击事件重复请求">
+<meta name="twitter:description" content="引子当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如： 12345var num = 1;$(&apos;ele&apos;).on(&apos;click&apos;,function()&amp;#123;	num++;    //执行的业务逻辑&amp;#125;) 这样num值会不断增加，依赖于num值的业务逻辑就会出错；一般出现的场景有：   ajax请求; 频率请求   接下来我们根据这些场景来分析下; 场景">
 
 
 
@@ -121,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.haohome.top/tags/学习记录/"/>
+  <link rel="canonical" href="http://blog.haohome.top/2018/05/29/JavaScript/点击事件重复请求/"/>
 
 
 
 
 
-  <title>标签: 学习记录 | 靖风行'S blog</title>
+  <title>点击事件重复请求 | 靖风行'S blog</title>
   
 
 
@@ -146,7 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -274,310 +276,281 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>学习记录<small>标签</small>
-        </h2>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/05/29/JavaScript/点击事件重复请求/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daniel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/01/14/Web/跨域资源共享 CORS/" itemprop="url">
-              
-                <span itemprop="name">跨域资源共享CORS</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">点击事件重复请求</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-14T00:00:00+08:00"
-              content="2018-01-14" >
-          01-14
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T00:00:00+08:00">
+                2018-05-29
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/05/29/JavaScript/点击事件重复请求/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/05/29/JavaScript/点击事件重复请求/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  392
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/07/Java/Java中的接口/" itemprop="url">
-              
-                <span itemprop="name">Java中的接口</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-07T00:00:00+08:00"
-              content="2018-01-07" >
-          01-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>当我们针对某个按钮绑定点击事件后，就可以随时通过点击鼠标来触发按钮的点击事件，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br><span class="line">$(<span class="string">'ele'</span>).on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	num++;</span><br><span class="line">    <span class="comment">//执行的业务逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这样num值会不断增加，依赖于num值的业务逻辑就会出错；<br>一般出现的场景有：</p>
+<blockquote>
+<ol>
+<li>ajax请求;</li>
+<li>频率请求</li>
+</ol>
+</blockquote>
+<p>接下来我们根据这些场景来分析下;</p>
+<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><h3 id="1-ajax提交"><a href="#1-ajax提交" class="headerlink" title="1. ajax提交"></a>1. ajax提交</h3><script async src="//jsrun.net/ejZKp/embed/all/light/"></script>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>当用户短时间内重复点击登录按钮时,会触发多次的表单提交;<br>解决方案: 当点击提交按钮后,给按钮添加disabled属性,事件完成后再<code>removeAttr(&#39;disabled&#39;)</code></p>
+<script async src="//jsrun.net/tjZKp/embed/all/light/"></script>
 
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/Java/FreeMaker 模板_数据模型/" itemprop="url">
-              
-                <span itemprop="name">FreeMaker 模板_数据模型</span>
-              
-            </a>
-        
-      </h3>
+<h3 id="2-问卷答题"><a href="#2-问卷答题" class="headerlink" title="2. 问卷答题"></a>2. 问卷答题</h3><script async src="//jsrun.net/RjZKp/embed/all/light/"></script>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T00:00:00+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
+<p>当选择一个答案时,重复点击,机会造成num重复增加,可能会造成中间某些选题未答直接跳到后面的答题，而添加一个name数组判断是否重复就可以避免该问题;</p>
+<script async src="//jsrun.net/rjZKp/embed/all/light/"></script>
 
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/Java/Java中的类和对象/" itemprop="url">
-              
-                <span itemprop="name">Java中的类和对象</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T00:00:00+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/Java/Java中的抽象类/" itemprop="url">
-              
-                <span itemprop="name">Java中的抽象类</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T00:00:00+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/Java/Java中super关键字的使用/" itemprop="url">
-              
-                <span itemprop="name">Java中super关键字的使用</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T00:00:00+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/Java/Java中的多态/" itemprop="url">
-              
-                <span itemprop="name">Java中的多态</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T00:00:00+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/21/Java/Java 中的 static 使用/" itemprop="url">
-              
-                <span itemprop="name">Java中的static的使用</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-21T00:00:00+08:00"
-              content="2017-12-21" >
-          12-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/17/JavaScript/Backbone-study-note/" itemprop="url">
-              
-                <span itemprop="name">Backbone学习笔记</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-17T00:00:00+08:00"
-              content="2017-12-17" >
-          12-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/11/Java/Java中extends和implements区别/" itemprop="url">
-              
-                <span itemprop="name">Java中extends和implements的区别</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-11T00:00:00+08:00"
-              content="2017-12-11" >
-          12-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>解决重复点击问题可以归结为标记作用位点，有两种方法:</p>
+<ol>
+<li>点击触发请求后，作用点设为disabled属性，请求（或者包括请求后具体的业务流程处理）后，移除disabled属性；</li>
+<li>记录作用点，判断作用点是否重复，重复则直接return</li>
+</ol>
+<p>其实ajax还有一个更好的方法来避免重复提交,我们知道js是单线程执行事件的,所以可以根据此原理定义事件序列，重新封装ajax方法来避免。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Daniel 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Daniel 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/event/" rel="tag"># event</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/14/JavaScript/Vuex入门基础/" rel="next" title="Vuex入门基础">
+                <i class="fa fa-chevron-left"></i> Vuex入门基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/tags/学习记录/page/2/">2</a><a class="extend next" rel="next" href="/tags/学习记录/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
 
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -585,6 +558,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -605,8 +587,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -707,6 +698,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x5F15;&#x5B50;" class="headerlink" title="&#x5F15;&#x5B50;"></a>&#x5F15;&#x5B50;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场景分析"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x573A;&#x666F;&#x5206;&#x6790;" class="headerlink" title="&#x573A;&#x666F;&#x5206;&#x6790;"></a>&#x573A;&#x666F;&#x5206;&#x6790;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ajax提交"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#1-ajax&#x63D0;&#x4EA4;" class="headerlink" title="1. ajax&#x63D0;&#x4EA4;"></a>1. ajax&#x63D0;&#x4EA4;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-问卷答题"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#2-&#x95EE;&#x5377;&#x7B54;&#x9898;" class="headerlink" title="2. &#x95EE;&#x5377;&#x7B54;&#x9898;"></a>2. &#x95EE;&#x5377;&#x7B54;&#x9898;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -843,6 +850,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
