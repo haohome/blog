@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="web,blog" />
+  <meta name="keywords" content="你不知道的JavaScript," />
 
 
 
@@ -82,17 +82,18 @@
 
 
 
-<meta name="description" content="title: 垃圾回收机制与内存管理categories: JavaScriptdate: 2018-07-11tags:[你不知道的JavaScript]  1. 垃圾回收机制JavaScript是一门高级语言,具有自动垃圾回收机制(Garbage Collecatio), js创建变量（对象，字符串等）时分配内存，并且在不再使用它们时“自动”释放,其主要原理为:   垃圾收集器会定期（周期性">
+<meta name="description" content="1. 垃圾回收机制JavaScript是一门高级语言,具有自动垃圾回收机制(Garbage Collecatio), js创建变量（对象，字符串等）时分配内存，并且在不再使用它们时“自动”释放,其主要原理为:   垃圾收集器会定期（周期性）找出那些不在继续使用的变量，然后释放其内存。  JavaScript垃圾回收的机制很简单：找出不再使用的变量，然后释放掉其占用的内存，但是这个过程不是实时的，因">
+<meta name="keywords" content="你不知道的JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="靖风行&#39;S blog">
-<meta property="og:url" content="http://blog.haohome.top/2018/07/10/JavaScript/垃圾回收机制与内存管理/index.html">
+<meta property="og:title" content="垃圾回收机制与内存管理">
+<meta property="og:url" content="http://blog.haohome.top/2018/07/11/JavaScript/垃圾回收机制与内存管理/index.html">
 <meta property="og:site_name" content="靖风行&#39;S blog">
-<meta property="og:description" content="title: 垃圾回收机制与内存管理categories: JavaScriptdate: 2018-07-11tags:[你不知道的JavaScript]  1. 垃圾回收机制JavaScript是一门高级语言,具有自动垃圾回收机制(Garbage Collecatio), js创建变量（对象，字符串等）时分配内存，并且在不再使用它们时“自动”释放,其主要原理为:   垃圾收集器会定期（周期性">
+<meta property="og:description" content="1. 垃圾回收机制JavaScript是一门高级语言,具有自动垃圾回收机制(Garbage Collecatio), js创建变量（对象，字符串等）时分配内存，并且在不再使用它们时“自动”释放,其主要原理为:   垃圾收集器会定期（周期性）找出那些不在继续使用的变量，然后释放其内存。  JavaScript垃圾回收的机制很简单：找出不再使用的变量，然后释放掉其占用的内存，但是这个过程不是实时的，因">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-18T14:53:23.123Z">
+<meta property="og:updated_time" content="2018-07-18T15:02:39.383Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="靖风行&#39;S blog">
-<meta name="twitter:description" content="title: 垃圾回收机制与内存管理categories: JavaScriptdate: 2018-07-11tags:[你不知道的JavaScript]  1. 垃圾回收机制JavaScript是一门高级语言,具有自动垃圾回收机制(Garbage Collecatio), js创建变量（对象，字符串等）时分配内存，并且在不再使用它们时“自动”释放,其主要原理为:   垃圾收集器会定期（周期性">
+<meta name="twitter:title" content="垃圾回收机制与内存管理">
+<meta name="twitter:description" content="1. 垃圾回收机制JavaScript是一门高级语言,具有自动垃圾回收机制(Garbage Collecatio), js创建变量（对象，字符串等）时分配内存，并且在不再使用它们时“自动”释放,其主要原理为:   垃圾收集器会定期（周期性）找出那些不在继续使用的变量，然后释放其内存。  JavaScript垃圾回收的机制很简单：找出不再使用的变量，然后释放掉其占用的内存，但是这个过程不是实时的，因">
 
 
 
@@ -122,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.haohome.top/2018/07/10/JavaScript/垃圾回收机制与内存管理/"/>
+  <link rel="canonical" href="http://blog.haohome.top/2018/07/11/JavaScript/垃圾回收机制与内存管理/"/>
 
 
 
 
 
-  <title> | 靖风行'S blog</title>
+  <title>垃圾回收机制与内存管理 | 靖风行'S blog</title>
   
 
 
@@ -289,7 +290,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/07/10/JavaScript/垃圾回收机制与内存管理/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/07/11/JavaScript/垃圾回收机制与内存管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
@@ -306,7 +307,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline"></h2>
+          <h2 class="post-title" itemprop="name headline">垃圾回收机制与内存管理</h2>
         
 
         <div class="post-meta">
@@ -318,8 +319,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-10T22:57:00+08:00">
-                2018-07-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-11T00:00:00+08:00">
+                2018-07-11
               </time>
             
 
@@ -328,6 +329,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -338,8 +361,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/07/10/JavaScript/垃圾回收机制与内存管理/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/07/10/JavaScript/垃圾回收机制与内存管理/" itemprop="commentsCount"></span>
+                <a href="/2018/07/11/JavaScript/垃圾回收机制与内存管理/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/07/11/JavaScript/垃圾回收机制与内存管理/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -361,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,602
+                  1,577
                 </span>
               
 
@@ -386,10 +409,7 @@
       
 
       
-        <hr>
-<p>title: 垃圾回收机制与内存管理<br>categories: JavaScript<br>date: 2018-07-11<br>tags:[你不知道的JavaScript]</p>
-<hr>
-<h2 id="1-垃圾回收机制"><a href="#1-垃圾回收机制" class="headerlink" title="1. 垃圾回收机制"></a>1. 垃圾回收机制</h2><p>JavaScript是一门高级语言,具有自动垃圾回收机制(Garbage Collecatio), js创建变量（对象，字符串等）时分配内存，并且在不再使用它们时“自动”释放,其主要原理为:</p>
+        <h2 id="1-垃圾回收机制"><a href="#1-垃圾回收机制" class="headerlink" title="1. 垃圾回收机制"></a>1. 垃圾回收机制</h2><p>JavaScript是一门高级语言,具有自动垃圾回收机制(Garbage Collecatio), js创建变量（对象，字符串等）时分配内存，并且在不再使用它们时“自动”释放,其主要原理为:</p>
 <blockquote>
 <p> 垃圾收集器会<strong>定期（周期性）</strong>找出那些不在继续使用的变量，然后释放其内存。</p>
 </blockquote>
@@ -402,6 +422,7 @@
 </ol>
 </li>
 </ul>
+<a id="more"></a>
 <p><strong>JavaScript的内存分配</strong></p>
 <ol>
 <li><p>在<strong>定义变量时就完成了内存分配</strong>:</p>
@@ -496,6 +517,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/你不知道的JavaScript/" rel="tag"># 你不知道的JavaScript</a>
+          
+        </div>
       
 
       
@@ -648,7 +675,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
