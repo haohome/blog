@@ -4,6 +4,21 @@
 
     
   <url>
+    <loc>http://blog.haohome.top/2018/08/28/Program/hashchange%E4%BA%8B%E4%BB%B6/</loc>
+    <lastmod>2018-08-28T09:15:06.901Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2018-08-28T08:53:01.858Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.haohome.top/2018/08/28/Program/js%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81/</loc>
     <lastmod>2018-08-28T02:22:29.386Z</lastmod>
     <data>
@@ -375,34 +390,14 @@
         <title>flex弹性布局</title>
         <pubTime>2018-02-25T12:30:54.000Z</pubTime>
         
-        <tag>css</tag>
-         
         <tag>flex</tag>
+         
+        <tag>css</tag>
          
          
            
              
               <breadCrumb title="CSS" url="http://blog.haohome.top/categories/CSS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2016/04/19/Food/%E8%8B%B9%E6%9E%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A4%90%E5%8F%98/</loc>
-    <lastmod>2018-04-10T05:53:46.725Z</lastmod>
-    <data>
-        <display>
-        <title>苹果为什么会褐变</title>
-        <pubTime>2016-04-18T16:34:14.000Z</pubTime>
-        
-        <tag>保鲜知识</tag>
-         
-         
-           
-             
-              <breadCrumb title="food" url="http://blog.haohome.top/categories/food/"/>
           
         </display>
     </data>
@@ -425,6 +420,26 @@
            
              
               <breadCrumb title="HTML5" url="http://blog.haohome.top/categories/HTML5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2016/04/19/Food/%E8%8B%B9%E6%9E%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A4%90%E5%8F%98/</loc>
+    <lastmod>2018-04-10T05:53:46.725Z</lastmod>
+    <data>
+        <display>
+        <title>苹果为什么会褐变</title>
+        <pubTime>2016-04-18T16:34:14.000Z</pubTime>
+        
+        <tag>保鲜知识</tag>
+         
+         
+           
+             
+              <breadCrumb title="food" url="http://blog.haohome.top/categories/food/"/>
           
         </display>
     </data>
