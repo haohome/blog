@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.haohome.top/"/>
-  <updated>2018-08-28T09:25:55.772Z</updated>
+  <updated>2018-08-28T09:28:25.303Z</updated>
   <id>http://blog.haohome.top/</id>
   
   <author>
@@ -17,23 +17,54 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>JS判断当前文本输入状态</title>
+    <link href="http://blog.haohome.top/2018/08/28/Program/js%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81/"/>
+    <id>http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/</id>
+    <published>2018-08-27T16:00:00.000Z</published>
+    <updated>2018-08-28T09:28:25.303Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。</p></blockquote><p>在搜索的时候，我们需要按<code>Enter</code>键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:</p><ul><li><p>绑定<code>keyup</code>事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮</p></li><li><p>单纯按键监听，并没有判断中文输入状态</p></li></ul><a id="more"></a><p>网上查了一些资料：</p><ol><li><p>键盘事件:<br>当一个键盘被按下并松开时,每个浏览器都会触发三个事件:<code>keydown、keypress、keyup</code><br><code>keydown</code>事件发生在按键被按下的时候，接着触发<code>keypress</code>，松开按键的时候触发<code>keyup</code>事件</p><p>还有一个事件就是<code>input</code>:input事件能够检测用户的每一次输入</p><p>以上事件在英文状态下没有问题,但在中文状态下,依然捕获到的是英文,如下图:</p><p><img src="https://haohome.top/18-8-28/85753032.jpg" alt="image"></p></li><li><p>中文输入法</p><blockquote><p><code>firfox</code>：输入触发<code>keydown</code>，回车确认输入触发<code>keyup</code><br><code>chrome</code>：输入触发<code>keydown</code>、<code>keyup</code>，回车确认输入只触发<code>keydown</code><br><code>IE</code>：输入触发<code>keydown</code>、<code>keyup</code>，回车确认输入触发<code>keydown</code>，<code>keyup</code><br><code>Safari</code>：输入触发<code>keydown</code>、<code>keyup</code>，回车确认输入触发<code>keydown</code>，<code>keyup</code><br><code>opera</code>：输入触发<code>keydown</code>、<code>keyup</code>，回车确认输入触发<code>keydown</code>，<code>keyup</code><br>在<code>input</code>、<code>textarea</code>中，中文输入法时：没有触发<code>keypress</code>事件<br><code>keypress</code>事件：对中文输入法支持不好，无法响应中文输入；无法响应系统功能键</p></blockquote></li></ol><iframe width="100%" height="300" src="//jsrun.net/bmgKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe><p><strong>解决方案</strong>:</p><ol><li><p>利用<code>change</code>事件:</p><p>监听输入框最终内容变化识别,当文本输入状态完成,并且<code>input</code>失去焦点再触发<code>enter</code>事件</p><blockquote><p>通常情况下,文本框中文输入状态时,按下回车会触发相应的按钮,此时<code>input</code>会失去焦点并触发<code>change</code>事件,此时将输入状态传给按钮事件,即可判断并执行相应事件</p></blockquote></li><li><p>利用<code>compositionstart</code>和<code>compositionend</code>事件(事件不兼容旧浏览器)</p><p><code>compositionstart</code>:事件触发于一段文字的输入之前</p><p><code>compositionend</code>事件:当文本段落的组成完成或取消时, <code>compositionend</code>事件将被激发</p><p>简单来说，非直接输入法如中文输入开始时，触发<code>compositionstart</code>事件，结束时触发<code>compositionend</code>事件</p><p>两类解决方案都可以监听到当前输入框的输入状态,结合input事件，就能对所有的输入进行实时的检测了</p></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> doing=<span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> doSomething=<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//我要干点啥</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'testInput'</span>).addEventListener(<span class="string">'compositionstart'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    doing=<span class="literal">true</span>;</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'testInput'</span>).addEventListener(<span class="string">'input'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!doing)&#123;</span><br><span class="line">        doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'testInput'</span>).addEventListener(<span class="string">'compositionend'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    doing=<span class="literal">false</span>;</span><br><span class="line">    doSomething();</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在搜索的时候，我们需要按&lt;code&gt;Enter&lt;/code&gt;键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;绑定&lt;code&gt;keyup&lt;/code&gt;事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;单纯按键监听，并没有判断中文输入状态&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
+    
+      <category term="input" scheme="http://blog.haohome.top/tags/input/"/>
+    
+  </entry>
+  
+  <entry>
     <title>hashchange事件</title>
     <link href="http://blog.haohome.top/2018/08/28/Program/hashchange%E4%BA%8B%E4%BB%B6/"/>
     <id>http://blog.haohome.top/2018/08/28/Program/hashchange事件/</id>
     <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2018-08-28T09:25:55.772Z</updated>
+    <updated>2018-08-28T09:28:17.748Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p></blockquote><p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>hashchange 事件回调函数对象主要有两个参数会用到:</p><ul><li><p>newURL: 当前页面新的URL</p></li><li><p>oldURL: 当前页面旧的URL</p></li></ul><p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"oldURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"newURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p></blockquote><p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><a id="more"></a><p>hashchange 事件回调函数对象主要有两个参数会用到:</p><ul><li><p>newURL: 当前页面新的URL</p></li><li><p>oldURL: 当前页面旧的URL</p></li></ul><p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"oldURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"newURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;blockquote&gt;
+      &lt;blockquote&gt;
 &lt;p&gt;最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;当 一
-      
+&lt;p&gt;当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.onhashchange = handleHashChange;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;hashchange&quot;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//hash变化的处理逻辑&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -45,36 +76,6 @@
       <category term="hash" scheme="http://blog.haohome.top/tags/hash/"/>
     
       <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS判断当前文本输入状态</title>
-    <link href="http://blog.haohome.top/2018/08/28/Program/js%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81/"/>
-    <id>http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/</id>
-    <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2018-08-28T02:22:29.386Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。</p></blockquote><p>在搜索的时候，我们需要按<code>Enter</code>键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:</p><ul><li><p>绑定<code>keyup</code>事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮</p></li><li><p>单纯按键监听，并没有判断中文输入状态</p></li></ul><p>网上查了一些资料：</p><ol><li><p>键盘事件:<br>当一个键盘被按下并松开时,每个浏览器都会触发三个事件:<code>keydown、keypress、keyup</code><br><code>keydown</code>事件发生在按键被按下的时候，接着触发<code>keypress</code>，松开按键的时候触发<code>keyup</code>事件</p><p>还有一个事件就是<code>input</code>:input事件能够检测用户的每一次输入</p><p>以上事件在英文状态下没有问题,但在中文状态下,依然捕获到的是英文,如下图:</p><p><img src="https://haohome.top/18-8-28/85753032.jpg" alt="image"></p></li><li><p>中文输入法</p><blockquote><p><code>firfox</code>：输入触发<code>keydown</code>，回车确认输入触发<code>keyup</code><br><code>chrome</code>：输入触发<code>keydown</code>、<code>keyup</code>，回车确认输入只触发<code>keydown</code><br><code>IE</code>：输入触发<code>keydown</code>、<code>keyup</code>，回车确认输入触发<code>keydown</code>，<code>keyup</code><br><code>Safari</code>：输入触发<code>keydown</code>、<code>keyup</code>，回车确认输入触发<code>keydown</code>，<code>keyup</code><br><code>opera</code>：输入触发<code>keydown</code>、<code>keyup</code>，回车确认输入触发<code>keydown</code>，<code>keyup</code><br>在<code>input</code>、<code>textarea</code>中，中文输入法时：没有触发<code>keypress</code>事件<br><code>keypress</code>事件：对中文输入法支持不好，无法响应中文输入；无法响应系统功能键</p></blockquote></li></ol><iframe width="100%" height="300" src="//jsrun.net/bmgKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe><p><strong>解决方案</strong>:</p><ol><li><p>利用<code>change</code>事件:</p><p>监听输入框最终内容变化识别,当文本输入状态完成,并且<code>input</code>失去焦点再触发<code>enter</code>事件</p><blockquote><p>通常情况下,文本框中文输入状态时,按下回车会触发相应的按钮,此时<code>input</code>会失去焦点并触发<code>change</code>事件,此时将输入状态传给按钮事件,即可判断并执行相应事件</p></blockquote></li><li><p>利用<code>compositionstart</code>和<code>compositionend</code>事件(事件不兼容旧浏览器)</p><p><code>compositionstart</code>:事件触发于一段文字的输入之前</p><p><code>compositionend</code>事件:当文本段落的组成完成或取消时, <code>compositionend</code>事件将被激发</p><p>简单来说，非直接输入法如中文输入开始时，触发<code>compositionstart</code>事件，结束时触发<code>compositionend</code>事件</p><p>两类解决方案都可以监听到当前输入框的输入状态,结合input事件，就能对所有的输入进行实时的检测了</p></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> doing=<span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> doSomething=<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//我要干点啥</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'testInput'</span>).addEventListener(<span class="string">'compositionstart'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    doing=<span class="literal">true</span>;</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'testInput'</span>).addEventListener(<span class="string">'input'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!doing)&#123;</span><br><span class="line">        doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'testInput'</span>).addEventListener(<span class="string">'compositionend'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    doing=<span class="literal">false</span>;</span><br><span class="line">    doSomething();</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;在搜索的时候，我们需要按&lt;code&gt;Enter&lt;/code&gt;键实现直接跳转搜索，
-      
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
-    
-      <category term="input" scheme="http://blog.haohome.top/tags/input/"/>
     
   </entry>
   
@@ -196,9 +197,9 @@
       <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
     
     
-      <category term="node" scheme="http://blog.haohome.top/tags/node/"/>
-    
       <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
+    
+      <category term="node" scheme="http://blog.haohome.top/tags/node/"/>
     
   </entry>
   
@@ -225,6 +226,31 @@
       <category term="ajax" scheme="http://blog.haohome.top/tags/ajax/"/>
     
       <category term="jQuery" scheme="http://blog.haohome.top/tags/jQuery/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>跨域请求的jsonp处理</title>
+    <link href="http://blog.haohome.top/2018/04/07/Web/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86/"/>
+    <id>http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/</id>
+    <published>2018-04-06T16:00:00.000Z</published>
+    <updated>2018-05-02T15:28:24.913Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p><p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p><a id="more"></a><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><ul><li>JSON with Padding 填充式 json</li></ul><p>正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替</p><ul><li><p>处理步骤</p><ol><li>客户端定义一个专门处理相应的有名函数doResponse(<strong>处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态</strong>)</li><li>服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’;</li><li>动态创建一个script元素,设置src指向服务器端的php地址</li></ol><p>客户端js:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doResponse</span>(<span class="params">resp</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(resp);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> resp)&#123;</span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*动态追加script元素*/</span></span><br><span class="line">  $(<span class="string">"body"</span>).append(<span class="string">`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>也可以采用ajax获得返回数据</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.getJSON(<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,data=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  type:<span class="string">"GET"</span>,</span><br><span class="line">  url:<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,</span><br><span class="line">  success:<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"返回数据"</span>,data);</span><br><span class="line">  &#125;,</span><br><span class="line">  dataType:<span class="string">"jsonp"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>服务器端php:</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type:application/javascript;charset:utf-8"</span>);</span><br><span class="line">$getData=$_GET[<span class="string">'callback'</span>];</span><br><span class="line">$hello=json_encode([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]);</span><br><span class="line"><span class="keyword">echo</span> $getData.<span class="string">"('$hello')"</span>;</span><br></pre></td></tr></table></figure><p>​</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;跨域简介&quot;&gt;&lt;a href=&quot;#跨域简介&quot; class=&quot;headerlink&quot; title=&quot;跨域简介&quot;&gt;&lt;/a&gt;跨域简介&lt;/h3&gt;&lt;p&gt;跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。&lt;/p&gt;
+&lt;p&gt;浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="web" scheme="http://blog.haohome.top/categories/web/"/>
+    
+    
+      <category term="http" scheme="http://blog.haohome.top/tags/http/"/>
+    
+      <category term="web" scheme="http://blog.haohome.top/tags/web/"/>
     
   </entry>
   
@@ -260,31 +286,6 @@
       <category term="js" scheme="http://blog.haohome.top/tags/js/"/>
     
       <category term="对象" scheme="http://blog.haohome.top/tags/%E5%AF%B9%E8%B1%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>跨域请求的jsonp处理</title>
-    <link href="http://blog.haohome.top/2018/04/07/Web/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86/"/>
-    <id>http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/</id>
-    <published>2018-04-06T16:00:00.000Z</published>
-    <updated>2018-05-02T15:28:24.913Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p><p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p><a id="more"></a><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><ul><li>JSON with Padding 填充式 json</li></ul><p>正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替</p><ul><li><p>处理步骤</p><ol><li>客户端定义一个专门处理相应的有名函数doResponse(<strong>处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态</strong>)</li><li>服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’;</li><li>动态创建一个script元素,设置src指向服务器端的php地址</li></ol><p>客户端js:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doResponse</span>(<span class="params">resp</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(resp);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> resp)&#123;</span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*动态追加script元素*/</span></span><br><span class="line">  $(<span class="string">"body"</span>).append(<span class="string">`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>也可以采用ajax获得返回数据</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.getJSON(<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,data=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  type:<span class="string">"GET"</span>,</span><br><span class="line">  url:<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,</span><br><span class="line">  success:<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"返回数据"</span>,data);</span><br><span class="line">  &#125;,</span><br><span class="line">  dataType:<span class="string">"jsonp"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>服务器端php:</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type:application/javascript;charset:utf-8"</span>);</span><br><span class="line">$getData=$_GET[<span class="string">'callback'</span>];</span><br><span class="line">$hello=json_encode([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]);</span><br><span class="line"><span class="keyword">echo</span> $getData.<span class="string">"('$hello')"</span>;</span><br></pre></td></tr></table></figure><p>​</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;跨域简介&quot;&gt;&lt;a href=&quot;#跨域简介&quot; class=&quot;headerlink&quot; title=&quot;跨域简介&quot;&gt;&lt;/a&gt;跨域简介&lt;/h3&gt;&lt;p&gt;跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。&lt;/p&gt;
-&lt;p&gt;浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="web" scheme="http://blog.haohome.top/categories/web/"/>
-    
-    
-      <category term="web" scheme="http://blog.haohome.top/tags/web/"/>
-    
-      <category term="http" scheme="http://blog.haohome.top/tags/http/"/>
     
   </entry>
   
@@ -526,9 +527,9 @@
       <category term="CSS" scheme="http://blog.haohome.top/categories/CSS/"/>
     
     
-      <category term="css" scheme="http://blog.haohome.top/tags/css/"/>
-    
       <category term="flex" scheme="http://blog.haohome.top/tags/flex/"/>
+    
+      <category term="css" scheme="http://blog.haohome.top/tags/css/"/>
     
   </entry>
   

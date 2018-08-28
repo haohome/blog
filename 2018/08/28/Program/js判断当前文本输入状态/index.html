@@ -82,19 +82,19 @@
 
 
 
-<meta name="description" content="最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。  在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:  绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮  单纯按键监听，并没有判断中文输入状态   网上查了一些资料：  键盘事件:当一个键盘被按下并松开时,">
+<meta name="description" content="最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。  在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:  绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮  单纯按键监听，并没有判断中文输入状态">
 <meta name="keywords" content="JavaScript,input">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS判断当前文本输入状态">
 <meta property="og:url" content="http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/index.html">
 <meta property="og:site_name" content="靖风行&#39;S blog">
-<meta property="og:description" content="最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。  在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:  绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮  单纯按键监听，并没有判断中文输入状态   网上查了一些资料：  键盘事件:当一个键盘被按下并松开时,">
+<meta property="og:description" content="最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。  在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:  绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮  单纯按键监听，并没有判断中文输入状态">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://haohome.top/18-8-28/85753032.jpg">
-<meta property="og:updated_time" content="2018-08-28T02:22:29.386Z">
+<meta property="og:updated_time" content="2018-08-28T09:28:25.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS判断当前文本输入状态">
-<meta name="twitter:description" content="最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。  在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:  绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮  单纯按键监听，并没有判断中文输入状态   网上查了一些资料：  键盘事件:当一个键盘被按下并松开时,">
+<meta name="twitter:description" content="最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。  在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:  绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮  单纯按键监听，并没有判断中文输入状态">
 <meta name="twitter:image" content="https://haohome.top/18-8-28/85753032.jpg">
 
 
@@ -421,6 +421,7 @@
 <li><p>单纯按键监听，并没有判断中文输入状态</p>
 </li>
 </ul>
+<a id="more"></a>
 <p>网上查了一些资料：</p>
 <ol>
 <li><p>键盘事件:<br>当一个键盘被按下并松开时,每个浏览器都会触发三个事件:<code>keydown、keypress、keyup</code><br><code>keydown</code>事件发生在按键被按下的时候，接着触发<code>keypress</code>，松开按键的时候触发<code>keyup</code>事件</p>
@@ -513,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/11/JavaScript/垃圾回收机制与内存管理/" rel="next" title="垃圾回收机制与内存管理">
-                <i class="fa fa-chevron-left"></i> 垃圾回收机制与内存管理
+              <a href="/2018/08/28/Program/hashchange事件/" rel="next" title="hashchange事件">
+                <i class="fa fa-chevron-left"></i> hashchange事件
               </a>
             
           </div>
@@ -522,10 +523,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/28/Program/hashchange事件/" rel="prev" title="hashchange事件">
-                hashchange事件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
