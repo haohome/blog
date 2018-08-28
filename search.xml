@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JS判断当前文本输入状态]]></title>
+    <url>%2F2018%2F08%2F28%2FProgram%2Fjs%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81%2F</url>
+    <content type="text"><![CDATA[最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。 在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了: 绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮 单纯按键监听，并没有判断中文输入状态 网上查了一些资料： 键盘事件:当一个键盘被按下并松开时,每个浏览器都会触发三个事件:keydown、keypress、keyupkeydown事件发生在按键被按下的时候，接着触发keypress，松开按键的时候触发keyup事件 还有一个事件就是input:input事件能够检测用户的每一次输入 以上事件在英文状态下没有问题,但在中文状态下,依然捕获到的是英文,如下图: 中文输入法 firfox：输入触发keydown，回车确认输入触发keyupchrome：输入触发keydown、keyup，回车确认输入只触发keydownIE：输入触发keydown、keyup，回车确认输入触发keydown，keyupSafari：输入触发keydown、keyup，回车确认输入触发keydown，keyupopera：输入触发keydown、keyup，回车确认输入触发keydown，keyup在input、textarea中，中文输入法时：没有触发keypress事件keypress事件：对中文输入法支持不好，无法响应中文输入；无法响应系统功能键 解决方案: 利用change事件: 监听输入框最终内容变化识别,当文本输入状态完成,并且input失去焦点再触发enter事件 通常情况下,文本框中文输入状态时,按下回车会触发相应的按钮,此时input会失去焦点并触发change事件,此时将输入状态传给按钮事件,即可判断并执行相应事件 利用compositionstart和compositionend事件(事件不兼容旧浏览器) compositionstart:事件触发于一段文字的输入之前 compositionend事件:当文本段落的组成完成或取消时, compositionend事件将被激发 简单来说，非直接输入法如中文输入开始时，触发compositionstart事件，结束时触发compositionend事件 两类解决方案都可以监听到当前输入框的输入状态,结合input事件，就能对所有的输入进行实时的检测了 1234567891011121314151617var doing=false;var doSomething=function(e)&#123; //我要干点啥&#125;document.getElementById('testInput').addEventListener('compositionstart',function(e)&#123; doing=true;&#125;,false);document.getElementById('testInput').addEventListener('input',function(e)&#123; if(!doing)&#123; doSomething(); &#125;&#125;,false);document.getElementById('testInput').addEventListener('compositionend',function(e)&#123; doing=false; doSomething();&#125;,false);]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>input</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[垃圾回收机制与内存管理]]></title>
     <url>%2F2018%2F07%2F11%2FJavaScript%2F%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%2F</url>
     <content type="text"><![CDATA[1. 垃圾回收机制JavaScript是一门高级语言,具有自动垃圾回收机制(Garbage Collecatio), js创建变量（对象，字符串等）时分配内存，并且在不再使用它们时“自动”释放,其主要原理为: 垃圾收集器会定期（周期性）找出那些不在继续使用的变量，然后释放其内存。 JavaScript垃圾回收的机制很简单：找出不再使用的变量，然后释放掉其占用的内存，但是这个过程不是实时的，因为其开销比较大，所以垃圾回收器会按照固定的时间间隔周期性的执行。 任何程序语言,内存生命周期都是一致的: 分配你所需要的内存 使用分配到的内存（读、写） 不需要时将其释放/归还 JavaScript的内存分配 在定义变量时就完成了内存分配: 123456var n = 123; // 给数值变量分配内存var s = "hello"; // 给字符串分配内存var o = &#123; a: 1, b: null&#125;; // 给对象及其包含的值分配内存 通过函数调用分配内存 12var d = new Date(); // 分配一个 Date 对象var e = document.createElement('div'); // 分配一个 DOM 元素 当内存不再需要使用时释放 不再使用的变量也就是内存生命周期的结束,只可能是局部变量,局部变量只在函数的执行过程中存在,全局变量的生命周期直至浏览器卸载页面才会结束。 1234567891011function fn1() &#123; var obj = &#123;name: 'hanzichi', age: 10&#125;;&#125;function fn2() &#123; var obj = &#123;name:'hanzichi', age: 10&#125;; return obj;&#125;var a = fn1();var b = fn2(); 上面定义了两个function，分别叫做fn1和fn2: 当fn1被调用时，进入fn1的环境，会开辟一块内存存放对象{name: &#39;hanzichi&#39;, age: 10},当调用结束后，出了fn1的环境，那么该块内存会被js引擎中的垃圾回收器自动释放； 在fn2被调用的过程中，返回的对象被全局变量b所指向，所以该块内存并不会被释放。 所以垃圾收集器必须跟踪到底哪个变量没用，对于不再有用的变量打上标记，以备将来收回其占用的内存，垃圾回收算法主要依赖于引用的概念。 在内存管理的环境中，一个对象如果有访问另一个对象的权限（隐式或者显式），叫做一个对象引用另一个对象。 例如:一个Javascript对象具有对它原型的引用（隐式引用）和对它属性的引用（显式引用）。 1.1 标记清除这是JavaScript最常见的垃圾回收方式，当变量进入执行环境的时候，比如函数中声明一个变量，垃圾回收器将其标记为“进入环境”，当变量离开环境的时候（函数执行结束）将其标记为“离开环境”; 12345function test()&#123; var a = 10 ; //被标记 ，进入环境 var b = 20 ; //被标记 ，进入环境&#125;test(); //执行完毕 之后 a、b又被标离开环境，被回收。 1.2 引用计数引用计数的含义是跟踪记录每个值被引用的次数。 当声明了一个变量并将一个引用类型值赋给该变量时，则这个值的引用次数就是1。如果同一个值又被赋给另一个变量，则该值的引用次数加1。相反，如果包含对这个值引用的变量又取得了另外一个值，则这个值的引用次数减1。当这个值的引用次数变成0时，则说明没有办法再访问这个值了，因而就可以将其占用的内存空间回收回来。 123456function test()&#123; var a = &#123;&#125; ; //a的引用次数为0 var b = a ; //a的引用次数加1，为1 var c =a; //a的引用次数再加1，为2 var b =&#123;&#125;; //a的引用次数减1，为1&#125; 引用计数这种方式在老式浏览器中采用,在循环引用是会出现内存泄露问题: 1234567function fn() &#123; var a = &#123;&#125;; var b = &#123;&#125;; a.pro = b; b.pro = a;&#125;fn(); 标记清除: fn()执行完毕后，两个对象都已经离开环境,内存回收; 引用计数: fn()执行完毕后,a和b的引用次数都是2,不会被垃圾回收器回收内存;如果fn函数被大量调用，就会造成内存泄露。(在IE7与IE8上，内存直线上升) IE中有一部分对象并不是原生js对象。例如，其内存泄露DOM和BOM中的对象就是使用C++以COM对象的形式实现的，而COM对象的垃圾回收机制采用的就是引用计数策略。因此，即使IE的js引擎采用标记清除策略来实现，但js访问的COM对象依然是基于引用计数策略的。换句话说，只要在IE中涉及COM对象，就会存在循环引用的问题。 1234window.onload=function outerFunction()&#123; var obj = document.getElementById("element"); obj.onclick=function innerFunction()&#123;&#125;;&#125;; obj引用了document.getElementById(“element”)，而document.getElementById(“element”)的onclick方法会引用外部环境中德变量，自然也包括obj，是不是很隐蔽? 最简单的方式就是自己手工解除循环引用: 12345window.onload=function outerFunction()&#123; var obj = document.getElementById("element"); obj.onclick=function innerFunction()&#123;&#125;; obj=null;&#125;; IE9+并不存在循环引用导致Dom内存泄露问题，可能是微软做了优化，或者Dom的回收方式已经改变 2. 内存管理2.1 合理的方案当前比较合理的方案是标记清除: 遍历所有可访问的对象; 回收已不可访问的对象 2.2 GC的缺陷和其他语言一样，javascript的GC策略也无法避免一个问题：GC时，停止响应其他操作，这是为了安全考虑。而Javascript的GC在100ms甚至以上，对一般的应用还好，但对于JS游戏，动画对连贯性要求比较高的应用，就麻烦了。这就是新引擎需要优化的点：避免GC造成的长时间停止响应。]]></content>
@@ -60,18 +72,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[创建对象的Object.create与new]]></title>
-    <url>%2F2018%2F04%2F07%2FJavaScript%2F%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84Object.create%E4%B8%8Enew%2F</url>
-    <content type="text"><![CDATA[创建对象有几种方式: 直接量: 123var obj1=&#123;name:"xiaowang"&#125;;var obj2=new Object(&#123;name:"xiaowang"&#125;);console.log(obj1,obj2); 构造函数: 123var M=function(name)&#123;this.name=name&#125;;var obj3=new M('xiaowang');console.log(obj3); Object.create 123var p=&#123;name:'xiaowang'&#125;;var obj4=Object.create(p);console.log(obj4); 对应的输出结果为: 可以看到,Object.create方法得到的对象是空对象，再输出各自对象的name属性看看: console.log(obj2.name,obj3.name,obj4.name) 得到的结果为xiaowang xiaowang xiaowang 这是为什么??? Object.create 的实现方式: 1234567var obj1 = Object.create(null);console.log(obj1); // &#123;&#125;obj1.name = 'jian';var obj2 = Object.create(obj1);console.log(obj2); // &#123;&#125;console.log(obj2.name); // 'jian', conosle.log(obj2.__proto__===obj1.prototype) //true obj2是空对象,但obj2.name输出了’jian’,obj2继承自obj1的原型对象 由此可以总结Object.create()做了： ​ 1. 创建空对象{} ​ 2. 指定空对象{}继承自参数的原型对象,即空对象的 __proto__ 指向Object.create()参数的原型对象。 var obj1=new M({name:&#39;xiaowang&#39;}) 的实现方式: 123456789101112//定义构造函数Person var Person = function (name) &#123; this.name = firstName;&#125;;//定义Person原型对象的新方法Person.prototype.sayHello = function() &#123; console.log("Hello, I'm " + this.name);&#125;;//实例化对象var person1 = new Person("Alice");//对象调用methodperson1.sayHello(); // logs "Hello, I'm Alice" 由此可以总结new做了： 创建实例对象person1 调用构造函数(Person)初始化person1成员变量（name)。 指定实例对象的继承自Person.prototype对象。即person1.__proto__指向构造函数的原型对象Person.prototype。 对比 Object.create new 创建对象 创建空对象 创建实例对象,并将参数初始化赋值 继承 空对象继承自参数对象的原型对象,本身为空对象 实例对象继承自构造函数的原型对象 总结:Object.create得到的对象未实例化,本身为空对象,可继承对象,而new得到的对象是实例化的对象]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-        <tag>对象</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[跨域请求的jsonp处理]]></title>
     <url>%2F2018%2F04%2F07%2FWeb%2F%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86%2F</url>
     <content type="text"><![CDATA[跨域简介跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。 浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe； JSONP JSON with Padding 填充式 json 正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替 处理步骤 客户端定义一个专门处理相应的有名函数doResponse(处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态) 服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’; 动态创建一个script元素,设置src指向服务器端的php地址 客户端js: 12345678910function doResponse(resp)&#123; console.log(resp); for(var i in resp)&#123; console.log(i); &#125; &#125;$("#btn").click(function() &#123; /*动态追加script元素*/ $("body").append(`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`); &#125;); 也可以采用ajax获得返回数据 1234567891011$.getJSON("https://www.haohome.top/demo/jsonp.php?callback=doResponse",data=&gt;&#123; console.log(data);&#125;);$.ajax(&#123; type:"GET", url:"https://www.haohome.top/demo/jsonp.php?callback=doResponse", success:data=&gt;&#123; console.log("返回数据",data); &#125;, dataType:"jsonp"&#125;) 服务器端php: 1234header("Content-type:application/javascript;charset:utf-8");$getData=$_GET['callback'];$hello=json_encode([1,2,3,4]);echo $getData."('$hello')"; ​]]></content>
@@ -81,6 +81,18 @@
       <tags>
         <tag>http</tag>
         <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[创建对象的Object.create与new]]></title>
+    <url>%2F2018%2F04%2F07%2FJavaScript%2F%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84Object.create%E4%B8%8Enew%2F</url>
+    <content type="text"><![CDATA[创建对象有几种方式: 直接量: 123var obj1=&#123;name:"xiaowang"&#125;;var obj2=new Object(&#123;name:"xiaowang"&#125;);console.log(obj1,obj2); 构造函数: 123var M=function(name)&#123;this.name=name&#125;;var obj3=new M('xiaowang');console.log(obj3); Object.create 123var p=&#123;name:'xiaowang'&#125;;var obj4=Object.create(p);console.log(obj4); 对应的输出结果为: 可以看到,Object.create方法得到的对象是空对象，再输出各自对象的name属性看看: console.log(obj2.name,obj3.name,obj4.name) 得到的结果为xiaowang xiaowang xiaowang 这是为什么??? Object.create 的实现方式: 1234567var obj1 = Object.create(null);console.log(obj1); // &#123;&#125;obj1.name = 'jian';var obj2 = Object.create(obj1);console.log(obj2); // &#123;&#125;console.log(obj2.name); // 'jian', conosle.log(obj2.__proto__===obj1.prototype) //true obj2是空对象,但obj2.name输出了’jian’,obj2继承自obj1的原型对象 由此可以总结Object.create()做了： ​ 1. 创建空对象{} ​ 2. 指定空对象{}继承自参数的原型对象,即空对象的 __proto__ 指向Object.create()参数的原型对象。 var obj1=new M({name:&#39;xiaowang&#39;}) 的实现方式: 123456789101112//定义构造函数Person var Person = function (name) &#123; this.name = firstName;&#125;;//定义Person原型对象的新方法Person.prototype.sayHello = function() &#123; console.log("Hello, I'm " + this.name);&#125;;//实例化对象var person1 = new Person("Alice");//对象调用methodperson1.sayHello(); // logs "Hello, I'm Alice" 由此可以总结new做了： 创建实例对象person1 调用构造函数(Person)初始化person1成员变量（name)。 指定实例对象的继承自Person.prototype对象。即person1.__proto__指向构造函数的原型对象Person.prototype。 对比 Object.create new 创建对象 创建空对象 创建实例对象,并将参数初始化赋值 继承 空对象继承自参数对象的原型对象,本身为空对象 实例对象继承自构造函数的原型对象 总结:Object.create得到的对象未实例化,本身为空对象,可继承对象,而new得到的对象是实例化的对象]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+        <tag>对象</tag>
       </tags>
   </entry>
   <entry>
@@ -318,9 +330,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中的抽象类]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
+    <title><![CDATA[Java中super关键字的使用]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[super关键字在对象的内部使用,可以代表父类对象 1.访问父类的属性super.age 2.访问父类的方法super.eat()]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -330,16 +342,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[FreeMaker 模板_数据模型]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FFreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%2F</url>
-    <content type="text"><![CDATA[1. 模板 + 数据模型 = 输出1.1 模板 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如: 12345678910&lt;html&gt; &lt;head&gt; &lt;title&gt;Welcome!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Welcome $&#123;user&#125;!&lt;/h1&gt; &lt;p&gt;Our latest product: &lt;a href="$&#123;latestProduct.url&#125;"&gt;$&#123;latestProduct.name&#125;&lt;/a&gt;! &lt;/body&gt;&lt;/html&gt; ${…}：插值表达式(interpolation) FTL标签：FreeMarker模板的语言标签，标签的名字以 # 开头，用户自定义的FTL标签则需要使用 @ 来代替 # 注释：使用 &lt;#– and –&gt; 来标识 其他任何不是插值、FTL标签或注释的内容将被视为静态文本，直接在页面输出 1.2 数据模型为模板准备的数据整体被称作为数据模型数据模型是树形结构,例如: 123456789101112131415161718192021222324252627(root) | +- animals | | | +- mouse | | | | | +- size = "small" | | | | | +- price = 50 | | | +- elephant | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- python | | | +- size = "medium" | | | +- price = 4999 | +- message = "It is a test" | +- misc | +- foo = "Something" hashes (哈希表): 指变量中扮演目录角色(比如 root, animals, mouse, elephant, python, misc) 哈希表存储其他变量(被称为 子变量)， 它们可以通过名称来查找(比如 “animals”, “mouse” 或 “price”)。 scalars (标量): 指存储单值的变量 (size, price, message 和 foo) 如果要在模板中使用子变量， 那应该从根root开始指定它的路径，每级之间用点来分隔开。要访问 mouse 的 price ，要从root开始，首先进入到 animals ，之后访问 mouse ，最后访问 price 。就可以这样来写 animals.mouse.price。 sequences (序列): 像哈希表那样存储子变量，但是子变量没有名字，它们只是列表中的项。在下面这个数据模型中， animals 和 misc.fruits 就是序列： 1234567891011121314151617181920212223242526272829303132333435(root) | +- animals | | | +- (1st) | | | | | +- name = "mouse" | | | | | +- size = "small" | | | | | +- price = 50 | | | +- (2nd) | | | | | +- name = "elephant" | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- (3rd) | | | +- name = "python" | | | +- size = "medium" | | | +- price = 4999 | +- misc | +- fruits | +- (1st) = "orange" | +- (2nd) = "banana" 要访问序列的子变量，可以使用方括号形式的数字索引下标。 索引下标从0开始(从0开始也是程序员的传统)，那么第一项的索引就是0， 第二项的索引就是1等等。要得到第一个动物的名称的话，可以这么来写代码 animals[0].name。 标量类型可以分为如下的类别： 字符串：就是文本，也就是任意的字符序列，比如上面提到的 ‘m’,’o’,’u’, ‘s’,’e’。比如 name 和 size 也是字符串。 数字：这是数值类型，就像上面的 price。 在FreeMarker中，字符串 “50” 和数字 50 是两种完全不同的类型。 日期/时间: 可以是日期-时间格式(存储某一天的日期和时间)， 或者是日期(只有日期，没有时间)，或者是时间(只有时间，没有日期)。 布尔值：对应着对/错(是/否，开/关等值)类似的值。 总结： 数据模型可以被看成是树形结构。 标量用于存储单一的值。这种类型的值可以是字符串，数字，日期/时间或者是布尔值。 哈希表是一种存储变量及其相关且有唯一标识名称的容器。 序列是存储有序变量的容器。存储的变量可以通过数字索引来检索，索引通常从0开始。]]></content>
+    <title><![CDATA[Java中的抽象类]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
       <categories>
         <category>Java</category>
       </categories>
       <tags>
         <tag>学习记录</tag>
         <tag>Java</tag>
-        <tag>FreeMaker</tag>
       </tags>
   </entry>
   <entry>
@@ -367,15 +378,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中super关键字的使用]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[super关键字在对象的内部使用,可以代表父类对象 1.访问父类的属性super.age 2.访问父类的方法super.eat()]]></content>
+    <title><![CDATA[FreeMaker 模板_数据模型]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FFreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[1. 模板 + 数据模型 = 输出1.1 模板 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如: 12345678910&lt;html&gt; &lt;head&gt; &lt;title&gt;Welcome!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Welcome $&#123;user&#125;!&lt;/h1&gt; &lt;p&gt;Our latest product: &lt;a href="$&#123;latestProduct.url&#125;"&gt;$&#123;latestProduct.name&#125;&lt;/a&gt;! &lt;/body&gt;&lt;/html&gt; ${…}：插值表达式(interpolation) FTL标签：FreeMarker模板的语言标签，标签的名字以 # 开头，用户自定义的FTL标签则需要使用 @ 来代替 # 注释：使用 &lt;#– and –&gt; 来标识 其他任何不是插值、FTL标签或注释的内容将被视为静态文本，直接在页面输出 1.2 数据模型为模板准备的数据整体被称作为数据模型数据模型是树形结构,例如: 123456789101112131415161718192021222324252627(root) | +- animals | | | +- mouse | | | | | +- size = "small" | | | | | +- price = 50 | | | +- elephant | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- python | | | +- size = "medium" | | | +- price = 4999 | +- message = "It is a test" | +- misc | +- foo = "Something" hashes (哈希表): 指变量中扮演目录角色(比如 root, animals, mouse, elephant, python, misc) 哈希表存储其他变量(被称为 子变量)， 它们可以通过名称来查找(比如 “animals”, “mouse” 或 “price”)。 scalars (标量): 指存储单值的变量 (size, price, message 和 foo) 如果要在模板中使用子变量， 那应该从根root开始指定它的路径，每级之间用点来分隔开。要访问 mouse 的 price ，要从root开始，首先进入到 animals ，之后访问 mouse ，最后访问 price 。就可以这样来写 animals.mouse.price。 sequences (序列): 像哈希表那样存储子变量，但是子变量没有名字，它们只是列表中的项。在下面这个数据模型中， animals 和 misc.fruits 就是序列： 1234567891011121314151617181920212223242526272829303132333435(root) | +- animals | | | +- (1st) | | | | | +- name = "mouse" | | | | | +- size = "small" | | | | | +- price = 50 | | | +- (2nd) | | | | | +- name = "elephant" | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- (3rd) | | | +- name = "python" | | | +- size = "medium" | | | +- price = 4999 | +- misc | +- fruits | +- (1st) = "orange" | +- (2nd) = "banana" 要访问序列的子变量，可以使用方括号形式的数字索引下标。 索引下标从0开始(从0开始也是程序员的传统)，那么第一项的索引就是0， 第二项的索引就是1等等。要得到第一个动物的名称的话，可以这么来写代码 animals[0].name。 标量类型可以分为如下的类别： 字符串：就是文本，也就是任意的字符序列，比如上面提到的 ‘m’,’o’,’u’, ‘s’,’e’。比如 name 和 size 也是字符串。 数字：这是数值类型，就像上面的 price。 在FreeMarker中，字符串 “50” 和数字 50 是两种完全不同的类型。 日期/时间: 可以是日期-时间格式(存储某一天的日期和时间)， 或者是日期(只有日期，没有时间)，或者是时间(只有时间，没有日期)。 布尔值：对应着对/错(是/否，开/关等值)类似的值。 总结： 数据模型可以被看成是树形结构。 标量用于存储单一的值。这种类型的值可以是字符串，数字，日期/时间或者是布尔值。 哈希表是一种存储变量及其相关且有唯一标识名称的容器。 序列是存储有序变量的容器。存储的变量可以通过数字索引来检索，索引通常从0开始。]]></content>
       <categories>
         <category>Java</category>
       </categories>
       <tags>
         <tag>学习记录</tag>
         <tag>Java</tag>
+        <tag>FreeMaker</tag>
       </tags>
   </entry>
   <entry>
