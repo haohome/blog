@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/Java/Java中的抽象类/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/Java/Java中的多态/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
@@ -308,7 +308,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/01/Java/Java中的抽象类/" itemprop="url">Java中的抽象类</a></h2>
+                <a class="post-title-link" href="/2018/01/01/Java/Java中的多态/" itemprop="url">Java中的多态</a></h2>
         
 
         <div class="post-meta">
@@ -362,8 +362,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/01/01/Java/Java中的抽象类/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/01/01/Java/Java中的抽象类/" class="cy_cmt_count" data-xid="2018/01/01/Java/Java中的抽象类/" itemprop="commentsCount" ></span>
+                <a href="/2018/01/01/Java/Java中的多态/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://blog.haohome.top/2018/01/01/Java/Java中的多态/" class="cy_cmt_count" data-xid="2018/01/01/Java/Java中的多态/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  238
+                  203
                 </span>
               
 
@@ -412,15 +412,14 @@
       
         
           
-            <h3 id="1-语法定义"><a href="#1-语法定义" class="headerlink" title="1.语法定义"></a>1.语法定义</h3><p>抽象类前使用abstract关键字修饰,则该类为抽象类</p>
-<h3 id="2-应用场景"><a href="#2-应用场景" class="headerlink" title="2.应用场景"></a>2.应用场景</h3><ul>
-<li>父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法</li>
-<li>从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性<h3 id="3-作用"><a href="#3-作用" class="headerlink" title="3.作用"></a>3.作用</h3>抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法<h3 id="4-使用规则-步骤"><a href="#4-使用规则-步骤" class="headerlink" title="4.使用规则(步骤)"></a>4.使用规则(步骤)</h3></li>
-<li>1)abstract定义抽象类</li>
-<li>2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现)</li>
-<li>3)包含抽象方法的类是抽象类</li>
-<li>4)抽象类中可以包含普通方法,也可以没有抽象方法</li>
-<li>5)抽象类不能直接创建,可以定义引用变量</li>
+            <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><h4 id="1-引用多态"><a href="#1-引用多态" class="headerlink" title="1.引用多态"></a>1.引用多态</h4><ul>
+<li>父类的引用可以指向本类的对象</li>
+<li>父类的引用可以指向子类的对象<h4 id="2-方法多态"><a href="#2-方法多态" class="headerlink" title="2.方法多态"></a>2.方法多态</h4></li>
+<li>创建本类对象时,调用的方法为本类方法</li>
+<li>创建子类对象时,调用的方法为<strong>子类重写的方法或者继承的方法</strong><h4 id="3-引用类型转换"><a href="#3-引用类型转换" class="headerlink" title="3.引用类型转换"></a>3.引用类型转换</h4></li>
+<li>向上类型转换(隐式/自动类型转换),是小类型向大类型转换</li>
+<li><strong>向下类型转换(强制类型转换),是大类型到小类型转换</strong>(存在数据溢出风险)</li>
+<li>instanceof运算符:避免类型转换出现的安全问题<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Dog dog=<span class="keyword">new</span> Dog();</span><br><span class="line">Animal animal=dog;<span class="comment">//(向上类型转换)</span></span><br><span class="line"><span class="keyword">if</span> (animal <span class="keyword">instanceof</span> Dog) &#123;</span><br><span class="line">  Dog dog2=(Dog)animal;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">  System.out.println(<span class="string">"无法进行类型转换"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
           
@@ -646,7 +645,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/Java/Java中的多态/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/Java/Java中的类和对象/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
@@ -665,7 +664,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/01/Java/Java中的多态/" itemprop="url">Java中的多态</a></h2>
+                <a class="post-title-link" href="/2018/01/01/Java/Java中的类和对象/" itemprop="url">Java中的类和对象</a></h2>
         
 
         <div class="post-meta">
@@ -719,8 +718,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/01/01/Java/Java中的多态/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/01/01/Java/Java中的多态/" class="cy_cmt_count" data-xid="2018/01/01/Java/Java中的多态/" itemprop="commentsCount" ></span>
+                <a href="/2018/01/01/Java/Java中的类和对象/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://blog.haohome.top/2018/01/01/Java/Java中的类和对象/" class="cy_cmt_count" data-xid="2018/01/01/Java/Java中的类和对象/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -742,7 +741,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  203
+                  378
                 </span>
               
 
@@ -769,15 +768,75 @@
       
         
           
-            <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><h4 id="1-引用多态"><a href="#1-引用多态" class="headerlink" title="1.引用多态"></a>1.引用多态</h4><ul>
-<li>父类的引用可以指向本类的对象</li>
-<li>父类的引用可以指向子类的对象<h4 id="2-方法多态"><a href="#2-方法多态" class="headerlink" title="2.方法多态"></a>2.方法多态</h4></li>
-<li>创建本类对象时,调用的方法为本类方法</li>
-<li>创建子类对象时,调用的方法为<strong>子类重写的方法或者继承的方法</strong><h4 id="3-引用类型转换"><a href="#3-引用类型转换" class="headerlink" title="3.引用类型转换"></a>3.引用类型转换</h4></li>
-<li>向上类型转换(隐式/自动类型转换),是小类型向大类型转换</li>
-<li><strong>向下类型转换(强制类型转换),是大类型到小类型转换</strong>(存在数据溢出风险)</li>
-<li>instanceof运算符:避免类型转换出现的安全问题<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Dog dog=<span class="keyword">new</span> Dog();</span><br><span class="line">Animal animal=dog;<span class="comment">//(向上类型转换)</span></span><br><span class="line"><span class="keyword">if</span> (animal <span class="keyword">instanceof</span> Dog) &#123;</span><br><span class="line">  Dog dog2=(Dog)animal;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">  System.out.println(<span class="string">"无法进行类型转换"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+            <h2 id="1-类"><a href="#1-类" class="headerlink" title="1.类"></a>1.类</h2><ul>
+<li>类是对象的类型</li>
+<li>类具有相同属性和方法的一组对象的集合</li>
 </ul>
+<ol>
+<li>定义:确定对象将拥有的特征(属性)和方法(行为)</li>
+<li>类的组成:属性和方法</li>
+<li>定义类的步骤<blockquote>
+<p>a.定义类名<br>b.编写类的属性<br>c.编写类的方法<br> !– more –&gt;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 类名</span>&#123;</span><br><span class="line">  <span class="comment">//定义属性部分(成员变量)</span></span><br><span class="line">  属性<span class="number">1</span>的类型 属性<span class="number">1</span>;</span><br><span class="line">  属性<span class="number">2</span>的类型 属性<span class="number">2</span>;</span><br><span class="line">  <span class="comment">//定义方法部分</span></span><br><span class="line">  方法<span class="number">1</span>;</span><br><span class="line">  方法<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ol>
+<h2 id="2-对象"><a href="#2-对象" class="headerlink" title="2.对象"></a>2.对象</h2><h3 id="对象的属性"><a href="#对象的属性" class="headerlink" title="对象的属性"></a>对象的属性</h3><ul>
+<li>对象具有的各种特征</li>
+<li>每个对象的每个属性都拥有特定值<h3 id="对象的方法"><a href="#对象的方法" class="headerlink" title="对象的方法"></a>对象的方法</h3></li>
+<li>对象可以执行的操作</li>
+</ul>
+<p>使用对象的步骤:<br> a. 创建对象(new)<br> b. 使用对象<br>    引用对象的属性:对象名.属性<br>    引用对象的方法:对象名.方法</p>
+<blockquote>
+<p>类是抽象的概念,对象是一个具体的实物</p>
+</blockquote>
+<h2 id="3-访问修饰符"><a href="#3-访问修饰符" class="headerlink" title="3.访问修饰符"></a>3.访问修饰符</h2><table>
+<thead>
+<tr>
+<th>访问修饰符</th>
+<th>本类</th>
+<th>同包</th>
+<th>子类</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>private</td>
+<td>√</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>默认</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>protected</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>public</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>属性通常设为private</li>
+<li>外部调用对象属性通常通过对象的getter和setter方法</li>
+</ul>
+<h2 id="4-Object类的方法"><a href="#4-Object类的方法" class="headerlink" title="4.Object类的方法"></a>4.Object类的方法</h2><h3 id="4-1-toString-方法"><a href="#4-1-toString-方法" class="headerlink" title="4.1 toString()方法"></a>4.1 toString()方法</h3><p>默认:toString()方法默认返回的是对象的哈希码(对象的地址字符串)<br>Override:返回的是对象的属性值</p>
+<h3 id="4-2-equals-方法"><a href="#4-2-equals-方法" class="headerlink" title="4.2 equals()方法"></a>4.2 equals()方法</h3><p>默认:比较的是对象的引用是否指向同一块内存地址<br>Override:比较对象的属性值(数据)信息</p>
 
           
         
@@ -2136,7 +2195,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
