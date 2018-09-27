@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.haohome.top/"/>
-  <updated>2018-08-28T09:28:25.303Z</updated>
+  <updated>2018-09-27T15:55:12.803Z</updated>
   <id>http://blog.haohome.top/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://blog.haohome.top/2018/09/21/Program/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7%E6%80%BB%E7%BB%93/"/>
+    <id>http://blog.haohome.top/2018/09/21/Program/浏览器兼容性总结/</id>
+    <published>2018-09-21T08:14:02.058Z</published>
+    <updated>2018-09-27T15:55:12.803Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p>title: 浏览器兼容性<br>category: JavaScript<br>date: 2018-08-21<br>tags: [JavaScript,兼容性]</p><hr><h2 id="1-视频截取第一帧"><a href="#1-视频截取第一帧" class="headerlink" title="1. 视频截取第一帧"></a>1. 视频截取第一帧</h2><ul><li>问题: 在加载h5 的视频时,PC端一半都会默认加载首帧显示,而在移动端就会显示空白或者一片黑</li></ul><blockquote><p><strong>解决方案</strong>: 在上传本地视频时,监听视频加载事件,获取第一帧图片,利用canvas绘制出图片并存储,作为移动端视频video的poster</p><p>onloadeddata事件:  浏览器加载声频、视频当前帧结束后触发的事件(与下一帧是否下载完成无关)<br>在音频和视频加载过程中,能够触发的事件如下:</p><ol><li>开始读入媒体数据时触发的事件(<a href="http://www.webkkl.com/api-v/onloadstart.php" target="_blank" rel="noopener">onloadstart</a>)</li><li>更改声频、视频的时长时(<a href="http://www.webkkl.com/api-v/ondurationchange.php" target="_blank" rel="noopener">ondurationchange</a>)</li><li>浏览器已加载声频、视频的元数据时触发的事件(<a href="http://www.webkkl.com/api-v/onloadedmetadata.php" target="_blank" rel="noopener">onloadedmetadata</a>)</li><li>浏览器加载声频、视频当前帧结束后(<a href="http://www.webkkl.com/api-v/onloadeddata.php" target="_blank" rel="noopener">onloadeddata</a>)</li><li>浏览器正在下载媒体数据时(<a href="http://www.webkkl.com/api-v/onprogress.php" target="_blank" rel="noopener">onprogress</a>)</li><li>浏览器可以播放媒体数据时(<a href="http://www.webkkl.com/api-v/oncanplay.php" target="_blank" rel="noopener">oncanplay</a>)</li><li>当浏览器可以在不因缓冲而停顿的情况下播放时(<a href="http://www.webkkl.com/api-v/oncanplaythrough.php" target="_blank" rel="noopener">oncanplaythrough</a>)</li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">&gt;   <span class="tag">&lt;<span class="name">h1</span>&gt;</span>视频获取第一帧<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">&gt;   &lt;hr&gt;</span><br><span class="line">&gt;   &lt;div&gt;</span><br><span class="line">&gt;     &lt;p&gt;本地上传&lt;/p&gt;</span><br><span class="line">&gt;       &lt;label for="file"&gt;选择视频&lt;/label&gt; </span><br><span class="line">&gt;       &lt;input type="file" name="" id="file""&gt;&lt;br&gt;</span><br><span class="line">&gt;   &lt;/div&gt;</span><br><span class="line">&gt;   &lt;hr&gt;</span><br><span class="line">&gt;   &lt;div&gt;</span><br><span class="line">&gt;       &lt;p&gt;外链&lt;/p&gt;</span><br><span class="line">&gt;       &lt;input type="text" id='link'&gt;&lt;button id="btn"&gt;提交&lt;/button&gt;</span><br><span class="line">&gt;   &lt;/div&gt;</span><br><span class="line">&gt;   &lt;hr&gt;</span><br><span class="line">&gt;   &lt;video id='video'  preload="meta" style='display:none' crossorigin="anonymous"&gt;&lt;/video&gt;</span><br><span class="line">&gt;   &lt;div&gt;</span><br><span class="line">&gt;     &lt;h2&gt;首帧图片显示&lt;/h2&gt;</span><br><span class="line">&gt;     &lt;img src="" alt="" id="img"&gt;</span><br><span class="line">&gt;   &lt;/div&gt;</span><br><span class="line">&gt; &lt;p&gt;外链视频: https://haohome.top/movie.mp4&lt;/p&gt;</span><br><span class="line">&gt;   &lt;script&gt;</span><br><span class="line">&gt;     var video = document.getElementById("video")</span><br><span class="line">&gt;     var file = document.getElementById("file")</span><br><span class="line">&gt;     var btn = document.getElementById("btn")</span><br><span class="line">&gt;     var link = document.getElementById("link")</span><br><span class="line">&gt;     file.addEventListener("change",function()&#123;</span><br><span class="line">&gt;       var file  = this.files[0];</span><br><span class="line">&gt;       var src = URL.createObjectURL(file)</span><br><span class="line">&gt;       var newFile = new FileReader(file)</span><br><span class="line">&gt;       video.src = src</span><br><span class="line">&gt;     &#125;)</span><br><span class="line">&gt;     btn.onclick=function()&#123;</span><br><span class="line">&gt;       video.src =link.value</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;      video.addEventListener("loadeddata", function () &#123;</span><br><span class="line">&gt;       var canvas = document.createElement("canvas");</span><br><span class="line">&gt;       canvas.width = this.videoWidth;</span><br><span class="line">&gt;       canvas.height = this.videoHeight;</span><br><span class="line">&gt;       setTimeout(() =&gt; &#123;</span><br><span class="line">&gt;         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);</span><br><span class="line">&gt;         var imgSrc = '';</span><br><span class="line">&gt;         try &#123;</span><br><span class="line">&gt;           imgSrc = canvas.toDataURL("image/png");</span><br><span class="line">&gt;           img.src = imgSrc</span><br><span class="line">&gt;         &#125; catch (e) &#123;</span><br><span class="line">&gt;           document.write("只能截取当前域名视频图片! ", e);</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;       &#125;, 200)</span><br><span class="line">&gt;     &#125;, false);</span><br><span class="line">&gt;   &lt;/script&gt;</span><br><span class="line">&gt; &lt;/body&gt;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><iframe width="100%" height="300" src="//jsrun.net/PqhKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe><p><strong>当采用链接视频时,会存在视频的跨域问题,需要在video上添加属性crossOrigin=’Anonymous’ 即可</strong>(IE由于安全性问题,会报SecurityError)</p><blockquote><p>Tips:</p><p>获取本地地址两种方法:</p><ol><li><p><code>URL.createObjectURL</code>: </p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;    <span class="keyword">var</span> src = URL.createObjectURL(file)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></li></ol></blockquote><p>&gt;</p><blockquote><ol><li><p><strong><code>FileReader</code></strong>:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;    <span class="keyword">var</span> fr=<span class="keyword">new</span> FileReader();</span><br><span class="line">&gt;    fr.onload=<span class="function"><span class="keyword">function</span> (<span class="params">file</span>) </span>&#123;</span><br><span class="line">&gt;     <span class="keyword">var</span> src =<span class="keyword">this</span>.result;</span><br><span class="line">&gt;    &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure><p>当前监听video视频获取首帧图片时,采用了延时200ms,是为了给视频加载以一定时间</p></li></ol></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;p&gt;title: 浏览器兼容性&lt;br&gt;category: JavaScript&lt;br&gt;date: 2018-08-21&lt;br&gt;tags: [JavaScript,兼容性]&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;1-视频截取第一帧&quot;&gt;&lt;a href=&quot;#1-视频截取第一帧&quot;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hashchange事件</title>
+    <link href="http://blog.haohome.top/2018/08/28/Program/hashchange%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://blog.haohome.top/2018/08/28/Program/hashchange事件/</id>
+    <published>2018-08-27T16:00:00.000Z</published>
+    <updated>2018-08-28T09:28:17.748Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p></blockquote><p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><a id="more"></a><p>hashchange 事件回调函数对象主要有两个参数会用到:</p><ul><li><p>newURL: 当前页面新的URL</p></li><li><p>oldURL: 当前页面旧的URL</p></li></ul><p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"oldURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"newURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.onhashchange = handleHashChange;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;hashchange&quot;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//hash变化的处理逻辑&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
+    
+      <category term="hash" scheme="http://blog.haohome.top/tags/hash/"/>
+    
+      <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>JS判断当前文本输入状态</title>
@@ -46,36 +100,6 @@
       <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
     
       <category term="input" scheme="http://blog.haohome.top/tags/input/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hashchange事件</title>
-    <link href="http://blog.haohome.top/2018/08/28/Program/hashchange%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://blog.haohome.top/2018/08/28/Program/hashchange事件/</id>
-    <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2018-08-28T09:28:17.748Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p></blockquote><p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><a id="more"></a><p>hashchange 事件回调函数对象主要有两个参数会用到:</p><ul><li><p>newURL: 当前页面新的URL</p></li><li><p>oldURL: 当前页面旧的URL</p></li></ul><p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"oldURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"newURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.onhashchange = handleHashChange;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;hashchange&quot;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//hash变化的处理逻辑&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
-    
-      <category term="hash" scheme="http://blog.haohome.top/tags/hash/"/>
-    
-      <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
     
   </entry>
   
@@ -197,9 +221,9 @@
       <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
-    
       <category term="node" scheme="http://blog.haohome.top/tags/node/"/>
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
     
   </entry>
   
@@ -248,9 +272,9 @@
       <category term="web" scheme="http://blog.haohome.top/categories/web/"/>
     
     
-      <category term="http" scheme="http://blog.haohome.top/tags/http/"/>
-    
       <category term="web" scheme="http://blog.haohome.top/tags/web/"/>
+    
+      <category term="http" scheme="http://blog.haohome.top/tags/http/"/>
     
   </entry>
   
@@ -527,9 +551,9 @@
       <category term="CSS" scheme="http://blog.haohome.top/categories/CSS/"/>
     
     
-      <category term="flex" scheme="http://blog.haohome.top/tags/flex/"/>
-    
       <category term="css" scheme="http://blog.haohome.top/tags/css/"/>
+    
+      <category term="flex" scheme="http://blog.haohome.top/tags/flex/"/>
     
   </entry>
   
@@ -607,39 +631,6 @@
     
     
       <category term="网摘" scheme="http://blog.haohome.top/tags/%E7%BD%91%E6%91%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DOM通用事件绑定</title>
-    <link href="http://blog.haohome.top/2018/02/18/JavaScript/DOM%E9%80%9A%E7%94%A8%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A/"/>
-    <id>http://blog.haohome.top/2018/02/18/JavaScript/DOM通用事件绑定/</id>
-    <published>2018-02-17T16:00:00.000Z</published>
-    <updated>2018-04-10T05:53:46.974Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-认识DOM"><a href="#1-认识DOM" class="headerlink" title="1. 认识DOM"></a>1. 认识DOM</h3><p>DOM(Document Object Model),即文档对象模型,是为了<strong>以编程的方法操作HTML和XML文档内容</strong>制定的标准,主要有三种:</p><ul><li>核心 DOM - 针对任何结构化文档的标准模型</li><li>XML DOM - 针对 XML 文档的标准模型</li><li>HTML DOM - 针对 HTML 文档的标准模型</li></ul><p>这里主要认识HTML DOM</p><blockquote><p>HTML DOM: 关于如何获取、修改、添加或删除 HTML 元素的标准</p></blockquote><a id="more"></a><p>在DOM中,HTML 文档中的所有内容都是节点,通过HTML DOM,树中的所有节点均可通过Js进行增删改查(操作DOM);</p><p><img src="https://haohome.top/18-2-18/22599283.jpg" alt="节点树"></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>DOM 教程<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>DOM 第一课<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello world!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="built_in">document</span>.querySelector(<span class="string">"p"</span>);<span class="comment">//根据选择器标签查找DOM元素</span></span><br><span class="line"><span class="keyword">var</span> btn=<span class="built_in">document</span>.getElementById(<span class="string">"btn"</span>);<span class="comment">//根据ID查找DOM元素</span></span><br><span class="line">btn.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//通过操作DOM事件绑定事件</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"你点击了我"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>事件的绑定有一个通用的方法:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">btn.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"绑定了点击事件"</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="2-DOM事件绑定"><a href="#2-DOM事件绑定" class="headerlink" title="2. DOM事件绑定"></a>2. DOM事件绑定</h3><p>上面讲了两种点击事件绑定的方法，addEventListener是一个通用的事件绑定API，但单词太多，最好自己封装一个绑定方法：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindEvent</span>(<span class="params">elem,type,fn</span>)</span>&#123;</span><br><span class="line">  event.addEventListener(type,fn)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//给按钮btn绑定点击事件</span></span><br><span class="line">bindEvent(btn,click,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"绑定了点击事件"</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>重写的bindEvent是一个通用事件绑定,结合事件冒泡情况,可以更完善:</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p1"</span>&gt;</span>激活1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p2"</span>&gt;</span>激活2<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p3"</span>&gt;</span>激活3<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p4"</span>&gt;</span>激活4<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><p>按之前的事件绑定方式,给每个p元素绑定事件,打印输出对应的innerHTML值</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p1=<span class="built_in">document</span>.getElementById(<span class="string">'p1'</span>);</span><br><span class="line">bindEvent(p1,<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e.target.innerHTML)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> body=<span class="built_in">document</span>.body;</span><br><span class="line">bindEvent(body,<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(e.target.innerHTML)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>运行后发现,点击p1元素会输出两次,说明该元素绑定了两次单击事件,这是由于给p1元素绑定单击事件时冒泡到父元素div1上;</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bindEvent(p1,<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  e.stopPropagation();</span><br><span class="line">  <span class="built_in">console</span>.log(e.target.innerHTML)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>那么这样通用事件绑定方法就不通用,需要进行改造:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindEvent</span>(<span class="params">elem,type,selector,fn</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(fn==<span class="literal">null</span>)&#123;<span class="comment">//如果没有第四个参数</span></span><br><span class="line">  fn=selector;</span><br><span class="line">    selector=<span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  elem.addEventListener(type,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(selector)&#123;</span><br><span class="line">    <span class="keyword">var</span> target=e.target</span><br><span class="line">      <span class="keyword">if</span>(target.matches(selector))&#123;</span><br><span class="line">        fn.call(<span class="keyword">this</span>,e)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      fn(e)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> div1=<span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>);</span><br><span class="line">bindEvent(div1,<span class="string">'click'</span>,<span class="string">'p'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// e.stopPropagation();</span></span><br><span class="line">  <span class="built_in">console</span>.log(e.target.innerHTML)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;1-认识DOM&quot;&gt;&lt;a href=&quot;#1-认识DOM&quot; class=&quot;headerlink&quot; title=&quot;1. 认识DOM&quot;&gt;&lt;/a&gt;1. 认识DOM&lt;/h3&gt;&lt;p&gt;DOM(Document Object Model),即文档对象模型,是为了&lt;strong&gt;以编程的方法操作HTML和XML文档内容&lt;/strong&gt;制定的标准,主要有三种:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;核心 DOM - 针对任何结构化文档的标准模型&lt;/li&gt;
-&lt;li&gt;XML DOM - 针对 XML 文档的标准模型&lt;/li&gt;
-&lt;li&gt;HTML DOM - 针对 HTML 文档的标准模型&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这里主要认识HTML DOM&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;HTML DOM: 关于如何获取、修改、添加或删除 HTML 元素的标准&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
-    
-    
-      <category term="js" scheme="http://blog.haohome.top/tags/js/"/>
-    
-      <category term="DOM" scheme="http://blog.haohome.top/tags/DOM/"/>
     
   </entry>
   

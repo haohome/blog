@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/09/21/Program/浏览器兼容性总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
@@ -308,7 +308,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/28/Program/js判断当前文本输入状态/" itemprop="url">JS判断当前文本输入状态</a></h2>
+                <a class="post-title-link" href="/2018/09/21/Program/浏览器兼容性总结/" itemprop="url">未命名</a></h2>
         
 
         <div class="post-meta">
@@ -320,8 +320,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T00:00:00+08:00">
-                2018-08-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T16:14:02+08:00">
+                2018-09-21
               </time>
             
 
@@ -330,28 +330,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -362,8 +340,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/08/28/Program/js判断当前文本输入状态/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/" class="cy_cmt_count" data-xid="2018/08/28/Program/js判断当前文本输入状态/" itemprop="commentsCount" ></span>
+                <a href="/2018/09/21/Program/浏览器兼容性总结/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://blog.haohome.top/2018/09/21/Program/浏览器兼容性总结/" class="cy_cmt_count" data-xid="2018/09/21/Program/浏览器兼容性总结/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -385,7 +363,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  704
+                  653
                 </span>
               
 
@@ -411,23 +389,50 @@
 
       
         
-          <blockquote>
-<p>最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。</p>
-</blockquote>
-<p>在搜索的时候，我们需要按<code>Enter</code>键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:</p>
-<ul>
-<li><p>绑定<code>keyup</code>事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮</p>
-</li>
-<li><p>单纯按键监听，并没有判断中文输入状态</p>
-</li>
+          
+            <hr>
+<p>title: 浏览器兼容性<br>category: JavaScript<br>date: 2018-08-21<br>tags: [JavaScript,兼容性]</p>
+<hr>
+<h2 id="1-视频截取第一帧"><a href="#1-视频截取第一帧" class="headerlink" title="1. 视频截取第一帧"></a>1. 视频截取第一帧</h2><ul>
+<li>问题: 在加载h5 的视频时,PC端一半都会默认加载首帧显示,而在移动端就会显示空白或者一片黑</li>
 </ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/28/Program/js判断当前文本输入状态/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<blockquote>
+<p><strong>解决方案</strong>: 在上传本地视频时,监听视频加载事件,获取第一帧图片,利用canvas绘制出图片并存储,作为移动端视频video的poster</p>
+<p>onloadeddata事件:  浏览器加载声频、视频当前帧结束后触发的事件(与下一帧是否下载完成无关)<br>在音频和视频加载过程中,能够触发的事件如下:</p>
+<ol>
+<li>开始读入媒体数据时触发的事件(<a href="http://www.webkkl.com/api-v/onloadstart.php" target="_blank" rel="noopener">onloadstart</a>)</li>
+<li>更改声频、视频的时长时(<a href="http://www.webkkl.com/api-v/ondurationchange.php" target="_blank" rel="noopener">ondurationchange</a>)</li>
+<li>浏览器已加载声频、视频的元数据时触发的事件(<a href="http://www.webkkl.com/api-v/onloadedmetadata.php" target="_blank" rel="noopener">onloadedmetadata</a>)</li>
+<li>浏览器加载声频、视频当前帧结束后(<a href="http://www.webkkl.com/api-v/onloadeddata.php" target="_blank" rel="noopener">onloadeddata</a>)</li>
+<li>浏览器正在下载媒体数据时(<a href="http://www.webkkl.com/api-v/onprogress.php" target="_blank" rel="noopener">onprogress</a>)</li>
+<li>浏览器可以播放媒体数据时(<a href="http://www.webkkl.com/api-v/oncanplay.php" target="_blank" rel="noopener">oncanplay</a>)</li>
+<li>当浏览器可以在不因缓冲而停顿的情况下播放时(<a href="http://www.webkkl.com/api-v/oncanplaythrough.php" target="_blank" rel="noopener">oncanplaythrough</a>)</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">&gt;   <span class="tag">&lt;<span class="name">h1</span>&gt;</span>视频获取第一帧<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">&gt;   &lt;hr&gt;</span><br><span class="line">&gt;   &lt;div&gt;</span><br><span class="line">&gt;     &lt;p&gt;本地上传&lt;/p&gt;</span><br><span class="line">&gt;       &lt;label for="file"&gt;选择视频&lt;/label&gt; </span><br><span class="line">&gt;       &lt;input type="file" name="" id="file""&gt;&lt;br&gt;</span><br><span class="line">&gt;   &lt;/div&gt;</span><br><span class="line">&gt;   &lt;hr&gt;</span><br><span class="line">&gt;   &lt;div&gt;</span><br><span class="line">&gt;       &lt;p&gt;外链&lt;/p&gt;</span><br><span class="line">&gt;       &lt;input type="text" id='link'&gt;&lt;button id="btn"&gt;提交&lt;/button&gt;</span><br><span class="line">&gt;   &lt;/div&gt;</span><br><span class="line">&gt;   &lt;hr&gt;</span><br><span class="line">&gt;   &lt;video id='video'  preload="meta" style='display:none' crossorigin="anonymous"&gt;&lt;/video&gt;</span><br><span class="line">&gt;   &lt;div&gt;</span><br><span class="line">&gt;     &lt;h2&gt;首帧图片显示&lt;/h2&gt;</span><br><span class="line">&gt;     &lt;img src="" alt="" id="img"&gt;</span><br><span class="line">&gt;   &lt;/div&gt;</span><br><span class="line">&gt; 	&lt;p&gt;外链视频: https://haohome.top/movie.mp4&lt;/p&gt;</span><br><span class="line">&gt;   &lt;script&gt;</span><br><span class="line">&gt;     var video = document.getElementById("video")</span><br><span class="line">&gt;     var file = document.getElementById("file")</span><br><span class="line">&gt;     var btn = document.getElementById("btn")</span><br><span class="line">&gt;     var link = document.getElementById("link")</span><br><span class="line">&gt;     file.addEventListener("change",function()&#123;</span><br><span class="line">&gt;       var file  = this.files[0];</span><br><span class="line">&gt;       var src = URL.createObjectURL(file)</span><br><span class="line">&gt;       var newFile = new FileReader(file)</span><br><span class="line">&gt;       video.src = src</span><br><span class="line">&gt;     &#125;)</span><br><span class="line">&gt;     btn.onclick=function()&#123;</span><br><span class="line">&gt;       video.src =link.value</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;      video.addEventListener("loadeddata", function () &#123;</span><br><span class="line">&gt;       var canvas = document.createElement("canvas");</span><br><span class="line">&gt;       canvas.width = this.videoWidth;</span><br><span class="line">&gt;       canvas.height = this.videoHeight;</span><br><span class="line">&gt;       setTimeout(() =&gt; &#123;</span><br><span class="line">&gt;         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);</span><br><span class="line">&gt;         var imgSrc = '';</span><br><span class="line">&gt;         try &#123;</span><br><span class="line">&gt;           imgSrc = canvas.toDataURL("image/png");</span><br><span class="line">&gt;           img.src = imgSrc</span><br><span class="line">&gt;         &#125; catch (e) &#123;</span><br><span class="line">&gt;           document.write("只能截取当前域名视频图片! ", e);</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;       &#125;, 200)</span><br><span class="line">&gt;     &#125;, false);</span><br><span class="line">&gt;   &lt;/script&gt;</span><br><span class="line">&gt; &lt;/body&gt;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<iframe width="100%" height="300" src="//jsrun.net/PqhKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p><strong>当采用链接视频时,会存在视频的跨域问题,需要在video上添加属性crossOrigin=’Anonymous’ 即可</strong>(IE由于安全性问题,会报SecurityError)</p>
+<blockquote>
+<p>Tips:</p>
+<p>获取本地地址两种方法:</p>
+<ol>
+<li><p><code>URL.createObjectURL</code>: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;    <span class="keyword">var</span> src = URL.createObjectURL(file)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<ol>
+<li><p><strong><code>FileReader</code></strong>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;    <span class="keyword">var</span> fr=<span class="keyword">new</span> FileReader();</span><br><span class="line">&gt;    fr.onload=<span class="function"><span class="keyword">function</span> (<span class="params">file</span>) </span>&#123;</span><br><span class="line">&gt;     <span class="keyword">var</span> src =<span class="keyword">this</span>.result;</span><br><span class="line">&gt;    &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<p>当前监听video视频获取首帧图片时,采用了延时200ms,是为了给视频加载以一定时间</p>
+</li>
+</ol>
+</blockquote>
+
+          
         
       
     </div>
@@ -604,6 +609,191 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/28/Program/hashchange事件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daniel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/28/Program/js判断当前文本输入状态/" itemprop="url">JS判断当前文本输入状态</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T00:00:00+08:00">
+                2018-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/08/28/Program/js判断当前文本输入状态/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/" class="cy_cmt_count" data-xid="2018/08/28/Program/js判断当前文本输入状态/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  704
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。</p>
+</blockquote>
+<p>在搜索的时候，我们需要按<code>Enter</code>键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:</p>
+<ul>
+<li><p>绑定<code>keyup</code>事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮</p>
+</li>
+<li><p>单纯按键监听，并没有判断中文输入状态</p>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/28/Program/js判断当前文本输入状态/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1917,193 +2107,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/03/29/Web/浏览器缓存问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="靖风行'S blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/29/Web/浏览器缓存问题/" itemprop="url">浏览器缓存问题</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-29T00:06:25+08:00">
-                2018-03-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/03/29/Web/浏览器缓存问题/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/03/29/Web/浏览器缓存问题/" class="cy_cmt_count" data-xid="2018/03/29/Web/浏览器缓存问题/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,584
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>请求缓存的路线图:</p>
-<p><img src="https://haohome.top/18-3-28/12713380.jpg" width="60%"></p>
-<h2 id="两个概念"><a href="#两个概念" class="headerlink" title="两个概念"></a>两个概念</h2><ol>
-<li><p>强缓存<br>用户发送的请求，直接从客户端缓存中获取，不发送请求到服务器，不与服务器发生交互行为。</p>
-</li>
-<li><p>协商缓存<br>用户发送的请求，发送到服务器后，由服务器判定是否从缓存中获取资源。</p>
-</li>
-</ol>
-<blockquote>
-<p>共同点: 客户端获得的数据最后都是从客户端缓存中获得</p>
-<p>区别: 强缓存不与服务器交互，而协商缓存则需要与服务器交互。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/29/Web/浏览器缓存问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2158,7 +2161,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
