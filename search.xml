@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Data类型的url简介]]></title>
+    <url>%2F2018%2F09%2F28%2FHTML5%26CSS%2FData%E7%B1%BB%E5%9E%8B%E7%9A%84Url%E7%AE%80%E4%BB%8B%2F</url>
+    <content type="text"><![CDATA[1. 定义和语法Data URLs，即前缀为 data: 协议的的URL，其允许内容创建者向文档中嵌入小文件。(MDN) 这样的好处是减少外部资源的载入,减少http请求 Data URLs 由四个部分组成：前缀(data:)、指示数据类型的MIME类型、如果非文本则为可选的base64标记、数据本身： data:[&lt;mediatype&gt;][;base64],&lt;data&gt; mediatype是个 MIME 类型的字符串，例如 “image/jpeg“ 表示 JPEG 图像文件,如果被省略，则默认值为 text/plain;charset=US-ASCII 实例: data:,Hello%2C%20World!简单的 text/plain 类型数据 data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D上一条示例的 base64 编码版本 data:text/html,%3Ch1%3EHello%2C%20World!%3C%2Fh1%3E一个HTML文档源代码 &lt;h1&gt;Hello, World&lt;/h1&gt; data:text/html,&lt;script&gt;alert(&#39;hi&#39;);&lt;/script&gt;一个会执行 JavaScript alert 的 HTML 文档。注意 script 标签必须封闭。 2. data url的优缺点优点: 当访问外部资源很麻烦或受限时(这个比较鸡肋) 当图片是在服务器端用程序动态生成，每个访问用户显示的都不同时（场景较少） 当图片的体积太小，占用一个HTTP会话不是很值得时（雪碧图可以出场了） 缺点: Base64编码的数据体积通常是原数据的体积4/3，也就是Data URL形式的图片会比二进制格式的图片体积大1/3 Data URL形式的图片不会被浏览器缓存，这意味着每次访问这样页面时都被下载一次 3.在css中使用浏览器会css文件以提高访问效率,所以浏览器也可以缓存css中的data url数据, 1234567.box &#123; width: 100px; height: 100px; background-image: url("data:image/gif;b ase64,R0lGODlhAwADAIAAAP///8zMzCH5BAAAAAAALAAAAAADAAMAAAIEBHIJBQA7"); border: 1px solid gray; padding: 10px;&#125; 图片不是很大,而且不会是重复在css中使用,适合用data url形式展现 更多请阅读Data URI&amp;MHTML: 用还是不用？]]></content>
+      <categories>
+        <category>HTML5</category>
+      </categories>
+      <tags>
+        <tag>html5</tag>
+        <tag>wiki</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[浏览器兼容性]]></title>
     <url>%2F2018%2F09%2F26%2FProgram%2F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[1. 视频截取第一帧 问题: 在加载h5 的视频时,PC端一半都会默认加载首帧显示,而在移动端就会显示空白或者一片黑 解决方案: 在上传本地视频时,监听视频加载事件,获取第一帧图片,利用canvas绘制出图片并存储,作为移动端视频video的poster onloadeddata事件: 浏览器加载声频、视频当前帧结束后触发的事件(与下一帧是否下载完成无关)在音频和视频加载过程中,能够触发的事件如下: 开始读入媒体数据时触发的事件(onloadstart) 更改声频、视频的时长时(ondurationchange) 浏览器已加载声频、视频的元数据时触发的事件(onloadedmetadata) 浏览器加载声频、视频当前帧结束后(onloadeddata) 浏览器正在下载媒体数据时(onprogress) 浏览器可以播放媒体数据时(oncanplay) 当浏览器可以在不因缓冲而停顿的情况下播放时(oncanplaythrough) 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051&lt;body&gt; &lt;h1&gt;视频获取第一帧&lt;/h1&gt; &lt;hr&gt; &lt;div&gt; &lt;p&gt;本地上传&lt;/p&gt; &lt;label for="file"&gt;选择视频&lt;/label&gt; &lt;input type="file" name="" id="file""&gt;&lt;br&gt; &lt;/div&gt; &lt;hr&gt; &lt;div&gt; &lt;p&gt;外链&lt;/p&gt; &lt;input type="text" id='link'&gt;&lt;button id="btn"&gt;提交&lt;/button&gt; &lt;/div&gt; &lt;hr&gt; &lt;video id='video' preload="meta" style='display:none' crossorigin="anonymous"&gt;&lt;/video&gt; &lt;div&gt; &lt;h2&gt;首帧图片显示&lt;/h2&gt; &lt;img src="" alt="" id="img"&gt; &lt;/div&gt; &lt;p&gt;外链视频: https://haohome.top/movie.mp4&lt;/p&gt; &lt;script&gt; var video = document.getElementById("video") var file = document.getElementById("file") var btn = document.getElementById("btn") var link = document.getElementById("link") file.addEventListener("change",function()&#123; var file = this.files[0]; var src = URL.createObjectURL(file) var newFile = new FileReader(file) video.src = src &#125;) btn.onclick=function()&#123; video.src =link.value &#125; video.addEventListener("loadeddata", function () &#123; var canvas = document.createElement("canvas"); canvas.width = this.videoWidth; canvas.height = this.videoHeight; setTimeout(() =&gt; &#123; canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height); var imgSrc = ''; try &#123; imgSrc = canvas.toDataURL("image/png"); img.src = imgSrc &#125; catch (e) &#123; document.write("只能截取当前域名视频图片! ", e); &#125; &#125;, 200) &#125;, false); &lt;/script&gt;&lt;/body&gt; 当采用链接视频时,会存在视频的跨域问题,需要在video上添加属性crossOrigin=’Anonymous’ 即可(IE由于安全性问题,会报SecurityError) Tips: 获取本地地址两种方法: URL.createObjectURL: 12&gt; var src = URL.createObjectURL(file)&gt; &gt; FileReader: 12345&gt; var fr=new FileReader();&gt; fr.onload=function (file) &#123;&gt; var src =this.result;&gt; &#125;&gt; 当前监听video视频获取首帧图片时,采用了延时200ms,是为了给视频加载以一定时间]]></content>
@@ -21,8 +33,8 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>兼容性</tag>
         <tag>hash</tag>
+        <tag>兼容性</tag>
       </tags>
   </entry>
   <entry>
@@ -104,8 +116,8 @@
         <category>web</category>
       </categories>
       <tags>
-        <tag>http</tag>
         <tag>web</tag>
+        <tag>http</tag>
       </tags>
   </entry>
   <entry>
@@ -350,8 +362,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -362,20 +374,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java中的抽象类]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
         <tag>Java</tag>
-        <tag>学习记录</tag>
       </tags>
   </entry>
   <entry>
@@ -386,21 +386,9 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
+        <tag>Java</tag>
         <tag>FreeMaker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java中super关键字的使用]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[super关键字在对象的内部使用,可以代表父类对象 1.访问父类的属性super.age 2.访问父类的方法super.eat()]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>学习记录</tag>
       </tags>
   </entry>
   <entry>
@@ -411,8 +399,32 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中的抽象类]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中super关键字的使用]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[super关键字在对象的内部使用,可以代表父类对象 1.访问父类的属性super.age 2.访问父类的方法super.eat()]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -423,8 +435,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -447,8 +459,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -459,8 +471,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
