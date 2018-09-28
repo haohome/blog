@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="css,flex," />
+  <meta name="keywords" content="HTML5,css3," />
 
 
 
@@ -82,31 +82,20 @@
 
 
 
-<meta name="description" content="flex布局是什么Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。  任何一个容器都可以指定为flex布局,包括行内元素  123456.box&amp;#123;  display: flex;&amp;#125;.box&amp;#123;  display: inline-flex;&amp;#125;  Webkit 内核的浏览器，必须加上-webkit前缀。  设为 F">
-<meta name="keywords" content="css,flex">
+<meta name="description" content="忽然想到曾经遇到的一个案例： ​    在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。 在这里用代码重现下，首先分析下需求：  绘制页面： 生成随机数，根据随机数生成随机颜色 利用svg绘图技术在页面绘制随机数量的圆 将圆填充随机色   JS事件：  为每个圆绑定单击事件  创建定时器">
+<meta name="keywords" content="HTML5,css3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flex弹性布局">
-<meta property="og:url" content="http://blog.haohome.top/2018/02/25/CSS/Flex布局/index.html">
+<meta property="og:title" content="利用H5画随机色圆">
+<meta property="og:url" content="http://blog.haohome.top/2018/03/06/HTML5&CSS/利用H5画随机色圆/index.html">
 <meta property="og:site_name" content="靖风行&#39;S blog">
-<meta property="og:description" content="flex布局是什么Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。  任何一个容器都可以指定为flex布局,包括行内元素  123456.box&amp;#123;  display: flex;&amp;#125;.box&amp;#123;  display: inline-flex;&amp;#125;  Webkit 内核的浏览器，必须加上-webkit前缀。  设为 F">
+<meta property="og:description" content="忽然想到曾经遇到的一个案例： ​    在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。 在这里用代码重现下，首先分析下需求：  绘制页面： 生成随机数，根据随机数生成随机颜色 利用svg绘图技术在页面绘制随机数量的圆 将圆填充随机色   JS事件：  为每个圆绑定单击事件  创建定时器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://haohome.top/18-2-25/20821183.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/16870590.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/51964219.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/51329599.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/48930655.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/54601068.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/33824725.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/45463771.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/98462050.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/98462050.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/17444861.jpg">
-<meta property="og:image" content="https://haohome.top/18-2-25/33003949.jpg">
-<meta property="og:updated_time" content="2018-04-10T05:53:46.853Z">
+<meta property="og:image" content="https://haohome.top/18-3-8/79565300.jpg">
+<meta property="og:updated_time" content="2018-04-10T05:53:46.725Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="flex弹性布局">
-<meta name="twitter:description" content="flex布局是什么Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。  任何一个容器都可以指定为flex布局,包括行内元素  123456.box&amp;#123;  display: flex;&amp;#125;.box&amp;#123;  display: inline-flex;&amp;#125;  Webkit 内核的浏览器，必须加上-webkit前缀。  设为 F">
-<meta name="twitter:image" content="https://haohome.top/18-2-25/20821183.jpg">
+<meta name="twitter:title" content="利用H5画随机色圆">
+<meta name="twitter:description" content="忽然想到曾经遇到的一个案例： ​    在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。 在这里用代码重现下，首先分析下需求：  绘制页面： 生成随机数，根据随机数生成随机颜色 利用svg绘图技术在页面绘制随机数量的圆 将圆填充随机色   JS事件：  为每个圆绑定单击事件  创建定时器">
+<meta name="twitter:image" content="https://haohome.top/18-3-8/79565300.jpg">
 
 
 
@@ -136,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.haohome.top/2018/02/25/CSS/Flex布局/"/>
+  <link rel="canonical" href="http://blog.haohome.top/2018/03/06/HTML5&CSS/利用H5画随机色圆/"/>
 
 
 
 
 
-  <title>flex弹性布局 | 靖风行'S blog</title>
+  <title>利用H5画随机色圆 | 靖风行'S blog</title>
   
 
 
@@ -303,7 +292,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/02/25/CSS/Flex布局/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/03/06/HTML5&CSS/利用H5画随机色圆/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
@@ -320,7 +309,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">flex弹性布局</h2>
+          <h2 class="post-title" itemprop="name headline">利用H5画随机色圆</h2>
         
 
         <div class="post-meta">
@@ -332,8 +321,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T20:30:54+08:00">
-                2018-02-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T22:42:54+08:00">
+                2018-03-06
               </time>
             
 
@@ -355,8 +344,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index">
-                    <span itemprop="name">CSS</span>
+                  <a href="/categories/HTML5/" itemprop="url" rel="index">
+                    <span itemprop="name">HTML5</span>
                   </a>
                 </span>
 
@@ -374,8 +363,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/02/25/CSS/Flex布局/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/02/25/CSS/Flex布局/" itemprop="commentsCount"></span>
+                <a href="/2018/03/06/HTML5&CSS/利用H5画随机色圆/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/06/HTML5&CSS/利用H5画随机色圆/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -397,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,422
+                  411
                 </span>
               
 
@@ -422,149 +411,41 @@
       
 
       
-        <h2 id="flex布局是什么"><a href="#flex布局是什么" class="headerlink" title="flex布局是什么"></a>flex布局是什么</h2><p>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</p>
-<blockquote>
-<p>任何一个容器都可以指定为flex布局,包括行内元素</p>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Webkit 内核的浏览器，必须加上<code>-webkit</code>前缀。</p>
-</blockquote>
-<p>设为 Flex 布局以后，子元素的<code>float</code>、<code>clear</code>和<code>vertical-align</code>属性将失效。</p>
+        <p>忽然想到曾经遇到的一个案例：</p>
+<p>​    <strong>在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。</strong></p>
+<p>在这里用代码重现下，首先分析下需求：</p>
+<ul>
+<li>绘制页面：<ul>
+<li>生成随机数，根据随机数生成随机颜色</li>
+<li>利用svg绘图技术在页面绘制随机数量的圆</li>
+<li>将圆填充随机色</li>
+</ul>
+</li>
+<li><p>JS事件：</p>
+<ul>
+<li><p>为每个圆绑定单击事件</p>
+</li>
+<li><p>创建定时器</p>
+</li>
+</ul>
+</li>
+</ul>
 <a id="more"></a>
-<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。</p>
-<p><img src="https://haohome.top/18-2-25/20821183.jpg" alt=""></p>
-<p>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做<code>main start</code>，结束位置叫做<code>main end</code>；交叉轴的开始位置叫做<code>cross start</code>，结束位置叫做<code>cross end</code>。</p>
-<blockquote>
-<p>项目默认沿主轴排列。单个项目占据的主轴空间叫做<code>main size</code>，占据的交叉轴空间叫做<code>cross size</code>。</p>
-</blockquote>
-<h2 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h2><p>有六个属性设置在容器上:</p>
-<ul>
-<li><p>flex-direction</p>
-</li>
-<li><p>flex-wrap</p>
-</li>
-<li><p>flex-flow  :  flex-direction和flex-wrap的简写  <code>.box {  flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;}</code></p>
-<p>默认值为<code>row nowrap</code></p>
-</li>
-<li><p>justify-content</p>
-</li>
-<li><p>align-items</p>
-</li>
-<li><p>align-content</p>
-</li>
-</ul>
-<h3 id="1-flex-direction属性"><a href="#1-flex-direction属性" class="headerlink" title="1. flex-direction属性"></a>1. flex-direction属性</h3><p><code>flex-direction</code>属性决定主轴的方向（即项目的排列方向）。</p>
-<blockquote>
-<ul>
-<li><code>row</code>（默认值）：主轴为水平方向，起点在左端。</li>
-<li><code>row-reverse</code>：主轴为水平方向，起点在右端。</li>
-<li><code>column</code>：主轴为垂直方向，起点在上沿。</li>
-<li><code>column-reverse</code>：主轴为垂直方向，起点在下沿。</li>
-</ul>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">flex-direction</span>: row | row-reverse | column | column-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://haohome.top/18-2-25/16870590.jpg" style="width:70%"></p>
-<h3 id="2-flex-wrap属性"><a href="#2-flex-wrap属性" class="headerlink" title="2. flex-wrap属性"></a>2. flex-wrap属性</h3><p>默认情况下，项目都排在一条线（又称”轴线”）上。<code>flex-wrap</code>属性定义，如果一条轴线排不下，如何换行。</p>
-<blockquote>
-<ul>
-<li><code>nowrap</code>（默认）：不换行。</li>
-<li><code>wrap</code>：换行，第一行在上方。</li>
-<li><code>wrap-reverse</code>：换行，第一行在下方。</li>
-</ul>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>nowrap</li>
-</ul>
-<p><img src="https://haohome.top/18-2-25/51964219.jpg" style="width:70%"></p>
-<ul>
-<li>wrap</li>
-</ul>
-<p><img src="https://haohome.top/18-2-25/51329599.jpg" style="width:70%"></p>
-<ul>
-<li>wrap-reverse</li>
-</ul>
-<p><img src="https://haohome.top/18-2-25/48930655.jpg" style="width:70%"></p>
-<h3 id="3-justify-content属性"><a href="#3-justify-content属性" class="headerlink" title="3. justify-content属性"></a>3. justify-content属性</h3><p><code>justify-content</code>属性定义了项目在主轴上的对齐方式。</p>
-<p>可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。</p>
-<blockquote>
-<ul>
-<li><code>flex-start</code>（默认值）：左对齐</li>
-<li><code>flex-end</code>：右对齐</li>
-<li><code>center</code>： 居中</li>
-<li><code>space-between</code>：两端对齐，项目之间的间隔都相等。</li>
-<li><code>space-around</code>：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</li>
-</ul>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://haohome.top/18-2-25/54601068.jpg" style="width:50%"></p>
-<h3 id="4-align-items属性"><a href="#4-align-items属性" class="headerlink" title="4. align-items属性"></a>4. align-items属性</h3><p><code>align-items</code>属性定义项目在交叉轴上对齐方式。</p>
-<p>可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。</p>
-<blockquote>
-<ul>
-<li><code>flex-start</code>：交叉轴的起点对齐。</li>
-<li><code>flex-end</code>：交叉轴的终点对齐。</li>
-<li><code>center</code>：交叉轴的中点对齐。</li>
-<li><code>baseline</code>: 项目的第一行文字的基线对齐。</li>
-<li><code>stretch</code>（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。</li>
-</ul>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://haohome.top/18-2-25/33824725.jpg" style="width:50%"></p>
-<h3 id="5-align-content属性"><a href="#5-align-content属性" class="headerlink" title="5. align-content属性"></a>5. align-content属性</h3><p><code>align-content</code>属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</p>
-<p>可能取6个值:</p>
-<blockquote>
-<ul>
-<li><code>flex-start</code>：与交叉轴的起点对齐。</li>
-<li><code>flex-end</code>：与交叉轴的终点对齐。</li>
-<li><code>center</code>：与交叉轴的中点对齐。</li>
-<li><code>space-between</code>：与交叉轴两端对齐，轴线之间的间隔平均分布。</li>
-<li><code>space-around</code>：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</li>
-<li><code>stretch</code>（默认值）：轴线占满整个交叉轴。</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="selector-class">.box</span> &#123;</span><br><span class="line">&gt;   align-content: flex-start | flex-end | center | space-between | space-around | stretch;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p><img src="https://haohome.top/18-2-25/45463771.jpg" style="width:50%"></p>
-<h2 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h2><p>6个属性设置在项目上(子元素);</p>
-<blockquote>
-<ul>
-<li><p><code>order</code></p>
-</li>
-<li><p><code>flex-grow</code></p>
-</li>
-<li><p><code>flex-shrink</code></p>
-</li>
-<li><p><code>flex-basis</code></p>
-</li>
-<li><p><code>flex</code>: 是<code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>的简写，默认值为<code>0 1 auto</code>。后两个属性可选。</p>
-<p><code>flex: none | [ &lt;&#39;flex-grow&#39;&gt; &lt;&#39;flex-shrink&#39;&gt;? || &lt;&#39;flex-basis&#39;&gt; ]</code></p>
-<p>该属性有两个快捷值：<code>auto</code> (<code>1 1 auto</code>) 和 none (<code>0 0 auto</code>)。</p>
-<blockquote>
-<p>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
-</blockquote>
-</li>
-<li><p><code>align-self</code></p>
-</li>
-</ul>
-</blockquote>
-<h3 id="1-order属性"><a href="#1-order属性" class="headerlink" title="1. order属性"></a>1. order属性</h3><p><code>order</code>属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: &lt;integer&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://haohome.top/18-2-25/98462050.jpg" style="width:50%"></p>
-<h3 id="2-flex-grow属性"><a href="#2-flex-grow属性" class="headerlink" title="2. flex-grow属性"></a>2. flex-grow属性</h3><p><code>flex-grow</code>属性定义项目的放大比例，默认为<code>0</code>，即如果存在剩余空间，也不放大。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">	<span class="attribute">flex-grow</span>: &lt;number&gt;; <span class="comment">/* default 0 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://haohome.top/18-2-25/98462050.jpg" style="width:50%"></p>
-<p>如果所有项目的<code>flex-grow</code>属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的<code>flex-grow</code>属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
-<h3 id="3-flex-shrink属性"><a href="#3-flex-shrink属性" class="headerlink" title="3. flex-shrink属性"></a>3. flex-shrink属性</h3><p><code>flex-shrink</code>属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-shrink</span>: &lt;number&gt;; <span class="comment">/* default 1 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://haohome.top/18-2-25/17444861.jpg" style="width:70%"></p>
-<h3 id="4-flex-basis属性"><a href="#4-flex-basis属性" class="headerlink" title="4. flex-basis属性"></a>4. flex-basis属性</h3><p><code>flex-basis</code>属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为<code>auto</code>，即<strong>项目的本身大小</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.item &#123;</span><br><span class="line">  flex-basis: &lt;length&gt; | auto; /* default auto */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>它也可以设为跟<code>width</code>或<code>height</code>属性一样的值（比如350px），则项目将占据固定空间。</p>
-<h3 id="5-align-self属性"><a href="#5-align-self属性" class="headerlink" title="5. align-self属性"></a>5. align-self属性</h3><p><code>align-self</code>属性允许单个项目有与其他项目不一样的对齐方式，可覆盖<code>align-items</code>属性。默认值为<code>auto</code>，表示继承父元素的<code>align-items</code>属性，如果没有父元素，则等同于<code>stretch</code>。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">  <span class="comment">/*除了auto，其他都与align-items属性完全一致*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://haohome.top/18-2-25/33003949.jpg" style="width:50%"></p>
-<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><p><a href="https://codepen.io/hfood/pen/MQqMev" target="_blank" rel="noopener">骰子</a></p>
+<p>代码：</p>
+<ol>
+<li>生成随机数和随机颜色方法</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*获取指定范围内的随机数字*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomNum</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n=<span class="built_in">Math</span>.random()*(max-min)+min;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(n)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*生成随机色*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomColor</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> r=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> g=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> b=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> a=<span class="built_in">Math</span>.random();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`rgba(<span class="subst">$&#123;r&#125;</span>,<span class="subst">$&#123;g&#125;</span>,<span class="subst">$&#123;b&#125;</span>,<span class="subst">$&#123;a&#125;</span>)`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>利用svg绘图</li>
+</ol>
+<p>html:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">id</span>=<span class="string">"svg"</span> <span class="attr">width</span>=<span class="string">"1000px"</span>  <span class="attr">height</span>=<span class="string">"500px"</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>JavaScript:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> svg=<span class="built_in">document</span>.getElementById(<span class="string">"svg"</span>); </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">50</span>;i++)&#123;</span><br><span class="line">    <span class="comment">//创建圆元素</span></span><br><span class="line">	<span class="keyword">var</span> c=<span class="built_in">document</span>.createElementNS(<span class="string">"http://www.w3.org/2000/svg"</span>,<span class="string">"circle"</span>);</span><br><span class="line">    c.setAttribute(<span class="string">"r"</span>,randomNum(<span class="number">10</span>,<span class="number">80</span>));</span><br><span class="line">    c.setAttribute(<span class="string">"cx"</span>,randomNum(<span class="number">0</span>,<span class="number">800</span>));</span><br><span class="line">    c.setAttribute(<span class="string">"cy"</span>,randomNum(<span class="number">0</span>,<span class="number">400</span>));</span><br><span class="line">    c.setAttribute(<span class="string">"fill"</span>,randomColor(<span class="number">0</span>,<span class="number">255</span>));</span><br><span class="line">    c.setAttribute(<span class="string">"fill-opacity"</span>,<span class="built_in">Math</span>.random());</span><br><span class="line">    svg.appendChild(c)</span><br><span class="line">  <span class="comment">//绑定单击事件</span></span><br><span class="line">  c.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that=<span class="keyword">this</span>;</span><br><span class="line">    <span class="comment">//设置循环定时器</span></span><br><span class="line">    <span class="keyword">var</span> timer=setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> r=that.getAttribute(<span class="string">"r"</span>);</span><br><span class="line">      r*=<span class="number">1.05</span>;</span><br><span class="line">      that.setAttribute(<span class="string">"r"</span>,r);</span><br><span class="line">      <span class="keyword">var</span> fillOpac=that.getAttribute(<span class="string">"fill-opacity"</span>);</span><br><span class="line">      fillOpac*=<span class="number">0.9</span>;</span><br><span class="line">      that.setAttribute(<span class="string">"fill-opacity"</span>,fillOpac);</span><br><span class="line">      <span class="comment">//设置循环定时器停止条件</span></span><br><span class="line">      <span class="keyword">if</span>(fillOpac&lt;<span class="number">0.001</span>)&#123;</span><br><span class="line">      	clearInterval(timer);</span><br><span class="line">        timer=<span class="literal">null</span>;</span><br><span class="line">       	svg.removeChild(that);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,<span class="number">20</span>)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>附上<a href="https://codepen.io/hfood/full/gvVovo/" target="_blank" rel="noopener">codePen链接</a></p>
+<p>效果图:</p>
+<p><img src="https://haohome.top/18-3-8/79565300.jpg" width="80%"></p>
 
       
     </div>
@@ -611,9 +492,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/css/" rel="tag"># css</a>
+            <a href="/tags/HTML5/" rel="tag"># HTML5</a>
           
-            <a href="/tags/flex/" rel="tag"># flex</a>
+            <a href="/tags/css3/" rel="tag"># css3</a>
           
         </div>
       
@@ -626,8 +507,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/22/JavaScript/javascript 数组以及对象的深拷贝/" rel="next" title="JS数组以及对象的深拷贝">
-                <i class="fa fa-chevron-left"></i> JS数组以及对象的深拷贝
+              <a href="/2018/03/05/Web/一道简单的JavaScript面试题/" rel="next" title="一道简单的setTimeout面试题">
+                <i class="fa fa-chevron-left"></i> 一道简单的setTimeout面试题
               </a>
             
           </div>
@@ -636,8 +517,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/01/JavaScript/闭包与模块/" rel="prev" title="闭包与模块">
-                闭包与模块 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/10/JavaScript/原生js实现瀑布流效果/" rel="prev" title="原生JS实现瀑布流效果">
+                原生JS实现瀑布流效果 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -695,17 +576,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -806,22 +678,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#flex布局是什么"><span class="nav-number">1.</span> <span class="nav-text"><a href="#flex&#x5E03;&#x5C40;&#x662F;&#x4EC0;&#x4E48;" class="headerlink" title="flex&#x5E03;&#x5C40;&#x662F;&#x4EC0;&#x4E48;"></a>flex&#x5E03;&#x5C40;&#x662F;&#x4EC0;&#x4E48;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x57FA;&#x7840;&#x6982;&#x5FF5;" class="headerlink" title="&#x57FA;&#x7840;&#x6982;&#x5FF5;"></a>&#x57FA;&#x7840;&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器的属性"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x5BB9;&#x5668;&#x7684;&#x5C5E;&#x6027;" class="headerlink" title="&#x5BB9;&#x5668;&#x7684;&#x5C5E;&#x6027;"></a>&#x5BB9;&#x5668;&#x7684;&#x5C5E;&#x6027;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-flex-direction属性"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#1-flex-direction&#x5C5E;&#x6027;" class="headerlink" title="1. flex-direction&#x5C5E;&#x6027;"></a>1. flex-direction&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-flex-wrap属性"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#2-flex-wrap&#x5C5E;&#x6027;" class="headerlink" title="2. flex-wrap&#x5C5E;&#x6027;"></a>2. flex-wrap&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-justify-content属性"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#3-justify-content&#x5C5E;&#x6027;" class="headerlink" title="3. justify-content&#x5C5E;&#x6027;"></a>3. justify-content&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-align-items属性"><span class="nav-number">3.4.</span> <span class="nav-text"><a href="#4-align-items&#x5C5E;&#x6027;" class="headerlink" title="4. align-items&#x5C5E;&#x6027;"></a>4. align-items&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-align-content属性"><span class="nav-number">3.5.</span> <span class="nav-text"><a href="#5-align-content&#x5C5E;&#x6027;" class="headerlink" title="5. align-content&#x5C5E;&#x6027;"></a>5. align-content&#x5C5E;&#x6027;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目的属性"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x9879;&#x76EE;&#x7684;&#x5C5E;&#x6027;" class="headerlink" title="&#x9879;&#x76EE;&#x7684;&#x5C5E;&#x6027;"></a>&#x9879;&#x76EE;&#x7684;&#x5C5E;&#x6027;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-order属性"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#1-order&#x5C5E;&#x6027;" class="headerlink" title="1. order&#x5C5E;&#x6027;"></a>1. order&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-flex-grow属性"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#2-flex-grow&#x5C5E;&#x6027;" class="headerlink" title="2. flex-grow&#x5C5E;&#x6027;"></a>2. flex-grow&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-flex-shrink属性"><span class="nav-number">4.3.</span> <span class="nav-text"><a href="#3-flex-shrink&#x5C5E;&#x6027;" class="headerlink" title="3. flex-shrink&#x5C5E;&#x6027;"></a>3. flex-shrink&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-flex-basis属性"><span class="nav-number">4.4.</span> <span class="nav-text"><a href="#4-flex-basis&#x5C5E;&#x6027;" class="headerlink" title="4. flex-basis&#x5C5E;&#x6027;"></a>4. flex-basis&#x5C5E;&#x6027;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-align-self属性"><span class="nav-number">4.5.</span> <span class="nav-text"><a href="#5-align-self&#x5C5E;&#x6027;" class="headerlink" title="5. align-self&#x5C5E;&#x6027;"></a>5. align-self&#x5C5E;&#x6027;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用实例"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x5E94;&#x7528;&#x5B9E;&#x4F8B;" class="headerlink" title="&#x5E94;&#x7528;&#x5B9E;&#x4F8B;"></a>&#x5E94;&#x7528;&#x5B9E;&#x4F8B;</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
