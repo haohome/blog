@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>%2F2018%2F09%2F30%2FProgram%2F%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%8E%8B%E7%BC%A9%2F</url>
+    <content type="text"><![CDATA[最近在做关于图片上传方面的业务开发,项目中主要需要实现图片的本地预览、压缩和上传 1. 图片选择和预览添加accept属性,控制选择文件的类型为拍照和图像文件,设置multiple支持图片文件多选,监听input的change事件获取选择对象文件,每个文件都是Blob类型 123456789101112131415161718&lt;label for="file2"&gt;多个图片上传&lt;/label&gt;&lt;input type="file" accept="image/gif,image/jpeg,image/png" multiple id='file2' /&gt; &lt;br&gt;&lt;div id="preview2"&gt;&lt;/div&gt;&lt;script&gt;// 模拟jQueryvar $ = selector =&gt; document.querySelector(selector)// 多个图片var file2 = $("#file2")var preview2 = $('#preview2')file2.onchange = function () &#123; var fileList = Array.prototype.slice.call(this.files) fileList.forEach((item, index) =&gt; &#123; var domImg = new Image(); domImg.src = URL.createObjectURL(item) preview2.appendChild(domImg) &#125;)&#125;&lt;/script&gt; 2. 图片的压缩当前手机拍照质量月来越高,带来的问题就是大小也越来越大,直接上传原图,上传速度会很低,甚至很可能上传失败,而且后续加载也影响速度 下面是封装了一个压缩图片的方法,实现的原理是,利用canvas将图片绘制出来,并导出canvas图片.主要通过图片的缩放和控制canvas导出图片质量来实现图片的体积压缩 1234567891011121314151617181920212223242526272829303132333435363738394041 /** * 压缩图片 * @param &#123;file&#125; 输入图片 * @param &#123;quality&#125; 图片质量 * @returns &#123;Promise&#125; resolved promise 返回压缩后的新图片 */function compressImg(file, quality) &#123; return new Promise((resolve, reject) =&gt; &#123; var img = new Image(); img.src = URL.createObjectURL(file) img.onerror = error =&gt; reject(error) img.onload = () =&gt; &#123; var canvas = document.createElement('canvas') var ctx = canvas.getContext('2d') var canvasWidth = document.documentElement.clientWidth * window.devicePixelRatio var canvasHeight = document.documentElement.clientHeight * window.devicePixelRatio // 水平方向想缩放比 var scaleX = canvasWidth / img.width var scaleY = canvasHeight / img.height // 取缩放比更小的比例 var scale = Math.min(scaleX, scaleY) // 画布上绘制的图片尺寸 const imageWidth = img.width * scale const imageHeight = img.height * scale canvas.width = imageWidth canvas.height = imageHeight ctx.drawImage(img, 0, 0, imageWidth, imageHeight) canvas.toBlob(file =&gt; resolve(file), "image/jpeg", quality); &#125; &#125;)&#125;file2.onchange = function () &#123; var fileList = Array.prototype.slice.call(this.files) fileList.forEach((item, index) =&gt; &#123; compressImg(imgfile, .5).then(blobFile =&gt; &#123; var domImg = new Image(); domImg.src = URL.createObjectURL(blobFile) preview2.appendChild(domImg) &#125;) &#125;)&#125; 3. 图片上传文件上传是通过FormData创建表单数据，并发起 ajax POST请求; 发送FormData数据时，浏览器会自动设置Content-Type为合适的值 123456789101112131415161718192021222324/** * 上传图片 * @param &#123;File&#125; file 待上传的文件 * @return &#123;Promise&#125; */ function uploadFile(file,url) &#123; return new Promise((resolve, reject) =&gt; &#123; // 准备表单数据 const formData = new FormData() formData.append('file', file) // 提交请求 const xhr = new XMLHttpRequest() xhr.open('POST', url) xhr.onreadystatechange = function () &#123; if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) &#123; resolve(JSON.parse(this.responseText)) &#125; else &#123; reject(this.responseText) &#125; &#125; xhr.send(formData) &#125;) &#125; 最后奉上JSrun的demo:]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Data类型的url简介]]></title>
     <url>%2F2018%2F09%2F28%2FHTML5%26CSS%2FData%E7%B1%BB%E5%9E%8B%E7%9A%84Url%E7%AE%80%E4%BB%8B%2F</url>
     <content type="text"><![CDATA[1. 定义和语法Data URLs，即前缀为 data: 协议的的URL，其允许内容创建者向文档中嵌入小文件。(MDN) 这样的好处是减少外部资源的载入,减少http请求 Data URLs 由四个部分组成：前缀(data:)、指示数据类型的MIME类型、如果非文本则为可选的base64标记、数据本身： data:[&lt;mediatype&gt;][;base64],&lt;data&gt; mediatype是个 MIME 类型的字符串，例如 “image/jpeg“ 表示 JPEG 图像文件,如果被省略，则默认值为 text/plain;charset=US-ASCII 实例: data:,Hello%2C%20World!简单的 text/plain 类型数据 data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D上一条示例的 base64 编码版本 data:text/html,%3Ch1%3EHello%2C%20World!%3C%2Fh1%3E一个HTML文档源代码 &lt;h1&gt;Hello, World&lt;/h1&gt; data:text/html,&lt;script&gt;alert(&#39;hi&#39;);&lt;/script&gt;一个会执行 JavaScript alert 的 HTML 文档。注意 script 标签必须封闭。 2. data url的优缺点优点: 当访问外部资源很麻烦或受限时(这个比较鸡肋) 当图片是在服务器端用程序动态生成，每个访问用户显示的都不同时（场景较少） 当图片的体积太小，占用一个HTTP会话不是很值得时（雪碧图可以出场了） 缺点: Base64编码的数据体积通常是原数据的体积4/3，也就是Data URL形式的图片会比二进制格式的图片体积大1/3 Data URL形式的图片不会被浏览器缓存，这意味着每次访问这样页面时都被下载一次 3.在css中使用浏览器会css文件以提高访问效率,所以浏览器也可以缓存css中的data url数据, 1234567.box &#123; width: 100px; height: 100px; background-image: url("data:image/gif;b ase64,R0lGODlhAwADAIAAAP///8zMzCH5BAAAAAAALAAAAAADAAMAAAIEBHIJBQA7"); border: 1px solid gray; padding: 10px;&#125; 图片不是很大,而且不会是重复在css中使用,适合用data url形式展现 更多请阅读Data URI&amp;MHTML: 用还是不用？]]></content>
@@ -116,8 +127,8 @@
         <category>web</category>
       </categories>
       <tags>
-        <tag>web</tag>
         <tag>http</tag>
+        <tag>web</tag>
       </tags>
   </entry>
   <entry>
@@ -210,8 +221,8 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>css</tag>
         <tag>flex</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -367,18 +378,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中的多态]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
-    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>学习记录</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[FreeMaker 模板_数据模型]]></title>
     <url>%2F2018%2F01%2F01%2FJava%2FFreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%2F</url>
     <content type="text"><![CDATA[1. 模板 + 数据模型 = 输出1.1 模板 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如: 12345678910&lt;html&gt; &lt;head&gt; &lt;title&gt;Welcome!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Welcome $&#123;user&#125;!&lt;/h1&gt; &lt;p&gt;Our latest product: &lt;a href="$&#123;latestProduct.url&#125;"&gt;$&#123;latestProduct.name&#125;&lt;/a&gt;! &lt;/body&gt;&lt;/html&gt; ${…}：插值表达式(interpolation) FTL标签：FreeMarker模板的语言标签，标签的名字以 # 开头，用户自定义的FTL标签则需要使用 @ 来代替 # 注释：使用 &lt;#– and –&gt; 来标识 其他任何不是插值、FTL标签或注释的内容将被视为静态文本，直接在页面输出 1.2 数据模型为模板准备的数据整体被称作为数据模型数据模型是树形结构,例如: 123456789101112131415161718192021222324252627(root) | +- animals | | | +- mouse | | | | | +- size = "small" | | | | | +- price = 50 | | | +- elephant | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- python | | | +- size = "medium" | | | +- price = 4999 | +- message = "It is a test" | +- misc | +- foo = "Something" hashes (哈希表): 指变量中扮演目录角色(比如 root, animals, mouse, elephant, python, misc) 哈希表存储其他变量(被称为 子变量)， 它们可以通过名称来查找(比如 “animals”, “mouse” 或 “price”)。 scalars (标量): 指存储单值的变量 (size, price, message 和 foo) 如果要在模板中使用子变量， 那应该从根root开始指定它的路径，每级之间用点来分隔开。要访问 mouse 的 price ，要从root开始，首先进入到 animals ，之后访问 mouse ，最后访问 price 。就可以这样来写 animals.mouse.price。 sequences (序列): 像哈希表那样存储子变量，但是子变量没有名字，它们只是列表中的项。在下面这个数据模型中， animals 和 misc.fruits 就是序列： 1234567891011121314151617181920212223242526272829303132333435(root) | +- animals | | | +- (1st) | | | | | +- name = "mouse" | | | | | +- size = "small" | | | | | +- price = 50 | | | +- (2nd) | | | | | +- name = "elephant" | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- (3rd) | | | +- name = "python" | | | +- size = "medium" | | | +- price = 4999 | +- misc | +- fruits | +- (1st) = "orange" | +- (2nd) = "banana" 要访问序列的子变量，可以使用方括号形式的数字索引下标。 索引下标从0开始(从0开始也是程序员的传统)，那么第一项的索引就是0， 第二项的索引就是1等等。要得到第一个动物的名称的话，可以这么来写代码 animals[0].name。 标量类型可以分为如下的类别： 字符串：就是文本，也就是任意的字符序列，比如上面提到的 ‘m’,’o’,’u’, ‘s’,’e’。比如 name 和 size 也是字符串。 数字：这是数值类型，就像上面的 price。 在FreeMarker中，字符串 “50” 和数字 50 是两种完全不同的类型。 日期/时间: 可以是日期-时间格式(存储某一天的日期和时间)， 或者是日期(只有日期，没有时间)，或者是时间(只有时间，没有日期)。 布尔值：对应着对/错(是/否，开/关等值)类似的值。 总结： 数据模型可以被看成是树形结构。 标量用于存储单一的值。这种类型的值可以是字符串，数字，日期/时间或者是布尔值。 哈希表是一种存储变量及其相关且有唯一标识名称的容器。 序列是存储有序变量的容器。存储的变量可以通过数字索引来检索，索引通常从0开始。]]></content>
@@ -389,6 +388,18 @@
         <tag>学习记录</tag>
         <tag>Java</tag>
         <tag>FreeMaker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中的抽象类]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -404,9 +415,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中的抽象类]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
+    <title><![CDATA[Java中的多态]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
+    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
       <categories>
         <category>Java</category>
       </categories>
