@@ -308,7 +308,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/30/Program/图片上传与压缩/" itemprop="url">未命名</a></h2>
+                <a class="post-title-link" href="/2018/09/30/Program/图片上传与压缩/" itemprop="url">图片上传与压缩</a></h2>
         
 
         <div class="post-meta">
@@ -411,25 +411,17 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p> 最近在做关于图片上传方面的业务开发,项目中主要需要实现图片的本地预览、压缩和上传</p>
 </blockquote>
 <h2 id="1-图片选择和预览"><a href="#1-图片选择和预览" class="headerlink" title="1. 图片选择和预览"></a>1. 图片选择和预览</h2><p>添加<code>accept</code>属性,控制选择文件的类型为拍照和图像文件,设置multiple支持图片文件多选,监听<code>input</code>的<code>change</code>事件获取选择对象文件,每个文件都是Blob类型</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"file2"</span>&gt;</span>多个图片上传<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">accept</span>=<span class="string">"image/gif,image/jpeg,image/png"</span> <span class="attr">multiple</span> <span class="attr">id</span>=<span class="string">'file2'</span> /&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"preview2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="comment">// 模拟jQuery</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> $ = <span class="function"><span class="params">selector</span> =&gt;</span> <span class="built_in">document</span>.querySelector(selector)</span></span><br><span class="line"><span class="javascript"><span class="comment">// 多个图片</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> file2 = $(<span class="string">"#file2"</span>)</span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> preview2 = $(<span class="string">'#preview2'</span>)</span></span><br><span class="line"><span class="javascript">file2.onchange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> fileList = <span class="built_in">Array</span>.prototype.slice.call(<span class="keyword">this</span>.files)</span></span><br><span class="line"><span class="javascript">    fileList.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> domImg = <span class="keyword">new</span> Image();</span></span><br><span class="line"><span class="undefined">        domImg.src = URL.createObjectURL(item)</span></span><br><span class="line"><span class="undefined">        preview2.appendChild(domImg)</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-图片的压缩"><a href="#2-图片的压缩" class="headerlink" title="2. 图片的压缩"></a>2. 图片的压缩</h2><p>当前手机拍照质量月来越高,带来的问题就是大小也越来越大,直接上传原图,上传速度会很低,甚至很可能上传失败,而且后续加载也影响速度</p>
-<p>下面是封装了一个压缩图片的方法,实现的原理是,利用canvas将图片绘制出来,并导出canvas图片.主要通过图片的缩放和控制canvas导出图片质量来实现图片的体积压缩</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 压缩图片</span></span><br><span class="line"><span class="comment">     * @param &#123;file&#125; 输入图片</span></span><br><span class="line"><span class="comment">     * @param &#123;quality&#125; 图片质量</span></span><br><span class="line"><span class="comment">     * @returns &#123;Promise&#125; resolved promise 返回压缩后的新图片</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compressImg</span>(<span class="params">file, quality</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">      img.src = URL.createObjectURL(file)</span><br><span class="line">      img.onerror = <span class="function"><span class="params">error</span> =&gt;</span> reject(error)</span><br><span class="line">      img.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>)</span><br><span class="line">          <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>)</span><br><span class="line">          <span class="keyword">var</span> canvasWidth = <span class="built_in">document</span>.documentElement.clientWidth * <span class="built_in">window</span>.devicePixelRatio</span><br><span class="line">          <span class="keyword">var</span> canvasHeight = <span class="built_in">document</span>.documentElement.clientHeight * <span class="built_in">window</span>.devicePixelRatio</span><br><span class="line">          <span class="comment">// 水平方向想缩放比</span></span><br><span class="line">          <span class="keyword">var</span> scaleX = canvasWidth / img.width</span><br><span class="line">          <span class="keyword">var</span> scaleY = canvasHeight / img.height</span><br><span class="line">          <span class="comment">// 取缩放比更小的比例</span></span><br><span class="line">          <span class="keyword">var</span> scale = <span class="built_in">Math</span>.min(scaleX, scaleY)</span><br><span class="line">          <span class="comment">// 画布上绘制的图片尺寸</span></span><br><span class="line">          <span class="keyword">const</span> imageWidth = img.width * scale</span><br><span class="line">          <span class="keyword">const</span> imageHeight = img.height * scale</span><br><span class="line">          canvas.width = imageWidth</span><br><span class="line">          canvas.height = imageHeight</span><br><span class="line">          ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>, imageWidth, imageHeight)</span><br><span class="line">          canvas.toBlob(<span class="function"><span class="params">file</span> =&gt;</span> resolve(file), <span class="string">"image/jpeg"</span>, quality);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">file2.onchange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fileList = <span class="built_in">Array</span>.prototype.slice.call(<span class="keyword">this</span>.files)</span><br><span class="line">    fileList.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">        compressImg(imgfile, <span class="number">.5</span>).then(<span class="function"><span class="params">blobFile</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">var</span> domImg = <span class="keyword">new</span> Image();</span><br><span class="line">            domImg.src = URL.createObjectURL(blobFile)</span><br><span class="line">            preview2.appendChild(domImg)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="3-图片上传"><a href="#3-图片上传" class="headerlink" title="3. 图片上传"></a>3. 图片上传</h2><p>文件上传是通过<code>FormData</code>创建表单数据，并发起 ajax <code>POST</code>请求;</p>
-<blockquote>
-<p>发送<code>FormData</code>数据时，浏览器会自动设置<code>Content-Type</code>为合适的值</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 上传图片</span></span><br><span class="line"><span class="comment">     * @param &#123;File&#125; file 待上传的文件</span></span><br><span class="line"><span class="comment">     * @return &#123;Promise&#125; </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">uploadFile</span>(<span class="params">file,url</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 准备表单数据</span></span><br><span class="line">        <span class="keyword">const</span> formData = <span class="keyword">new</span> FormData()</span><br><span class="line">        formData.append(<span class="string">'file'</span>, file)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 提交请求</span></span><br><span class="line">        <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">        xhr.open(<span class="string">'POST'</span>, url)</span><br><span class="line">        xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === XMLHttpRequest.DONE &amp;&amp; <span class="keyword">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">            resolve(<span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.responseText))</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            reject(<span class="keyword">this</span>.responseText)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.send(formData)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>最后奉上JSrun的demo:</p>
-<iframe width="100%" height="300" src="//jsrun.net/kyhKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/30/Program/图片上传与压缩/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -858,186 +850,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/08/28/Program/hashchange事件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="靖风行'S blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/28/Program/hashchange事件/" itemprop="url">hashchange事件</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T00:00:00+08:00">
-                2018-08-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/28/Program/hashchange事件/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/08/28/Program/hashchange事件/" class="cy_cmt_count" data-xid="2018/08/28/Program/hashchange事件/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  247
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p>
-</blockquote>
-<p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/28/Program/hashchange事件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1173,6 +985,186 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/28/Program/js判断当前文本输入状态/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/08/28/Program/hashchange事件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daniel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/28/Program/hashchange事件/" itemprop="url">hashchange事件</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T00:00:00+08:00">
+                2018-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/08/28/Program/hashchange事件/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://blog.haohome.top/2018/08/28/Program/hashchange事件/" class="cy_cmt_count" data-xid="2018/08/28/Program/hashchange事件/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  247
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p>
+</blockquote>
+<p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/28/Program/hashchange事件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
