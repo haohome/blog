@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[图片上传与压缩]]></title>
     <url>%2F2018%2F09%2F30%2FProgram%2F%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%8E%8B%E7%BC%A9%2F</url>
-    <content type="text"><![CDATA[最近在做关于图片上传方面的业务开发,项目中主要需要实现图片的本地预览、压缩和上传 1. 图片选择和预览添加accept属性,控制选择文件的类型为拍照和图像文件,设置multiple支持图片文件多选,监听input的change事件获取选择对象文件,每个文件都是Blob类型 123456789101112131415161718&lt;label for="file2"&gt;多个图片上传&lt;/label&gt;&lt;input type="file" accept="image/gif,image/jpeg,image/png" multiple id='file2' /&gt; &lt;br&gt;&lt;div id="preview2"&gt;&lt;/div&gt;&lt;script&gt;// 模拟jQueryvar $ = selector =&gt; document.querySelector(selector)// 多个图片var file2 = $("#file2")var preview2 = $('#preview2')file2.onchange = function () &#123; var fileList = Array.prototype.slice.call(this.files) fileList.forEach((item, index) =&gt; &#123; var domImg = new Image(); domImg.src = URL.createObjectURL(item) preview2.appendChild(domImg) &#125;)&#125;&lt;/script&gt; 2. 图片的压缩当前手机拍照质量月来越高,带来的问题就是大小也越来越大,直接上传原图,上传速度会很低,甚至很可能上传失败,而且后续加载也影响速度 下面是封装了一个压缩图片的方法,实现的原理是,利用canvas将图片绘制出来,并导出canvas图片.主要通过图片的缩放和控制canvas导出图片质量来实现图片的体积压缩 1234567891011121314151617181920212223242526272829303132333435363738394041 /** * 压缩图片 * @param &#123;file&#125; 输入图片 * @param &#123;quality&#125; 图片质量 * @returns &#123;Promise&#125; resolved promise 返回压缩后的新图片 */function compressImg(file, quality) &#123; return new Promise((resolve, reject) =&gt; &#123; var img = new Image(); img.src = URL.createObjectURL(file) img.onerror = error =&gt; reject(error) img.onload = () =&gt; &#123; var canvas = document.createElement('canvas') var ctx = canvas.getContext('2d') var canvasWidth = document.documentElement.clientWidth * window.devicePixelRatio var canvasHeight = document.documentElement.clientHeight * window.devicePixelRatio // 水平方向想缩放比 var scaleX = canvasWidth / img.width var scaleY = canvasHeight / img.height // 取缩放比更小的比例 var scale = Math.min(scaleX, scaleY) // 画布上绘制的图片尺寸 const imageWidth = img.width * scale const imageHeight = img.height * scale canvas.width = imageWidth canvas.height = imageHeight ctx.drawImage(img, 0, 0, imageWidth, imageHeight) canvas.toBlob(file =&gt; resolve(file), "image/jpeg", quality); &#125; &#125;)&#125;file2.onchange = function () &#123; var fileList = Array.prototype.slice.call(this.files) fileList.forEach((item, index) =&gt; &#123; compressImg(imgfile, .5).then(blobFile =&gt; &#123; var domImg = new Image(); domImg.src = URL.createObjectURL(blobFile) preview2.appendChild(domImg) &#125;) &#125;)&#125; 3. 图片上传文件上传是通过FormData创建表单数据，并发起 ajax POST请求; 发送FormData数据时，浏览器会自动设置Content-Type为合适的值 123456789101112131415161718192021222324/** * 上传图片 * @param &#123;File&#125; file 待上传的文件 * @return &#123;Promise&#125; */ function uploadFile(file,url) &#123; return new Promise((resolve, reject) =&gt; &#123; // 准备表单数据 const formData = new FormData() formData.append('file', file) // 提交请求 const xhr = new XMLHttpRequest() xhr.open('POST', url) xhr.onreadystatechange = function () &#123; if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) &#123; resolve(JSON.parse(this.responseText)) &#125; else &#123; reject(this.responseText) &#125; &#125; xhr.send(formData) &#125;) &#125; 最后奉上JSrun的demo:]]></content>
+    <content type="text"><![CDATA[最近在做关于移动端图片上传方面,项目中主要需要实现图片的本地预览、压缩和上传 1. 图片选择和预览添加accept属性,控制选择文件的类型为拍照和图像文件,设置multiple支持图片文件多选,监听input的change事件获取选择对象文件,每个文件都是Blob类型 123456789101112131415161718&lt;label for="file2"&gt;多个图片上传&lt;/label&gt;&lt;input type="file" accept="image/gif,image/jpeg,image/png" multiple id='file2' /&gt; &lt;br&gt;&lt;div id="preview2"&gt;&lt;/div&gt;&lt;script&gt;// 模拟jQueryvar $ = selector =&gt; document.querySelector(selector)// 多个图片var file2 = $("#file2")var preview2 = $('#preview2')file2.onchange = function () &#123; var fileList = Array.prototype.slice.call(this.files) fileList.forEach((item, index) =&gt; &#123; var domImg = new Image(); domImg.src = URL.createObjectURL(item) preview2.appendChild(domImg) &#125;)&#125;&lt;/script&gt; 2. 图片的压缩当前手机拍照质量月来越高,带来的问题就是大小也越来越大,直接上传原图,上传速度会很低,甚至很可能上传失败,而且后续加载也影响速度 下面是封装了一个压缩图片的方法,实现的原理是,利用canvas将图片绘制出来,并导出canvas图片.主要通过图片的缩放和控制canvas导出图片质量来实现图片的体积压缩 1234567891011121314151617181920212223242526272829303132333435363738394041 /** * 压缩图片 * @param &#123;file&#125; 输入图片 * @param &#123;quality&#125; 图片质量 * @returns &#123;Promise&#125; resolved promise 返回压缩后的新图片 */function compressImg(file, quality) &#123; return new Promise((resolve, reject) =&gt; &#123; var img = new Image(); img.src = URL.createObjectURL(file) img.onerror = error =&gt; reject(error) img.onload = () =&gt; &#123; var canvas = document.createElement('canvas') var ctx = canvas.getContext('2d') var canvasWidth = document.documentElement.clientWidth * window.devicePixelRatio var canvasHeight = document.documentElement.clientHeight * window.devicePixelRatio // 水平方向想缩放比 var scaleX = canvasWidth / img.width var scaleY = canvasHeight / img.height // 取缩放比更小的比例 var scale = Math.min(scaleX, scaleY) // 画布上绘制的图片尺寸 const imageWidth = img.width * scale const imageHeight = img.height * scale canvas.width = imageWidth canvas.height = imageHeight ctx.drawImage(img, 0, 0, imageWidth, imageHeight) canvas.toBlob(file =&gt; resolve(file), "image/jpeg", quality); &#125; &#125;)&#125;file2.onchange = function () &#123; var fileList = Array.prototype.slice.call(this.files) fileList.forEach((item, index) =&gt; &#123; compressImg(imgfile, .5).then(blobFile =&gt; &#123; var domImg = new Image(); domImg.src = URL.createObjectURL(blobFile) preview2.appendChild(domImg) &#125;) &#125;)&#125; 3. 图片上传文件上传是通过FormData创建表单数据，并发起 ajax POST请求; 发送FormData数据时，浏览器会自动设置Content-Type为合适的值 123456789101112131415161718192021222324/** * 上传图片 * @param &#123;File&#125; file 待上传的文件 * @return &#123;Promise&#125; */ function uploadFile(file,url) &#123; return new Promise((resolve, reject) =&gt; &#123; // 准备表单数据 const formData = new FormData() formData.append('file', file) // 提交请求 const xhr = new XMLHttpRequest() xhr.open('POST', url) xhr.onreadystatechange = function () &#123; if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) &#123; resolve(JSON.parse(this.responseText)) &#125; else &#123; reject(this.responseText) &#125; &#125; xhr.send(formData) &#125;) &#125; 最后奉上JSrun的demo:]]></content>
       <categories>
         <category>JavaScript</category>
       </categories>
@@ -378,18 +378,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中的类和对象]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%2F</url>
-    <content type="text"><![CDATA[1.类 类是对象的类型 类具有相同属性和方法的一组对象的集合 定义:确定对象将拥有的特征(属性)和方法(行为) 类的组成:属性和方法 定义类的步骤 a.定义类名b.编写类的属性c.编写类的方法 !– more –&gt; 12345678public class 类名&#123; //定义属性部分(成员变量) 属性1的类型 属性1; 属性2的类型 属性2; //定义方法部分 方法1; 方法2;&#125; 2.对象对象的属性 对象具有的各种特征 每个对象的每个属性都拥有特定值对象的方法 对象可以执行的操作 使用对象的步骤: a. 创建对象(new) b. 使用对象 引用对象的属性:对象名.属性 引用对象的方法:对象名.方法 类是抽象的概念,对象是一个具体的实物 3.访问修饰符 访问修饰符 本类 同包 子类 其他 private √ 默认 √ √ protected √ √ √ public √ √ √ √ 属性通常设为private 外部调用对象属性通常通过对象的getter和setter方法 4.Object类的方法4.1 toString()方法默认:toString()方法默认返回的是对象的哈希码(对象的地址字符串)Override:返回的是对象的属性值 4.2 equals()方法默认:比较的是对象的引用是否指向同一块内存地址Override:比较对象的属性值(数据)信息]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>学习记录</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Java中super关键字的使用]]></title>
     <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[super关键字在对象的内部使用,可以代表父类对象 1.访问父类的属性super.age 2.访问父类的方法super.eat()]]></content>
@@ -415,9 +403,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中的多态]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
-    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
+    <title><![CDATA[Java中的类和对象]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%2F</url>
+    <content type="text"><![CDATA[1.类 类是对象的类型 类具有相同属性和方法的一组对象的集合 定义:确定对象将拥有的特征(属性)和方法(行为) 类的组成:属性和方法 定义类的步骤 a.定义类名b.编写类的属性c.编写类的方法 !– more –&gt; 12345678public class 类名&#123; //定义属性部分(成员变量) 属性1的类型 属性1; 属性2的类型 属性2; //定义方法部分 方法1; 方法2;&#125; 2.对象对象的属性 对象具有的各种特征 每个对象的每个属性都拥有特定值对象的方法 对象可以执行的操作 使用对象的步骤: a. 创建对象(new) b. 使用对象 引用对象的属性:对象名.属性 引用对象的方法:对象名.方法 类是抽象的概念,对象是一个具体的实物 3.访问修饰符 访问修饰符 本类 同包 子类 其他 private √ 默认 √ √ protected √ √ √ public √ √ √ √ 属性通常设为private 外部调用对象属性通常通过对象的getter和setter方法 4.Object类的方法4.1 toString()方法默认:toString()方法默认返回的是对象的哈希码(对象的地址字符串)Override:返回的是对象的属性值 4.2 equals()方法默认:比较的是对象的引用是否指向同一块内存地址Override:比较对象的属性值(数据)信息]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -430,6 +418,18 @@
     <title><![CDATA[Java中的抽象类]]></title>
     <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
     <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中的多态]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
+    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
       <categories>
         <category>Java</category>
       </categories>
