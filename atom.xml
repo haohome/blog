@@ -233,9 +233,9 @@
     
       <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
     
-      <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
-    
       <category term="hash" scheme="http://blog.haohome.top/tags/hash/"/>
+    
+      <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
     
   </entry>
   
@@ -357,9 +357,9 @@
       <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
-    
       <category term="node" scheme="http://blog.haohome.top/tags/node/"/>
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
     
   </entry>
   
@@ -386,6 +386,31 @@
       <category term="ajax" scheme="http://blog.haohome.top/tags/ajax/"/>
     
       <category term="jQuery" scheme="http://blog.haohome.top/tags/jQuery/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>跨域请求的jsonp处理</title>
+    <link href="http://blog.haohome.top/2018/04/07/Web/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86/"/>
+    <id>http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/</id>
+    <published>2018-04-06T16:00:00.000Z</published>
+    <updated>2018-05-02T15:28:24.913Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p><p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p><a id="more"></a><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><ul><li>JSON with Padding 填充式 json</li></ul><p>正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替</p><ul><li><p>处理步骤</p><ol><li>客户端定义一个专门处理相应的有名函数doResponse(<strong>处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态</strong>)</li><li>服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’;</li><li>动态创建一个script元素,设置src指向服务器端的php地址</li></ol><p>客户端js:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doResponse</span>(<span class="params">resp</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(resp);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> resp)&#123;</span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*动态追加script元素*/</span></span><br><span class="line">  $(<span class="string">"body"</span>).append(<span class="string">`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>也可以采用ajax获得返回数据</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.getJSON(<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,data=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  type:<span class="string">"GET"</span>,</span><br><span class="line">  url:<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,</span><br><span class="line">  success:<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"返回数据"</span>,data);</span><br><span class="line">  &#125;,</span><br><span class="line">  dataType:<span class="string">"jsonp"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>服务器端php:</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type:application/javascript;charset:utf-8"</span>);</span><br><span class="line">$getData=$_GET[<span class="string">'callback'</span>];</span><br><span class="line">$hello=json_encode([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]);</span><br><span class="line"><span class="keyword">echo</span> $getData.<span class="string">"('$hello')"</span>;</span><br></pre></td></tr></table></figure><p>​</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;跨域简介&quot;&gt;&lt;a href=&quot;#跨域简介&quot; class=&quot;headerlink&quot; title=&quot;跨域简介&quot;&gt;&lt;/a&gt;跨域简介&lt;/h3&gt;&lt;p&gt;跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。&lt;/p&gt;
+&lt;p&gt;浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="web" scheme="http://blog.haohome.top/categories/web/"/>
+    
+    
+      <category term="web" scheme="http://blog.haohome.top/tags/web/"/>
+    
+      <category term="http" scheme="http://blog.haohome.top/tags/http/"/>
     
   </entry>
   
@@ -421,31 +446,6 @@
       <category term="js" scheme="http://blog.haohome.top/tags/js/"/>
     
       <category term="对象" scheme="http://blog.haohome.top/tags/%E5%AF%B9%E8%B1%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>跨域请求的jsonp处理</title>
-    <link href="http://blog.haohome.top/2018/04/07/Web/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86/"/>
-    <id>http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/</id>
-    <published>2018-04-06T16:00:00.000Z</published>
-    <updated>2018-05-02T15:28:24.913Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p><p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p><a id="more"></a><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><ul><li>JSON with Padding 填充式 json</li></ul><p>正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替</p><ul><li><p>处理步骤</p><ol><li>客户端定义一个专门处理相应的有名函数doResponse(<strong>处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态</strong>)</li><li>服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’;</li><li>动态创建一个script元素,设置src指向服务器端的php地址</li></ol><p>客户端js:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doResponse</span>(<span class="params">resp</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(resp);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> resp)&#123;</span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*动态追加script元素*/</span></span><br><span class="line">  $(<span class="string">"body"</span>).append(<span class="string">`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>也可以采用ajax获得返回数据</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.getJSON(<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,data=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  type:<span class="string">"GET"</span>,</span><br><span class="line">  url:<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,</span><br><span class="line">  success:<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"返回数据"</span>,data);</span><br><span class="line">  &#125;,</span><br><span class="line">  dataType:<span class="string">"jsonp"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>服务器端php:</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type:application/javascript;charset:utf-8"</span>);</span><br><span class="line">$getData=$_GET[<span class="string">'callback'</span>];</span><br><span class="line">$hello=json_encode([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]);</span><br><span class="line"><span class="keyword">echo</span> $getData.<span class="string">"('$hello')"</span>;</span><br></pre></td></tr></table></figure><p>​</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;跨域简介&quot;&gt;&lt;a href=&quot;#跨域简介&quot; class=&quot;headerlink&quot; title=&quot;跨域简介&quot;&gt;&lt;/a&gt;跨域简介&lt;/h3&gt;&lt;p&gt;跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。&lt;/p&gt;
-&lt;p&gt;浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="web" scheme="http://blog.haohome.top/categories/web/"/>
-    
-    
-      <category term="web" scheme="http://blog.haohome.top/tags/web/"/>
-    
-      <category term="http" scheme="http://blog.haohome.top/tags/http/"/>
     
   </entry>
   
@@ -571,9 +571,9 @@
       <category term="HTML5" scheme="http://blog.haohome.top/categories/HTML5/"/>
     
     
-      <category term="HTML5" scheme="http://blog.haohome.top/tags/HTML5/"/>
-    
       <category term="css3" scheme="http://blog.haohome.top/tags/css3/"/>
+    
+      <category term="HTML5" scheme="http://blog.haohome.top/tags/HTML5/"/>
     
   </entry>
   
