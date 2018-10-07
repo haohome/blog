@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>http://blog.haohome.top/2018/10/07/JavaScript/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-10-07T06:52:42.595Z</lastmod>
+    <data>
+        <display>
+        <title>JavaScript设计模式之适配器模式</title>
+        <pubTime>2018-10-06T16:00:00.000Z</pubTime>
+        
+        <tag>设计模式</tag>
+         
+        <tag>JS</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2018/10/06/JavaScript/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-10-07T06:50:46.648Z</lastmod>
+    <data>
+        <display>
+        <title>JavaScript设计模式之单例模式</title>
+        <pubTime>2018-10-05T16:00:00.000Z</pubTime>
+        
+        <tag>设计模式</tag>
+         
+        <tag>JS</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.haohome.top/2018/09/30/Program/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%8E%8B%E7%BC%A9/</loc>
     <lastmod>2018-09-30T15:20:24.832Z</lastmod>
     <data>
@@ -99,9 +143,9 @@
         
         <tag>JavaScript</tag>
          
-        <tag>hash</tag>
-         
         <tag>兼容性</tag>
+         
+        <tag>hash</tag>
          
          
            
