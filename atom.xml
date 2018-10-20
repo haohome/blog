@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.haohome.top/"/>
-  <updated>2018-10-20T07:18:56.283Z</updated>
+  <updated>2018-10-20T15:01:54.316Z</updated>
   <id>http://blog.haohome.top/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>你不知道的JavaScript之词法作用域与动态作用域</title>
+    <link href="http://blog.haohome.top/2018/10/20/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
+    <id>http://blog.haohome.top/2018/10/20/JavaScript/你不知道的JavaScript之词法作用域与动态作用域/</id>
+    <published>2018-10-19T16:00:00.000Z</published>
+    <updated>2018-10-20T15:01:54.316Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在写代码的过程中,我们经常分不清作用域中变量的值指向什么,主要原因是我们分不清楚是应该按照函数的调用顺序还是按照函数位置的嵌套顺序查找变量.作用域有两种工作模式:词法作用域和动态作用域,词法作用域也叫静态作用域.</p><blockquote><ul><li>词法作用域关心函数在<strong>何处声明</strong>，作用域链基于作用域嵌套 </li><li>动态作用域关心函数在<strong>何处调用</strong>，作用域链基于调用栈</li></ul></blockquote><a id="more"></a><h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h2><p><a href="https://www.cnblogs.com/xiaohuochai/p/5700095.html" target="_blank" rel="noopener">词法作用域是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变</a>.</p><p>无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    bar();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br><span class="line">foo();  <span class="comment">// 100</span></span><br></pre></td></tr></table></figure><p>因为bar函数是在全局声明的，所以是输出全局变量a的值</p><p>词法作用域中又分为函数作用域和块级作用域,JavaScript没有动态作用域,它是基于函数作用域的,但同时也有块级作用域,如with关键字、try-catch语句的catch子句、let关键字（ES6）、const关键字（ES6）</p><h2 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h2><p>我们经常会把词法作用域和this机制弄混淆,这是因为this机制从某种程度上与动态作用域类似.</p><p>动态作用域并不关心函数和作用域是如何声明以及在任何处声明的，只关心它们从何处调用</p><p>继续拿上面的例子,如果处于动态作用域,变量a应首先在bar()中查找,没有找到会顺着调用栈在调用bar()函数的地方也就是foo()函数中查找,找到赋值a为1,所以输出1</p><blockquote><p>两种作用域的区别，简而言之，词法作用域是在定义时确定的，而动态作用域是在运行时确定的</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;在写代码的过程中,我们经常分不清作用域中变量的值指向什么,主要原因是我们分不清楚是应该按照函数的调用顺序还是按照函数位置的嵌套顺序查找变量.作用域有两种工作模式:词法作用域和动态作用域,词法作用域也叫静态作用域.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;词法作用域关心函数在&lt;strong&gt;何处声明&lt;/strong&gt;，作用域链基于作用域嵌套 &lt;/li&gt;
+&lt;li&gt;动态作用域关心函数在&lt;strong&gt;何处调用&lt;/strong&gt;，作用域链基于调用栈&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
+    
+    
+      <category term="JS" scheme="http://blog.haohome.top/tags/JS/"/>
+    
+      <category term="YDKJS" scheme="http://blog.haohome.top/tags/YDKJS/"/>
+    
+  </entry>
   
   <entry>
     <title>你不知道的JavaScript之闭包</title>
@@ -264,6 +294,36 @@
   </entry>
   
   <entry>
+    <title>hashchange事件</title>
+    <link href="http://blog.haohome.top/2018/08/28/Program/hashchange%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://blog.haohome.top/2018/08/28/Program/hashchange事件/</id>
+    <published>2018-08-27T16:00:00.000Z</published>
+    <updated>2018-08-28T09:28:17.748Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p></blockquote><p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><a id="more"></a><p>hashchange 事件回调函数对象主要有两个参数会用到:</p><ul><li><p>newURL: 当前页面新的URL</p></li><li><p>oldURL: 当前页面旧的URL</p></li></ul><p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"oldURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"newURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.onhashchange = handleHashChange;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;hashchange&quot;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//hash变化的处理逻辑&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
+    
+      <category term="hash" scheme="http://blog.haohome.top/tags/hash/"/>
+    
+      <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JS判断当前文本输入状态</title>
     <link href="http://blog.haohome.top/2018/08/28/Program/js%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81/"/>
     <id>http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/</id>
@@ -293,36 +353,6 @@
       <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
     
       <category term="input" scheme="http://blog.haohome.top/tags/input/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hashchange事件</title>
-    <link href="http://blog.haohome.top/2018/08/28/Program/hashchange%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://blog.haohome.top/2018/08/28/Program/hashchange事件/</id>
-    <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2018-08-28T09:28:17.748Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p></blockquote><p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><a id="more"></a><p>hashchange 事件回调函数对象主要有两个参数会用到:</p><ul><li><p>newURL: 当前页面新的URL</p></li><li><p>oldURL: 当前页面旧的URL</p></li></ul><p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"oldURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"newURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.onhashchange = handleHashChange;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;hashchange&quot;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//hash变化的处理逻辑&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
-    
-      <category term="hash" scheme="http://blog.haohome.top/tags/hash/"/>
-    
-      <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
     
   </entry>
   
@@ -594,31 +624,6 @@
       <category term="js" scheme="http://blog.haohome.top/tags/js/"/>
     
       <category term="原型" scheme="http://blog.haohome.top/tags/%E5%8E%9F%E5%9E%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>原生JS实现瀑布流效果</title>
-    <link href="http://blog.haohome.top/2018/03/10/JavaScript/%E5%8E%9F%E7%94%9Fjs%E5%AE%9E%E7%8E%B0%E7%80%91%E5%B8%83%E6%B5%81%E6%95%88%E6%9E%9C/"/>
-    <id>http://blog.haohome.top/2018/03/10/JavaScript/原生js实现瀑布流效果/</id>
-    <published>2018-03-09T16:00:00.000Z</published>
-    <updated>2018-04-06T18:16:32.688Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @name:瀑布流</span></span><br><span class="line"><span class="comment">   * @param:parent(容器元素)</span></span><br><span class="line"><span class="comment">   * @param:oneGap(只有一列时元素的间距,其他列数自适应)</span></span><br><span class="line"><span class="comment">   * @description:自适应瀑布流,多列间距自适应</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">waterFall:<span class="function"><span class="keyword">function</span> (<span class="params">parent,oneGap</span>)</span>&#123;</span><br><span class="line">  <span class="comment">/**容器的宽度(包含内边距、边框) */</span></span><br><span class="line">  <span class="keyword">var</span> width=parent.offsetWidth;</span><br><span class="line">  <span class="comment">/**容器内盒子元素的宽度(包含内边距、边框)  */</span></span><br><span class="line">  <span class="keyword">var</span> items=parent.children;</span><br><span class="line">  <span class="keyword">var</span> itemWidth = items[<span class="number">0</span>].offsetWidth;</span><br><span class="line">  <span class="keyword">var</span> gap=(width-<span class="built_in">parseInt</span>(width / (itemWidth))*itemWidth)/<span class="number">2</span>;</span><br><span class="line">  <span class="comment">/**计算每列放的盒子元素个数 */</span></span><br><span class="line">  <span class="keyword">var</span> columns = <span class="built_in">parseInt</span>(width / (itemWidth + gap));</span><br><span class="line">  <span class="comment">/**定义一个空数组,用来储存每列元素的高度 */</span></span><br><span class="line">  <span class="keyword">var</span> arr = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; items.length; i++) &#123;</span><br><span class="line">    <span class="comment">/**1.将第一行元素的高度都存到arr中 */</span></span><br><span class="line">    <span class="keyword">if</span> (i &lt; columns) &#123;</span><br><span class="line">      items[i].style.top = <span class="number">0</span>;</span><br><span class="line">      items[i].style.left = (itemWidth + gap) * i + <span class="string">'px'</span>;</span><br><span class="line">      arr.push(items[i].offsetHeight);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">/**2.找到每一行的最小高度 */</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> minHeight = arr[<span class="number">0</span>];</span><br><span class="line">      <span class="keyword">var</span> index = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (minHeight &gt; arr[j]) &#123;</span><br><span class="line">          minHeight = arr[j];<span class="comment">//获得当前行最小高度</span></span><br><span class="line">          index = j;          <span class="comment">//记下当前列下标</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">/**3.设置下一行第一个盒子的位置,</span></span><br><span class="line"><span class="comment">           * top值就是最小高度值+gap</span></span><br><span class="line"><span class="comment">           * left值就是最小列距离左边的距离</span></span><br><span class="line"><span class="comment">           */</span></span><br><span class="line">      <span class="keyword">if</span>(gap!=<span class="number">0</span>)&#123;</span><br><span class="line">        items[i].style.top = arr[index] + gap + <span class="string">'px'</span>;</span><br><span class="line">        items[i].style.left = items[index].offsetLeft + <span class="string">'px'</span>;</span><br><span class="line">        <span class="comment">/**4.修改最小列的高度 </span></span><br><span class="line"><span class="comment">             * 最小列的高度 = 当前自己的高度 + 拼接过来的高度 + 间隙的高度</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">        arr[index] = arr[index] + items[i].offsetHeight + gap;</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        items[i].style.top = arr[index] + oneGap + <span class="string">'px'</span>;</span><br><span class="line">        items[i].style.left = <span class="number">0</span>;</span><br><span class="line">        arr[index] = arr[index] + items[i].offsetHeight + oneGap;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span 
-      
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
-    
-    
-      <category term="js" scheme="http://blog.haohome.top/tags/js/"/>
     
   </entry>
   
