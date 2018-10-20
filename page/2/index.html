@@ -2,16 +2,27 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
-<meta name="baidu-site-verification" content="s8Pe1TBqyy" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
+
+
+
 
 
 
@@ -39,10 +50,6 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -51,47 +58,25 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.4.2">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.4.2">
 
 
-  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="web,blog" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="靖风行'S blog" type="application/atom+xml" />
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
 
 
 
 
 
 
-<meta name="description" content="独立 自由 分享 感悟">
-<meta property="og:type" content="website">
-<meta property="og:title" content="靖风行&#39;S blog">
-<meta property="og:url" content="http://blog.haohome.top/page/2/index.html">
-<meta property="og:site_name" content="靖风行&#39;S blog">
-<meta property="og:description" content="独立 自由 分享 感悟">
-<meta property="og:locale" content="zh-Hans">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="靖风行&#39;S blog">
-<meta name="twitter:description" content="独立 自由 分享 感悟">
 
 
 
@@ -100,15 +85,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '5.1.4',
+    version: '6.4.2',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -120,12 +103,38 @@
 </script>
 
 
+  
+
+
+
+
+  <meta name="description" content="独立 自由 分享 感悟">
+<meta property="og:type" content="website">
+<meta property="og:title" content="靖风行&#39;S blog">
+<meta property="og:url" content="http://blog.haohome.top/page/2/index.html">
+<meta property="og:site_name" content="靖风行&#39;S blog">
+<meta property="og:description" content="独立 自由 分享 感悟">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="靖风行&#39;S blog">
+<meta name="twitter:description" content="独立 自由 分享 感悟">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="靖风行'S blog" type="application/atom+xml" />
+
+
+
 
   <link rel="canonical" href="http://blog.haohome.top/page/2/"/>
 
 
 
-
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>靖风行'S blog</title>
   
@@ -137,9 +146,37 @@
 
 
 
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -156,19 +193,17 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">靖风行'S blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <h1 class="site-subtitle" itemprop="description"></h1>
-      
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -176,66 +211,58 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
 
+      
       
         <li class="menu-item menu-item-search">
           
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
         </li>
       
     </ul>
+  
+
   
 
   
@@ -266,12 +293,23 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
+          
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
@@ -284,6 +322,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -293,7 +333,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -306,13 +346,23 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/11/JavaScript/垃圾回收机制与内存管理/" itemprop="url">垃圾回收机制与内存管理</a></h2>
+                <a class="post-title-link" href="/2018/07/11/JavaScript/垃圾回收机制与内存管理/" itemprop="url">
+                  垃圾回收机制与内存管理
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -320,13 +370,30 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-11T00:00:00+08:00">
-                2018-07-11
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-11 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-11T00:00:00+08:00">2018-07-11</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-18 23:02:39" itemprop="dateModified" datetime="2018-07-18T23:02:39+08:00">2018-07-18</time>
+              
             
           </span>
 
@@ -342,11 +409,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -363,7 +426,7 @@
               </span>
               
                 <a href="/2018/07/11/JavaScript/垃圾回收机制与内存管理/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/07/11/JavaScript/垃圾回收机制与内存管理/" class="cy_cmt_count" data-xid="2018/07/11/JavaScript/垃圾回收机制与内存管理/" itemprop="commentsCount" ></span>
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/07/11/JavaScript/垃圾回收机制与内存管理/" class="cy_cmt_count" data-xid="2018/07/11/JavaScript/垃圾回收机制与内存管理/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -374,25 +437,6 @@
 
           
 
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,577
-                </span>
-              
-
-              
-
-              
-            </div>
           
 
           
@@ -434,6 +478,9 @@
         
       
     </div>
+
+    
+
     
     
     
@@ -472,6 +519,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -481,7 +530,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -494,13 +543,23 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/29/JavaScript/点击事件重复请求/" itemprop="url">点击事件重复请求</a></h2>
+                <a class="post-title-link" href="/2018/05/29/JavaScript/点击事件重复请求/" itemprop="url">
+                  点击事件重复请求
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -508,13 +567,30 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T00:00:00+08:00">
-                2018-05-29
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-05-29T00:00:00+08:00">2018-05-29</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-30 21:27:34" itemprop="dateModified" datetime="2018-05-30T21:27:34+08:00">2018-05-30</time>
+              
             
           </span>
 
@@ -530,11 +606,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -551,7 +623,7 @@
               </span>
               
                 <a href="/2018/05/29/JavaScript/点击事件重复请求/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/05/29/JavaScript/点击事件重复请求/" class="cy_cmt_count" data-xid="2018/05/29/JavaScript/点击事件重复请求/" itemprop="commentsCount" ></span>
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/05/29/JavaScript/点击事件重复请求/" class="cy_cmt_count" data-xid="2018/05/29/JavaScript/点击事件重复请求/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -562,25 +634,6 @@
 
           
 
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  392
-                </span>
-              
-
-              
-
-              
-            </div>
           
 
           
@@ -619,6 +672,9 @@
         
       
     </div>
+
+    
+
     
     
     
@@ -657,6 +713,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -666,7 +724,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -679,13 +737,23 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/14/JavaScript/Vuex入门基础/" itemprop="url">Vuex入门基础</a></h2>
+                <a class="post-title-link" href="/2018/05/14/JavaScript/Vuex入门基础/" itemprop="url">
+                  Vuex入门基础
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -693,13 +761,30 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-14T00:00:00+08:00">
-                2018-05-14
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-14 00:00:00" itemprop="dateCreated datePublished" datetime="2018-05-14T00:00:00+08:00">2018-05-14</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-15 21:58:59" itemprop="dateModified" datetime="2018-05-15T21:58:59+08:00">2018-05-15</time>
+              
             
           </span>
 
@@ -715,11 +800,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -736,7 +817,7 @@
               </span>
               
                 <a href="/2018/05/14/JavaScript/Vuex入门基础/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/05/14/JavaScript/Vuex入门基础/" class="cy_cmt_count" data-xid="2018/05/14/JavaScript/Vuex入门基础/" itemprop="commentsCount" ></span>
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/05/14/JavaScript/Vuex入门基础/" class="cy_cmt_count" data-xid="2018/05/14/JavaScript/Vuex入门基础/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -747,25 +828,6 @@
 
           
 
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,576
-                </span>
-              
-
-              
-
-              
-            </div>
           
 
           
@@ -801,6 +863,9 @@
         
       
     </div>
+
+    
+
     
     
     
@@ -839,6 +904,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -848,7 +915,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -861,13 +928,23 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/02/JavaScript/Node.js的web服务器路由重构/" itemprop="url">Node.js的web服务器路由重构</a></h2>
+                <a class="post-title-link" href="/2018/05/02/JavaScript/Node.js的web服务器路由重构/" itemprop="url">
+                  Node.js的web服务器路由重构
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -875,13 +952,30 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-02T23:32:00+08:00">
-                2018-05-02
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-02 23:32:00" itemprop="dateCreated datePublished" datetime="2018-05-02T23:32:00+08:00">2018-05-02</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-04 21:38:57" itemprop="dateModified" datetime="2018-05-04T21:38:57+08:00">2018-05-04</time>
+              
             
           </span>
 
@@ -897,11 +991,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -918,7 +1008,7 @@
               </span>
               
                 <a href="/2018/05/02/JavaScript/Node.js的web服务器路由重构/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/05/02/JavaScript/Node.js的web服务器路由重构/" class="cy_cmt_count" data-xid="2018/05/02/JavaScript/Node.js的web服务器路由重构/" itemprop="commentsCount" ></span>
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/05/02/JavaScript/Node.js的web服务器路由重构/" class="cy_cmt_count" data-xid="2018/05/02/JavaScript/Node.js的web服务器路由重构/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -929,25 +1019,6 @@
 
           
 
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  951
-                </span>
-              
-
-              
-
-              
-            </div>
           
 
           
@@ -980,6 +1051,9 @@
         
       
     </div>
+
+    
+
     
     
     
@@ -1018,6 +1092,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1027,7 +1103,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1040,13 +1116,23 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/14/JavaScript/模拟jQuery的ajax方法封装/" itemprop="url">模拟jQuery的ajax方法封装</a></h2>
+                <a class="post-title-link" href="/2018/04/14/JavaScript/模拟jQuery的ajax方法封装/" itemprop="url">
+                  模拟jQuery的ajax方法封装
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1054,13 +1140,30 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-14T16:19:00+08:00">
-                2018-04-14
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-14 16:19:00" itemprop="dateCreated datePublished" datetime="2018-04-14T16:19:00+08:00">2018-04-14</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-04-15 13:55:55" itemprop="dateModified" datetime="2018-04-15T13:55:55+08:00">2018-04-15</time>
+              
             
           </span>
 
@@ -1076,11 +1179,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -1097,7 +1196,7 @@
               </span>
               
                 <a href="/2018/04/14/JavaScript/模拟jQuery的ajax方法封装/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/04/14/JavaScript/模拟jQuery的ajax方法封装/" class="cy_cmt_count" data-xid="2018/04/14/JavaScript/模拟jQuery的ajax方法封装/" itemprop="commentsCount" ></span>
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/04/14/JavaScript/模拟jQuery的ajax方法封装/" class="cy_cmt_count" data-xid="2018/04/14/JavaScript/模拟jQuery的ajax方法封装/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -1108,25 +1207,6 @@
 
           
 
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  668
-                </span>
-              
-
-              
-
-              
-            </div>
           
 
           
@@ -1158,6 +1238,9 @@
         
       
     </div>
+
+    
+
     
     
     
@@ -1196,16 +1279,18 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1218,13 +1303,23 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="url">创建对象的Object.create与new</a></h2>
+                <a class="post-title-link" href="/2018/04/07/Web/跨域请求的jsonp处理/" itemprop="url">
+                  跨域请求的jsonp处理
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1232,13 +1327,30 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T00:00:00+08:00">
-                2018-04-07
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-07 00:00:00" itemprop="dateCreated datePublished" datetime="2018-04-07T00:00:00+08:00">2018-04-07</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-02 23:28:24" itemprop="dateModified" datetime="2018-05-02T23:28:24+08:00">2018-05-02</time>
+              
             
           </span>
 
@@ -1254,11 +1366,193 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/04/07/Web/跨域请求的jsonp处理/#SOHUCS" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/" class="cy_cmt_count" data-xid="2018/04/07/Web/跨域请求的jsonp处理/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p>
+<p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/07/Web/跨域请求的jsonp处理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daniel">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="url">
+                  创建对象的Object.create与new
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-07 00:00:00" itemprop="dateCreated datePublished" datetime="2018-04-07T00:00:00+08:00">2018-04-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
                 </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -1275,7 +1569,7 @@
               </span>
               
                 <a href="/2018/04/07/JavaScript/创建对象的Object.create与new/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/" class="cy_cmt_count" data-xid="2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="commentsCount" ></span>
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/" class="cy_cmt_count" data-xid="2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -1286,25 +1580,6 @@
 
           
 
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  495
-                </span>
-              
-
-              
-
-              
-            </div>
           
 
           
@@ -1345,183 +1620,9 @@
         
       
     </div>
-    
-    
-    
 
     
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="靖风行'S blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/07/Web/跨域请求的jsonp处理/" itemprop="url">跨域请求的jsonp处理</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T00:00:00+08:00">
-                2018-04-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/04/07/Web/跨域请求的jsonp处理/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/" class="cy_cmt_count" data-xid="2018/04/07/Web/跨域请求的jsonp处理/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  366
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p>
-<p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/07/Web/跨域请求的jsonp处理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
     
     
     
@@ -1558,6 +1659,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -1569,7 +1672,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1582,13 +1685,23 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/29/Web/浏览器缓存问题/" itemprop="url">浏览器缓存问题</a></h2>
+                <a class="post-title-link" href="/2018/03/29/Web/浏览器缓存问题/" itemprop="url">
+                  浏览器缓存问题
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1596,13 +1709,30 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-29T00:06:25+08:00">
-                2018-03-29
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-29 00:06:25" itemprop="dateCreated datePublished" datetime="2018-03-29T00:06:25+08:00">2018-03-29</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
+              
             
           </span>
 
@@ -1618,11 +1748,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
 
                 
                 
@@ -1639,7 +1765,7 @@
               </span>
               
                 <a href="/2018/03/29/Web/浏览器缓存问题/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/03/29/Web/浏览器缓存问题/" class="cy_cmt_count" data-xid="2018/03/29/Web/浏览器缓存问题/" itemprop="commentsCount" ></span>
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/03/29/Web/浏览器缓存问题/" class="cy_cmt_count" data-xid="2018/03/29/Web/浏览器缓存问题/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -1650,25 +1776,6 @@
 
           
 
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,584
-                </span>
-              
-
-              
-
-              
-            </div>
           
 
           
@@ -1709,6 +1816,9 @@
         
       
     </div>
+
+    
+
     
     
     
@@ -1747,6 +1857,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1756,7 +1868,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1769,13 +1881,23 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/11/JavaScript/通俗易懂的原型与原型链/" itemprop="url">通俗易懂的原型与原型链</a></h2>
+                <a class="post-title-link" href="/2018/03/11/JavaScript/通俗易懂的原型与原型链/" itemprop="url">
+                  通俗易懂的原型与原型链
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1783,13 +1905,30 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-11T21:23:00+08:00">
-                2018-03-11
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-11 21:23:00" itemprop="dateCreated datePublished" datetime="2018-03-11T21:23:00+08:00">2018-03-11</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
+              
             
           </span>
 
@@ -1805,11 +1944,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -1826,7 +1961,7 @@
               </span>
               
                 <a href="/2018/03/11/JavaScript/通俗易懂的原型与原型链/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/03/11/JavaScript/通俗易懂的原型与原型链/" class="cy_cmt_count" data-xid="2018/03/11/JavaScript/通俗易懂的原型与原型链/" itemprop="commentsCount" ></span>
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/03/11/JavaScript/通俗易懂的原型与原型链/" class="cy_cmt_count" data-xid="2018/03/11/JavaScript/通俗易懂的原型与原型链/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -1837,25 +1972,6 @@
 
           
 
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,051
-                </span>
-              
-
-              
-
-              
-            </div>
           
 
           
@@ -1889,6 +2005,9 @@
         
       
     </div>
+
+    
+
     
     
     
@@ -1927,6 +2046,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1936,7 +2057,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1949,13 +2070,23 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/10/JavaScript/原生js实现瀑布流效果/" itemprop="url">原生JS实现瀑布流效果</a></h2>
+                <a class="post-title-link" href="/2018/03/10/JavaScript/原生js实现瀑布流效果/" itemprop="url">
+                  原生JS实现瀑布流效果
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1963,13 +2094,30 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T00:00:00+08:00">
-                2018-03-10
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-10 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-10T00:00:00+08:00">2018-03-10</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-04-07 02:16:32" itemprop="dateModified" datetime="2018-04-07T02:16:32+08:00">2018-04-07</time>
+              
             
           </span>
 
@@ -1985,11 +2133,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -2006,7 +2150,7 @@
               </span>
               
                 <a href="/2018/03/10/JavaScript/原生js实现瀑布流效果/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://blog.haohome.top/2018/03/10/JavaScript/原生js实现瀑布流效果/" class="cy_cmt_count" data-xid="2018/03/10/JavaScript/原生js实现瀑布流效果/" itemprop="commentsCount" ></span>
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/03/10/JavaScript/原生js实现瀑布流效果/" class="cy_cmt_count" data-xid="2018/03/10/JavaScript/原生js实现瀑布流效果/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -2017,25 +2161,6 @@
 
           
 
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  405
-                </span>
-              
-
-              
-
-              
-            </div>
           
 
           
@@ -2061,6 +2186,9 @@
         
       
     </div>
+
+    
+
     
     
     
@@ -2095,15 +2223,12 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
 
           </div>
-          
-
-
           
 
         </div>
@@ -2135,45 +2260,155 @@
                 alt="Daniel" />
             
               <p class="site-author-name" itemprop="name">Daniel</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">独立 自由 分享 感悟</p>
           </div>
 
-          <nav class="site-state motion-element">
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">57</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
 
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">57</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
 
-            
               
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">45</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
+            </nav>
+          
 
           
             <div class="feed-link motion-element">
@@ -2186,19 +2421,17 @@
 
           
             <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/yifoo" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="http://weibo.com/wuhaofushan" target="_blank" title="微博">
-                      
-                        <i class="fa fa-fw fa-weibo"></i>微博</a>
-                  </span>
-                
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yifoo" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/wuhaofushan" target="_blank" title="微博"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                  
+                </span>
+              
             </div>
           
 
@@ -2209,8 +2442,8 @@
           
             <div class="links-of-blogroll motion-element links-of-blogroll-block">
               <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-home"></i>
-                
+                <i class="fa  fa-fw fa-link"></i>
+                Links
               </div>
               <ul class="links-of-blogroll-list">
                 
@@ -2222,6 +2455,9 @@
             </div>
           
 
+          
+            
+          
           
 
         </div>
@@ -2241,11 +2477,13 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Daniel</span>
+
+  
 
   
 </div>
@@ -2253,14 +2491,21 @@
 
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.4.3</div>
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.2</div>
 
 
 
 
         
+
 
 
 
@@ -2280,7 +2525,10 @@
     
 
     
+	
+    
 
+    
   </div>
 
   
@@ -2299,7 +2547,11 @@
 
 
 
-  
+
+
+
+
+
 
 
 
@@ -2319,16 +2571,6 @@
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -2337,18 +2579,13 @@
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
 
 
 
@@ -2356,9 +2593,9 @@
   
 
 
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
 
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
 
 
 
@@ -2367,27 +2604,11 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
 
 
 
   
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
 
 
 
@@ -2399,8 +2620,6 @@
   
     <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytkKTQa0"></script>
   
-
-
 
 
 
@@ -2459,6 +2678,8 @@
         .css('overflow', 'hidden');
       $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
 
+      
+
       $.ajax({
         url: path,
         dataType: isXml ? "xml" : "json",
@@ -2492,6 +2713,7 @@
                 var title = data.title.trim();
                 var titleInLowerCase = title.toLowerCase();
                 var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
                 var contentInLowerCase = content.toLowerCase();
                 var articleUrl = decodeURIComponent(data.url);
                 var indexOfTitle = [];
@@ -2738,14 +2960,17 @@
   
 
   
+
+  
   
 
   
 
   
-  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
-  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
 
+  
+
+  
 
   
 
