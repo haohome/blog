@@ -25,7 +25,6 @@
     </url>
 
     
-    
   <url>
     <loc>http://blog.haohome.top/2018/10/10/Mac&PC/iTerm%20%E7%BB%88%E7%AB%AF%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</loc>
     <lastmod>2018-10-20T07:21:25.925Z</lastmod>
@@ -592,14 +591,34 @@
         <title>flex弹性布局</title>
         <pubTime>2018-02-25T12:30:54.000Z</pubTime>
         
-        <tag>css</tag>
-         
         <tag>flex</tag>
+         
+        <tag>css</tag>
          
          
            
              
               <breadCrumb title="CSS" url="http://blog.haohome.top/categories/CSS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2016/04/19/Food/%E8%8B%B9%E6%9E%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A4%90%E5%8F%98/</loc>
+    <lastmod>2018-04-10T05:53:46.725Z</lastmod>
+    <data>
+        <display>
+        <title>苹果为什么会褐变</title>
+        <pubTime>2016-04-18T16:34:14.000Z</pubTime>
+        
+        <tag>保鲜知识</tag>
+         
+         
+           
+             
+              <breadCrumb title="food" url="http://blog.haohome.top/categories/food/"/>
           
         </display>
     </data>
@@ -622,26 +641,6 @@
            
              
               <breadCrumb title="HTML5" url="http://blog.haohome.top/categories/HTML5/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2016/04/19/Food/%E8%8B%B9%E6%9E%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A4%90%E5%8F%98/</loc>
-    <lastmod>2018-04-10T05:53:46.725Z</lastmod>
-    <data>
-        <display>
-        <title>苹果为什么会褐变</title>
-        <pubTime>2016-04-18T16:34:14.000Z</pubTime>
-        
-        <tag>保鲜知识</tag>
-         
-         
-           
-             
-              <breadCrumb title="food" url="http://blog.haohome.top/categories/food/"/>
           
         </display>
     </data>
