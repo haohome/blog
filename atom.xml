@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.haohome.top/"/>
-  <updated>2018-10-07T06:52:42.595Z</updated>
+  <updated>2018-10-20T07:18:56.283Z</updated>
   <id>http://blog.haohome.top/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>你不知道的JavaScript之闭包</title>
+    <link href="http://blog.haohome.top/2018/10/18/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E9%97%AD%E5%8C%85/"/>
+    <id>http://blog.haohome.top/2018/10/18/JavaScript/你不知道的JavaScript之闭包/</id>
+    <published>2018-10-17T16:00:00.000Z</published>
+    <updated>2018-10-20T07:18:56.283Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><blockquote><p>闭包是函数和声明该函数的词法环境的组合。(来自:<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">MDN</a>)</p><p>另一种定义:<strong>是指有权访问另外一个函数作用域中的变量的函数。创建闭包的常见方式就是在一个函数内部创建另外一个函数。</strong></p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"Mozilla"</span>; <span class="comment">// name 是一个被 init 创建的局部变量</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">displayName</span>(<span class="params"></span>) </span>&#123; <span class="comment">// displayName() 是内部函数,一个闭包</span></span><br><span class="line">        alert(name); <span class="comment">// 使用了父函数中声明的变量</span></span><br><span class="line">    &#125;</span><br><span class="line">    displayName();</span><br><span class="line">&#125;</span><br><span class="line">init();<span class="comment">// 弹出Mozilla</span></span><br></pre></td></tr></table></figure><ul><li><code>init()</code> 创建了一个局部变量 <code>name</code> 和一个名为 <code>displayName()</code> 的函数。</li><li><code>displayName()</code> 内没有自己的局部变量，然而它可以访问到外部函数的变量name;</li><li>但是，如果有同名变量 <code>name</code> 在 <code>displayName()</code> 中被定义，则会优先使用 <code>displayName()</code> 中定义的 <code>name</code> 。</li></ul><p>这个<em>词法作用域</em>的例子介绍了引擎是如何解析函数嵌套中的变量的</p><a id="more"></a><p>闭包是由函数以及创建该函数的词法环境组合而成,<strong>这个环境包含了这个闭包创建时所能访问的所有局部变量</strong>。函数<code>displayName()</code>具有一个涵盖<code>init()</code>作用域的闭包</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"Mozilla"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">displayName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> displayName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myFunc = makeFunc();</span><br><span class="line">myFunc();</span><br></pre></td></tr></table></figure><ul><li><p><code>myFunc</code> 是执行 <code>makeFunc</code> 时创建的 <code>displayName</code> 函数实例的引用，而 <code>displayName</code> 实例<strong>仍</strong>可访问其词法作用域中的变量(闭包环境)，即可以访问到 <code>name</code> 。</p></li><li><p>当 <code>myFunc</code> 被调用时，<code>name</code> 仍可被访问，其值 <code>Mozilla</code> 就被传递到<code>alert</code>中。</p></li></ul><p>再看一个例子:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeAdder</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add5 = makeAdder(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">var</span> add10 = makeAdder(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add5(<span class="number">2</span>));  <span class="comment">// 7</span></span><br><span class="line"><span class="built_in">console</span>.log(add10(<span class="number">4</span>)); <span class="comment">// 14</span></span><br></pre></td></tr></table></figure><ul><li><p>我们定义了 <code>makeAdder(x)</code> 函数，它接受一个参数 <code>x</code> ，并返回一个新的函数</p></li><li><p>返回的函数接受一个参数 <code>y</code>，并返回<code>x+y</code>的值</p></li></ul><p><code>makeAdder</code> 是一个函数工厂 ,其创建了两个新函数,新函数执行时其参数<code>y</code>与<code>makeAdder</code>形成的闭包环境中的参数<code>x</code>相加;</p><p>而<code>add5</code> 和 <code>add10</code> 都是闭包,它们共享相同的函数定义，但是保存了不同的词法环境。在 <code>add5</code>的环境中，<code>x</code> 为 5。而在 <code>add10</code> 中，<code>x</code> 则为 10。</p><p>这就是闭包: 它允许将函数与其所操作的某些数据（环境）关联起来,类似于面向对象,允许对象的属性与一个或多个方法关联</p><h2 id="2-一个常见的错误-循环和闭包"><a href="#2-一个常见的错误-循环和闭包" class="headerlink" title="2. 一个常见的错误:循环和闭包"></a>2. 一个常见的错误:循环和闭包</h2><iframe width="100%" height="200" src="//jsrun.net/w2hKp/embedded/js,result/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe><p>这是一道经典的面试题,<code>setTimeout</code>定时器是一个异步回调的方法,当执行定时器回调函数时,回调函数内部的i都通过词法作用域共享变量i,而此时<code>for</code>循环已经终止,i值为6,因此每个打印出来的都为6</p><p>而如果希望打印的是1,2,3,4,5,通过声明并立即执行一个函数来创建作用域,循环中的每个迭代都给自己捕获一个<code>i</code>的副本储存,结果就能实现,如:</p><iframe width="100%" height="200" src="//jsrun.net/N2hKp/embedded/js,result/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe><p>ES6语法中let会创建块级作用域,很简单就能实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;,i * <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="3-用闭包模拟私有方法-模块模式"><a href="#3-用闭包模拟私有方法-模块模式" class="headerlink" title="3.用闭包模拟私有方法(模块模式)"></a>3.用闭包模拟私有方法(模块模式)</h2><p>在java的编程语言中,是支持方法声明为私有的,即他们只能被同一个类中的其他方法所调用,JavaScript不支持(typescript支持),但js是可以通过闭包的方式模拟私有方法;</p><p><strong>私有化方法有利于限制对代码的访问</strong>,还提供了管理全局命名空间的能力,避免非核心方法影响了代码的公共接口部分</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Counter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> privateCounter = <span class="number">0</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">changeBy</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    privateCounter += val;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    increment: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      changeBy(<span class="number">1</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    decrement: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      changeBy(<span class="number">-1</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    value: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> privateCounter;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;   </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> count1= Counter()</span><br><span class="line"><span class="built_in">console</span>.log(count1.value());<span class="comment">//0</span></span><br><span class="line">count1.increment();</span><br><span class="line">count1.increment();</span><br><span class="line"><span class="built_in">console</span>.log(count1.value());<span class="comment">//2</span></span><br><span class="line">count1.decrement();</span><br><span class="line">count1.log(Counter.value());<span class="comment">//1</span></span><br><span class="line"><span class="keyword">var</span> count2 = Counter()</span><br><span class="line"><span class="built_in">console</span>.log(count2.value())<span class="comment">//0</span></span><br></pre></td></tr></table></figure><p><code>Counter()</code>形成了闭包环境(可认为是模块),返回三个对象方法:<code>increment</code>、<code>decrement</code> 和 <code>value</code>,这三个公共函数具有涵盖实例内部作用域的闭包,其本质也可看做是<strong>模块的公共API</strong>,通过它访问闭包环境内的私有属性和方法:<code>privateCounter</code> 的变量和名为 <code>changeBy</code> 的函数;</p><blockquote><p>通过在模块实例的内部保留对公共API对象的内部引用，可以从内部对模块实例进行修改，包括添加或删除方法和属性，以及修改它们的值。</p></blockquote><p>当通过返回一个含有属性引用的对象的方式来将函数传递到词法作用域外部时，我们已经创造了可以观察和实践闭包的条件。</p><p>对于模块模式,需要具备两个必要条件:</p><ol><li>必须有外部的封闭函数,形成私有作用域,该函数必须至少被调用一次(每次调用都会创建一个新的模块实例)</li><li>封闭函数必须返回至少一个内部函数,即模块的公共API,以访问或者修改私有的状态</li></ol><p>上一个示例代码中有一个叫作<code>Counter()</code>的独立的模块创建器，可以被调用任意多次，每次调用都会创建一个新的模块实例。当只需要一个实例时，可以对这个模式进行简单的改进来实现<strong>单例模式</strong>：</p><blockquote><p>采用匿名函数自调</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> counter = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> privateCounter = <span class="number">0</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">changeBy</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">    privateCounter += val;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    increment: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      changeBy(<span class="number">1</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    decrement: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      changeBy(<span class="number">-1</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    value: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> privateCounter;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;   </span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log(count.value());<span class="comment">//0</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-简介&quot;&gt;&lt;a href=&quot;#1-简介&quot; class=&quot;headerlink&quot; title=&quot;1. 简介&quot;&gt;&lt;/a&gt;1. 简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;闭包是函数和声明该函数的词法环境的组合。(来自:&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;MDN&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;另一种定义:&lt;strong&gt;是指有权访问另外一个函数作用域中的变量的函数。创建闭包的常见方式就是在一个函数内部创建另外一个函数。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;init&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; name = &lt;span class=&quot;string&quot;&gt;&quot;Mozilla&quot;&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;// name 是一个被 init 创建的局部变量&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;displayName&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123; &lt;span class=&quot;comment&quot;&gt;// displayName() 是内部函数,一个闭包&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        alert(name); &lt;span class=&quot;comment&quot;&gt;// 使用了父函数中声明的变量&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    displayName();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;init();		&lt;span class=&quot;comment&quot;&gt;// 弹出Mozilla&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;init()&lt;/code&gt; 创建了一个局部变量 &lt;code&gt;name&lt;/code&gt; 和一个名为 &lt;code&gt;displayName()&lt;/code&gt; 的函数。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;displayName()&lt;/code&gt; 内没有自己的局部变量，然而它可以访问到外部函数的变量name;&lt;/li&gt;
+&lt;li&gt;但是，如果有同名变量 &lt;code&gt;name&lt;/code&gt; 在 &lt;code&gt;displayName()&lt;/code&gt; 中被定义，则会优先使用 &lt;code&gt;displayName()&lt;/code&gt; 中定义的 &lt;code&gt;name&lt;/code&gt; 。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这个&lt;em&gt;词法作用域&lt;/em&gt;的例子介绍了引擎是如何解析函数嵌套中的变量的&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
+    
+    
+      <category term="JS" scheme="http://blog.haohome.top/tags/JS/"/>
+    
+      <category term="YDKJS" scheme="http://blog.haohome.top/tags/YDKJS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iTerm终端设置代理</title>
+    <link href="http://blog.haohome.top/2018/10/10/Mac&amp;PC/iTerm%20%E7%BB%88%E7%AB%AF%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/"/>
+    <id>http://blog.haohome.top/2018/10/10/Mac&amp;PC/iTerm 终端设置代理/</id>
+    <published>2018-10-09T16:00:00.000Z</published>
+    <updated>2018-10-20T07:21:25.925Z</updated>
+    
+    <content type="html"><![CDATA[<p>某些站点必须爬墙才能访问，但在mac上设置的全局代理，对终端又不起作用，终端需要单独设置代理。<br>在终端中执行：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export ALL_PROXY=socks5://127.0.0.1:1086/</span><br></pre></td></tr></table></figure><p>如果是http的代理:</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=http://127.0.0.1:1087/</span><br><span class="line">export https_proxy=http://127.0.0.1:1087/</span><br></pre></td></tr></table></figure><p>如果需要开机自动设置，把上面的代码加到~/.bash_profile里</p><p><code>source  ~/.bash_profile</code> 使文件生效</p><p>测试当前终端标签/窗口是否走代理：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl ip.gs</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;某些站点必须爬墙才能访问，但在mac上设置的全局代理，对终端又不起作用，终端需要单独设置代理。&lt;br&gt;在终端中执行：&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span c
+      
+    
+    </summary>
+    
+      <category term="Mac&amp;PC" scheme="http://blog.haohome.top/categories/Mac-PC/"/>
+    
+    
+      <category term="电脑技巧" scheme="http://blog.haohome.top/tags/%E7%94%B5%E8%84%91%E6%8A%80%E5%B7%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript设计模式之适配器模式</title>
@@ -69,6 +129,33 @@
       <category term="设计模式" scheme="http://blog.haohome.top/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
       <category term="JS" scheme="http://blog.haohome.top/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iTerm终端设置代理</title>
+    <link href="http://blog.haohome.top/2018/10/05/Mac&amp;PC/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8iTerm2%E8%AE%A9SSH%E8%AE%B0%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81/"/>
+    <id>http://blog.haohome.top/2018/10/05/Mac&amp;PC/Mac下使用iTerm2让SSH记录远程服务器账号和密码/</id>
+    <published>2018-10-04T16:00:00.000Z</published>
+    <updated>2018-10-20T07:20:52.495Z</updated>
+    
+    <content type="html"><![CDATA[<p>iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。</p><p> 下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。</p><p> 第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车</p><p> 第二步：新建一个文件，命名为example吧，里面写入内容：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">set user root</span><br><span class="line">set host 122.114.12.181</span><br><span class="line">set password WuHaoXcp1990</span><br><span class="line"> </span><br><span class="line">spawn ssh $user@$host</span><br><span class="line">expect "*assword:*"</span><br><span class="line">send "$password\r"</span><br><span class="line">interact</span><br><span class="line">expect eof</span><br></pre></td></tr></table></figure><p> 第三步：到官方<a href="http://www.iterm2.com/" target="_blank" rel="noopener">http://www.iterm2.com/</a>下载并打开iTerm2，菜单栏找到『Profiles』→『Open Profiles…』,打开面板上，点击右下角『Edit  Profiles…』</p><p> 第四步：在打开面板，左边应该是选中默认default，右边找到Command，默认应该是Login shell，选中Command，里面输入：expect ~/.ssh/example</p><p> 第五步，下次打开iTerm2，是不是默认就登录上服务器了？极大提升效率。<br> 按照以上方法，可以配置profile,对应很多个服务器。这样每次启动可以选择默认操作，然后再profile下拉选中中执行对应的VPS profile，则可以实现自动登录！</p><blockquote><p>Tips:  如果重新添加相同ip的实例,需要在~/.ssh/known_hosts 里删除该ip的ssh-rsa码</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。&lt;/p&gt;
+&lt;p&gt; 下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。&lt;/p&gt;
+&lt;p&gt; 第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh
+      
+    
+    </summary>
+    
+      <category term="Mac&amp;PC" scheme="http://blog.haohome.top/categories/Mac-PC/"/>
+    
+    
+      <category term="电脑技巧" scheme="http://blog.haohome.top/tags/%E7%94%B5%E8%84%91%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
@@ -177,6 +264,36 @@
   </entry>
   
   <entry>
+    <title>hashchange事件</title>
+    <link href="http://blog.haohome.top/2018/08/28/Program/hashchange%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://blog.haohome.top/2018/08/28/Program/hashchange事件/</id>
+    <published>2018-08-27T16:00:00.000Z</published>
+    <updated>2018-08-28T09:28:17.748Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p></blockquote><p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><a id="more"></a><p>hashchange 事件回调函数对象主要有两个参数会用到:</p><ul><li><p>newURL: 当前页面新的URL</p></li><li><p>oldURL: 当前页面旧的URL</p></li></ul><p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"oldURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"newURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.onhashchange = handleHashChange;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;hashchange&quot;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//hash变化的处理逻辑&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
+    
+      <category term="hash" scheme="http://blog.haohome.top/tags/hash/"/>
+    
+      <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JS判断当前文本输入状态</title>
     <link href="http://blog.haohome.top/2018/08/28/Program/js%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81/"/>
     <id>http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/</id>
@@ -206,36 +323,6 @@
       <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
     
       <category term="input" scheme="http://blog.haohome.top/tags/input/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hashchange事件</title>
-    <link href="http://blog.haohome.top/2018/08/28/Program/hashchange%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://blog.haohome.top/2018/08/28/Program/hashchange事件/</id>
-    <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2018-08-28T09:28:17.748Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p></blockquote><p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><a id="more"></a><p>hashchange 事件回调函数对象主要有两个参数会用到:</p><ul><li><p>newURL: 当前页面新的URL</p></li><li><p>oldURL: 当前页面旧的URL</p></li></ul><p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"oldURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"newURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.onhashchange = handleHashChange;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;hashchange&quot;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//hash变化的处理逻辑&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
-    
-      <category term="hash" scheme="http://blog.haohome.top/tags/hash/"/>
-    
-      <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
     
   </entry>
   
@@ -390,31 +477,6 @@
   </entry>
   
   <entry>
-    <title>跨域请求的jsonp处理</title>
-    <link href="http://blog.haohome.top/2018/04/07/Web/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86/"/>
-    <id>http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/</id>
-    <published>2018-04-06T16:00:00.000Z</published>
-    <updated>2018-05-02T15:28:24.913Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p><p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p><a id="more"></a><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><ul><li>JSON with Padding 填充式 json</li></ul><p>正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替</p><ul><li><p>处理步骤</p><ol><li>客户端定义一个专门处理相应的有名函数doResponse(<strong>处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态</strong>)</li><li>服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’;</li><li>动态创建一个script元素,设置src指向服务器端的php地址</li></ol><p>客户端js:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doResponse</span>(<span class="params">resp</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(resp);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> resp)&#123;</span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*动态追加script元素*/</span></span><br><span class="line">  $(<span class="string">"body"</span>).append(<span class="string">`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>也可以采用ajax获得返回数据</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.getJSON(<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,data=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  type:<span class="string">"GET"</span>,</span><br><span class="line">  url:<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,</span><br><span class="line">  success:<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"返回数据"</span>,data);</span><br><span class="line">  &#125;,</span><br><span class="line">  dataType:<span class="string">"jsonp"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>服务器端php:</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type:application/javascript;charset:utf-8"</span>);</span><br><span class="line">$getData=$_GET[<span class="string">'callback'</span>];</span><br><span class="line">$hello=json_encode([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]);</span><br><span class="line"><span class="keyword">echo</span> $getData.<span class="string">"('$hello')"</span>;</span><br></pre></td></tr></table></figure><p>​</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;跨域简介&quot;&gt;&lt;a href=&quot;#跨域简介&quot; class=&quot;headerlink&quot; title=&quot;跨域简介&quot;&gt;&lt;/a&gt;跨域简介&lt;/h3&gt;&lt;p&gt;跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。&lt;/p&gt;
-&lt;p&gt;浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="web" scheme="http://blog.haohome.top/categories/web/"/>
-    
-    
-      <category term="web" scheme="http://blog.haohome.top/tags/web/"/>
-    
-      <category term="http" scheme="http://blog.haohome.top/tags/http/"/>
-    
-  </entry>
-  
-  <entry>
     <title>创建对象的Object.create与new</title>
     <link href="http://blog.haohome.top/2018/04/07/JavaScript/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84Object.create%E4%B8%8Enew/"/>
     <id>http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/</id>
@@ -446,6 +508,31 @@
       <category term="js" scheme="http://blog.haohome.top/tags/js/"/>
     
       <category term="对象" scheme="http://blog.haohome.top/tags/%E5%AF%B9%E8%B1%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>跨域请求的jsonp处理</title>
+    <link href="http://blog.haohome.top/2018/04/07/Web/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86/"/>
+    <id>http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/</id>
+    <published>2018-04-06T16:00:00.000Z</published>
+    <updated>2018-05-02T15:28:24.913Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p><p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p><a id="more"></a><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><ul><li>JSON with Padding 填充式 json</li></ul><p>正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替</p><ul><li><p>处理步骤</p><ol><li>客户端定义一个专门处理相应的有名函数doResponse(<strong>处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态</strong>)</li><li>服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’;</li><li>动态创建一个script元素,设置src指向服务器端的php地址</li></ol><p>客户端js:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doResponse</span>(<span class="params">resp</span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(resp);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> resp)&#123;</span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*动态追加script元素*/</span></span><br><span class="line">  $(<span class="string">"body"</span>).append(<span class="string">`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>也可以采用ajax获得返回数据</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.getJSON(<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,data=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  type:<span class="string">"GET"</span>,</span><br><span class="line">  url:<span class="string">"https://www.haohome.top/demo/jsonp.php?callback=doResponse"</span>,</span><br><span class="line">  success:<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"返回数据"</span>,data);</span><br><span class="line">  &#125;,</span><br><span class="line">  dataType:<span class="string">"jsonp"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>服务器端php:</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type:application/javascript;charset:utf-8"</span>);</span><br><span class="line">$getData=$_GET[<span class="string">'callback'</span>];</span><br><span class="line">$hello=json_encode([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]);</span><br><span class="line"><span class="keyword">echo</span> $getData.<span class="string">"('$hello')"</span>;</span><br></pre></td></tr></table></figure><p>​</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;跨域简介&quot;&gt;&lt;a href=&quot;#跨域简介&quot; class=&quot;headerlink&quot; title=&quot;跨域简介&quot;&gt;&lt;/a&gt;跨域简介&lt;/h3&gt;&lt;p&gt;跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。&lt;/p&gt;
+&lt;p&gt;浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="web" scheme="http://blog.haohome.top/categories/web/"/>
+    
+    
+      <category term="http" scheme="http://blog.haohome.top/tags/http/"/>
+    
+      <category term="web" scheme="http://blog.haohome.top/tags/web/"/>
     
   </entry>
   
@@ -532,132 +619,6 @@
     
     
       <category term="js" scheme="http://blog.haohome.top/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用H5画随机色圆</title>
-    <link href="http://blog.haohome.top/2018/03/06/HTML5&amp;CSS/%E5%88%A9%E7%94%A8H5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/"/>
-    <id>http://blog.haohome.top/2018/03/06/HTML5&amp;CSS/利用H5画随机色圆/</id>
-    <published>2018-03-06T14:42:54.000Z</published>
-    <updated>2018-04-10T05:53:46.725Z</updated>
-    
-    <content type="html"><![CDATA[<p>忽然想到曾经遇到的一个案例：</p><p>​    <strong>在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。</strong></p><p>在这里用代码重现下，首先分析下需求：</p><ul><li>绘制页面：<ul><li>生成随机数，根据随机数生成随机颜色</li><li>利用svg绘图技术在页面绘制随机数量的圆</li><li>将圆填充随机色</li></ul></li><li><p>JS事件：</p><ul><li><p>为每个圆绑定单击事件</p></li><li><p>创建定时器</p></li></ul></li></ul><a id="more"></a><p>代码：</p><ol><li>生成随机数和随机颜色方法</li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*获取指定范围内的随机数字*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomNum</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n=<span class="built_in">Math</span>.random()*(max-min)+min;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(n)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*生成随机色*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomColor</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> r=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> g=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> b=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> a=<span class="built_in">Math</span>.random();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`rgba(<span class="subst">$&#123;r&#125;</span>,<span class="subst">$&#123;g&#125;</span>,<span class="subst">$&#123;b&#125;</span>,<span class="subst">$&#123;a&#125;</span>)`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol><li>利用svg绘图</li></ol><p>html:</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">id</span>=<span class="string">"svg"</span> <span class="attr">width</span>=<span class="string">"1000px"</span>  <span class="attr">height</span>=<span class="string">"500px"</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure><p>JavaScript:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> svg=<span class="built_in">document</span>.getElementById(<span class="string">"svg"</span>); </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">50</span>;i++)&#123;</span><br><span class="line">    <span class="comment">//创建圆元素</span></span><br><span class="line"><span class="keyword">var</span> c=<span class="built_in">document</span>.createElementNS(<span class="string">"http://www.w3.org/2000/svg"</span>,<span class="string">"circle"</span>);</span><br><span class="line">    c.setAttribute(<span class="string">"r"</span>,randomNum(<span class="number">10</span>,<span class="number">80</span>));</span><br><span class="line">    c.setAttribute(<span class="string">"cx"</span>,randomNum(<span class="number">0</span>,<span class="number">800</span>));</span><br><span class="line">    c.setAttribute(<span class="string">"cy"</span>,randomNum(<span class="number">0</span>,<span class="number">400</span>));</span><br><span class="line">    c.setAttribute(<span class="string">"fill"</span>,randomColor(<span class="number">0</span>,<span class="number">255</span>));</span><br><span class="line">    c.setAttribute(<span class="string">"fill-opacity"</span>,<span class="built_in">Math</span>.random());</span><br><span class="line">    svg.appendChild(c)</span><br><span class="line">  <span class="comment">//绑定单击事件</span></span><br><span class="line">  c.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that=<span class="keyword">this</span>;</span><br><span class="line">    <span class="comment">//设置循环定时器</span></span><br><span class="line">    <span class="keyword">var</span> timer=setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> r=that.getAttribute(<span class="string">"r"</span>);</span><br><span class="line">      r*=<span class="number">1.05</span>;</span><br><span class="line">      that.setAttribute(<span class="string">"r"</span>,r);</span><br><span class="line">      <span class="keyword">var</span> fillOpac=that.getAttribute(<span class="string">"fill-opacity"</span>);</span><br><span class="line">      fillOpac*=<span class="number">0.9</span>;</span><br><span class="line">      that.setAttribute(<span class="string">"fill-opacity"</span>,fillOpac);</span><br><span class="line">      <span class="comment">//设置循环定时器停止条件</span></span><br><span class="line">      <span class="keyword">if</span>(fillOpac&lt;<span class="number">0.001</span>)&#123;</span><br><span class="line">      clearInterval(timer);</span><br><span class="line">        timer=<span class="literal">null</span>;</span><br><span class="line">       svg.removeChild(that);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,<span class="number">20</span>)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>附上<a href="https://codepen.io/hfood/full/gvVovo/" target="_blank" rel="noopener">codePen链接</a></p><p>效果图:</p><p><img src="https://haohome.top/18-3-8/79565300.jpg" width="80%"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;忽然想到曾经遇到的一个案例：&lt;/p&gt;
-&lt;p&gt;​    &lt;strong&gt;在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;在这里用代码重现下，首先分析下需求：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;绘制页面：&lt;ul&gt;
-&lt;li&gt;生成随机数，根据随机数生成随机颜色&lt;/li&gt;
-&lt;li&gt;利用svg绘图技术在页面绘制随机数量的圆&lt;/li&gt;
-&lt;li&gt;将圆填充随机色&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;JS事件：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;为每个圆绑定单击事件&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;创建定时器&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="HTML5" scheme="http://blog.haohome.top/categories/HTML5/"/>
-    
-    
-      <category term="css3" scheme="http://blog.haohome.top/tags/css3/"/>
-    
-      <category term="HTML5" scheme="http://blog.haohome.top/tags/HTML5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>一道简单的setTimeout面试题</title>
-    <link href="http://blog.haohome.top/2018/03/05/Web/%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E7%9A%84JavaScript%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    <id>http://blog.haohome.top/2018/03/05/Web/一道简单的JavaScript面试题/</id>
-    <published>2018-03-05T15:48:00.000Z</published>
-    <updated>2018-04-10T05:53:47.029Z</updated>
-    
-    <content type="html"><![CDATA[<p>这是一道很入门的js面试题，考察JavaScript的单线程事件执行机制:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)<span class="comment">//10*10</span></span><br><span class="line">  &#125;, <span class="number">10</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>不理解原因的可能会认为输出0,1,2,3,4,5,6,7,8,9。事实并不是这样，原因很简单：</p><p>先看下JavaScript的单线程和异步：</p><p><img src="https://haohome.top/18-3-5/89406852.jpg" width="80%"></p><blockquote><ul><li>JS是单线程语言，浏览器只分配给JS一个主线程用来执行任务（函数）；</li><li>任务一次只能一次，任务会形成队列排队执行；</li><li>浏览器会为setTimeout（定时器，异步）单独开一个线程，异步任务完成后会触发回调函数，这时就把回调函数放到主线程任务队列等待执行</li></ul></blockquote><a id="more"></a><p>具体到例子：</p><ul><li>js没有块级作用域，for循环中i提升为全局变量；</li><li>setTimeout是异步执行，而for循环为同步执行，每执行一次for循环，setTimeout执行一次，触发一次回调函数；</li><li>for循环已经执行完时setTimeout内部回调函数开始，i值为10，故最后连续输出10个10</li></ul><p>如果需要输出连续数字，则需要采用闭包或ES6语法中的let</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 闭包</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">void</span> <span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(j)</span><br><span class="line">    &#125;, <span class="number">10</span> * j)</span><br><span class="line">  &#125;(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// let</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>;  i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">  &#125;, <span class="number">10</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>闭包：</p><ul><li>JavaScript的函数会形成作用域，闭包就是记住变量不受污染</li><li>i作为参数传入匿名函数被记住</li></ul><p>let：</p><ul><li>在{  }内形成块级作用域；</li><li>生成不同的i实例，形成一个匿名函数自调，类似于闭包</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这是一道很入门的js面试题，考察JavaScript的单线程事件执行机制:&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;; i++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  setTimeout(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(i)	&lt;span class=&quot;comment&quot;&gt;//10*10&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;, &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt; * i)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;不理解原因的可能会认为输出0,1,2,3,4,5,6,7,8,9。事实并不是这样，原因很简单：&lt;/p&gt;
-&lt;p&gt;先看下JavaScript的单线程和异步：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://haohome.top/18-3-5/89406852.jpg&quot; width=&quot;80%&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;JS是单线程语言，浏览器只分配给JS一个主线程用来执行任务（函数）；&lt;/li&gt;
-&lt;li&gt;任务一次只能一次，任务会形成队列排队执行；&lt;/li&gt;
-&lt;li&gt;浏览器会为setTimeout（定时器，异步）单独开一个线程，异步任务完成后会触发回调函数，这时就把回调函数放到主线程任务队列等待执行&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="web" scheme="http://blog.haohome.top/categories/web/"/>
-    
-    
-      <category term="面试" scheme="http://blog.haohome.top/tags/%E9%9D%A2%E8%AF%95/"/>
-    
-      <category term="events" scheme="http://blog.haohome.top/tags/events/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>闭包与模块</title>
-    <link href="http://blog.haohome.top/2018/03/01/JavaScript/%E9%97%AD%E5%8C%85%E4%B8%8E%E6%A8%A1%E5%9D%97/"/>
-    <id>http://blog.haohome.top/2018/03/01/JavaScript/闭包与模块/</id>
-    <published>2018-03-01T03:30:00.000Z</published>
-    <updated>2018-04-06T18:25:12.235Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p>闭包是有重用机制，同时保护变量不被污染的一种机制</p><table><thead><tr><th style="text-align:center">变量类型</th><th style="text-align:center">优点</th><th style="text-align:center">缺点</th></tr></thead><tbody><tr><td style="text-align:center">全局变量</td><td style="text-align:center">可重用</td><td style="text-align:center">污染/随处可用</td></tr><tr><td style="text-align:center">局部变量</td><td style="text-align:center">仅作用域内部可用,不会污染不可重用全局</td><td style="text-align:center">不可重用</td></tr></tbody></table><blockquote><p>闭包在需要重用一个变量，又需要保护变量不被污染的情况时使用</p><p><strong>即使函数已经完成了运行，它依然可以“记住”并持续访问函数的作用域。</strong></p></blockquote><a id="more"></a><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeAdder</span>(<span class="params">x</span>) </span>&#123;<span class="comment">// 参数x是一个内部变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">y</span>) </span>&#123;<span class="comment">// 内部函数add()使用x，所以它对x拥有一个“闭包”</span></span><br><span class="line"><span class="keyword">return</span> y + x;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">return</span> add;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>每次调用<code>makeAdder(...)</code> 所对应的<code>add(...)</code> 函数引用都会记住被传入<code>makeAdder()</code> 的参数<code>X</code> </p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> plusOne = makeAdder( <span class="number">1</span> ); <span class="comment">//plusOne得到一个指向内部函数add(..)的引用,add()函数拥有对外部makeAdder(..)的参数x的闭包,相当于add()中x=2</span></span><br><span class="line"><span class="keyword">var</span> plusTen = makeAdder( <span class="number">10</span> );<span class="comment">//相当于add()中x=10</span></span><br><span class="line">plusOne( <span class="number">3</span> );<span class="comment">//调用add()方法,y=3,返回值为4</span></span><br><span class="line">plusOne( <span class="number">41</span> );<span class="comment">//调用add()方法,y=41,返回值为42</span></span><br><span class="line">plusTen( <span class="number">13</span> );<span class="comment">//x=10,调用add()方法,y=13,返回值为23</span></span><br></pre></td></tr></table></figure><p> 这段代码的工作机制:</p><blockquote><ul><li>当调用makeAdder(1)时,会得到返回的内部函数add(),该函数引用了<strong>参数x</strong>为1并记住了1;</li><li>将调用返回的函数引用为plusOne;</li><li>当调用plusOne(3)时,它会在传入参数y为3的基础上加上记住的x为1，结果为4；</li></ul></blockquote><p>实现闭包的三个步骤：</p><ol><li>用外层函数包裹要保护的变量和操作变量的函数</li><li>外层函数将内层函数的对象返回到外部</li><li>使用者调用外层函数,获得内层函数对象</li></ol><p><strong>闭包形成原因：外层函数的作用域对象(AO)无法释放,被内层函数对象引用着</strong></p><h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>模块是闭包中最常见的用法，模块让你定义对外面世界不可见的私有实现细节（变量，函数），和暴露给外面可访问的公有API。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> username, password;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doLogin</span>(<span class="params">user,pw</span>) </span>&#123;<span class="comment">//登录的方法</span></span><br><span class="line">username = user;</span><br><span class="line">password = pw;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> publicAPI = &#123;<span class="comment">//需要暴露给外面的API</span></span><br><span class="line">login: doLogin</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">return</span> publicAPI;<span class="comment">//将API暴露出来</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> fred = User();<span class="comment">// 创建一个 `User` 模块的实例</span></span><br><span class="line">fred.login( <span class="string">"fred"</span>, <span class="string">"12Battery34!"</span> );</span><br></pre></td></tr></table></figure><p>工作机制:</p><blockquote><ul><li>接口 <code>publicAPI</code>是一个带有一个属性/方法的对象，<code>login</code>是一个指向内部<code>doLogin()</code>函数的引用</li><li>方法<code>User()</code> 内部包含两个局部作用域变量username和password，私有的doLogin()方法接受从API传入的两个参数值,并赋值给相应的username和password</li><li>执行<code>User()</code>创建了<code>User</code>模块的一个 <em>实例</em> —— 一个全新的作用域会被创建，而每个内部变量/函数因此被创建新的副本。将这个实例赋值给<code>fred</code> 如果再次运行<code>User()</code> ，将会得到一个与fred完全分离的新实例；</li><li>当<code>User()</code> 函数执行完，<code>username</code> 和<code>password</code> 这样的内部变量不会消失，因为<code>login()</code> 函数里有一个闭包保护变量</li></ul></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;什么是闭包&quot;&gt;&lt;a href=&quot;#什么是闭包&quot; class=&quot;headerlink&quot; title=&quot;什么是闭包&quot;&gt;&lt;/a&gt;什么是闭包&lt;/h2&gt;&lt;p&gt;闭包是有重用机制，同时保护变量不被污染的一种机制&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;变量类型&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;优点&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;缺点&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;全局变量&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;可重用&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;污染/随处可用&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;局部变量&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;仅作用域内部可用,不会污染不可重用全局&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;不可重用&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;blockquote&gt;
-&lt;p&gt;闭包在需要重用一个变量，又需要保护变量不被污染的情况时使用&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;即使函数已经完成了运行，它依然可以“记住”并持续访问函数的作用域。&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
-    
-    
-      <category term="js" scheme="http://blog.haohome.top/tags/js/"/>
-    
-      <category term="function" scheme="http://blog.haohome.top/tags/function/"/>
     
   </entry>
   

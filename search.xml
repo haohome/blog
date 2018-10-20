@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[你不知道的JavaScript之闭包]]></title>
+    <url>%2F2018%2F10%2F18%2FJavaScript%2F%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E9%97%AD%E5%8C%85%2F</url>
+    <content type="text"><![CDATA[1. 简介 闭包是函数和声明该函数的词法环境的组合。(来自:MDN) 另一种定义:是指有权访问另外一个函数作用域中的变量的函数。创建闭包的常见方式就是在一个函数内部创建另外一个函数。 12345678function init() &#123; var name = "Mozilla"; // name 是一个被 init 创建的局部变量 function displayName() &#123; // displayName() 是内部函数,一个闭包 alert(name); // 使用了父函数中声明的变量 &#125; displayName();&#125;init(); // 弹出Mozilla init() 创建了一个局部变量 name 和一个名为 displayName() 的函数。 displayName() 内没有自己的局部变量，然而它可以访问到外部函数的变量name; 但是，如果有同名变量 name 在 displayName() 中被定义，则会优先使用 displayName() 中定义的 name 。 这个词法作用域的例子介绍了引擎是如何解析函数嵌套中的变量的 闭包是由函数以及创建该函数的词法环境组合而成,这个环境包含了这个闭包创建时所能访问的所有局部变量。函数displayName()具有一个涵盖init()作用域的闭包 12345678910function makeFunc() &#123; var name = "Mozilla"; function displayName() &#123; alert(name); &#125; return displayName;&#125;var myFunc = makeFunc();myFunc(); myFunc 是执行 makeFunc 时创建的 displayName 函数实例的引用，而 displayName 实例仍可访问其词法作用域中的变量(闭包环境)，即可以访问到 name 。 当 myFunc 被调用时，name 仍可被访问，其值 Mozilla 就被传递到alert中。 再看一个例子: 1234567891011function makeAdder(x) &#123; return function(y) &#123; return x + y; &#125;;&#125;var add5 = makeAdder(5);var add10 = makeAdder(10);console.log(add5(2)); // 7console.log(add10(4)); // 14 我们定义了 makeAdder(x) 函数，它接受一个参数 x ，并返回一个新的函数 返回的函数接受一个参数 y，并返回x+y的值 makeAdder 是一个函数工厂 ,其创建了两个新函数,新函数执行时其参数y与makeAdder形成的闭包环境中的参数x相加; 而add5 和 add10 都是闭包,它们共享相同的函数定义，但是保存了不同的词法环境。在 add5的环境中，x 为 5。而在 add10 中，x 则为 10。 这就是闭包: 它允许将函数与其所操作的某些数据（环境）关联起来,类似于面向对象,允许对象的属性与一个或多个方法关联 2. 一个常见的错误:循环和闭包 这是一道经典的面试题,setTimeout定时器是一个异步回调的方法,当执行定时器回调函数时,回调函数内部的i都通过词法作用域共享变量i,而此时for循环已经终止,i值为6,因此每个打印出来的都为6 而如果希望打印的是1,2,3,4,5,通过声明并立即执行一个函数来创建作用域,循环中的每个迭代都给自己捕获一个i的副本储存,结果就能实现,如: ES6语法中let会创建块级作用域,很简单就能实现 12345for (let i = 1; i &lt;= 5; i++) &#123; setTimeout(function timer() &#123; console.log(i); &#125;,i * 1000)&#125; 3.用闭包模拟私有方法(模块模式)在java的编程语言中,是支持方法声明为私有的,即他们只能被同一个类中的其他方法所调用,JavaScript不支持(typescript支持),但js是可以通过闭包的方式模拟私有方法; 私有化方法有利于限制对代码的访问,还提供了管理全局命名空间的能力,避免非核心方法影响了代码的公共接口部分 1234567891011121314151617181920212223242526function Counter() &#123; var privateCounter = 0; function changeBy(val) &#123; privateCounter += val; &#125; return &#123; increment: function() &#123; changeBy(1); &#125;, decrement: function() &#123; changeBy(-1); &#125;, value: function() &#123; return privateCounter; &#125; &#125; &#125;;var count1= Counter()console.log(count1.value()); //0count1.increment();count1.increment();console.log(count1.value()); //2count1.decrement();count1.log(Counter.value()); //1var count2 = Counter()console.log(count2.value()) //0 Counter()形成了闭包环境(可认为是模块),返回三个对象方法:increment、decrement 和 value,这三个公共函数具有涵盖实例内部作用域的闭包,其本质也可看做是模块的公共API,通过它访问闭包环境内的私有属性和方法:privateCounter 的变量和名为 changeBy 的函数; 通过在模块实例的内部保留对公共API对象的内部引用，可以从内部对模块实例进行修改，包括添加或删除方法和属性，以及修改它们的值。 当通过返回一个含有属性引用的对象的方式来将函数传递到词法作用域外部时，我们已经创造了可以观察和实践闭包的条件。 对于模块模式,需要具备两个必要条件: 必须有外部的封闭函数,形成私有作用域,该函数必须至少被调用一次(每次调用都会创建一个新的模块实例) 封闭函数必须返回至少一个内部函数,即模块的公共API,以访问或者修改私有的状态 上一个示例代码中有一个叫作Counter()的独立的模块创建器，可以被调用任意多次，每次调用都会创建一个新的模块实例。当只需要一个实例时，可以对这个模式进行简单的改进来实现单例模式： 采用匿名函数自调 123456789101112131415161718var counter = (function() &#123; var privateCounter = 0; function changeBy(val) &#123; privateCounter += val; &#125; return &#123; increment: function() &#123; changeBy(1); &#125;, decrement: function() &#123; changeBy(-1); &#125;, value: function() &#123; return privateCounter; &#125; &#125; &#125;)();console.log(count.value()); //0]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+        <tag>YDKJS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iTerm终端设置代理]]></title>
+    <url>%2F2018%2F10%2F10%2FMac%26PC%2FiTerm%20%E7%BB%88%E7%AB%AF%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86%2F</url>
+    <content type="text"><![CDATA[某些站点必须爬墙才能访问，但在mac上设置的全局代理，对终端又不起作用，终端需要单独设置代理。在终端中执行： 1export ALL_PROXY=socks5://127.0.0.1:1086/ 如果是http的代理: 12export http_proxy=http://127.0.0.1:1087/export https_proxy=http://127.0.0.1:1087/ 如果需要开机自动设置，把上面的代码加到~/.bash_profile里 source ~/.bash_profile 使文件生效 测试当前终端标签/窗口是否走代理： 1curl ip.gs]]></content>
+      <categories>
+        <category>Mac&amp;PC</category>
+      </categories>
+      <tags>
+        <tag>电脑技巧</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JavaScript设计模式之适配器模式]]></title>
     <url>%2F2018%2F10%2F07%2FJavaScript%2FJavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[简介适配器模式的作用是解决两个软件实体间的接口不兼容的问题. 这在实际开发过程中会经常遇到,比如后端返回的数据api接口与前端实际需求有差异,我们就需要对数据api接口进行转换一下再使用,这就需要适配器;而在vue中最直接的提现就是computed属性 举个例子: 当向谷歌地图和百度地图都发出显示请求时,两个地图都以各自的方式展示 123456789101112131415161718192021class GoogleMap&#123; show()&#123; console.log( '开始渲染谷歌地图' ); &#125;&#125;class BaiduMap&#123; show()&#123; console.log( '开始渲染百度地图' ); &#125;&#125;;class RenderMap&#123; constructor(map)&#123; if ( map.show instanceof Function )&#123; map.show(); &#125; &#125;&#125;;let baiduMap = new BaiduMap()let baidu = new RenderMap(baiduMap)let googleMap = new GoogleMap()let google = new RenderMap(googleMap) 这段程序正常运行的关键是,两个地图类都提供了show的方法,假如google提供的不是show而是display方法,那我们可通过增加新的适配器来解决: 12345678910111213141516class GoogleMap&#123; display()&#123; console.log( '开始渲染谷歌地图' ); &#125;&#125;class GoogleAdapter&#123; constructor(googleMap)&#123; this.googleMap = googleMap &#125; show()&#123; return this.googleMap.display() &#125;&#125;let g = new GoogleMap()let googleMap = new GoogleAdapter(g)let google = new RenderMap(googleMap) 适配器模式主要用来解决两个已有接口之间不匹配的问题，它不考虑这些接口是怎样实现的，也不考虑它们将来可能会如何演化。适配器模式不需要改变已有的接口，就能够使它们协同作用。]]></content>
@@ -22,6 +45,17 @@
       <tags>
         <tag>设计模式</tag>
         <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iTerm终端设置代理]]></title>
+    <url>%2F2018%2F10%2F05%2FMac%26PC%2FMac%E4%B8%8B%E4%BD%BF%E7%94%A8iTerm2%E8%AE%A9SSH%E8%AE%B0%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。 下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。 第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车 第二步：新建一个文件，命名为example吧，里面写入内容： 123456789set user rootset host 122.114.12.181set password WuHaoXcp1990 spawn ssh $user@$hostexpect "*assword:*"send "$password\r"interactexpect eof 第三步：到官方http://www.iterm2.com/下载并打开iTerm2，菜单栏找到『Profiles』→『Open Profiles…』,打开面板上，点击右下角『Edit Profiles…』 第四步：在打开面板，左边应该是选中默认default，右边找到Command，默认应该是Login shell，选中Command，里面输入：expect ~/.ssh/example 第五步，下次打开iTerm2，是不是默认就登录上服务器了？极大提升效率。 按照以上方法，可以配置profile,对应很多个服务器。这样每次启动可以选择默认操作，然后再profile下拉选中中执行对应的VPS profile，则可以实现自动登录！ Tips: 如果重新添加相同ip的实例,需要在~/.ssh/known_hosts 里删除该ip的ssh-rsa码]]></content>
+      <categories>
+        <category>Mac&amp;PC</category>
+      </categories>
+      <tags>
+        <tag>电脑技巧</tag>
       </tags>
   </entry>
   <entry>
@@ -60,18 +94,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[JS判断当前文本输入状态]]></title>
-    <url>%2F2018%2F08%2F28%2FProgram%2Fjs%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81%2F</url>
-    <content type="text"><![CDATA[最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。 在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了: 绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮 单纯按键监听，并没有判断中文输入状态 网上查了一些资料： 键盘事件:当一个键盘被按下并松开时,每个浏览器都会触发三个事件:keydown、keypress、keyupkeydown事件发生在按键被按下的时候，接着触发keypress，松开按键的时候触发keyup事件 还有一个事件就是input:input事件能够检测用户的每一次输入 以上事件在英文状态下没有问题,但在中文状态下,依然捕获到的是英文,如下图: 中文输入法 firfox：输入触发keydown，回车确认输入触发keyupchrome：输入触发keydown、keyup，回车确认输入只触发keydownIE：输入触发keydown、keyup，回车确认输入触发keydown，keyupSafari：输入触发keydown、keyup，回车确认输入触发keydown，keyupopera：输入触发keydown、keyup，回车确认输入触发keydown，keyup在input、textarea中，中文输入法时：没有触发keypress事件keypress事件：对中文输入法支持不好，无法响应中文输入；无法响应系统功能键 解决方案: 利用change事件: 监听输入框最终内容变化识别,当文本输入状态完成,并且input失去焦点再触发enter事件 通常情况下,文本框中文输入状态时,按下回车会触发相应的按钮,此时input会失去焦点并触发change事件,此时将输入状态传给按钮事件,即可判断并执行相应事件 利用compositionstart和compositionend事件(事件不兼容旧浏览器) compositionstart:事件触发于一段文字的输入之前 compositionend事件:当文本段落的组成完成或取消时, compositionend事件将被激发 简单来说，非直接输入法如中文输入开始时，触发compositionstart事件，结束时触发compositionend事件 两类解决方案都可以监听到当前输入框的输入状态,结合input事件，就能对所有的输入进行实时的检测了 1234567891011121314151617var doing=false;var doSomething=function(e)&#123; //我要干点啥&#125;document.getElementById('testInput').addEventListener('compositionstart',function(e)&#123; doing=true;&#125;,false);document.getElementById('testInput').addEventListener('input',function(e)&#123; if(!doing)&#123; doSomething(); &#125;&#125;,false);document.getElementById('testInput').addEventListener('compositionend',function(e)&#123; doing=false; doSomething();&#125;,false);]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>input</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[hashchange事件]]></title>
     <url>%2F2018%2F08%2F28%2FProgram%2Fhashchange%E4%BA%8B%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。 当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件: 1234window.onhashchange = handleHashChange;window.addEventListener("hashchange",function(event)&#123; //hash变化的处理逻辑&#125;) hashchange 事件回调函数对象主要有两个参数会用到: newURL: 当前页面新的URL oldURL: 当前页面旧的URL 但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码: 12345678if(!window.HashChangeEvent)(function()&#123; var lastURL=document.URL; window.addEventListener("hashchange",function(event)&#123; Object.defineProperty(event,"oldURL",&#123;enumerable:true,configurable:true,value:lastURL&#125;); Object.defineProperty(event,"newURL",&#123;enumerable:true,configurable:true,value:document.URL&#125;); lastURL=document.URL; &#125;);&#125;());]]></content>
@@ -82,6 +104,18 @@
         <tag>JavaScript</tag>
         <tag>hash</tag>
         <tag>兼容性</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JS判断当前文本输入状态]]></title>
+    <url>%2F2018%2F08%2F28%2FProgram%2Fjs%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81%2F</url>
+    <content type="text"><![CDATA[最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。 在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了: 绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮 单纯按键监听，并没有判断中文输入状态 网上查了一些资料： 键盘事件:当一个键盘被按下并松开时,每个浏览器都会触发三个事件:keydown、keypress、keyupkeydown事件发生在按键被按下的时候，接着触发keypress，松开按键的时候触发keyup事件 还有一个事件就是input:input事件能够检测用户的每一次输入 以上事件在英文状态下没有问题,但在中文状态下,依然捕获到的是英文,如下图: 中文输入法 firfox：输入触发keydown，回车确认输入触发keyupchrome：输入触发keydown、keyup，回车确认输入只触发keydownIE：输入触发keydown、keyup，回车确认输入触发keydown，keyupSafari：输入触发keydown、keyup，回车确认输入触发keydown，keyupopera：输入触发keydown、keyup，回车确认输入触发keydown，keyup在input、textarea中，中文输入法时：没有触发keypress事件keypress事件：对中文输入法支持不好，无法响应中文输入；无法响应系统功能键 解决方案: 利用change事件: 监听输入框最终内容变化识别,当文本输入状态完成,并且input失去焦点再触发enter事件 通常情况下,文本框中文输入状态时,按下回车会触发相应的按钮,此时input会失去焦点并触发change事件,此时将输入状态传给按钮事件,即可判断并执行相应事件 利用compositionstart和compositionend事件(事件不兼容旧浏览器) compositionstart:事件触发于一段文字的输入之前 compositionend事件:当文本段落的组成完成或取消时, compositionend事件将被激发 简单来说，非直接输入法如中文输入开始时，触发compositionstart事件，结束时触发compositionend事件 两类解决方案都可以监听到当前输入框的输入状态,结合input事件，就能对所有的输入进行实时的检测了 1234567891011121314151617var doing=false;var doSomething=function(e)&#123; //我要干点啥&#125;document.getElementById('testInput').addEventListener('compositionstart',function(e)&#123; doing=true;&#125;,false);document.getElementById('testInput').addEventListener('input',function(e)&#123; if(!doing)&#123; doSomething(); &#125;&#125;,false);document.getElementById('testInput').addEventListener('compositionend',function(e)&#123; doing=false; doSomething();&#125;,false);]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>input</tag>
       </tags>
   </entry>
   <entry>
@@ -144,18 +178,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[跨域请求的jsonp处理]]></title>
-    <url>%2F2018%2F04%2F07%2FWeb%2F%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86%2F</url>
-    <content type="text"><![CDATA[跨域简介跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。 浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe； JSONP JSON with Padding 填充式 json 正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替 处理步骤 客户端定义一个专门处理相应的有名函数doResponse(处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态) 服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’; 动态创建一个script元素,设置src指向服务器端的php地址 客户端js: 12345678910function doResponse(resp)&#123; console.log(resp); for(var i in resp)&#123; console.log(i); &#125; &#125;$("#btn").click(function() &#123; /*动态追加script元素*/ $("body").append(`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`); &#125;); 也可以采用ajax获得返回数据 1234567891011$.getJSON("https://www.haohome.top/demo/jsonp.php?callback=doResponse",data=&gt;&#123; console.log(data);&#125;);$.ajax(&#123; type:"GET", url:"https://www.haohome.top/demo/jsonp.php?callback=doResponse", success:data=&gt;&#123; console.log("返回数据",data); &#125;, dataType:"jsonp"&#125;) 服务器端php: 1234header("Content-type:application/javascript;charset:utf-8");$getData=$_GET['callback'];$hello=json_encode([1,2,3,4]);echo $getData."('$hello')"; ​]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>http</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[创建对象的Object.create与new]]></title>
     <url>%2F2018%2F04%2F07%2FJavaScript%2F%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84Object.create%E4%B8%8Enew%2F</url>
     <content type="text"><![CDATA[创建对象有几种方式: 直接量: 123var obj1=&#123;name:"xiaowang"&#125;;var obj2=new Object(&#123;name:"xiaowang"&#125;);console.log(obj1,obj2); 构造函数: 123var M=function(name)&#123;this.name=name&#125;;var obj3=new M('xiaowang');console.log(obj3); Object.create 123var p=&#123;name:'xiaowang'&#125;;var obj4=Object.create(p);console.log(obj4); 对应的输出结果为: 可以看到,Object.create方法得到的对象是空对象，再输出各自对象的name属性看看: console.log(obj2.name,obj3.name,obj4.name) 得到的结果为xiaowang xiaowang xiaowang 这是为什么??? Object.create 的实现方式: 1234567var obj1 = Object.create(null);console.log(obj1); // &#123;&#125;obj1.name = 'jian';var obj2 = Object.create(obj1);console.log(obj2); // &#123;&#125;console.log(obj2.name); // 'jian', conosle.log(obj2.__proto__===obj1.prototype) //true obj2是空对象,但obj2.name输出了’jian’,obj2继承自obj1的原型对象 由此可以总结Object.create()做了： ​ 1. 创建空对象{} ​ 2. 指定空对象{}继承自参数的原型对象,即空对象的 __proto__ 指向Object.create()参数的原型对象。 var obj1=new M({name:&#39;xiaowang&#39;}) 的实现方式: 123456789101112//定义构造函数Person var Person = function (name) &#123; this.name = firstName;&#125;;//定义Person原型对象的新方法Person.prototype.sayHello = function() &#123; console.log("Hello, I'm " + this.name);&#125;;//实例化对象var person1 = new Person("Alice");//对象调用methodperson1.sayHello(); // logs "Hello, I'm Alice" 由此可以总结new做了： 创建实例对象person1 调用构造函数(Person)初始化person1成员变量（name)。 指定实例对象的继承自Person.prototype对象。即person1.__proto__指向构造函数的原型对象Person.prototype。 对比 Object.create new 创建对象 创建空对象 创建实例对象,并将参数初始化赋值 继承 空对象继承自参数对象的原型对象,本身为空对象 实例对象继承自构造函数的原型对象 总结:Object.create得到的对象未实例化,本身为空对象,可继承对象,而new得到的对象是实例化的对象]]></content>
@@ -165,6 +187,18 @@
       <tags>
         <tag>js</tag>
         <tag>对象</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[跨域请求的jsonp处理]]></title>
+    <url>%2F2018%2F04%2F07%2FWeb%2F%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86%2F</url>
+    <content type="text"><![CDATA[跨域简介跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。 浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe； JSONP JSON with Padding 填充式 json 正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替 处理步骤 客户端定义一个专门处理相应的有名函数doResponse(处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态) 服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’; 动态创建一个script元素,设置src指向服务器端的php地址 客户端js: 12345678910function doResponse(resp)&#123; console.log(resp); for(var i in resp)&#123; console.log(i); &#125; &#125;$("#btn").click(function() &#123; /*动态追加script元素*/ $("body").append(`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`); &#125;); 也可以采用ajax获得返回数据 1234567891011$.getJSON("https://www.haohome.top/demo/jsonp.php?callback=doResponse",data=&gt;&#123; console.log(data);&#125;);$.ajax(&#123; type:"GET", url:"https://www.haohome.top/demo/jsonp.php?callback=doResponse", success:data=&gt;&#123; console.log("返回数据",data); &#125;, dataType:"jsonp"&#125;) 服务器端php: 1234header("Content-type:application/javascript;charset:utf-8");$getData=$_GET['callback'];$hello=json_encode([1,2,3,4]);echo $getData."('$hello')"; ​]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>http</tag>
+        <tag>web</tag>
       </tags>
   </entry>
   <entry>
@@ -209,8 +243,8 @@
         <category>HTML5</category>
       </categories>
       <tags>
-        <tag>css3</tag>
         <tag>HTML5</tag>
+        <tag>css3</tag>
       </tags>
   </entry>
   <entry>
@@ -303,8 +337,8 @@
         <category>Framework</category>
       </categories>
       <tags>
-        <tag>vue</tag>
         <tag>css3</tag>
+        <tag>vue</tag>
       </tags>
   </entry>
   <entry>
@@ -315,8 +349,8 @@
         <category>Framework</category>
       </categories>
       <tags>
-        <tag>vue</tag>
         <tag>css</tag>
+        <tag>vue</tag>
       </tags>
   </entry>
   <entry>
@@ -397,56 +431,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java中的多态]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
-    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
         <tag>Java</tag>
-        <tag>学习记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java中的类和对象]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%2F</url>
-    <content type="text"><![CDATA[1.类 类是对象的类型 类具有相同属性和方法的一组对象的集合 定义:确定对象将拥有的特征(属性)和方法(行为) 类的组成:属性和方法 定义类的步骤 a.定义类名b.编写类的属性c.编写类的方法 !– more –&gt; 12345678public class 类名&#123; //定义属性部分(成员变量) 属性1的类型 属性1; 属性2的类型 属性2; //定义方法部分 方法1; 方法2;&#125; 2.对象对象的属性 对象具有的各种特征 每个对象的每个属性都拥有特定值对象的方法 对象可以执行的操作 使用对象的步骤: a. 创建对象(new) b. 使用对象 引用对象的属性:对象名.属性 引用对象的方法:对象名.方法 类是抽象的概念,对象是一个具体的实物 3.访问修饰符 访问修饰符 本类 同包 子类 其他 private √ 默认 √ √ protected √ √ √ public √ √ √ √ 属性通常设为private 外部调用对象属性通常通过对象的getter和setter方法 4.Object类的方法4.1 toString()方法默认:toString()方法默认返回的是对象的哈希码(对象的地址字符串)Override:返回的是对象的属性值 4.2 equals()方法默认:比较的是对象的引用是否指向同一块内存地址Override:比较对象的属性值(数据)信息]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>学习记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java中的抽象类]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>学习记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java中super关键字的使用]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[super关键字在对象的内部使用,可以代表父类对象 1.访问父类的属性super.age 2.访问父类的方法super.eat()]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>学习记录</tag>
       </tags>
   </entry>
   <entry>
@@ -457,9 +443,57 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
+        <tag>Java</tag>
         <tag>FreeMaker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中的抽象类]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中的类和对象]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%2F</url>
+    <content type="text"><![CDATA[1.类 类是对象的类型 类具有相同属性和方法的一组对象的集合 定义:确定对象将拥有的特征(属性)和方法(行为) 类的组成:属性和方法 定义类的步骤 a.定义类名b.编写类的属性c.编写类的方法 !– more –&gt; 12345678public class 类名&#123; //定义属性部分(成员变量) 属性1的类型 属性1; 属性2的类型 属性2; //定义方法部分 方法1; 方法2;&#125; 2.对象对象的属性 对象具有的各种特征 每个对象的每个属性都拥有特定值对象的方法 对象可以执行的操作 使用对象的步骤: a. 创建对象(new) b. 使用对象 引用对象的属性:对象名.属性 引用对象的方法:对象名.方法 类是抽象的概念,对象是一个具体的实物 3.访问修饰符 访问修饰符 本类 同包 子类 其他 private √ 默认 √ √ protected √ √ √ public √ √ √ √ 属性通常设为private 外部调用对象属性通常通过对象的getter和setter方法 4.Object类的方法4.1 toString()方法默认:toString()方法默认返回的是对象的哈希码(对象的地址字符串)Override:返回的是对象的属性值 4.2 equals()方法默认:比较的是对象的引用是否指向同一块内存地址Override:比较对象的属性值(数据)信息]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中的多态]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
+    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中super关键字的使用]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[super关键字在对象的内部使用,可以代表父类对象 1.访问父类的属性super.age 2.访问父类的方法super.eat()]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -470,8 +504,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -494,8 +528,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -506,8 +540,8 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
