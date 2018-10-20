@@ -2,6 +2,8 @@
 
 ## 2018
 
+2018-10-20 [你不知道的JavaScript之词法作用域与动态作用域](https://blog.haohome.top/2018/10/20/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/)
+
 2018-10-18 [你不知道的JavaScript之闭包](https://blog.haohome.top/2018/10/18/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E9%97%AD%E5%8C%85/)
 
 2018-10-10 [iTerm终端设置代理](https://blog.haohome.top/2018/10/10/Mac&PC/iTerm%20%E7%BB%88%E7%AB%AF%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/)
