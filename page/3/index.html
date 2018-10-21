@@ -329,6 +329,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/03/11/JavaScript/通俗易懂的原型与原型链/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daniel">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/11/JavaScript/通俗易懂的原型与原型链/" itemprop="url">
+                  通俗易懂的原型与原型链
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-11 21:23:00" itemprop="dateCreated datePublished" datetime="2018-03-11T21:23:00+08:00">2018-03-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/03/11/JavaScript/通俗易懂的原型与原型链/#SOHUCS" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/03/11/JavaScript/通俗易懂的原型与原型链/" class="cy_cmt_count" data-xid="2018/03/11/JavaScript/通俗易懂的原型与原型链/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="普通对象与函数对象"><a href="#普通对象与函数对象" class="headerlink" title="普通对象与函数对象"></a>普通对象与函数对象</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o1 = &#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> o2 =<span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="keyword">var</span> o3 = <span class="keyword">new</span> f1();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> f3 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'str'</span>,<span class="string">'console.log(str)'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Object</span>); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Function</span>); <span class="comment">//function  </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f1); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f2); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f3); <span class="comment">//function   </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o1); <span class="comment">//object </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o2); <span class="comment">//object </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o3); <span class="comment">//object</span></span><br></pre></td></tr></table></figure>
+<p>上面的例子中: o1、o2、o3都是普通对象object，而f1、f2、f3是函数对象function</p>
+<blockquote>
+<p><strong>凡是通过 new Function() 创建的对象都是函数对象，其他的都是普通对象。f1、f2归根结底都是通过 new Function()的方式进行创建的。Function Object 也都是通过 New Function()创建的</strong>。</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/11/JavaScript/通俗易懂的原型与原型链/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/03/10/JavaScript/原生js实现瀑布流效果/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2055,196 +2244,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/02/14/JavaScript/Vue的点赞效果/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="独立 自由 分享 感悟">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="靖风行'S blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/14/JavaScript/Vue的点赞效果/" itemprop="url">
-                  Vue的点赞效果
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-02-14 20:45:00" itemprop="dateCreated datePublished" datetime="2018-02-14T20:45:00+08:00">2018-02-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Framework/" itemprop="url" rel="index"><span itemprop="name">Framework</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/02/14/JavaScript/Vue的点赞效果/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/02/14/JavaScript/Vue的点赞效果/" class="cy_cmt_count" data-xid="2018/02/14/JavaScript/Vue的点赞效果/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="1-原生-利用CSS3-Animation-实现"><a href="#1-原生-利用CSS3-Animation-实现" class="headerlink" title="1. 原生: 利用CSS3 Animation 实现"></a>1. 原生: 利用CSS3 Animation 实现</h3><p>animation的动画效果通常是连贯性的，简单的说就是线性渐变的动画。但有些效果不需要连贯性，只需要关键帧之间的跳跃，这时应该使用<code>steps</code> 过渡方式，称之为帧动画。</p>
-<p>比较知名的Twitter点赞功能就是采用steps方式：</p>
-<p>HTML</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"heart"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>CSS<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.heart</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">5rem</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">5rem</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(heart.png);</span><br><span class="line">  <span class="attribute">background-size</span>: auto <span class="number">5rem</span>;</span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.heart</span><span class="selector-pseudo">:active</span> &#123; <span class="comment">/*当鼠标点击激活时执行动画效果*/</span></span><br><span class="line">  <span class="attribute">transition</span>: background <span class="number">1s</span> <span class="built_in">steps</span>(28); </span><br><span class="line">  <span class="attribute">background-position</span>: -<span class="number">140rem</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://haohome.top/18-2-14/71551117.jpg" alt="点赞"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/14/JavaScript/Vue的点赞效果/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2296,7 +2295,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

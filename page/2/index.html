@@ -1463,6 +1463,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daniel">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="url">
+                  创建对象的Object.create与new
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-07 00:00:00" itemprop="dateCreated datePublished" datetime="2018-04-07T00:00:00+08:00">2018-04-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/04/07/JavaScript/创建对象的Object.create与new/#SOHUCS" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/" class="cy_cmt_count" data-xid="2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>创建对象有几种方式:</p>
+<ul>
+<li><p>直接量:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1=&#123;<span class="attr">name</span>:<span class="string">"xiaowang"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2=<span class="keyword">new</span> <span class="built_in">Object</span>(&#123;<span class="attr">name</span>:<span class="string">"xiaowang"</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj1,obj2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造函数:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> M=<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;<span class="keyword">this</span>.name=name&#125;;</span><br><span class="line"><span class="keyword">var</span> obj3=<span class="keyword">new</span> M(<span class="string">'xiaowang'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(obj3);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Object.create</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p=&#123;<span class="attr">name</span>:<span class="string">'xiaowang'</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj4=<span class="built_in">Object</span>.create(p);</span><br><span class="line"><span class="built_in">console</span>.log(obj4);</span><br></pre></td></tr></table></figure>
+<p>对应的输出结果为:</p>
+<p><img src="https://haohome.top/18-4-7/88488666.jpg" alt="img"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/07/JavaScript/创建对象的Object.create与new/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/Web/跨域请求的jsonp处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1649,7 +1845,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/06/JavaScript/你不知道的JavaScript之this/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
@@ -1668,8 +1864,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="url">
-                  创建对象的Object.create与new
+                <a class="post-title-link" href="/2018/04/06/JavaScript/你不知道的JavaScript之this/" itemprop="url">
+                  未命名
                 </a>
               
             
@@ -1695,7 +1891,7 @@
                 
               
 
-              <time title="创建时间：2018-04-07 00:00:00" itemprop="dateCreated datePublished" datetime="2018-04-07T00:00:00+08:00">2018-04-07</time>
+              <time title="创建时间：2018-04-06 22:57:16" itemprop="dateCreated datePublished" datetime="2018-04-06T22:57:16+08:00">2018-04-06</time>
             
 
             
@@ -1712,29 +1908,11 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
+                <time title="修改时间：2018-10-21 23:27:01" itemprop="dateModified" datetime="2018-10-21T23:27:01+08:00">2018-10-21</time>
               
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1745,8 +1923,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/04/07/JavaScript/创建对象的Object.create与new/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/" class="cy_cmt_count" data-xid="2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="commentsCount" ></span>
+                <a href="/2018/04/06/JavaScript/你不知道的JavaScript之this/#SOHUCS" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/04/06/JavaScript/你不知道的JavaScript之this/" class="cy_cmt_count" data-xid="2018/04/06/JavaScript/你不知道的JavaScript之this/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -1775,21 +1953,14 @@
 
       
         
-          <p>创建对象有几种方式:</p>
-<ul>
-<li><p>直接量:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1=&#123;<span class="attr">name</span>:<span class="string">"xiaowang"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2=<span class="keyword">new</span> <span class="built_in">Object</span>(&#123;<span class="attr">name</span>:<span class="string">"xiaowang"</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj1,obj2);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>构造函数:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> M=<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;<span class="keyword">this</span>.name=name&#125;;</span><br><span class="line"><span class="keyword">var</span> obj3=<span class="keyword">new</span> M(<span class="string">'xiaowang'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(obj3);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Object.create</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p=&#123;<span class="attr">name</span>:<span class="string">'xiaowang'</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj4=<span class="built_in">Object</span>.create(p);</span><br><span class="line"><span class="built_in">console</span>.log(obj4);</span><br></pre></td></tr></table></figure>
-<p>对应的输出结果为:</p>
-<p><img src="https://haohome.top/18-4-7/88488666.jpg" alt="img"></p>
+          <hr>
+<p>title: 你不知道的JavaScript之this<br>categories: JavaScript<br>tags: [YDKJS,JS]<br>date: 2018-10-21</p>
+<hr>
+<h2 id="初识this"><a href="#初识this" class="headerlink" title="初识this"></a>初识this</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identify</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.name.toUpperCase();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speak</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> greeting = <span class="string">"Hello, I'm "</span> + identify.call( <span class="keyword">this</span> );</span><br><span class="line">	<span class="built_in">console</span>.log( greeting );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> me = &#123;</span><br><span class="line">	name: <span class="string">"Kyle"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> you = &#123;</span><br><span class="line">	name: <span class="string">"Reader"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">identify.call( me ); <span class="comment">// KYLE</span></span><br><span class="line">identify.call( you ); <span class="comment">// READER</span></span><br><span class="line"></span><br><span class="line">speak.call( me ); <span class="comment">// Hello, I'm KYLE</span></span><br><span class="line">speak.call( you ); <span class="comment">// Hello, I'm READER</span></span><br></pre></td></tr></table></figure>
+<p>这个代码片段允许 <code>identify()</code> 和 <code>speak()</code> 函数对多个 <em>环境</em> 对象（<code>me</code> 和 <code>you</code>）进行复用，而不是针对每个对象定义函数的分离版本。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/07/JavaScript/创建对象的Object.create与new/#more" rel="contents">
+            <a class="btn" href="/2018/04/06/JavaScript/你不知道的JavaScript之this/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2026,195 +2197,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/03/11/JavaScript/通俗易懂的原型与原型链/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Daniel">
-      <meta itemprop="description" content="独立 自由 分享 感悟">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="靖风行'S blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/11/JavaScript/通俗易懂的原型与原型链/" itemprop="url">
-                  通俗易懂的原型与原型链
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-03-11 21:23:00" itemprop="dateCreated datePublished" datetime="2018-03-11T21:23:00+08:00">2018-03-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/03/11/JavaScript/通俗易懂的原型与原型链/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/03/11/JavaScript/通俗易懂的原型与原型链/" class="cy_cmt_count" data-xid="2018/03/11/JavaScript/通俗易懂的原型与原型链/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="普通对象与函数对象"><a href="#普通对象与函数对象" class="headerlink" title="普通对象与函数对象"></a>普通对象与函数对象</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o1 = &#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> o2 =<span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="keyword">var</span> o3 = <span class="keyword">new</span> f1();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> f3 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'str'</span>,<span class="string">'console.log(str)'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Object</span>); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Function</span>); <span class="comment">//function  </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f1); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f2); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f3); <span class="comment">//function   </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o1); <span class="comment">//object </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o2); <span class="comment">//object </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o3); <span class="comment">//object</span></span><br></pre></td></tr></table></figure>
-<p>上面的例子中: o1、o2、o3都是普通对象object，而f1、f2、f3是函数对象function</p>
-<blockquote>
-<p><strong>凡是通过 new Function() 创建的对象都是函数对象，其他的都是普通对象。f1、f2归根结底都是通过 new Function()的方式进行创建的。Function Object 也都是通过 New Function()创建的</strong>。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/11/JavaScript/通俗易懂的原型与原型链/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2266,7 +2248,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

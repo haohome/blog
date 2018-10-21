@@ -109,7 +109,7 @@
 
 
   <meta name="description" content="flex布局是什么Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。  任何一个容器都可以指定为flex布局,包括行内元素  123456.box&amp;#123;  display: flex;&amp;#125;.box&amp;#123;  display: inline-flex;&amp;#125;  Webkit 内核的浏览器，必须加上-webkit前缀。  设为 F">
-<meta name="keywords" content="flex,css">
+<meta name="keywords" content="css,flex">
 <meta property="og:type" content="article">
 <meta property="og:title" content="flex弹性布局">
 <meta property="og:url" content="http://blog.haohome.top/2018/02/25/HTML5&CSS/Flex布局/index.html">
@@ -601,7 +601,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-shrink</span>: &lt;number&gt;; <span class="comment">/* default 1 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://haohome.top/18-2-25/17444861.jpg" style="width:70%"></p>
 <h3 id="4-flex-basis属性"><a href="#4-flex-basis属性" class="headerlink" title="4. flex-basis属性"></a>4. flex-basis属性</h3><p><code>flex-basis</code>属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为<code>auto</code>，即<strong>项目的本身大小</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.item &#123;</span><br><span class="line">  flex-basis: &lt;length&gt; | auto; /* default auto */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.item &#123;</span><br><span class="line">  flex-basis: <span class="xml"><span class="tag">&lt;<span class="name">length</span>&gt;</span> | auto; /* default auto */</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>它也可以设为跟<code>width</code>或<code>height</code>属性一样的值（比如350px），则项目将占据固定空间。</p>
 <h3 id="5-align-self属性"><a href="#5-align-self属性" class="headerlink" title="5. align-self属性"></a>5. align-self属性</h3><p><code>align-self</code>属性允许单个项目有与其他项目不一样的对齐方式，可覆盖<code>align-items</code>属性。默认值为<code>auto</code>，表示继承父元素的<code>align-items</code>属性，如果没有父元素，则等同于<code>stretch</code>。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">  <span class="comment">/*除了auto，其他都与align-items属性完全一致*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -656,9 +656,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/flex/" rel="tag"># flex</a>
-          
             <a href="/tags/css/" rel="tag"># css</a>
+          
+            <a href="/tags/flex/" rel="tag"># flex</a>
           
         </div>
       
@@ -762,7 +762,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

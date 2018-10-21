@@ -126,8 +126,8 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>hash</tag>
         <tag>兼容性</tag>
+        <tag>hash</tag>
       </tags>
   </entry>
   <entry>
@@ -190,18 +190,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[跨域请求的jsonp处理]]></title>
-    <url>%2F2018%2F04%2F07%2FWeb%2F%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86%2F</url>
-    <content type="text"><![CDATA[跨域简介跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。 浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe； JSONP JSON with Padding 填充式 json 正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替 处理步骤 客户端定义一个专门处理相应的有名函数doResponse(处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态) 服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’; 动态创建一个script元素,设置src指向服务器端的php地址 客户端js: 12345678910function doResponse(resp)&#123; console.log(resp); for(var i in resp)&#123; console.log(i); &#125; &#125;$("#btn").click(function() &#123; /*动态追加script元素*/ $("body").append(`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`); &#125;); 也可以采用ajax获得返回数据 1234567891011$.getJSON("https://www.haohome.top/demo/jsonp.php?callback=doResponse",data=&gt;&#123; console.log(data);&#125;);$.ajax(&#123; type:"GET", url:"https://www.haohome.top/demo/jsonp.php?callback=doResponse", success:data=&gt;&#123; console.log("返回数据",data); &#125;, dataType:"jsonp"&#125;) 服务器端php: 1234header("Content-type:application/javascript;charset:utf-8");$getData=$_GET['callback'];$hello=json_encode([1,2,3,4]);echo $getData."('$hello')"; ​]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>http</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[创建对象的Object.create与new]]></title>
     <url>%2F2018%2F04%2F07%2FJavaScript%2F%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84Object.create%E4%B8%8Enew%2F</url>
     <content type="text"><![CDATA[创建对象有几种方式: 直接量: 123var obj1=&#123;name:"xiaowang"&#125;;var obj2=new Object(&#123;name:"xiaowang"&#125;);console.log(obj1,obj2); 构造函数: 123var M=function(name)&#123;this.name=name&#125;;var obj3=new M('xiaowang');console.log(obj3); Object.create 123var p=&#123;name:'xiaowang'&#125;;var obj4=Object.create(p);console.log(obj4); 对应的输出结果为: 可以看到,Object.create方法得到的对象是空对象，再输出各自对象的name属性看看: console.log(obj2.name,obj3.name,obj4.name) 得到的结果为xiaowang xiaowang xiaowang 这是为什么??? Object.create 的实现方式: 1234567var obj1 = Object.create(null);console.log(obj1); // &#123;&#125;obj1.name = 'jian';var obj2 = Object.create(obj1);console.log(obj2); // &#123;&#125;console.log(obj2.name); // 'jian', conosle.log(obj2.__proto__===obj1.prototype) //true obj2是空对象,但obj2.name输出了’jian’,obj2继承自obj1的原型对象 由此可以总结Object.create()做了： ​ 1. 创建空对象{} ​ 2. 指定空对象{}继承自参数的原型对象,即空对象的 __proto__ 指向Object.create()参数的原型对象。 var obj1=new M({name:&#39;xiaowang&#39;}) 的实现方式: 123456789101112//定义构造函数Person var Person = function (name) &#123; this.name = firstName;&#125;;//定义Person原型对象的新方法Person.prototype.sayHello = function() &#123; console.log("Hello, I'm " + this.name);&#125;;//实例化对象var person1 = new Person("Alice");//对象调用methodperson1.sayHello(); // logs "Hello, I'm Alice" 由此可以总结new做了： 创建实例对象person1 调用构造函数(Person)初始化person1成员变量（name)。 指定实例对象的继承自Person.prototype对象。即person1.__proto__指向构造函数的原型对象Person.prototype。 对比 Object.create new 创建对象 创建空对象 创建实例对象,并将参数初始化赋值 继承 空对象继承自参数对象的原型对象,本身为空对象 实例对象继承自构造函数的原型对象 总结:Object.create得到的对象未实例化,本身为空对象,可继承对象,而new得到的对象是实例化的对象]]></content>
@@ -212,6 +200,23 @@
         <tag>js</tag>
         <tag>对象</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[跨域请求的jsonp处理]]></title>
+    <url>%2F2018%2F04%2F07%2FWeb%2F%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86%2F</url>
+    <content type="text"><![CDATA[跨域简介跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。 浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe； JSONP JSON with Padding 填充式 json 正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替 处理步骤 客户端定义一个专门处理相应的有名函数doResponse(处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态) 服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’; 动态创建一个script元素,设置src指向服务器端的php地址 客户端js: 12345678910function doResponse(resp)&#123; console.log(resp); for(var i in resp)&#123; console.log(i); &#125; &#125;$("#btn").click(function() &#123; /*动态追加script元素*/ $("body").append(`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`); &#125;); 也可以采用ajax获得返回数据 1234567891011$.getJSON("https://www.haohome.top/demo/jsonp.php?callback=doResponse",data=&gt;&#123; console.log(data);&#125;);$.ajax(&#123; type:"GET", url:"https://www.haohome.top/demo/jsonp.php?callback=doResponse", success:data=&gt;&#123; console.log("返回数据",data); &#125;, dataType:"jsonp"&#125;) 服务器端php: 1234header("Content-type:application/javascript;charset:utf-8");$getData=$_GET['callback'];$hello=json_encode([1,2,3,4]);echo $getData."('$hello')"; ​]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>http</tag>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2018%2F04%2F06%2FJavaScript%2F%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8Bthis%2F</url>
+    <content type="text"><![CDATA[title: 你不知道的JavaScript之thiscategories: JavaScripttags: [YDKJS,JS]date: 2018-10-21 初识this1234567891011121314151617181920function identify() &#123; return this.name.toUpperCase();&#125;function speak() &#123; var greeting = "Hello, I'm " + identify.call( this ); console.log( greeting );&#125;var me = &#123; name: "Kyle"&#125;;var you = &#123; name: "Reader"&#125;;identify.call( me ); // KYLEidentify.call( you ); // READERspeak.call( me ); // Hello, I'm KYLEspeak.call( you ); // Hello, I'm READER 这个代码片段允许 identify() 和 speak() 函数对多个 环境 对象（me 和 you）进行复用，而不是针对每个对象定义函数的分离版本。 如果不用this,也可以明确的将环境对象传递给 identify() 和 speak() 1234567891011function identify(context) &#123; return context.name.toUpperCase();&#125;function speak(context) &#123; var greeting = "Hello, I'm " + identify( context ); console.log( greeting );&#125;identify( you ); // READERspeak( me ); // Hello, I'm KYLE this 机制提供了更优雅的方式来隐含地“传递”一个对象引用，导致更加干净的API设计和更容易的复用。 将执行环境作为一个明确参数传递，通常比传递 this 执行环境要乱。 this可以自动引用执行环境对象 看下面这段代码,追踪foo被调用了几次: 123456789101112131415161718function foo(num) &#123; console.log( "foo: " + num );// 追踪 `foo` 被调用了多少次 this.count++;&#125;foo.count = 0;var i;for (i=0; i&lt;10; i++) &#123; if (i &gt; 5) &#123; foo( i ); &#125;&#125;// foo: 6// foo: 7// foo: 8// foo: 9// `foo` 被调用了多少次？console.log( foo.count ); // 0 -- 这他妈怎么回事……？ foo.count 依然 是 0, 即便四个 console.log 语句明明告诉我们 foo(..) 实际上被调用了四次。源于对于 this（在 this.count++ 中）的含义进行了 过于字面化 的解释。 当代码执行 foo.count = 0 时，它确实向函数对象 foo 添加了一个 count 属性。但是对于函数内部的 this.count 引用，this 其实 根本就不 指向那个函数对象，即便属性名称一样，但根对象也不同，因而产生了混淆。 创建另一个对象来持有 count 属性： 12345678910111213141516171819202122function foo(num) &#123; console.log( "foo: " + num ); // 追踪 `foo` 被调用了多少次 data.count++;&#125;var data = &#123; count: 0&#125;;var i;for (i=0; i&lt;10; i++) &#123; if (i &gt; 5) &#123; foo( i ); &#125;&#125;// foo: 6// foo: 7// foo: 8// foo: 9// `foo` 被调用了多少次？console.log( data.count ); // 4 看到这里,你应该知道this的指向，this指向了window，这涉及到了词法作用域 为了从函数对象内部引用它自己，一般来说通过 this 是不够的。你通常需要通过一个指向它的词法标识符（变量）得到函数对象的引用。 12345678910function foo() &#123; foo.count = 4; // `foo` 引用它自己&#125;setTimeout( function()&#123; // 匿名函数（没有名字）不能引用它自己&#125;, 10 );第一个函数，称为“命名函数”，foo 是一个引用，可以用于在它内部引用自己。而在第二个例子中,传递给 setTimeout(..) 的回调函数没有名称标识符（所以被称为“匿名函数”），所以没有合适的办法引用函数对象自己。 通过命名函数调用自己,每个地方都是用foo 标识符作为对函数的引用(完全依靠foo的词法作用域): 12345678910111213141516function foo(num) &#123; console.log( "foo: " + num ); foo.count++; // 追踪 `foo` 被调用了多少次&#125;foo.count = 0;var i;for (i=0; i&lt;10; i++) &#123; if (i &gt; 5) &#123; foo( i ); &#125;&#125;// foo: 6// foo: 7// foo: 8// foo: 9console.log( foo.count ); // 4 利用call强迫this指向foo 1234567891011121314151617function foo(num) &#123; console.log( "foo: " + num ); // 注意：由于 `foo` 的被调用方式（见下方），`this` 现在确实是 `foo` this.count++; // 追踪 `foo` 被调用了多少次&#125;foo.count = 0;var i;for (i=0; i&lt;10; i++) &#123; if (i &gt; 5) &#123; foo.call( foo, i );// 使用 `call(..)`，我们可以保证 `this` 指向函数对象(`foo`) &#125;&#125;// foo: 6// foo: 7// foo: 8// foo: 9console.log( foo.count ); // 4 解惑this调用点（Call-site）函数在代码中被调用的位置（不是被声明的位置） 调用栈（call-stack）: 使我们到达当前执行位置而被调用的所有方法的堆栈 123456789101112131415161718function baz() &#123; // 调用栈是: `baz` // 我们的调用点是 global scope（全局作用域） console.log( "baz" ); bar(); // &lt;-- `bar` 的调用点&#125;function bar() &#123; // 调用栈是: `baz` -&gt; `bar` // 我们的调用点位于 `baz` console.log( "bar" ); foo(); // &lt;-- `foo` 的 call-site&#125;function foo() &#123; // 调用栈是: `baz` -&gt; `bar` -&gt; `foo` // 我们的调用点位于 `bar` console.log( "foo" );&#125;baz(); // &lt;-- `baz` 的调用点 调用规则默认绑定（Default Binding)该规则源于函数调用最常见的情况:独立函数调用。可以认为这种 this 规则是在没有其他规则适用时的默认规则。 123456function foo() &#123; console.log( this.a );&#125;var a = 2;foo(); // 2 独立函数的调用,相当于window.foo(),对此方法调用的this实施了默认绑定,使this指向全局对象window 如果 strict mode 在这里生效，那么对于 默认绑定 来说全局对象是不合法的，所以 this 将被设置为 undefined。 123456function foo() &#123; "use strict"; console.log( this.a );&#125;var a = 2;foo(); // TypeError: `this` is `undefined` 有一个重要的细节: 即便所有的 this 绑定规则都是完全基于调用点的,如果foo()的内容没有在strict mode下执行,对于 默认绑定 来说全局对象是 唯一 合法的； 12345678function foo() &#123; console.log( this.a );&#125;var a = 2;(function()&#123; "use strict"; foo(); // 2&#125;)(); foo() 的调用点的 strict mode 状态与此无关。 隐含绑定（Implicit Binding)调用点是否有一个环境对象（context object） 12345678function foo() &#123; console.log( this.a );&#125;var obj = &#123; a: 2, foo: foo&#125;;obj.foo(); // 2 foo() 被声明然后作为引用属性添加到 obj 上，obj通过函数引用调用foo(),foo()内的this就指代调用对象obj; 可以这样理解:this是在函数执行时自动创建的一个关键词,会自动指向正在调用当前函数的对象 隐含丢失（Implicitly Lost）当一个 隐含绑定 丢失了它的绑定，这通常意味着它会退回到 默认绑定， 根据 strict mode 的状态，其结果不是全局对象就是 undefined。 12345678910function foo() &#123; console.log( this.a );&#125;var obj = &#123; a: 2, foo: foo&#125;;var bar = obj.foo; // 函数引用！var a = "oops, global"; // `a` 也是一个全局对象的属性bar(); // "oops, global" 这里bar仅仅是对foo的一个应用而已,调用点是bar(),因此默认绑定适用这里; 12345678910111213function foo() &#123; console.log( this.a );&#125;function doFoo(fn) &#123; // `fn` 只不过 `foo` 的另一个引用 fn(); // &lt;-- 调用点!&#125;var obj = &#123; a: 2, foo: foo&#125;;var a = "oops, global"; // `a` 也是一个全局对象的属性doFoo( obj.foo ); // "oops, global" 看到这里,可以看出this的指向是由函数对象的调用点决定的 明确绑定（Explicit Binding）如果你想强制一个函数调用使用某个特定对象作为 this 绑定,通过call或apply方法,用于指定this 1234567function foo() &#123; console.log( this.a );&#125;var obj = &#123; a: 2&#125;;foo.call( obj ); // 2 通过 foo.call(..) 使用 明确绑定 来调用 foo，允许我们强制函数的 this 指向 obj。 如果你传递一个简单基本类型值（string，boolean，或 number 类型）作为 this 绑定，那么这个基本类型值会被包装在它的对象类型中（分别是 new String(..)，new Boolean(..)，或 new Number(..)）。这通常称为“封箱（boxing）”。 硬绑定（Hard Binding） 1234567891011121314151617function foo() &#123; console.log( this.a );&#125;var obj = &#123; a: 2&#125;;var bar = function() &#123; foo.call( obj );&#125;;bar(); // 2setTimeout( bar, 100 ); // 2// `bar` 将 `foo` 的 `this` 硬绑定到 `obj`// 所以它不可以被覆盖bar.call( window ); // 2 我们创建了一个函数 bar()，在它的内部手动调用 foo.call(obj)，由此强制 this 绑定到 obj 并调用 foo。无论你过后怎样调用函数 bar，它总是手动使用 obj 调用 foo。这种绑定即明确又坚定，所以我们称之为 硬绑定（hard binding） 用 硬绑定 将一个函数包装起来的最典型的方法，是为所有传入的参数和传出的返回值创建一个通道： 12345678910111213function foo(something) &#123; console.log( this.a, something ); return this.a + something;&#125;var obj = &#123; a: 2&#125;;var bar = function() &#123; return foo.apply( obj, arguments );&#125;;var b = bar( 3 ); // 2 3console.log( b ); // 5 API 调用的“环境” 许多库中的函数，和许多在 JavaScript 语言以及宿主环境中的内建函数，都提供一个可选参数，通常称为“环境（context）”，这种设计作为一种替代方案来确保你的回调函数使用特定的 this 而不必非得使用 bind(..)。 12345678910function foo(el) &#123; console.log( el, this.id );&#125;var obj = &#123; id: "awesome"&#125;;// 使用 `obj` 作为 `this` 来调用 `foo(..)`[1, 2, 3].forEach( foo, obj ); // 1 awesome 2 awesome 3 awesome 从内部来说，几乎可以确定这种类型的函数是通过 call(..) 或 apply(..) 来使用 明确绑定 new 绑定（new Binding）当在函数前面被加入 new 调用时: 创建一个新的空对象 自动让新的子对象继承构造函数继承原型对象 调用构造函数，将构造函数中的this执行正在创建的新的空对象中强行添加新成员将新对象地址返回给变量 将新对象地址返回给变量保存 12345function foo(a) &#123; this.a = a;&#125;var bar = new foo( 2 );console.log( bar.a ); // 2 以上就是函数调用中的四种 this 绑定规则,通常需要找到调用点然后考察哪一种规则适用于它。但四种规则是有优先级的, 判定 this 函数是通过 new 被调用的吗（new 绑定）？如果是，this 就是新构建的对象。 var bar = new foo() 函数是通过 call 或 apply 被调用（明确绑定），甚至是隐藏在 bind 硬绑定 之中吗？如果是，this 就是那个被明确指定的对象。 var bar = foo.call( obj2 ) 函数是通过环境对象（也称为拥有者或容器对象）被调用的吗（隐含绑定）？如果是，this 就是那个环境对象。 var bar = obj1.foo() 否则，使用默认的 this（默认绑定）。如果在 strict mode 下，就是 undefined，否则是 global 对象。 var bar = foo() 以上，就是理解对于普通的函数调用来说的 this 绑定规则 所需的全部。]]></content>
   </entry>
   <entry>
     <title><![CDATA[浏览器缓存问题]]></title>
@@ -291,8 +296,8 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>flex</tag>
         <tag>css</tag>
+        <tag>flex</tag>
       </tags>
   </entry>
   <entry>
@@ -448,22 +453,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[FreeMaker 模板_数据模型]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FFreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%2F</url>
-    <content type="text"><![CDATA[1. 模板 + 数据模型 = 输出1.1 模板 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如: 12345678910&lt;html&gt; &lt;head&gt; &lt;title&gt;Welcome!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Welcome $&#123;user&#125;!&lt;/h1&gt; &lt;p&gt;Our latest product: &lt;a href="$&#123;latestProduct.url&#125;"&gt;$&#123;latestProduct.name&#125;&lt;/a&gt;! &lt;/body&gt;&lt;/html&gt; ${…}：插值表达式(interpolation) FTL标签：FreeMarker模板的语言标签，标签的名字以 # 开头，用户自定义的FTL标签则需要使用 @ 来代替 # 注释：使用 &lt;#– and –&gt; 来标识 其他任何不是插值、FTL标签或注释的内容将被视为静态文本，直接在页面输出 1.2 数据模型为模板准备的数据整体被称作为数据模型数据模型是树形结构,例如: 123456789101112131415161718192021222324252627(root) | +- animals | | | +- mouse | | | | | +- size = "small" | | | | | +- price = 50 | | | +- elephant | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- python | | | +- size = "medium" | | | +- price = 4999 | +- message = "It is a test" | +- misc | +- foo = "Something" hashes (哈希表): 指变量中扮演目录角色(比如 root, animals, mouse, elephant, python, misc) 哈希表存储其他变量(被称为 子变量)， 它们可以通过名称来查找(比如 “animals”, “mouse” 或 “price”)。 scalars (标量): 指存储单值的变量 (size, price, message 和 foo) 如果要在模板中使用子变量， 那应该从根root开始指定它的路径，每级之间用点来分隔开。要访问 mouse 的 price ，要从root开始，首先进入到 animals ，之后访问 mouse ，最后访问 price 。就可以这样来写 animals.mouse.price。 sequences (序列): 像哈希表那样存储子变量，但是子变量没有名字，它们只是列表中的项。在下面这个数据模型中， animals 和 misc.fruits 就是序列： 1234567891011121314151617181920212223242526272829303132333435(root) | +- animals | | | +- (1st) | | | | | +- name = "mouse" | | | | | +- size = "small" | | | | | +- price = 50 | | | +- (2nd) | | | | | +- name = "elephant" | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- (3rd) | | | +- name = "python" | | | +- size = "medium" | | | +- price = 4999 | +- misc | +- fruits | +- (1st) = "orange" | +- (2nd) = "banana" 要访问序列的子变量，可以使用方括号形式的数字索引下标。 索引下标从0开始(从0开始也是程序员的传统)，那么第一项的索引就是0， 第二项的索引就是1等等。要得到第一个动物的名称的话，可以这么来写代码 animals[0].name。 标量类型可以分为如下的类别： 字符串：就是文本，也就是任意的字符序列，比如上面提到的 ‘m’,’o’,’u’, ‘s’,’e’。比如 name 和 size 也是字符串。 数字：这是数值类型，就像上面的 price。 在FreeMarker中，字符串 “50” 和数字 50 是两种完全不同的类型。 日期/时间: 可以是日期-时间格式(存储某一天的日期和时间)， 或者是日期(只有日期，没有时间)，或者是时间(只有时间，没有日期)。 布尔值：对应着对/错(是/否，开/关等值)类似的值。 总结： 数据模型可以被看成是树形结构。 标量用于存储单一的值。这种类型的值可以是字符串，数字，日期/时间或者是布尔值。 哈希表是一种存储变量及其相关且有唯一标识名称的容器。 序列是存储有序变量的容器。存储的变量可以通过数字索引来检索，索引通常从0开始。]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>学习记录</tag>
-        <tag>Java</tag>
-        <tag>FreeMaker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java中的抽象类]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
+    <title><![CDATA[Java中的多态]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
+    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -485,9 +477,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中的类和对象]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%2F</url>
-    <content type="text"><![CDATA[1.类 类是对象的类型 类具有相同属性和方法的一组对象的集合 定义:确定对象将拥有的特征(属性)和方法(行为) 类的组成:属性和方法 定义类的步骤 a.定义类名b.编写类的属性c.编写类的方法 !– more –&gt; 12345678public class 类名&#123; //定义属性部分(成员变量) 属性1的类型 属性1; 属性2的类型 属性2; //定义方法部分 方法1; 方法2;&#125; 2.对象对象的属性 对象具有的各种特征 每个对象的每个属性都拥有特定值对象的方法 对象可以执行的操作 使用对象的步骤: a. 创建对象(new) b. 使用对象 引用对象的属性:对象名.属性 引用对象的方法:对象名.方法 类是抽象的概念,对象是一个具体的实物 3.访问修饰符 访问修饰符 本类 同包 子类 其他 private √ 默认 √ √ protected √ √ √ public √ √ √ √ 属性通常设为private 外部调用对象属性通常通过对象的getter和setter方法 4.Object类的方法4.1 toString()方法默认:toString()方法默认返回的是对象的哈希码(对象的地址字符串)Override:返回的是对象的属性值 4.2 equals()方法默认:比较的是对象的引用是否指向同一块内存地址Override:比较对象的属性值(数据)信息]]></content>
+    <title><![CDATA[Java中的抽象类]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -497,9 +489,22 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中的多态]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
-    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
+    <title><![CDATA[FreeMaker 模板_数据模型]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FFreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[1. 模板 + 数据模型 = 输出1.1 模板 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如: 12345678910&lt;html&gt; &lt;head&gt; &lt;title&gt;Welcome!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Welcome $&#123;user&#125;!&lt;/h1&gt; &lt;p&gt;Our latest product: &lt;a href="$&#123;latestProduct.url&#125;"&gt;$&#123;latestProduct.name&#125;&lt;/a&gt;! &lt;/body&gt;&lt;/html&gt; ${…}：插值表达式(interpolation) FTL标签：FreeMarker模板的语言标签，标签的名字以 # 开头，用户自定义的FTL标签则需要使用 @ 来代替 # 注释：使用 &lt;#– and –&gt; 来标识 其他任何不是插值、FTL标签或注释的内容将被视为静态文本，直接在页面输出 1.2 数据模型为模板准备的数据整体被称作为数据模型数据模型是树形结构,例如: 123456789101112131415161718192021222324252627(root) | +- animals | | | +- mouse | | | | | +- size = "small" | | | | | +- price = 50 | | | +- elephant | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- python | | | +- size = "medium" | | | +- price = 4999 | +- message = "It is a test" | +- misc | +- foo = "Something" hashes (哈希表): 指变量中扮演目录角色(比如 root, animals, mouse, elephant, python, misc) 哈希表存储其他变量(被称为 子变量)， 它们可以通过名称来查找(比如 “animals”, “mouse” 或 “price”)。 scalars (标量): 指存储单值的变量 (size, price, message 和 foo) 如果要在模板中使用子变量， 那应该从根root开始指定它的路径，每级之间用点来分隔开。要访问 mouse 的 price ，要从root开始，首先进入到 animals ，之后访问 mouse ，最后访问 price 。就可以这样来写 animals.mouse.price。 sequences (序列): 像哈希表那样存储子变量，但是子变量没有名字，它们只是列表中的项。在下面这个数据模型中， animals 和 misc.fruits 就是序列： 1234567891011121314151617181920212223242526272829303132333435(root) | +- animals | | | +- (1st) | | | | | +- name = "mouse" | | | | | +- size = "small" | | | | | +- price = 50 | | | +- (2nd) | | | | | +- name = "elephant" | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- (3rd) | | | +- name = "python" | | | +- size = "medium" | | | +- price = 4999 | +- misc | +- fruits | +- (1st) = "orange" | +- (2nd) = "banana" 要访问序列的子变量，可以使用方括号形式的数字索引下标。 索引下标从0开始(从0开始也是程序员的传统)，那么第一项的索引就是0， 第二项的索引就是1等等。要得到第一个动物的名称的话，可以这么来写代码 animals[0].name。 标量类型可以分为如下的类别： 字符串：就是文本，也就是任意的字符序列，比如上面提到的 ‘m’,’o’,’u’, ‘s’,’e’。比如 name 和 size 也是字符串。 数字：这是数值类型，就像上面的 price。 在FreeMarker中，字符串 “50” 和数字 50 是两种完全不同的类型。 日期/时间: 可以是日期-时间格式(存储某一天的日期和时间)， 或者是日期(只有日期，没有时间)，或者是时间(只有时间，没有日期)。 布尔值：对应着对/错(是/否，开/关等值)类似的值。 总结： 数据模型可以被看成是树形结构。 标量用于存储单一的值。这种类型的值可以是字符串，数字，日期/时间或者是布尔值。 哈希表是一种存储变量及其相关且有唯一标识名称的容器。 序列是存储有序变量的容器。存储的变量可以通过数字索引来检索，索引通常从0开始。]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
+        <tag>FreeMaker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中的类和对象]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%2F</url>
+    <content type="text"><![CDATA[1.类 类是对象的类型 类具有相同属性和方法的一组对象的集合 定义:确定对象将拥有的特征(属性)和方法(行为) 类的组成:属性和方法 定义类的步骤 a.定义类名b.编写类的属性c.编写类的方法 !– more –&gt; 12345678public class 类名&#123; //定义属性部分(成员变量) 属性1的类型 属性1; 属性2的类型 属性2; //定义方法部分 方法1; 方法2;&#125; 2.对象对象的属性 对象具有的各种特征 每个对象的每个属性都拥有特定值对象的方法 对象可以执行的操作 使用对象的步骤: a. 创建对象(new) b. 使用对象 引用对象的属性:对象名.属性 引用对象的方法:对象名.方法 类是抽象的概念,对象是一个具体的实物 3.访问修饰符 访问修饰符 本类 同包 子类 其他 private √ 默认 √ √ protected √ √ √ public √ √ √ √ 属性通常设为private 外部调用对象属性通常通过对象的getter和setter方法 4.Object类的方法4.1 toString()方法默认:toString()方法默认返回的是对象的哈希码(对象的地址字符串)Override:返回的是对象的属性值 4.2 equals()方法默认:比较的是对象的引用是否指向同一块内存地址Override:比较对象的属性值(数据)信息]]></content>
       <categories>
         <category>Java</category>
       </categories>
