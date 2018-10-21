@@ -350,6 +350,34 @@
 
       <h2 class="post-title">
         
+            <a class="post-title-link" href="/2018/10/21/JavaScript/你不知道的JavaScript之this/" itemprop="url">
+              
+                <span itemprop="name">你不知道的JavaScript之this</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-10-21T00:00:00+08:00"
+              content="2018-10-21" >
+          10-21
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
             <a class="post-title-link" href="/2018/10/20/JavaScript/你不知道的JavaScript之词法作用域与动态作用域/" itemprop="url">
               
                 <span itemprop="name">你不知道的JavaScript之词法作用域与动态作用域</span>
@@ -1224,22 +1252,7 @@
 
 </body>
 </html>
-result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
                   } else {
                     resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
                   }

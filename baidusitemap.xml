@@ -4,15 +4,22 @@
 
     
   <url>
-    <loc>http://blog.haohome.top/2018/04/06/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8Bthis/</loc>
-    <lastmod>2018-10-21T15:34:29.393Z</lastmod>
+    <loc>http://blog.haohome.top/2018/10/21/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8Bthis/</loc>
+    <lastmod>2018-10-21T15:42:41.563Z</lastmod>
     <data>
         <display>
-        <title></title>
-        <pubTime>2018-04-06T14:57:16.400Z</pubTime>
+        <title>你不知道的JavaScript之this</title>
+        <pubTime>2018-10-20T16:00:00.000Z</pubTime>
         
+        <tag>JS</tag>
+         
+        <tag>YDKJS</tag>
+         
          
            
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+          
         </display>
     </data>
     </url>
@@ -20,11 +27,33 @@
     
   <url>
     <loc>http://blog.haohome.top/2018/10/20/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/</loc>
-    <lastmod>2018-10-20T15:01:54.316Z</lastmod>
+    <lastmod>2018-10-21T15:38:43.579Z</lastmod>
     <data>
         <display>
         <title>你不知道的JavaScript之词法作用域与动态作用域</title>
         <pubTime>2018-10-19T16:00:00.000Z</pubTime>
+        
+        <tag>JS</tag>
+         
+        <tag>YDKJS</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2018/10/18/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E9%97%AD%E5%8C%85/</loc>
+    <lastmod>2018-10-21T14:58:07.706Z</lastmod>
+    <data>
+        <display>
+        <title>你不知道的JavaScript之闭包</title>
+        <pubTime>2018-10-17T16:00:00.000Z</pubTime>
         
         <tag>JS</tag>
          
@@ -74,28 +103,6 @@
            
              
               <breadCrumb title="Mac&amp;PC" url="http://blog.haohome.top/categories/Mac-PC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2018/10/18/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E9%97%AD%E5%8C%85/</loc>
-    <lastmod>2018-10-20T07:18:56.283Z</lastmod>
-    <data>
-        <display>
-        <title>你不知道的JavaScript之闭包</title>
-        <pubTime>2018-10-17T16:00:00.000Z</pubTime>
-        
-        <tag>JS</tag>
-         
-        <tag>YDKJS</tag>
-         
-         
-           
-             
-              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
           
         </display>
     </data>
@@ -348,9 +355,9 @@
         <title>Node.js的web服务器路由重构</title>
         <pubTime>2018-05-02T15:32:00.000Z</pubTime>
         
-        <tag>JavaScript</tag>
-         
         <tag>node</tag>
+         
+        <tag>JavaScript</tag>
          
          
            
@@ -370,9 +377,9 @@
         <title>跨域请求的jsonp处理</title>
         <pubTime>2018-04-06T16:00:00.000Z</pubTime>
         
-        <tag>http</tag>
-         
         <tag>web</tag>
+         
+        <tag>http</tag>
          
          
            
@@ -621,26 +628,6 @@
 
     
   <url>
-    <loc>http://blog.haohome.top/2016/04/19/Food/%E8%8B%B9%E6%9E%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A4%90%E5%8F%98/</loc>
-    <lastmod>2018-04-10T05:53:46.725Z</lastmod>
-    <data>
-        <display>
-        <title>苹果为什么会褐变</title>
-        <pubTime>2016-04-18T16:34:14.000Z</pubTime>
-        
-        <tag>保鲜知识</tag>
-         
-         
-           
-             
-              <breadCrumb title="food" url="http://blog.haohome.top/categories/food/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://blog.haohome.top/2018/03/06/HTML5&CSS/%E5%88%A9%E7%94%A8H5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/</loc>
     <lastmod>2018-04-10T05:53:46.725Z</lastmod>
     <data>
@@ -656,6 +643,26 @@
            
              
               <breadCrumb title="HTML5" url="http://blog.haohome.top/categories/HTML5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2016/04/19/Food/%E8%8B%B9%E6%9E%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A4%90%E5%8F%98/</loc>
+    <lastmod>2018-04-10T05:53:46.725Z</lastmod>
+    <data>
+        <display>
+        <title>苹果为什么会褐变</title>
+        <pubTime>2016-04-18T16:34:14.000Z</pubTime>
+        
+        <tag>保鲜知识</tag>
+         
+         
+           
+             
+              <breadCrumb title="food" url="http://blog.haohome.top/categories/food/"/>
           
         </display>
     </data>
