@@ -329,7 +329,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/08/28/Program/hashchange事件/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
@@ -348,8 +348,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/28/Program/hashchange事件/" itemprop="url">
-                  hashchange事件
+                <a class="post-title-link" href="/2018/08/28/Program/js判断当前文本输入状态/" itemprop="url">
+                  JS判断当前文本输入状态
                 </a>
               
             
@@ -375,7 +375,7 @@
                 
               
 
-              <time title="创建时间：2018-08-28 00:00:00 / 修改时间：17:28:17" itemprop="dateCreated datePublished" datetime="2018-08-28T00:00:00+08:00">2018-08-28</time>
+              <time title="创建时间：2018-08-28 00:00:00 / 修改时间：17:28:25" itemprop="dateCreated datePublished" datetime="2018-08-28T00:00:00+08:00">2018-08-28</time>
             
 
             
@@ -413,8 +413,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/08/28/Program/hashchange事件/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/08/28/Program/hashchange事件/" class="cy_cmt_count" data-xid="2018/08/28/Program/hashchange事件/" itemprop="commentsCount" ></span>
+                <a href="/2018/08/28/Program/js判断当前文本输入状态/#SOHUCS" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/" class="cy_cmt_count" data-xid="2018/08/28/Program/js判断当前文本输入状态/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -444,13 +444,18 @@
       
         
           <blockquote>
-<p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p>
+<p>最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。</p>
 </blockquote>
-<p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在搜索的时候，我们需要按<code>Enter</code>键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了:</p>
+<ul>
+<li><p>绑定<code>keyup</code>事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮</p>
+</li>
+<li><p>单纯按键监听，并没有判断中文输入状态</p>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/28/Program/hashchange事件/#more" rel="contents">
+            <a class="btn" href="/2018/08/28/Program/js判断当前文本输入状态/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1908,7 +1913,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-21 23:27:01" itemprop="dateModified" datetime="2018-10-21T23:27:01+08:00">2018-10-21</time>
+                <time title="修改时间：2018-10-21 23:34:29" itemprop="dateModified" datetime="2018-10-21T23:34:29+08:00">2018-10-21</time>
               
             
           </span>
