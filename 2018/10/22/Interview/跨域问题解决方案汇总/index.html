@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="靖风行&#39;S blog">
 <meta property="og:description" content="同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的关键的安全机制。但是有时候跨域请求资源是合理的需求，本文尝试从多篇文章中汇总至今存在的所有跨域请求解决方案。 跨域请求首先需要了解的是同源和跨源的概念。对于相同源，其定义为：如果协议、端口（如果指定了一个）和主机对于两个页面是相同的，则两个页面具有相同的源。只要三者之一任意一点有不同，那么就为不同源">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-22T01:14:57.217Z">
+<meta property="og:updated_time" content="2018-10-22T01:17:24.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跨域问题解决方案汇总">
 <meta name="twitter:description" content="同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的关键的安全机制。但是有时候跨域请求资源是合理的需求，本文尝试从多篇文章中汇总至今存在的所有跨域请求解决方案。 跨域请求首先需要了解的是同源和跨源的概念。对于相同源，其定义为：如果协议、端口（如果指定了一个）和主机对于两个页面是相同的，则两个页面具有相同的源。只要三者之一任意一点有不同，那么就为不同源">
@@ -372,7 +372,7 @@
                 
               
 
-              <time title="创建时间：2018-10-22 00:00:00 / 修改时间：09:14:57" itemprop="dateCreated datePublished" datetime="2018-10-22T00:00:00+08:00">2018-10-22</time>
+              <time title="创建时间：2018-10-22 00:00:00 / 修改时间：09:17:24" itemprop="dateCreated datePublished" datetime="2018-10-22T00:00:00+08:00">2018-10-22</time>
             
 
             
@@ -444,6 +444,7 @@
 <blockquote>
 <p>跨域不一定是浏览器限制了发起跨站请求，而也可能是跨站请求可以正常发起，但是返回结果被浏览器拦截了。最好的例子是 CSRF 跨站攻击原理，请求是发送到了后端服务器无论是否跨域！注意：有些浏览器不允许从 HTTPS 的域跨域访问 HTTP，比如  Chrome 和 Firefox，这些浏览器在请求还未发出的时候就会拦截请求，这是一个特例。</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="解决方法汇总"><a href="#解决方法汇总" class="headerlink" title="解决方法汇总"></a>解决方法汇总</h2><p>以下我们由简及深介绍各种存在的跨域请求解决方案，包括 <code>document.domain, location.hash, window.name, window.postMessage, JSONP, WebSocket, CORS</code>。</p>
 <h3 id="document-domain"><a href="#document-domain" class="headerlink" title="document.domain"></a>document.domain</h3><p><code>document.domain</code> 的作用是用来获取/设置当前文档的原始域部分，例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对于文档 www.example.xxx/good.html</span></span><br><span class="line"><span class="built_in">document</span>.domain=<span class="string">"www.example.xxx"</span></span><br><span class="line"><span class="comment">// 对于URI http://developer.mozilla.org/en/docs/DOM </span></span><br><span class="line"><span class="built_in">document</span>.domain=<span class="string">"developer.mozilla.org"</span></span><br></pre></td></tr></table></figure>
