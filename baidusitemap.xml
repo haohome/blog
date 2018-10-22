@@ -4,6 +4,224 @@
 
     
   <url>
+    <loc>http://blog.haohome.top/2018/10/22/Interview/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%B1%87%E6%80%BB/</loc>
+    <lastmod>2018-10-22T01:14:57.217Z</lastmod>
+    <data>
+        <display>
+        <title>跨域问题解决方案汇总</title>
+        <pubTime>2018-10-21T16:00:00.000Z</pubTime>
+        
+        <tag>JS</tag>
+         
+         
+           
+             
+              <breadCrumb title="Interview" url="http://blog.haohome.top/categories/Interview/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2018/02/20/HTML5&CSS/viewports%E5%89%96%E6%9E%90/</loc>
+    <lastmod>2018-10-22T01:13:50.091Z</lastmod>
+    <data>
+        <display>
+        <title>Viewport剖析</title>
+        <pubTime>2018-02-20T08:00:00.000Z</pubTime>
+        
+        <tag>css</tag>
+         
+         
+           
+             
+              <breadCrumb title="HTML5" url="http://blog.haohome.top/categories/HTML5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2018/02/25/HTML5&CSS/Flex%E5%B8%83%E5%B1%80/</loc>
+    <lastmod>2018-10-22T01:13:47.526Z</lastmod>
+    <data>
+        <display>
+        <title>flex弹性布局</title>
+        <pubTime>2018-02-25T12:30:54.000Z</pubTime>
+        
+        <tag>css</tag>
+         
+        <tag>flex</tag>
+         
+         
+           
+             
+              <breadCrumb title="HTML5" url="http://blog.haohome.top/categories/HTML5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2017/11/09/HTML5&CSS/flex-shrink%20%20%E6%96%B0%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%B1%9E%E6%80%A7/</loc>
+    <lastmod>2018-10-22T01:13:44.913Z</lastmod>
+    <data>
+        <display>
+        <title>flex-shrink 新弹性和模型属性</title>
+        <pubTime>2017-11-09T15:30:54.000Z</pubTime>
+        
+        <tag>flex</tag>
+         
+         
+           
+             
+              <breadCrumb title="HTML5" url="http://blog.haohome.top/categories/HTML5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2016/10/12/HTML5&CSS/CSS%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2018-10-22T01:13:39.786Z</lastmod>
+    <data>
+        <display>
+        <title>CSS学习记录</title>
+        <pubTime>2016-10-12T12:46:25.000Z</pubTime>
+        
+        <tag>css</tag>
+         
+        <tag>html5</tag>
+         
+         
+           
+             
+              <breadCrumb title="HTML5" url="http://blog.haohome.top/categories/HTML5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2018/03/29/HTML5&CSS/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2018-10-22T01:13:14.449Z</lastmod>
+    <data>
+        <display>
+        <title>浏览器缓存问题</title>
+        <pubTime>2018-03-28T16:06:25.000Z</pubTime>
+        
+        <tag>http</tag>
+         
+         
+           
+             
+              <breadCrumb title="HTML5" url="http://blog.haohome.top/categories/HTML5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2017/11/15/Interview/58%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-10-22T01:12:46.052Z</lastmod>
+    <data>
+        <display>
+        <title>58同城面试总结</title>
+        <pubTime>2017-11-14T16:00:00.000Z</pubTime>
+        
+        <tag>css</tag>
+         
+        <tag>面试</tag>
+         
+         
+           
+             
+              <breadCrumb title="Interview" url="http://blog.haohome.top/categories/Interview/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2018/03/05/JavaScript/%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E7%9A%84JavaScript%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
+    <lastmod>2018-10-22T01:12:12.393Z</lastmod>
+    <data>
+        <display>
+        <title>一道简单的setTimeout面试题</title>
+        <pubTime>2018-03-05T15:48:00.000Z</pubTime>
+        
+        <tag>面试</tag>
+         
+        <tag>js</tag>
+         
+        <tag>events</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2018/01/14/JavaScript/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/</loc>
+    <lastmod>2018-10-22T01:11:51.905Z</lastmod>
+    <data>
+        <display>
+        <title>跨域资源共享CORS</title>
+        <pubTime>2018-01-13T16:00:00.000Z</pubTime>
+        
+        <tag>学习记录</tag>
+         
+        <tag>Http</tag>
+         
+        <tag>Ajax</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2018/04/07/JavaScript/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2018-10-22T01:11:26.946Z</lastmod>
+    <data>
+        <display>
+        <title>跨域请求的jsonp处理</title>
+        <pubTime>2018-04-06T16:00:00.000Z</pubTime>
+        
+        <tag>http</tag>
+         
+        <tag>js</tag>
+         
+        <tag>web</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.haohome.top/2018/10/21/JavaScript/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8Bthis/</loc>
     <lastmod>2018-10-21T15:42:41.563Z</lastmod>
     <data>
@@ -117,9 +335,9 @@
         <title>JavaScript设计模式之适配器模式</title>
         <pubTime>2018-10-06T16:00:00.000Z</pubTime>
         
-        <tag>设计模式</tag>
-         
         <tag>JS</tag>
+         
+        <tag>设计模式</tag>
          
          
            
@@ -139,9 +357,9 @@
         <title>JavaScript设计模式之单例模式</title>
         <pubTime>2018-10-05T16:00:00.000Z</pubTime>
         
-        <tag>设计模式</tag>
-         
         <tag>JS</tag>
+         
+        <tag>设计模式</tag>
          
          
            
@@ -355,36 +573,14 @@
         <title>Node.js的web服务器路由重构</title>
         <pubTime>2018-05-02T15:32:00.000Z</pubTime>
         
-        <tag>node</tag>
-         
         <tag>JavaScript</tag>
+         
+        <tag>node</tag>
          
          
            
              
               <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2018/04/07/Web/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2018-05-02T15:28:24.913Z</lastmod>
-    <data>
-        <display>
-        <title>跨域请求的jsonp处理</title>
-        <pubTime>2018-04-06T16:00:00.000Z</pubTime>
-        
-        <tag>web</tag>
-         
-        <tag>http</tag>
-         
-         
-           
-             
-              <breadCrumb title="web" url="http://blog.haohome.top/categories/web/"/>
           
         </display>
     </data>
@@ -502,26 +698,6 @@
 
     
   <url>
-    <loc>http://blog.haohome.top/2018/03/29/Web/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2018-04-10T05:53:47.208Z</lastmod>
-    <data>
-        <display>
-        <title>浏览器缓存问题</title>
-        <pubTime>2018-03-28T16:06:25.000Z</pubTime>
-        
-        <tag>http</tag>
-         
-         
-           
-             
-              <breadCrumb title="web" url="http://blog.haohome.top/categories/web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://blog.haohome.top/2018/01/21/JavaScript/Node_%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2018-04-10T05:53:47.096Z</lastmod>
     <data>
@@ -535,28 +711,6 @@
            
              
               <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2018/03/05/Web/%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E7%9A%84JavaScript%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
-    <lastmod>2018-04-10T05:53:47.029Z</lastmod>
-    <data>
-        <display>
-        <title>一道简单的setTimeout面试题</title>
-        <pubTime>2018-03-05T15:48:00.000Z</pubTime>
-        
-        <tag>面试</tag>
-         
-        <tag>events</tag>
-         
-         
-           
-             
-              <breadCrumb title="web" url="http://blog.haohome.top/categories/web/"/>
           
         </display>
     </data>
@@ -579,48 +733,6 @@
            
              
               <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2018/02/20/HTML5&CSS/viewports%E5%89%96%E6%9E%90/</loc>
-    <lastmod>2018-04-10T05:53:46.941Z</lastmod>
-    <data>
-        <display>
-        <title>Viewport剖析</title>
-        <pubTime>2018-02-20T08:00:00.000Z</pubTime>
-        
-        <tag>css</tag>
-         
-         
-           
-             
-              <breadCrumb title="CSS" url="http://blog.haohome.top/categories/CSS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2018/02/25/HTML5&CSS/Flex%E5%B8%83%E5%B1%80/</loc>
-    <lastmod>2018-04-10T05:53:46.853Z</lastmod>
-    <data>
-        <display>
-        <title>flex弹性布局</title>
-        <pubTime>2018-02-25T12:30:54.000Z</pubTime>
-        
-        <tag>css</tag>
-         
-        <tag>flex</tag>
-         
-         
-           
-             
-              <breadCrumb title="CSS" url="http://blog.haohome.top/categories/CSS/"/>
           
         </display>
     </data>
@@ -663,30 +775,6 @@
            
              
               <breadCrumb title="food" url="http://blog.haohome.top/categories/food/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2018/01/14/Web/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/</loc>
-    <lastmod>2018-04-07T06:57:04.991Z</lastmod>
-    <data>
-        <display>
-        <title>跨域资源共享CORS</title>
-        <pubTime>2018-01-13T16:00:00.000Z</pubTime>
-        
-        <tag>学习记录</tag>
-         
-        <tag>Http</tag>
-         
-        <tag>Ajax</tag>
-         
-         
-           
-             
-              <breadCrumb title="web" url="http://blog.haohome.top/categories/web/"/>
           
         </display>
     </data>
@@ -840,7 +928,7 @@
 
     
   <url>
-    <loc>http://blog.haohome.top/2018/02/20/Web/%E5%89%8D%E7%AB%AF%E7%BD%91%E6%91%98/</loc>
+    <loc>http://blog.haohome.top/2018/02/20/Interview/%E5%89%8D%E7%AB%AF%E7%BD%91%E6%91%98/</loc>
     <lastmod>2018-04-06T18:08:43.123Z</lastmod>
     <data>
         <display>
@@ -848,28 +936,6 @@
         <pubTime>2018-02-20T07:00:00.000Z</pubTime>
         
         <tag>网摘</tag>
-         
-         
-           
-             
-              <breadCrumb title="web" url="http://blog.haohome.top/categories/web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2017/11/15/Web/58%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2018-04-06T18:07:37.733Z</lastmod>
-    <data>
-        <display>
-        <title>58同城面试总结</title>
-        <pubTime>2017-11-14T16:00:00.000Z</pubTime>
-        
-        <tag>css</tag>
-         
-        <tag>面试</tag>
          
          
            
@@ -1021,9 +1087,9 @@
         <title>Java中的类和对象</title>
         <pubTime>2017-12-31T16:00:00.000Z</pubTime>
         
-        <tag>学习记录</tag>
-         
         <tag>Java</tag>
+         
+        <tag>学习记录</tag>
          
          
            
@@ -1043,9 +1109,9 @@
         <title>Java中的static的使用</title>
         <pubTime>2017-12-20T16:00:00.000Z</pubTime>
         
-        <tag>学习记录</tag>
-         
         <tag>Java</tag>
+         
+        <tag>学习记录</tag>
          
          
            
@@ -1065,9 +1131,9 @@
         <title>get和post推荐使用场景</title>
         <pubTime>2017-12-10T11:50:00.000Z</pubTime>
         
-        <tag>学习记录</tag>
-         
         <tag>Java</tag>
+         
+        <tag>学习记录</tag>
          
          
            
@@ -1087,9 +1153,9 @@
         <title>FreeMaker 模板_数据模型</title>
         <pubTime>2017-12-31T16:00:00.000Z</pubTime>
         
-        <tag>学习记录</tag>
-         
         <tag>Java</tag>
+         
+        <tag>学习记录</tag>
          
         <tag>FreeMaker</tag>
          
@@ -1097,46 +1163,6 @@
            
              
               <breadCrumb title="Java" url="http://blog.haohome.top/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2016/10/12/HTML5&CSS/CSS%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2018-02-20T07:58:44.287Z</lastmod>
-    <data>
-        <display>
-        <title>CSS学习记录</title>
-        <pubTime>2016-10-12T12:46:25.000Z</pubTime>
-        
-        <tag>学习记录</tag>
-         
-         
-           
-             
-              <breadCrumb title="CSS" url="http://blog.haohome.top/categories/CSS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2017/11/09/HTML5&CSS/flex-shrink%20%20%E6%96%B0%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%B1%9E%E6%80%A7/</loc>
-    <lastmod>2018-02-20T06:13:16.559Z</lastmod>
-    <data>
-        <display>
-        <title>flex-shrink 新弹性和模型属性</title>
-        <pubTime>2017-11-09T15:30:54.000Z</pubTime>
-        
-        <tag>flex</tag>
-         
-         
-           
-             
-              <breadCrumb title="CSS" url="http://blog.haohome.top/categories/CSS/"/>
           
         </display>
     </data>
@@ -1171,9 +1197,9 @@
         <title>Java中extends和implements的区别</title>
         <pubTime>2017-12-10T16:00:00.000Z</pubTime>
         
-        <tag>学习记录</tag>
-         
         <tag>Java</tag>
+         
+        <tag>学习记录</tag>
          
          
            
@@ -1193,9 +1219,9 @@
         <title>Java中super关键字的使用</title>
         <pubTime>2017-12-31T16:00:00.000Z</pubTime>
         
-        <tag>学习记录</tag>
-         
         <tag>Java</tag>
+         
+        <tag>学习记录</tag>
          
          
            
@@ -1215,9 +1241,9 @@
         <title>Java中的多态</title>
         <pubTime>2017-12-31T16:00:00.000Z</pubTime>
         
-        <tag>学习记录</tag>
-         
         <tag>Java</tag>
+         
+        <tag>学习记录</tag>
          
          
            
@@ -1237,9 +1263,9 @@
         <title>Java中的抽象类</title>
         <pubTime>2017-12-31T16:00:00.000Z</pubTime>
         
-        <tag>学习记录</tag>
-         
         <tag>Java</tag>
+         
+        <tag>学习记录</tag>
          
          
            
@@ -1259,9 +1285,9 @@
         <title>Java中的接口</title>
         <pubTime>2018-01-06T16:00:00.000Z</pubTime>
         
-        <tag>学习记录</tag>
-         
         <tag>Java</tag>
+         
+        <tag>学习记录</tag>
          
          
            

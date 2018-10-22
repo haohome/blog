@@ -108,20 +108,24 @@
 
 
 
-  <meta name="description" content="这是一道很入门的js面试题，考察JavaScript的单线程事件执行机制: 12345for (var i = 0; i &amp;lt; 10; i++) &amp;#123;  setTimeout(function () &amp;#123;    console.log(i)	//10*10  &amp;#125;, 10 * i)&amp;#125; 不理解原因的可能会认为输出0,1,2,3,4,5,6,7,8,9。事实并不是">
-<meta name="keywords" content="面试,events">
+  <meta name="description" content="请求缓存的路线图:  两个概念 强缓存用户发送的请求，直接从客户端缓存中获取，不发送请求到服务器，不与服务器发生交互行为。  协商缓存用户发送的请求，发送到服务器后，由服务器判定是否从缓存中获取资源。    共同点: 客户端获得的数据最后都是从客户端缓存中获得 区别: 强缓存不与服务器交互，而协商缓存则需要与服务器交互。">
+<meta name="keywords" content="http">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一道简单的setTimeout面试题">
-<meta property="og:url" content="http://blog.haohome.top/2018/03/05/Web/一道简单的JavaScript面试题/index.html">
+<meta property="og:title" content="浏览器缓存问题">
+<meta property="og:url" content="http://blog.haohome.top/2018/03/29/HTML5&CSS/浏览器缓存问题/index.html">
 <meta property="og:site_name" content="靖风行&#39;S blog">
-<meta property="og:description" content="这是一道很入门的js面试题，考察JavaScript的单线程事件执行机制: 12345for (var i = 0; i &amp;lt; 10; i++) &amp;#123;  setTimeout(function () &amp;#123;    console.log(i)	//10*10  &amp;#125;, 10 * i)&amp;#125; 不理解原因的可能会认为输出0,1,2,3,4,5,6,7,8,9。事实并不是">
+<meta property="og:description" content="请求缓存的路线图:  两个概念 强缓存用户发送的请求，直接从客户端缓存中获取，不发送请求到服务器，不与服务器发生交互行为。  协商缓存用户发送的请求，发送到服务器后，由服务器判定是否从缓存中获取资源。    共同点: 客户端获得的数据最后都是从客户端缓存中获得 区别: 强缓存不与服务器交互，而协商缓存则需要与服务器交互。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://haohome.top/18-3-5/89406852.jpg">
-<meta property="og:updated_time" content="2018-04-10T05:53:47.029Z">
+<meta property="og:image" content="https://haohome.top/18-3-28/12713380.jpg">
+<meta property="og:image" content="https://haohome.top/18-3-29/57859267.jpg">
+<meta property="og:image" content="https://haohome.top/18-3-29/21518884.jpg">
+<meta property="og:image" content="https://haohome.top/18-3-29/19908920.jpg">
+<meta property="og:image" content="https://haohome.top/18-3-29/99992671.jpg">
+<meta property="og:updated_time" content="2018-10-22T01:13:14.449Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一道简单的setTimeout面试题">
-<meta name="twitter:description" content="这是一道很入门的js面试题，考察JavaScript的单线程事件执行机制: 12345for (var i = 0; i &amp;lt; 10; i++) &amp;#123;  setTimeout(function () &amp;#123;    console.log(i)	//10*10  &amp;#125;, 10 * i)&amp;#125; 不理解原因的可能会认为输出0,1,2,3,4,5,6,7,8,9。事实并不是">
-<meta name="twitter:image" content="https://haohome.top/18-3-5/89406852.jpg">
+<meta name="twitter:title" content="浏览器缓存问题">
+<meta name="twitter:description" content="请求缓存的路线图:  两个概念 强缓存用户发送的请求，直接从客户端缓存中获取，不发送请求到服务器，不与服务器发生交互行为。  协商缓存用户发送的请求，发送到服务器后，由服务器判定是否从缓存中获取资源。    共同点: 客户端获得的数据最后都是从客户端缓存中获得 区别: 强缓存不与服务器交互，而协商缓存则需要与服务器交互。">
+<meta name="twitter:image" content="https://haohome.top/18-3-28/12713380.jpg">
 
 
 
@@ -130,7 +134,7 @@
 
 
 
-  <link rel="canonical" href="http://blog.haohome.top/2018/03/05/Web/一道简单的JavaScript面试题/"/>
+  <link rel="canonical" href="http://blog.haohome.top/2018/03/29/HTML5&CSS/浏览器缓存问题/"/>
 
 
 
@@ -140,7 +144,7 @@
   };
 </script>
 
-  <title>一道简单的setTimeout面试题 | 靖风行'S blog</title>
+  <title>浏览器缓存问题 | 靖风行'S blog</title>
   
 
 
@@ -332,7 +336,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/03/05/Web/一道简单的JavaScript面试题/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/03/29/HTML5&CSS/浏览器缓存问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Daniel">
@@ -349,7 +353,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">一道简单的setTimeout面试题
+          <h1 class="post-title" itemprop="name headline">浏览器缓存问题
               
             
           </h1>
@@ -374,7 +378,7 @@
                 
               
 
-              <time title="创建时间：2018-03-05 23:48:00" itemprop="dateCreated datePublished" datetime="2018-03-05T23:48:00+08:00">2018-03-05</time>
+              <time title="创建时间：2018-03-29 00:06:25" itemprop="dateCreated datePublished" datetime="2018-03-29T00:06:25+08:00">2018-03-29</time>
             
 
             
@@ -391,7 +395,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
+                <time title="修改时间：2018-10-22 09:13:14" itemprop="dateModified" datetime="2018-10-22T09:13:14+08:00">2018-10-22</time>
               
             
           </span>
@@ -408,7 +412,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/HTML5/" itemprop="url" rel="index"><span itemprop="name">HTML5</span></a></span>
 
                 
                 
@@ -424,8 +428,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/03/05/Web/一道简单的JavaScript面试题/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/05/Web/一道简单的JavaScript面试题/" itemprop="commentsCount"></span>
+                <a href="/2018/03/29/HTML5&CSS/浏览器缓存问题/#SOHUCS" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/29/HTML5&CSS/浏览器缓存问题/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -453,37 +457,76 @@
       
 
       
-        <p>这是一道很入门的js面试题，考察JavaScript的单线程事件执行机制:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)	<span class="comment">//10*10</span></span><br><span class="line">  &#125;, <span class="number">10</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>不理解原因的可能会认为输出0,1,2,3,4,5,6,7,8,9。事实并不是这样，原因很简单：</p>
-<p>先看下JavaScript的单线程和异步：</p>
-<p><img src="https://haohome.top/18-3-5/89406852.jpg" width="80%"></p>
+        <p>请求缓存的路线图:</p>
+<p><img src="https://haohome.top/18-3-28/12713380.jpg" width="60%"></p>
+<h2 id="两个概念"><a href="#两个概念" class="headerlink" title="两个概念"></a>两个概念</h2><ol>
+<li><p>强缓存<br>用户发送的请求，直接从客户端缓存中获取，不发送请求到服务器，不与服务器发生交互行为。</p>
+</li>
+<li><p>协商缓存<br>用户发送的请求，发送到服务器后，由服务器判定是否从缓存中获取资源。</p>
+</li>
+</ol>
 <blockquote>
-<ul>
-<li>JS是单线程语言，浏览器只分配给JS一个主线程用来执行任务（函数）；</li>
-<li>任务一次只能一次，任务会形成队列排队执行；</li>
-<li>浏览器会为setTimeout（定时器，异步）单独开一个线程，异步任务完成后会触发回调函数，这时就把回调函数放到主线程任务队列等待执行</li>
-</ul>
+<p>共同点: 客户端获得的数据最后都是从客户端缓存中获得</p>
+<p>区别: 强缓存不与服务器交互，而协商缓存则需要与服务器交互。</p>
 </blockquote>
 <a id="more"></a>
-<p>具体到例子：</p>
+<h2 id="四个过程详解"><a href="#四个过程详解" class="headerlink" title="四个过程详解"></a>四个过程详解</h2><h3 id="（a）浏览器判定是否有缓存"><a href="#（a）浏览器判定是否有缓存" class="headerlink" title="（a）浏览器判定是否有缓存"></a>（a）浏览器判定是否有缓存</h3><p>所谓“客户端缓存”就是指用户设备中本地资源。不同浏览器缓存文件的地址也不尽相同。</p>
+<p>对于一个html页面，缓存分3部分，一个是页面内容，一个是css样式，一个是JS文件</p>
+<p>我们以chrome为例来查看下浏览器缓存文件的地址，<br>1）首先在chrome中输入：chrome://chrome-urls/，看到一堆列表,里面隐藏了许多浏览器的奥秘，有兴趣的可以自己深扒。<br>2）找到 chrome://cache（当然也可以直接输入这个地址）</p>
+<h3 id="（b）缓存是否过期"><a href="#（b）缓存是否过期" class="headerlink" title="（b）缓存是否过期"></a>（b）缓存是否过期</h3><p><img src="https://haohome.top/18-3-29/57859267.jpg" width="80%"></p>
 <ul>
-<li>js没有块级作用域，for循环中i提升为全局变量；</li>
-<li>setTimeout是异步执行，而for循环为同步执行，每执行一次for循环，setTimeout执行一次，触发一次回调函数；</li>
-<li>for循环已经执行完时setTimeout内部回调函数开始，i值为10，故最后连续输出10个10</li>
+<li>expires</li>
 </ul>
-<p>如果需要输出连续数字，则需要采用闭包或ES6语法中的let</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 闭包</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">void</span> <span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(j)</span><br><span class="line">    &#125;, <span class="number">10</span> * j)</span><br><span class="line">  &#125;(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// let</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>;  i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">  &#125;, <span class="number">10</span> * i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>闭包：</p>
+<p>Http1.0 中的标准，表明过期时间，注意此处的时间都是指的是服务器的时间。</p>
+<p><strong>存在的问题：服务器时间与客户端时间的不一致，就会导致缓存跟期待效果出现偏差。</strong></p>
 <ul>
-<li>JavaScript的函数会形成作用域，闭包就是记住变量不受污染</li>
-<li>i作为参数传入匿名函数被记住</li>
+<li><p>Cache-Control<br>Http1.1 中的标准，可以看成是 expires 的补充。使用的是相对时间的概念。<br>Cache-Control的属性:</p>
+<p>1）max-age: 设置缓存的最大的有效时间，单位为秒（s）。max-age会覆盖掉Expires</p>
+<p>2)  s-maxage: 只用于共享缓存，比如CDN缓存（s -&gt; share）。与max-age 的区别是：max-age用于普通缓存，<br>而s-maxage用于代理缓存。如果存在s-maxage,则会覆盖max-age 和 Expires.</p>
+<p>3)  public：响应会被缓存，并且在多用户间共享。默认是public。</p>
+<p>4)  private: 响应只作为私有的缓存，不能在用户间共享。如果要求HTTP认证，响应会自动设置为private。</p>
+<p>5）no-cache: 指定不缓存响应，表明资源不进行缓存。但是设置了no-cache之后并不代表浏览器不缓存，而是在缓存前要向服务器确认资源是否被更改。因此有的时候只设置no-cache防止缓存还是不够保险，还可以加上private指令，将过期时间设为过去的时间。</p>
+<p>6）no-store: 绝对禁止缓存。</p>
+<p>7）must-revalidate: 如果页面过期，则去服务器进行获取。</p>
+<p><img src="https://haohome.top/18-3-29/21518884.jpg" width="60%"></p>
+<p>所以判断缓存是否过期步骤是：<br>1） 查看是否有cache-control 的max-age / s-maxage , 如果有，则用服务器时间date值 + max-age/s-maxage 的秒数计算出新的过期时间，将当前时间与过期时间进行比较，判断是否过期<br>2）查看是否有cache-control 的max-age / s-maxage，则用expires 作为过期时间比较</p>
+</li>
 </ul>
-<p>let：</p>
+<blockquote>
+<p>总结：（b）过程执行完后，如果判定为未过期，则使用客户端缓存。那么就是属于“强缓存”。</p>
+</blockquote>
+<h3 id="（c）跟服务器协商是否使用缓存"><a href="#（c）跟服务器协商是否使用缓存" class="headerlink" title="（c）跟服务器协商是否使用缓存"></a>（c）跟服务器协商是否使用缓存</h3><p><img src="https://haohome.top/18-3-29/19908920.jpg" width="80%"></p>
+<p>到这一步的时候，浏览器会向服务器发送请求，同时如果上一次的缓存中有Last-modified 和 Etag 字段，<br>浏览器将在request header 中加入If-Modified-Since（对应于Last-modified）， 和If-None-Match（对应于Etag）。</p>
 <ul>
-<li>在{  }内形成块级作用域；</li>
-<li>生成不同的i实例，形成一个匿名函数自调，类似于闭包</li>
+<li><p>Last-modified: 表明请求的资源上次的修改时间。</p>
+</li>
+<li><p>If-Modified-Since：客户端保留的资源上次的修改时间。</p>
+</li>
+<li><p>Etag：资源的内容标识。（不唯一，通常为文件的md5或者一段hash值，只要保证写入和验证时的方法一致即可）</p>
+</li>
+<li><p>If-None-Match： 客户端保留的资源内容标识。</p>
+<blockquote>
+<p>1） 分布式系统尽量关闭Etag，因为每台机器生成的Etag都不一样。<br>2）分布式系统里多台机器间文件的Last-Modified必须一致，以免负载均衡不同导致对比失败。</p>
+</blockquote>
+</li>
 </ul>
+<p>通常情况下，如果同时发送 If-None-Match 、If-Modified-Since字段，服务器只要比较etag 的内容即可，当然具体处理方式，看服务器的约定规则。</p>
+<h3 id="（d）协商缓存"><a href="#（d）协商缓存" class="headerlink" title="（d）协商缓存"></a>（d）协商缓存</h3><p>在这个阶段，服务器一般会将Cache-control、expires 、last-modified、date、etag 等字段在response header 中返回，便于下次缓存。当然具体的场景，也是看服务器的约定规则设定。</p>
+<h2 id="缓存的不同来源"><a href="#缓存的不同来源" class="headerlink" title="缓存的不同来源"></a>缓存的不同来源</h2><h3 id="from-disk-cache"><a href="#from-disk-cache" class="headerlink" title="from disk cache"></a>from disk cache</h3><p>从磁盘中获取缓存资源，等待下次访问时不需要重新下载资源，而直接从磁盘中获取。它的直接操作对象为CurlCacheManager。</p>
+<h3 id="from-memory-cache"><a href="#from-memory-cache" class="headerlink" title="from memory cache"></a>from memory cache</h3><p>从内存中获取资源，等待下次访问时不需要重新下载资源，而直接从内存中获取。Webkit早已支持memoryCache。<br>目前Webkit资源分成两类，一类是主资源，比如HTML页面，或者下载项，一类是派生资源，比如HTML页面中内嵌的图片或者脚本链接，分别对应代码中两个类：　　　　MainResourceLoader和SubresourceLoader。虽然Webkit支持memoryCache，但是也只是针对派生资源，它对应的类为CachedResource，用于保存原始数据（比如CSS，JS等），以及解码过的图片数据。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>当退出进程时，内存中的数据会被清空，而磁盘的数据不会，所以，当下次再进入该进程时，该进程仍可以从diskCache中获得数据，而memoryCache则不行。</p>
+<h3 id="相似"><a href="#相似" class="headerlink" title="相似"></a>相似</h3><p>diskCache与memoryCache相似之处就是也只能存储一些派生类资源文件。它的存储形式为一个index.dat文件，记录存储数据的url，然后再分别存储该url的response信息和content内容。Response信息最大作用就是用于判断服务器上该url的content内容是否被修改。</p>
+<h3 id="用户行为"><a href="#用户行为" class="headerlink" title="用户行为"></a>用户行为</h3><p><img src="https://haohome.top/18-3-29/99992671.jpg" width="80%"></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案:"></a>解决方案:</h2><h4 id="1、页面内容"><a href="#1、页面内容" class="headerlink" title="1、页面内容"></a>1、页面内容</h4><p><meta http-equiv="Expires" content="0"></p>
+<p><meta http-equiv="Pragma" content="no-cache"></p>
+<p><meta http-equiv="Cache-control" content="no-cache"></p>
+<meta http-equiv="Cache" content="no-cache">
+
+<h4 id="2、CSS和JS文件"><a href="#2、CSS和JS文件" class="headerlink" title="2、CSS和JS文件"></a>2、CSS和JS文件</h4><p><link rel="stylesheet" href="../css/register.css"></p>
+<p><script src="../scripts/register.js"></script><br>改成</p>
+<p><link rel="stylesheet" href="../css/register.css?v=20161020"></p>
+<p><script src="../scripts/register.js?v=20161020"></script><br>就是只要在每次修改后改一下版本号即可</p>
+<p>这样每次修改后都要改，有没有自动加版本号的东西，估计有，如果是JSP和php可以通过脚本<br>自动生成，如果是纯html也可以通过document.write，或者用动态加载JS的框架啥的。</p>
 
       
     </div>
@@ -533,9 +576,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/面试/" rel="tag"># 面试</a>
-          
-            <a href="/tags/events/" rel="tag"># events</a>
+            <a href="/tags/http/" rel="tag"># http</a>
           
         </div>
       
@@ -548,8 +589,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/01/JavaScript/闭包与模块/" rel="next" title="闭包与模块">
-                <i class="fa fa-chevron-left"></i> 闭包与模块
+              <a href="/2018/03/11/JavaScript/通俗易懂的原型与原型链/" rel="next" title="通俗易懂的原型与原型链">
+                <i class="fa fa-chevron-left"></i> 通俗易懂的原型与原型链
               </a>
             
           </div>
@@ -558,8 +599,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/06/HTML5&CSS/利用H5画随机色圆/" rel="prev" title="利用H5画随机色圆">
-                利用H5画随机色圆 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/07/JavaScript/创建对象的Object.create与new/" rel="prev" title="创建对象的Object.create与new">
+                创建对象的Object.create与new <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -610,8 +651,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -630,7 +680,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-count">60</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -659,7 +709,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -823,6 +875,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#两个概念"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E24;&#x4E2A;&#x6982;&#x5FF5;" class="headerlink" title="&#x4E24;&#x4E2A;&#x6982;&#x5FF5;"></a>&#x4E24;&#x4E2A;&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四个过程详解"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x56DB;&#x4E2A;&#x8FC7;&#x7A0B;&#x8BE6;&#x89E3;" class="headerlink" title="&#x56DB;&#x4E2A;&#x8FC7;&#x7A0B;&#x8BE6;&#x89E3;"></a>&#x56DB;&#x4E2A;&#x8FC7;&#x7A0B;&#x8BE6;&#x89E3;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（a）浏览器判定是否有缓存"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#xFF08;a&#xFF09;&#x6D4F;&#x89C8;&#x5668;&#x5224;&#x5B9A;&#x662F;&#x5426;&#x6709;&#x7F13;&#x5B58;" class="headerlink" title="&#xFF08;a&#xFF09;&#x6D4F;&#x89C8;&#x5668;&#x5224;&#x5B9A;&#x662F;&#x5426;&#x6709;&#x7F13;&#x5B58;"></a>&#xFF08;a&#xFF09;&#x6D4F;&#x89C8;&#x5668;&#x5224;&#x5B9A;&#x662F;&#x5426;&#x6709;&#x7F13;&#x5B58;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（b）缓存是否过期"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#xFF08;b&#xFF09;&#x7F13;&#x5B58;&#x662F;&#x5426;&#x8FC7;&#x671F;" class="headerlink" title="&#xFF08;b&#xFF09;&#x7F13;&#x5B58;&#x662F;&#x5426;&#x8FC7;&#x671F;"></a>&#xFF08;b&#xFF09;&#x7F13;&#x5B58;&#x662F;&#x5426;&#x8FC7;&#x671F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（c）跟服务器协商是否使用缓存"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#xFF08;c&#xFF09;&#x8DDF;&#x670D;&#x52A1;&#x5668;&#x534F;&#x5546;&#x662F;&#x5426;&#x4F7F;&#x7528;&#x7F13;&#x5B58;" class="headerlink" title="&#xFF08;c&#xFF09;&#x8DDF;&#x670D;&#x52A1;&#x5668;&#x534F;&#x5546;&#x662F;&#x5426;&#x4F7F;&#x7528;&#x7F13;&#x5B58;"></a>&#xFF08;c&#xFF09;&#x8DDF;&#x670D;&#x52A1;&#x5668;&#x534F;&#x5546;&#x662F;&#x5426;&#x4F7F;&#x7528;&#x7F13;&#x5B58;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（d）协商缓存"><span class="nav-number">2.4.</span> <span class="nav-text"><a href="#&#xFF08;d&#xFF09;&#x534F;&#x5546;&#x7F13;&#x5B58;" class="headerlink" title="&#xFF08;d&#xFF09;&#x534F;&#x5546;&#x7F13;&#x5B58;"></a>&#xFF08;d&#xFF09;&#x534F;&#x5546;&#x7F13;&#x5B58;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存的不同来源"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7F13;&#x5B58;&#x7684;&#x4E0D;&#x540C;&#x6765;&#x6E90;" class="headerlink" title="&#x7F13;&#x5B58;&#x7684;&#x4E0D;&#x540C;&#x6765;&#x6E90;"></a>&#x7F13;&#x5B58;&#x7684;&#x4E0D;&#x540C;&#x6765;&#x6E90;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#from-disk-cache"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#from-disk-cache" class="headerlink" title="from disk cache"></a>from disk cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#from-memory-cache"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#from-memory-cache" class="headerlink" title="from memory cache"></a>from memory cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#&#x533A;&#x522B;" class="headerlink" title="&#x533A;&#x522B;"></a>&#x533A;&#x522B;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相似"><span class="nav-number">3.4.</span> <span class="nav-text"><a href="#&#x76F8;&#x4F3C;" class="headerlink" title="&#x76F8;&#x4F3C;"></a>&#x76F8;&#x4F3C;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户行为"><span class="nav-number">3.5.</span> <span class="nav-text"><a href="#&#x7528;&#x6237;&#x884C;&#x4E3A;" class="headerlink" title="&#x7528;&#x6237;&#x884C;&#x4E3A;"></a>&#x7528;&#x6237;&#x884C;&#x4E3A;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x89E3;&#x51B3;&#x65B9;&#x6848;" class="headerlink" title="&#x89E3;&#x51B3;&#x65B9;&#x6848;:"></a>&#x89E3;&#x51B3;&#x65B9;&#x6848;:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、页面内容"><span class="nav-number">4.0.1.</span> <span class="nav-text"><a href="#1&#x3001;&#x9875;&#x9762;&#x5185;&#x5BB9;" class="headerlink" title="1&#x3001;&#x9875;&#x9762;&#x5185;&#x5BB9;"></a>1&#x3001;&#x9875;&#x9762;&#x5185;&#x5BB9;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、CSS和JS文件"><span class="nav-number">4.0.2.</span> <span class="nav-text"><a href="#2&#x3001;CSS&#x548C;JS&#x6587;&#x4EF6;" class="headerlink" title="2&#x3001;CSS&#x548C;JS&#x6587;&#x4EF6;"></a>2&#x3001;CSS&#x548C;JS&#x6587;&#x4EF6;</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
