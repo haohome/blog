@@ -10,7 +10,7 @@
   <id>http://blog.haohome.top/</id>
   
   <author>
-    <name>Daniel</name>
+    <name>Yifoo</name>
     
   </author>
   
@@ -345,36 +345,6 @@
   </entry>
   
   <entry>
-    <title>hashchange事件</title>
-    <link href="http://blog.haohome.top/2018/08/28/Program/hashchange%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://blog.haohome.top/2018/08/28/Program/hashchange事件/</id>
-    <published>2018-08-27T16:00:00.000Z</published>
-    <updated>2018-08-28T09:28:17.748Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p></blockquote><p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><a id="more"></a><p>hashchange 事件回调函数对象主要有两个参数会用到:</p><ul><li><p>newURL: 当前页面新的URL</p></li><li><p>oldURL: 当前页面旧的URL</p></li></ul><p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"oldURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"newURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.onhashchange = handleHashChange;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;hashchange&quot;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//hash变化的处理逻辑&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
-    
-      <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
-    
-      <category term="hash" scheme="http://blog.haohome.top/tags/hash/"/>
-    
-  </entry>
-  
-  <entry>
     <title>JS判断当前文本输入状态</title>
     <link href="http://blog.haohome.top/2018/08/28/Program/js%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81/"/>
     <id>http://blog.haohome.top/2018/08/28/Program/js判断当前文本输入状态/</id>
@@ -404,6 +374,36 @@
       <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
     
       <category term="input" scheme="http://blog.haohome.top/tags/input/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hashchange事件</title>
+    <link href="http://blog.haohome.top/2018/08/28/Program/hashchange%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://blog.haohome.top/2018/08/28/Program/hashchange事件/</id>
+    <published>2018-08-27T16:00:00.000Z</published>
+    <updated>2018-08-28T09:28:17.748Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p></blockquote><p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><a id="more"></a><p>hashchange 事件回调函数对象主要有两个参数会用到:</p><ul><li><p>newURL: 当前页面新的URL</p></li><li><p>oldURL: 当前页面旧的URL</p></li></ul><p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"hashchange"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"oldURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(event,<span class="string">"newURL"</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.onhashchange = handleHashChange;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;hashchange&quot;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//hash变化的处理逻辑&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://blog.haohome.top/tags/JavaScript/"/>
+    
+      <category term="兼容性" scheme="http://blog.haohome.top/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
+    
+      <category term="hash" scheme="http://blog.haohome.top/tags/hash/"/>
     
   </entry>
   

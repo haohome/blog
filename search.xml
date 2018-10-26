@@ -129,6 +129,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[JS判断当前文本输入状态]]></title>
+    <url>%2F2018%2F08%2F28%2FProgram%2Fjs%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81%2F</url>
+    <content type="text"><![CDATA[最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。 在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了: 绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮 单纯按键监听，并没有判断中文输入状态 网上查了一些资料： 键盘事件:当一个键盘被按下并松开时,每个浏览器都会触发三个事件:keydown、keypress、keyupkeydown事件发生在按键被按下的时候，接着触发keypress，松开按键的时候触发keyup事件 还有一个事件就是input:input事件能够检测用户的每一次输入 以上事件在英文状态下没有问题,但在中文状态下,依然捕获到的是英文,如下图: 中文输入法 firfox：输入触发keydown，回车确认输入触发keyupchrome：输入触发keydown、keyup，回车确认输入只触发keydownIE：输入触发keydown、keyup，回车确认输入触发keydown，keyupSafari：输入触发keydown、keyup，回车确认输入触发keydown，keyupopera：输入触发keydown、keyup，回车确认输入触发keydown，keyup在input、textarea中，中文输入法时：没有触发keypress事件keypress事件：对中文输入法支持不好，无法响应中文输入；无法响应系统功能键 解决方案: 利用change事件: 监听输入框最终内容变化识别,当文本输入状态完成,并且input失去焦点再触发enter事件 通常情况下,文本框中文输入状态时,按下回车会触发相应的按钮,此时input会失去焦点并触发change事件,此时将输入状态传给按钮事件,即可判断并执行相应事件 利用compositionstart和compositionend事件(事件不兼容旧浏览器) compositionstart:事件触发于一段文字的输入之前 compositionend事件:当文本段落的组成完成或取消时, compositionend事件将被激发 简单来说，非直接输入法如中文输入开始时，触发compositionstart事件，结束时触发compositionend事件 两类解决方案都可以监听到当前输入框的输入状态,结合input事件，就能对所有的输入进行实时的检测了 1234567891011121314151617var doing=false;var doSomething=function(e)&#123; //我要干点啥&#125;document.getElementById('testInput').addEventListener('compositionstart',function(e)&#123; doing=true;&#125;,false);document.getElementById('testInput').addEventListener('input',function(e)&#123; if(!doing)&#123; doSomething(); &#125;&#125;,false);document.getElementById('testInput').addEventListener('compositionend',function(e)&#123; doing=false; doSomething();&#125;,false);]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>input</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hashchange事件]]></title>
     <url>%2F2018%2F08%2F28%2FProgram%2Fhashchange%E4%BA%8B%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。 当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件: 1234window.onhashchange = handleHashChange;window.addEventListener("hashchange",function(event)&#123; //hash变化的处理逻辑&#125;) hashchange 事件回调函数对象主要有两个参数会用到: newURL: 当前页面新的URL oldURL: 当前页面旧的URL 但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码: 12345678if(!window.HashChangeEvent)(function()&#123; var lastURL=document.URL; window.addEventListener("hashchange",function(event)&#123; Object.defineProperty(event,"oldURL",&#123;enumerable:true,configurable:true,value:lastURL&#125;); Object.defineProperty(event,"newURL",&#123;enumerable:true,configurable:true,value:document.URL&#125;); lastURL=document.URL; &#125;);&#125;());]]></content>
@@ -139,18 +151,6 @@
         <tag>JavaScript</tag>
         <tag>兼容性</tag>
         <tag>hash</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[JS判断当前文本输入状态]]></title>
-    <url>%2F2018%2F08%2F28%2FProgram%2Fjs%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81%2F</url>
-    <content type="text"><![CDATA[最近在重构我的网址导航页面,这是我认识前端网页的启蒙项目,网上找的模板,然后修改链接、微调样式，成为了最初的网页导航1.0。 在搜索的时候，我们需要按Enter键实现直接跳转搜索，因此添加了按键监听事件。但问题出现了: 绑定keyup事件会将输入法中的英文文字输入到文字框并直接触发搜索按钮 单纯按键监听，并没有判断中文输入状态 网上查了一些资料： 键盘事件:当一个键盘被按下并松开时,每个浏览器都会触发三个事件:keydown、keypress、keyupkeydown事件发生在按键被按下的时候，接着触发keypress，松开按键的时候触发keyup事件 还有一个事件就是input:input事件能够检测用户的每一次输入 以上事件在英文状态下没有问题,但在中文状态下,依然捕获到的是英文,如下图: 中文输入法 firfox：输入触发keydown，回车确认输入触发keyupchrome：输入触发keydown、keyup，回车确认输入只触发keydownIE：输入触发keydown、keyup，回车确认输入触发keydown，keyupSafari：输入触发keydown、keyup，回车确认输入触发keydown，keyupopera：输入触发keydown、keyup，回车确认输入触发keydown，keyup在input、textarea中，中文输入法时：没有触发keypress事件keypress事件：对中文输入法支持不好，无法响应中文输入；无法响应系统功能键 解决方案: 利用change事件: 监听输入框最终内容变化识别,当文本输入状态完成,并且input失去焦点再触发enter事件 通常情况下,文本框中文输入状态时,按下回车会触发相应的按钮,此时input会失去焦点并触发change事件,此时将输入状态传给按钮事件,即可判断并执行相应事件 利用compositionstart和compositionend事件(事件不兼容旧浏览器) compositionstart:事件触发于一段文字的输入之前 compositionend事件:当文本段落的组成完成或取消时, compositionend事件将被激发 简单来说，非直接输入法如中文输入开始时，触发compositionstart事件，结束时触发compositionend事件 两类解决方案都可以监听到当前输入框的输入状态,结合input事件，就能对所有的输入进行实时的检测了 1234567891011121314151617var doing=false;var doSomething=function(e)&#123; //我要干点啥&#125;document.getElementById('testInput').addEventListener('compositionstart',function(e)&#123; doing=true;&#125;,false);document.getElementById('testInput').addEventListener('input',function(e)&#123; if(!doing)&#123; doSomething(); &#125;&#125;,false);document.getElementById('testInput').addEventListener('compositionend',function(e)&#123; doing=false; doSomething();&#125;,false);]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>input</tag>
       </tags>
   </entry>
   <entry>
@@ -473,9 +473,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中的多态]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
-    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
+    <title><![CDATA[Java中的抽象类]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -497,22 +497,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[FreeMaker 模板_数据模型]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FFreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%2F</url>
-    <content type="text"><![CDATA[1. 模板 + 数据模型 = 输出1.1 模板 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如: 12345678910&lt;html&gt; &lt;head&gt; &lt;title&gt;Welcome!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Welcome $&#123;user&#125;!&lt;/h1&gt; &lt;p&gt;Our latest product: &lt;a href="$&#123;latestProduct.url&#125;"&gt;$&#123;latestProduct.name&#125;&lt;/a&gt;! &lt;/body&gt;&lt;/html&gt; ${…}：插值表达式(interpolation) FTL标签：FreeMarker模板的语言标签，标签的名字以 # 开头，用户自定义的FTL标签则需要使用 @ 来代替 # 注释：使用 &lt;#– and –&gt; 来标识 其他任何不是插值、FTL标签或注释的内容将被视为静态文本，直接在页面输出 1.2 数据模型为模板准备的数据整体被称作为数据模型数据模型是树形结构,例如: 123456789101112131415161718192021222324252627(root) | +- animals | | | +- mouse | | | | | +- size = "small" | | | | | +- price = 50 | | | +- elephant | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- python | | | +- size = "medium" | | | +- price = 4999 | +- message = "It is a test" | +- misc | +- foo = "Something" hashes (哈希表): 指变量中扮演目录角色(比如 root, animals, mouse, elephant, python, misc) 哈希表存储其他变量(被称为 子变量)， 它们可以通过名称来查找(比如 “animals”, “mouse” 或 “price”)。 scalars (标量): 指存储单值的变量 (size, price, message 和 foo) 如果要在模板中使用子变量， 那应该从根root开始指定它的路径，每级之间用点来分隔开。要访问 mouse 的 price ，要从root开始，首先进入到 animals ，之后访问 mouse ，最后访问 price 。就可以这样来写 animals.mouse.price。 sequences (序列): 像哈希表那样存储子变量，但是子变量没有名字，它们只是列表中的项。在下面这个数据模型中， animals 和 misc.fruits 就是序列： 1234567891011121314151617181920212223242526272829303132333435(root) | +- animals | | | +- (1st) | | | | | +- name = "mouse" | | | | | +- size = "small" | | | | | +- price = 50 | | | +- (2nd) | | | | | +- name = "elephant" | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- (3rd) | | | +- name = "python" | | | +- size = "medium" | | | +- price = 4999 | +- misc | +- fruits | +- (1st) = "orange" | +- (2nd) = "banana" 要访问序列的子变量，可以使用方括号形式的数字索引下标。 索引下标从0开始(从0开始也是程序员的传统)，那么第一项的索引就是0， 第二项的索引就是1等等。要得到第一个动物的名称的话，可以这么来写代码 animals[0].name。 标量类型可以分为如下的类别： 字符串：就是文本，也就是任意的字符序列，比如上面提到的 ‘m’,’o’,’u’, ‘s’,’e’。比如 name 和 size 也是字符串。 数字：这是数值类型，就像上面的 price。 在FreeMarker中，字符串 “50” 和数字 50 是两种完全不同的类型。 日期/时间: 可以是日期-时间格式(存储某一天的日期和时间)， 或者是日期(只有日期，没有时间)，或者是时间(只有时间，没有日期)。 布尔值：对应着对/错(是/否，开/关等值)类似的值。 总结： 数据模型可以被看成是树形结构。 标量用于存储单一的值。这种类型的值可以是字符串，数字，日期/时间或者是布尔值。 哈希表是一种存储变量及其相关且有唯一标识名称的容器。 序列是存储有序变量的容器。存储的变量可以通过数字索引来检索，索引通常从0开始。]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>学习记录</tag>
-        <tag>FreeMaker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Java中的抽象类]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB%2F</url>
-    <content type="text"><![CDATA[1.语法定义抽象类前使用abstract关键字修饰,则该类为抽象类 2.应用场景 父类只知道子类应该包含哪些方法,但不知道子类如何实现这些方法 从多个具有相同特征的类中抽象出一个抽象类,以这个抽象类作为子类额模板,避免子类设计的随意性3.作用抽象类是约束子类必须有哪些方法,而并不关注子类如何实现这些方法4.使用规则(步骤) 1)abstract定义抽象类 2)abstract定义抽象方法,只有声明,不需要实现(就是定义一个方法名,让子类根据自己情况实现) 3)包含抽象方法的类是抽象类 4)抽象类中可以包含普通方法,也可以没有抽象方法 5)抽象类不能直接创建,可以定义引用变量]]></content>
+    <title><![CDATA[Java中的多态]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
+    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -531,6 +518,19 @@
       <tags>
         <tag>Java</tag>
         <tag>学习记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[FreeMaker 模板_数据模型]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FFreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[1. 模板 + 数据模型 = 输出1.1 模板 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如: 12345678910&lt;html&gt; &lt;head&gt; &lt;title&gt;Welcome!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Welcome $&#123;user&#125;!&lt;/h1&gt; &lt;p&gt;Our latest product: &lt;a href="$&#123;latestProduct.url&#125;"&gt;$&#123;latestProduct.name&#125;&lt;/a&gt;! &lt;/body&gt;&lt;/html&gt; ${…}：插值表达式(interpolation) FTL标签：FreeMarker模板的语言标签，标签的名字以 # 开头，用户自定义的FTL标签则需要使用 @ 来代替 # 注释：使用 &lt;#– and –&gt; 来标识 其他任何不是插值、FTL标签或注释的内容将被视为静态文本，直接在页面输出 1.2 数据模型为模板准备的数据整体被称作为数据模型数据模型是树形结构,例如: 123456789101112131415161718192021222324252627(root) | +- animals | | | +- mouse | | | | | +- size = "small" | | | | | +- price = 50 | | | +- elephant | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- python | | | +- size = "medium" | | | +- price = 4999 | +- message = "It is a test" | +- misc | +- foo = "Something" hashes (哈希表): 指变量中扮演目录角色(比如 root, animals, mouse, elephant, python, misc) 哈希表存储其他变量(被称为 子变量)， 它们可以通过名称来查找(比如 “animals”, “mouse” 或 “price”)。 scalars (标量): 指存储单值的变量 (size, price, message 和 foo) 如果要在模板中使用子变量， 那应该从根root开始指定它的路径，每级之间用点来分隔开。要访问 mouse 的 price ，要从root开始，首先进入到 animals ，之后访问 mouse ，最后访问 price 。就可以这样来写 animals.mouse.price。 sequences (序列): 像哈希表那样存储子变量，但是子变量没有名字，它们只是列表中的项。在下面这个数据模型中， animals 和 misc.fruits 就是序列： 1234567891011121314151617181920212223242526272829303132333435(root) | +- animals | | | +- (1st) | | | | | +- name = "mouse" | | | | | +- size = "small" | | | | | +- price = 50 | | | +- (2nd) | | | | | +- name = "elephant" | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- (3rd) | | | +- name = "python" | | | +- size = "medium" | | | +- price = 4999 | +- misc | +- fruits | +- (1st) = "orange" | +- (2nd) = "banana" 要访问序列的子变量，可以使用方括号形式的数字索引下标。 索引下标从0开始(从0开始也是程序员的传统)，那么第一项的索引就是0， 第二项的索引就是1等等。要得到第一个动物的名称的话，可以这么来写代码 animals[0].name。 标量类型可以分为如下的类别： 字符串：就是文本，也就是任意的字符序列，比如上面提到的 ‘m’,’o’,’u’, ‘s’,’e’。比如 name 和 size 也是字符串。 数字：这是数值类型，就像上面的 price。 在FreeMarker中，字符串 “50” 和数字 50 是两种完全不同的类型。 日期/时间: 可以是日期-时间格式(存储某一天的日期和时间)， 或者是日期(只有日期，没有时间)，或者是时间(只有时间，没有日期)。 布尔值：对应着对/错(是/否，开/关等值)类似的值。 总结： 数据模型可以被看成是树形结构。 标量用于存储单一的值。这种类型的值可以是字符串，数字，日期/时间或者是布尔值。 哈希表是一种存储变量及其相关且有唯一标识名称的容器。 序列是存储有序变量的容器。存储的变量可以通过数字索引来检索，索引通常从0开始。]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>学习记录</tag>
+        <tag>FreeMaker</tag>
       </tags>
   </entry>
   <entry>
@@ -659,8 +659,8 @@
         <category>HTML5</category>
       </categories>
       <tags>
-        <tag>css</tag>
         <tag>html5</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
