@@ -329,6 +329,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yifoo">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="url">
+                  创建对象的Object.create与new
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-07 00:00:00" itemprop="dateCreated datePublished" datetime="2018-04-07T00:00:00+08:00">2018-04-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/04/07/JavaScript/创建对象的Object.create与new/#SOHUCS" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/" class="cy_cmt_count" data-xid="2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>创建对象有几种方式:</p>
+<ul>
+<li><p>直接量:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1=&#123;<span class="attr">name</span>:<span class="string">"xiaowang"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2=<span class="keyword">new</span> <span class="built_in">Object</span>(&#123;<span class="attr">name</span>:<span class="string">"xiaowang"</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj1,obj2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造函数:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> M=<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;<span class="keyword">this</span>.name=name&#125;;</span><br><span class="line"><span class="keyword">var</span> obj3=<span class="keyword">new</span> M(<span class="string">'xiaowang'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(obj3);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Object.create</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p=&#123;<span class="attr">name</span>:<span class="string">'xiaowang'</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj4=<span class="built_in">Object</span>.create(p);</span><br><span class="line"><span class="built_in">console</span>.log(obj4);</span><br></pre></td></tr></table></figure>
+<p>对应的输出结果为:</p>
+<p><img src="https://haohome.top/18-4-7/88488666.jpg" alt="img"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/07/JavaScript/创建对象的Object.create与new/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/03/29/HTML5&CSS/浏览器缓存问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2057,200 +2253,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/02/20/Interview/前端网摘/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yifoo">
-      <meta itemprop="description" content="独立 自由 分享 感悟">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="靖风行'S blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/20/Interview/前端网摘/" itemprop="url">
-                  前端网摘
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-02-20 15:00:00" itemprop="dateCreated datePublished" datetime="2018-02-20T15:00:00+08:00">2018-02-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-10-22 09:29:12" itemprop="dateModified" datetime="2018-10-22T09:29:12+08:00">2018-10-22</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Interview/" itemprop="url" rel="index"><span itemprop="name">Interview</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/02/20/Interview/前端网摘/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/02/20/Interview/前端网摘/" class="cy_cmt_count" data-xid="2018/02/20/Interview/前端网摘/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-移动端网摘"><a href="#1-移动端网摘" class="headerlink" title="1. 移动端网摘"></a>1. 移动端网摘</h2><ol>
-<li><a href="https://www.w3cplus.com/css/viewports.html" target="_blank" rel="noopener">viewports剖析</a></li>
-<li><a href="https://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html" target="_blank" rel="noopener">使用Flexible实现手淘H5页面的终端适配</a></li>
-<li><a href="https://www.w3cplus.com/css/vw-for-layout.html" target="_blank" rel="noopener">再聊移动端适配</a></li>
-<li><a href="https://www.w3cplus.com/mobile/vw-layout-in-vue.html" target="_blank" rel="noopener">如何在Vue项目中使用vw实现移动端适配</a></li>
-<li><a href="https://material.io/devices/" target="_blank" rel="noopener">谷歌device列表</a></li>
-<li><a href="http://www.shejidaren.com/examples/tools/chichun/ui-design-spec.html#nogo" target="_blank" rel="noopener">最新Android &amp; iOS设计尺寸规范——2015</a></li>
-<li><a href="http://www.woshipm.com/pmd/176328.html" target="_blank" rel="noopener">px、pt、ppi、dpi、dp、sp之间的关系</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2297,7 +2304,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-count">61</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2429,7 +2436,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">45</span>
+                      
+                    
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
