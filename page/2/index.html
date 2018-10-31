@@ -2033,7 +2033,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/04/07/JavaScript/跨域请求的jsonp处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yifoo">
@@ -2052,8 +2052,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="url">
-                  创建对象的Object.create与new
+                <a class="post-title-link" href="/2018/04/07/JavaScript/跨域请求的jsonp处理/" itemprop="url">
+                  跨域请求的jsonp处理
                 </a>
               
             
@@ -2096,7 +2096,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-04-10 13:53:47" itemprop="dateModified" datetime="2018-04-10T13:53:47+08:00">2018-04-10</time>
+                <time title="修改时间：2018-10-22 09:11:26" itemprop="dateModified" datetime="2018-10-22T09:11:26+08:00">2018-10-22</time>
               
             
           </span>
@@ -2129,8 +2129,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/04/07/JavaScript/创建对象的Object.create与new/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/04/07/JavaScript/创建对象的Object.create与new/" class="cy_cmt_count" data-xid="2018/04/07/JavaScript/创建对象的Object.create与new/" itemprop="commentsCount" ></span>
+                <a href="/2018/04/07/JavaScript/跨域请求的jsonp处理/#SOHUCS" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://blog.haohome.top/2018/04/07/JavaScript/跨域请求的jsonp处理/" class="cy_cmt_count" data-xid="2018/04/07/JavaScript/跨域请求的jsonp处理/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -2159,21 +2159,11 @@
 
       
         
-          <p>创建对象有几种方式:</p>
-<ul>
-<li><p>直接量:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1=&#123;<span class="attr">name</span>:<span class="string">"xiaowang"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2=<span class="keyword">new</span> <span class="built_in">Object</span>(&#123;<span class="attr">name</span>:<span class="string">"xiaowang"</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj1,obj2);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>构造函数:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> M=<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;<span class="keyword">this</span>.name=name&#125;;</span><br><span class="line"><span class="keyword">var</span> obj3=<span class="keyword">new</span> M(<span class="string">'xiaowang'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(obj3);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Object.create</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p=&#123;<span class="attr">name</span>:<span class="string">'xiaowang'</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> obj4=<span class="built_in">Object</span>.create(p);</span><br><span class="line"><span class="built_in">console</span>.log(obj4);</span><br></pre></td></tr></table></figure>
-<p>对应的输出结果为:</p>
-<p><img src="https://haohome.top/18-4-7/88488666.jpg" alt="img"></p>
+          <h3 id="跨域简介"><a href="#跨域简介" class="headerlink" title="跨域简介"></a>跨域简介</h3><p>跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。</p>
+<p>浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe；</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/07/JavaScript/创建对象的Object.create与new/#more" rel="contents">
+            <a class="btn" href="/2018/04/07/JavaScript/跨域请求的jsonp处理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
