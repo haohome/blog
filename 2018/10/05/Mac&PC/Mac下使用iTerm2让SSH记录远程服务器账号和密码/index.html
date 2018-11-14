@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。  下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。  第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车  第二步：新建一个文件，命名为example吧，里面写入内容： 123456789set user rootset host 122.114">
+  <meta name="description" content="iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。  下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。  第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车  第二步：新建一个文件，命名为example吧，里面写入内容： 123456789set user rootset host 114.114">
 <meta name="keywords" content="电脑技巧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iTerm终端设置代理">
+<meta property="og:title" content="Mac下使用iTerm2让SSH记录远程服务器账号和密码">
 <meta property="og:url" content="http://blog.haohome.top/2018/10/05/Mac&PC/Mac下使用iTerm2让SSH记录远程服务器账号和密码/index.html">
 <meta property="og:site_name" content="靖风行&#39;S blog">
-<meta property="og:description" content="iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。  下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。  第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车  第二步：新建一个文件，命名为example吧，里面写入内容： 123456789set user rootset host 122.114">
+<meta property="og:description" content="iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。  下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。  第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车  第二步：新建一个文件，命名为example吧，里面写入内容： 123456789set user rootset host 114.114">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-20T07:20:52.495Z">
+<meta property="og:updated_time" content="2018-11-14T14:23:08.036Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iTerm终端设置代理">
-<meta name="twitter:description" content="iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。  下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。  第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车  第二步：新建一个文件，命名为example吧，里面写入内容： 123456789set user rootset host 122.114">
+<meta name="twitter:title" content="Mac下使用iTerm2让SSH记录远程服务器账号和密码">
+<meta name="twitter:description" content="iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。  下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。  第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车  第二步：新建一个文件，命名为example吧，里面写入内容： 123456789set user rootset host 114.114">
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>iTerm终端设置代理 | 靖风行'S blog</title>
+  <title>Mac下使用iTerm2让SSH记录远程服务器账号和密码 | 靖风行'S blog</title>
   
 
 
@@ -347,7 +347,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iTerm终端设置代理
+          <h1 class="post-title" itemprop="name headline">Mac下使用iTerm2让SSH记录远程服务器账号和密码
               
             
           </h1>
@@ -389,7 +389,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-20 15:20:52" itemprop="dateModified" datetime="2018-10-20T15:20:52+08:00">2018-10-20</time>
+                <time title="修改时间：2018-11-14 22:23:08" itemprop="dateModified" datetime="2018-11-14T22:23:08+08:00">2018-11-14</time>
               
             
           </span>
@@ -455,7 +455,7 @@
 <p> 下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。</p>
 <p> 第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车</p>
 <p> 第二步：新建一个文件，命名为example吧，里面写入内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">set user root</span><br><span class="line">set host 122.114.12.181</span><br><span class="line">set password WuHaoXcp1990</span><br><span class="line"> </span><br><span class="line">spawn ssh $user@$host</span><br><span class="line">expect "*assword:*"</span><br><span class="line">send "$password\r"</span><br><span class="line">interact</span><br><span class="line">expect eof</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">set user root</span><br><span class="line">set host 114.114.114.114</span><br><span class="line">set password ********</span><br><span class="line"> </span><br><span class="line">spawn ssh $user@$host</span><br><span class="line">expect "*assword:*"</span><br><span class="line">send "$password\r"</span><br><span class="line">interact</span><br><span class="line">expect eof</span><br></pre></td></tr></table></figure>
 <p> 第三步：到官方<a href="http://www.iterm2.com/" target="_blank" rel="noopener">http://www.iterm2.com/</a>下载并打开iTerm2，菜单栏找到『Profiles』→『Open Profiles…』,打开面板上，点击右下角『Edit  Profiles…』</p>
 <p> 第四步：在打开面板，左边应该是选中默认default，右边找到Command，默认应该是Login shell，选中Command，里面输入：expect ~/.ssh/example</p>
 <p> 第五步，下次打开iTerm2，是不是默认就登录上服务器了？极大提升效率。<br> 按照以上方法，可以配置profile,对应很多个服务器。这样每次启动可以选择默认操作，然后再profile下拉选中中执行对应的VPS profile，则可以实现自动登录！</p>
