@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>http://blog.haohome.top/2018/11/18/JavaScript/%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/</loc>
     <lastmod>2018-11-18T13:19:51.220Z</lastmod>
@@ -55,11 +56,11 @@
         <title>Vue项目总结</title>
         <pubTime>2018-10-30T16:00:00.000Z</pubTime>
         
+        <tag>JS</tag>
+         
         <tag>vue</tag>
          
         <tag>项目总结</tag>
-         
-        <tag>JS</tag>
          
          
            
@@ -70,7 +71,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>http://blog.haohome.top/2018/02/20/Interview/%E5%89%8D%E7%AB%AF%E7%BD%91%E6%91%98/</loc>
@@ -140,9 +140,9 @@
         <title>flex弹性布局</title>
         <pubTime>2018-02-25T12:30:54.000Z</pubTime>
         
-        <tag>css</tag>
-         
         <tag>flex</tag>
+         
+        <tag>css</tag>
          
          
            
@@ -182,9 +182,9 @@
         <title>CSS学习记录</title>
         <pubTime>2016-10-12T12:46:25.000Z</pubTime>
         
-        <tag>html5</tag>
-         
         <tag>css</tag>
+         
+        <tag>html5</tag>
          
          
            
@@ -642,9 +642,9 @@
         <title>Node.js的web服务器路由重构</title>
         <pubTime>2018-05-02T15:32:00.000Z</pubTime>
         
-        <tag>JavaScript</tag>
-         
         <tag>node</tag>
+         
+        <tag>JavaScript</tag>
          
          
            
