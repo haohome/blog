@@ -117,7 +117,7 @@
 <meta property="og:description" content="1. 前言最近做了一个内嵌在APP的H5项目,起初是准备自己选择vue框架和UI库搭建项目框架,后来发现已经有项目组采用了一个muse-ui库.为了APP的页面整体统一性,我只好clone了小伙伴的项目,在其基础上继续开发. 项目开发过程中遇到了不少坑,这个迭代开发结束就来逐步总结下.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://haohome.top/18-11-8/51395595.jpg">
-<meta property="og:updated_time" content="2018-11-08T13:54:59.098Z">
+<meta property="og:updated_time" content="2019-01-28T06:37:03.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue项目总结">
 <meta name="twitter:description" content="1. 前言最近做了一个内嵌在APP的H5项目,起初是准备自己选择vue框架和UI库搭建项目框架,后来发现已经有项目组采用了一个muse-ui库.为了APP的页面整体统一性,我只好clone了小伙伴的项目,在其基础上继续开发. 项目开发过程中遇到了不少坑,这个迭代开发结束就来逐步总结下.">
@@ -391,7 +391,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-11-08 21:54:59" itemprop="dateModified" datetime="2018-11-08T21:54:59+08:00">2018-11-08</time>
+                <time title="修改时间：2019-01-28 14:37:03" itemprop="dateModified" datetime="2019-01-28T14:37:03+08:00">2019-01-28</time>
               
             
           </span>
@@ -464,7 +464,7 @@
 <h4 id="3-1-组件数据双向绑定v-model"><a href="#3-1-组件数据双向绑定v-model" class="headerlink" title="3.1 组件数据双向绑定v-model"></a>3.1 组件数据双向绑定v-model</h4><p>数据双向绑定是vue中比较实用的一个功能,如:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'formInput'</span>, &#123;</span><br><span class="line">   data:&#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">      val:<span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">`&lt;input v-model='val'&gt;`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>而在父组件中,如何去实现实时获取子组件<code>formInput</code>的<code>value</code>呢?</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'parent'</span>,&#123;</span><br><span class="line">    data:&#123;</span><br><span class="line">        <span class="keyword">return</span>&#123;</span><br><span class="line">        	inputVal:<span class="string">""</span></span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template: <span class="string">`&lt;form-input&gt;&lt;/form-input&gt;`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'parent'</span>,&#123;</span><br><span class="line">    data:&#123;</span><br><span class="line">        <span class="keyword">return</span>&#123;</span><br><span class="line">        	inputVal:<span class="string">""</span></span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template: <span class="string">`&lt;form-input v-model="inputVal"&gt;&lt;/form-input&gt;`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>vue的父子组件传递有一个口诀:<code>props down,events up</code>即父组件通过<code>props</code>向子组件传值,子组件通过<code>evens</code>向父组件传值,另外在官方文档中有这样的介绍:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-model=&quot;searchText&quot;&gt;</span><br><span class="line">&lt;!-- 等价于 --&gt;</span><br><span class="line">&lt;input</span><br><span class="line">  v-bind:value=&quot;searchText&quot;</span><br><span class="line">  v-on:input=&quot;searchText = $event.target.value&quot;&gt;</span><br></pre></td></tr></table></figure>
 <p>当用在组件上时:</p>
@@ -479,14 +479,17 @@
 <p>这样就能达到我们想要的目的了.</p>
 <p>在单选框和复选框这类可能会将<code>value</code>用作不同的特性,vue提供了另一种方式:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'base-checkbox'</span>, &#123;</span><br><span class="line">  model: &#123;</span><br><span class="line">    prop: <span class="string">'checked'</span>,</span><br><span class="line">    event: <span class="string">'change'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    checked: <span class="built_in">Boolean</span></span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;input</span></span><br><span class="line"><span class="string">      type="checkbox"</span></span><br><span class="line"><span class="string">      v-bind:checked="checked"</span></span><br><span class="line"><span class="string">      v-on:change="$emit('change', $event.target.checked)"</span></span><br><span class="line"><span class="string">    &gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 组件上</span></span><br><span class="line">&lt;base-checkbox v-model=<span class="string">"lovingVue"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">base-checkbox</span>&gt;</span></span></span><br><span class="line"><span class="xml">// lovingVue 的值将会传入这个名为 checked 的 prop</span></span><br><span class="line"><span class="xml">// ! 需要在组件的 props 选项里声明 checked 这个 prop。</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-2-列表遍历v-for删除指定元素"><a href="#3-2-列表遍历v-for删除指定元素" class="headerlink" title="3.2 列表遍历v-for删除指定元素"></a>3.2 列表遍历v-for删除指定元素</h4><p>在做图片上传的时候,需要添加上传进度和删除图片,彼此间互不干扰,这就需要每个组件都需要具备独立的功能:</p>
+<h4 id="3-2-列表遍历v-for删除指定元素"><a href="#3-2-列表遍历v-for删除指定元素" class="headerlink" title="3.2 列表遍历v-for删除指定元素"></a>3.2 列表遍历v-for删除指定元素</h4><p>有时数组列表渲染我们比较喜欢采用数组本身的下标索引作为v-for绑定的key值如:</p>
+<iframe width="100%" height="300" src="//jsrun.net/jqXKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>在做图片上传的时候,需要添加上传进度和删除图片,彼此间互不干扰,这就需要每个组件都需要具备独立的功能:</p>
 <blockquote>
 <ul>
 <li>图片预览</li>
 <li>图片自动压缩</li>
 <li>图片上传</li>
 <li>上传进度动态展示</li>
-<li>删除按钮</li>
+<li>删除图片</li>
 <li>上传失败错误图标</li>
 <li>点击错误图标重传</li>
 </ul>
@@ -495,7 +498,9 @@
 <p>为方便理解,先举个例子:</p>
 <iframe width="100%" height="300" src="//jsrun.net/z8hKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-<p><code>single</code>图片组件具备了上述功能,选择一个图片后在<code>list</code>组件及时<code>push</code>一个图片的对象<code>this.fileList.push(item)</code>,这样页面就能通过<code>v-for</code>动态渲染,但使用后发现直接删除<code>fileList</code>某个元素就只会删除集合最后一个元素.针对<code>fileList</code>添加唯一性的索引就能解决这个问题,<code>this.fileList.push({ id: this.id, data: item });</code>,将<code>:key</code>绑定到<code>id</code></p>
+<p><code>single</code>图片组件具备了上述功能,选择一个图片后在<code>list</code>组件及时<code>push</code>一个图片的对象<code>this.arr.push(item)</code>,这样页面就能通过<code>v-for</code>动态渲染,但使用后发现直接删除<code>arr</code>某个元素就只会删除集合最后一个元素.</p>
+<p>这是由于列表的生成是通过绑定的arr数组来生成的，当arr删除掉一项时，列表的dom对象自然也会减少一项。但是由于v-for循环的是子组件，子组件内部显示数据并未绑定arr数组里的属性，因此子组件的显示数据并未按新数组重新渲染，体现出来的结果就是最后一个元素被删掉了</p>
+<p>针对<code>arr</code>添加唯一性的索引就能解决这个问题,<code>this.arr.push({ id: this.id, data: item });</code>,将<code>:key</code>绑定到<code>id</code></p>
 <blockquote>
 <p>由于v-for循环的是子组件，子组件内部显示数据并未绑定fileList数组里的属性,子组件的显示数据并未按新数组重新渲染,<strong>体现出来的结果</strong>就是最后一个元素被删掉了。</p>
 </blockquote>
@@ -533,7 +538,7 @@
 <p><code>OPTIONS</code> 方法用来查询针对请求 URI 指定的资源支持的方法。</p>
 </blockquote>
 <p><img src="https://haohome.top/18-11-8/51395595.jpg" width="50%"></p>
-<p>| 请求 | OPTIONS*HTTP/1.1<br>Host:www.zhongguo.com/upload           |<br>| :–: | :———————————————————– |<br>| 响应 | HTTP/1.1 200 OK<br>Allow: GET, POST, HEAD, OPTIONS<br>（返回服务器支持的方法） |</p>
+<p>| 请求 | OPTIONS*HTTP/1.1      |<br>| —- | ————————————————- |<br>|    Host|www.zhongguo.com/upload                                                        |<br>| 响应 | HTTP/1.1 200 OK                                   |<br>| Allow | GET, POST, HEAD, OPTIONS(返回服务器支持的方法) |</p>
 <p>如果后端未对<code>OPTIONS</code>请求做处理,前端文件<code>post</code>上传文件会失败的</p>
 <p><strong>当后端对<code>OPTIONS</code>请求做出响应200时,前端才会继续发送<code>post</code>请求</strong>,这就是我们在调试时看到文件上传时会默认发<code>OPTIONS</code>和<code>post</code>两个请求的原因</p>
 </li>
@@ -708,7 +713,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-count">63</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -935,7 +940,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
