@@ -310,9 +310,9 @@
         <title>一道简单的setTimeout面试题</title>
         <pubTime>2018-03-05T15:48:00.000Z</pubTime>
         
-        <tag>面试</tag>
-         
         <tag>js</tag>
+         
+        <tag>面试</tag>
          
         <tag>events</tag>
          
@@ -706,9 +706,9 @@
         <title>Node.js的web服务器路由重构</title>
         <pubTime>2018-05-02T15:32:00.000Z</pubTime>
         
-        <tag>node</tag>
-         
         <tag>JavaScript</tag>
+         
+        <tag>node</tag>
          
          
            
@@ -785,21 +785,21 @@
 
     
   <url>
-    <loc>http://blog.haohome.top/2018/02/14/JavaScript/Vue%E7%9A%84%E7%82%B9%E8%B5%9E%E6%95%88%E6%9E%9C/</loc>
+    <loc>http://blog.haohome.top/2018/03/11/JavaScript/%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82%E7%9A%84%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/</loc>
     <lastmod>2018-04-10T05:53:47.000Z</lastmod>
     <data>
         <display>
-        <title>Vue的点赞效果</title>
-        <pubTime>2018-02-14T12:45:00.000Z</pubTime>
+        <title>通俗易懂的原型与原型链</title>
+        <pubTime>2018-03-11T13:23:00.000Z</pubTime>
         
-        <tag>css3</tag>
+        <tag>js</tag>
          
-        <tag>vue</tag>
+        <tag>原型</tag>
          
          
            
              
-              <breadCrumb title="Framework" url="http://blog.haohome.top/categories/Framework/"/>
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
           
         </display>
     </data>
@@ -829,43 +829,21 @@
 
     
   <url>
-    <loc>http://blog.haohome.top/2018/03/11/JavaScript/%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82%E7%9A%84%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/</loc>
+    <loc>http://blog.haohome.top/2018/02/14/JavaScript/Vue%E7%9A%84%E7%82%B9%E8%B5%9E%E6%95%88%E6%9E%9C/</loc>
     <lastmod>2018-04-10T05:53:47.000Z</lastmod>
     <data>
         <display>
-        <title>通俗易懂的原型与原型链</title>
-        <pubTime>2018-03-11T13:23:00.000Z</pubTime>
+        <title>Vue的点赞效果</title>
+        <pubTime>2018-02-14T12:45:00.000Z</pubTime>
         
-        <tag>js</tag>
+        <tag>css3</tag>
          
-        <tag>原型</tag>
+        <tag>vue</tag>
          
          
            
              
-              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2018/02/18/JavaScript/DOM%E9%80%9A%E7%94%A8%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A/</loc>
-    <lastmod>2018-04-10T05:53:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>DOM通用事件绑定</title>
-        <pubTime>2018-02-17T16:00:00.000Z</pubTime>
-        
-        <tag>js</tag>
-         
-        <tag>DOM</tag>
-         
-         
-           
-             
-              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+              <breadCrumb title="Framework" url="http://blog.haohome.top/categories/Framework/"/>
           
         </display>
     </data>
@@ -908,6 +886,28 @@
            
              
               <breadCrumb title="food" url="http://blog.haohome.top/categories/food/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2018/02/18/JavaScript/DOM%E9%80%9A%E7%94%A8%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A/</loc>
+    <lastmod>2018-04-10T05:53:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>DOM通用事件绑定</title>
+        <pubTime>2018-02-17T16:00:00.000Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>DOM</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
           
         </display>
     </data>

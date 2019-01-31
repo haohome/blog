@@ -246,8 +246,8 @@
         <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>node</tag>
         <tag>JavaScript</tag>
+        <tag>node</tag>
       </tags>
   </entry>
   <entry>
@@ -263,18 +263,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[创建对象的Object.create与new]]></title>
-    <url>%2F2018%2F04%2F07%2FJavaScript%2F%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84Object.create%E4%B8%8Enew%2F</url>
-    <content type="text"><![CDATA[创建对象有几种方式: 直接量: 123var obj1=&#123;name:"xiaowang"&#125;;var obj2=new Object(&#123;name:"xiaowang"&#125;);console.log(obj1,obj2); 构造函数: 123var M=function(name)&#123;this.name=name&#125;;var obj3=new M('xiaowang');console.log(obj3); Object.create 123var p=&#123;name:'xiaowang'&#125;;var obj4=Object.create(p);console.log(obj4); 对应的输出结果为: 可以看到,Object.create方法得到的对象是空对象，再输出各自对象的name属性看看: console.log(obj2.name,obj3.name,obj4.name) 得到的结果为xiaowang xiaowang xiaowang 这是为什么??? Object.create 的实现方式: 1234567var obj1 = Object.create(null);console.log(obj1); // &#123;&#125;obj1.name = 'jian';var obj2 = Object.create(obj1);console.log(obj2); // &#123;&#125;console.log(obj2.name); // 'jian', conosle.log(obj2.__proto__===obj1.prototype) //true obj2是空对象,但obj2.name输出了’jian’,obj2继承自obj1的原型对象 由此可以总结Object.create()做了： ​ 1. 创建空对象{} ​ 2. 指定空对象{}继承自参数的原型对象,即空对象的 __proto__ 指向Object.create()参数的原型对象。 var obj1=new M({name:&#39;xiaowang&#39;}) 的实现方式: 123456789101112//定义构造函数Person var Person = function (name) &#123; this.name = firstName;&#125;;//定义Person原型对象的新方法Person.prototype.sayHello = function() &#123; console.log("Hello, I'm " + this.name);&#125;;//实例化对象var person1 = new Person("Alice");//对象调用methodperson1.sayHello(); // logs "Hello, I'm Alice" 由此可以总结new做了： 创建实例对象person1 调用构造函数(Person)初始化person1成员变量（name)。 指定实例对象的继承自Person.prototype对象。即person1.__proto__指向构造函数的原型对象Person.prototype。 对比 Object.create new 创建对象 创建空对象 创建实例对象,并将参数初始化赋值 继承 空对象继承自参数对象的原型对象,本身为空对象 实例对象继承自构造函数的原型对象 总结:Object.create得到的对象未实例化,本身为空对象,可继承对象,而new得到的对象是实例化的对象]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-        <tag>对象</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[跨域请求的jsonp处理]]></title>
     <url>%2F2018%2F04%2F07%2FJavaScript%2F%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84jsonp%E5%A4%84%E7%90%86%2F</url>
     <content type="text"><![CDATA[跨域简介跨域是指不用域之间相互请求资源,只要协议，主机名，端口号，二级域名等不同都算跨域。 浏览器认为多数由js程序发起的跨域请求都是不合法的，主要为xhr，但不由js发起的跨域是允许的，包括：img，link，script，iframe； JSONP JSON with Padding 填充式 json 正常的ajax请求是不允许跨域请求的，只能用允许跨域请求的元素script代替 处理步骤 客户端定义一个专门处理相应的有名函数doResponse(处理函数中仅接受并处理服务端json数据,不用xhr对象，更不用判断状态) 服务器端php: 接受请求数据并处理,返回一条js语句echo ‘doResponse($json)’; 动态创建一个script元素,设置src指向服务器端的php地址 客户端js: 12345678910function doResponse(resp)&#123; console.log(resp); for(var i in resp)&#123; console.log(i); &#125; &#125;$("#btn").click(function() &#123; /*动态追加script元素*/ $("body").append(`&lt;script src="http://127.0.0.1/jsonp.php?callback=doResponse"&gt;&lt;\/script&gt;`); &#125;); 也可以采用ajax获得返回数据 1234567891011$.getJSON("https://www.haohome.top/demo/jsonp.php?callback=doResponse",data=&gt;&#123; console.log(data);&#125;);$.ajax(&#123; type:"GET", url:"https://www.haohome.top/demo/jsonp.php?callback=doResponse", success:data=&gt;&#123; console.log("返回数据",data); &#125;, dataType:"jsonp"&#125;) 服务器端php: 1234header("Content-type:application/javascript;charset:utf-8");$getData=$_GET['callback'];$hello=json_encode([1,2,3,4]);echo $getData."('$hello')"; ​]]></content>
@@ -285,6 +273,18 @@
         <tag>http</tag>
         <tag>js</tag>
         <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[创建对象的Object.create与new]]></title>
+    <url>%2F2018%2F04%2F07%2FJavaScript%2F%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84Object.create%E4%B8%8Enew%2F</url>
+    <content type="text"><![CDATA[创建对象有几种方式: 直接量: 123var obj1=&#123;name:"xiaowang"&#125;;var obj2=new Object(&#123;name:"xiaowang"&#125;);console.log(obj1,obj2); 构造函数: 123var M=function(name)&#123;this.name=name&#125;;var obj3=new M('xiaowang');console.log(obj3); Object.create 123var p=&#123;name:'xiaowang'&#125;;var obj4=Object.create(p);console.log(obj4); 对应的输出结果为: 可以看到,Object.create方法得到的对象是空对象，再输出各自对象的name属性看看: console.log(obj2.name,obj3.name,obj4.name) 得到的结果为xiaowang xiaowang xiaowang 这是为什么??? Object.create 的实现方式: 1234567var obj1 = Object.create(null);console.log(obj1); // &#123;&#125;obj1.name = 'jian';var obj2 = Object.create(obj1);console.log(obj2); // &#123;&#125;console.log(obj2.name); // 'jian', conosle.log(obj2.__proto__===obj1.prototype) //true obj2是空对象,但obj2.name输出了’jian’,obj2继承自obj1的原型对象 由此可以总结Object.create()做了： ​ 1. 创建空对象{} ​ 2. 指定空对象{}继承自参数的原型对象,即空对象的 __proto__ 指向Object.create()参数的原型对象。 var obj1=new M({name:&#39;xiaowang&#39;}) 的实现方式: 123456789101112//定义构造函数Person var Person = function (name) &#123; this.name = firstName;&#125;;//定义Person原型对象的新方法Person.prototype.sayHello = function() &#123; console.log("Hello, I'm " + this.name);&#125;;//实例化对象var person1 = new Person("Alice");//对象调用methodperson1.sayHello(); // logs "Hello, I'm Alice" 由此可以总结new做了： 创建实例对象person1 调用构造函数(Person)初始化person1成员变量（name)。 指定实例对象的继承自Person.prototype对象。即person1.__proto__指向构造函数的原型对象Person.prototype。 对比 Object.create new 创建对象 创建空对象 创建实例对象,并将参数初始化赋值 继承 空对象继承自参数对象的原型对象,本身为空对象 实例对象继承自构造函数的原型对象 总结:Object.create得到的对象未实例化,本身为空对象,可继承对象,而new得到的对象是实例化的对象]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+        <tag>对象</tag>
       </tags>
   </entry>
   <entry>
@@ -341,8 +341,8 @@
         <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>面试</tag>
         <tag>js</tag>
+        <tag>面试</tag>
         <tag>events</tag>
       </tags>
   </entry>
@@ -523,9 +523,22 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中的类和对象]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%2F</url>
-    <content type="text"><![CDATA[1.类 类是对象的类型 类具有相同属性和方法的一组对象的集合 定义:确定对象将拥有的特征(属性)和方法(行为) 类的组成:属性和方法 定义类的步骤 a.定义类名b.编写类的属性c.编写类的方法 !– more –&gt; 12345678public class 类名&#123; //定义属性部分(成员变量) 属性1的类型 属性1; 属性2的类型 属性2; //定义方法部分 方法1; 方法2;&#125; 2.对象对象的属性 对象具有的各种特征 每个对象的每个属性都拥有特定值对象的方法 对象可以执行的操作 使用对象的步骤: a. 创建对象(new) b. 使用对象 引用对象的属性:对象名.属性 引用对象的方法:对象名.方法 类是抽象的概念,对象是一个具体的实物 3.访问修饰符 访问修饰符 本类 同包 子类 其他 private √ 默认 √ √ protected √ √ √ public √ √ √ √ 属性通常设为private 外部调用对象属性通常通过对象的getter和setter方法 4.Object类的方法4.1 toString()方法默认:toString()方法默认返回的是对象的哈希码(对象的地址字符串)Override:返回的是对象的属性值 4.2 equals()方法默认:比较的是对象的引用是否指向同一块内存地址Override:比较对象的属性值(数据)信息]]></content>
+    <title><![CDATA[FreeMaker 模板_数据模型]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FFreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[1. 模板 + 数据模型 = 输出1.1 模板 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如: 12345678910&lt;html&gt; &lt;head&gt; &lt;title&gt;Welcome!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Welcome $&#123;user&#125;!&lt;/h1&gt; &lt;p&gt;Our latest product: &lt;a href="$&#123;latestProduct.url&#125;"&gt;$&#123;latestProduct.name&#125;&lt;/a&gt;! &lt;/body&gt;&lt;/html&gt; ${…}：插值表达式(interpolation) FTL标签：FreeMarker模板的语言标签，标签的名字以 # 开头，用户自定义的FTL标签则需要使用 @ 来代替 # 注释：使用 &lt;#– and –&gt; 来标识 其他任何不是插值、FTL标签或注释的内容将被视为静态文本，直接在页面输出 1.2 数据模型为模板准备的数据整体被称作为数据模型数据模型是树形结构,例如: 123456789101112131415161718192021222324252627(root) | +- animals | | | +- mouse | | | | | +- size = "small" | | | | | +- price = 50 | | | +- elephant | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- python | | | +- size = "medium" | | | +- price = 4999 | +- message = "It is a test" | +- misc | +- foo = "Something" hashes (哈希表): 指变量中扮演目录角色(比如 root, animals, mouse, elephant, python, misc) 哈希表存储其他变量(被称为 子变量)， 它们可以通过名称来查找(比如 “animals”, “mouse” 或 “price”)。 scalars (标量): 指存储单值的变量 (size, price, message 和 foo) 如果要在模板中使用子变量， 那应该从根root开始指定它的路径，每级之间用点来分隔开。要访问 mouse 的 price ，要从root开始，首先进入到 animals ，之后访问 mouse ，最后访问 price 。就可以这样来写 animals.mouse.price。 sequences (序列): 像哈希表那样存储子变量，但是子变量没有名字，它们只是列表中的项。在下面这个数据模型中， animals 和 misc.fruits 就是序列： 1234567891011121314151617181920212223242526272829303132333435(root) | +- animals | | | +- (1st) | | | | | +- name = "mouse" | | | | | +- size = "small" | | | | | +- price = 50 | | | +- (2nd) | | | | | +- name = "elephant" | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- (3rd) | | | +- name = "python" | | | +- size = "medium" | | | +- price = 4999 | +- misc | +- fruits | +- (1st) = "orange" | +- (2nd) = "banana" 要访问序列的子变量，可以使用方括号形式的数字索引下标。 索引下标从0开始(从0开始也是程序员的传统)，那么第一项的索引就是0， 第二项的索引就是1等等。要得到第一个动物的名称的话，可以这么来写代码 animals[0].name。 标量类型可以分为如下的类别： 字符串：就是文本，也就是任意的字符序列，比如上面提到的 ‘m’,’o’,’u’, ‘s’,’e’。比如 name 和 size 也是字符串。 数字：这是数值类型，就像上面的 price。 在FreeMarker中，字符串 “50” 和数字 50 是两种完全不同的类型。 日期/时间: 可以是日期-时间格式(存储某一天的日期和时间)， 或者是日期(只有日期，没有时间)，或者是时间(只有时间，没有日期)。 布尔值：对应着对/错(是/否，开/关等值)类似的值。 总结： 数据模型可以被看成是树形结构。 标量用于存储单一的值。这种类型的值可以是字符串，数字，日期/时间或者是布尔值。 哈希表是一种存储变量及其相关且有唯一标识名称的容器。 序列是存储有序变量的容器。存储的变量可以通过数字索引来检索，索引通常从0开始。]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>学习记录</tag>
+        <tag>FreeMaker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java中的多态]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
+    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -547,28 +560,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java中的多态]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81%2F</url>
-    <content type="text"><![CDATA[多态1.引用多态 父类的引用可以指向本类的对象 父类的引用可以指向子类的对象2.方法多态 创建本类对象时,调用的方法为本类方法 创建子类对象时,调用的方法为子类重写的方法或者继承的方法3.引用类型转换 向上类型转换(隐式/自动类型转换),是小类型向大类型转换 向下类型转换(强制类型转换),是大类型到小类型转换(存在数据溢出风险) instanceof运算符:避免类型转换出现的安全问题12345678Dog dog=new Dog();Animal animal=dog;//(向上类型转换)if (animal instanceof Dog) &#123; Dog dog2=(Dog)animal;&#125;else&#123; System.out.println("无法进行类型转换");&#125;]]></content>
+    <title><![CDATA[Java中的类和对象]]></title>
+    <url>%2F2018%2F01%2F01%2FJava%2FJava%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%2F</url>
+    <content type="text"><![CDATA[1.类 类是对象的类型 类具有相同属性和方法的一组对象的集合 定义:确定对象将拥有的特征(属性)和方法(行为) 类的组成:属性和方法 定义类的步骤 a.定义类名b.编写类的属性c.编写类的方法 !– more –&gt; 12345678public class 类名&#123; //定义属性部分(成员变量) 属性1的类型 属性1; 属性2的类型 属性2; //定义方法部分 方法1; 方法2;&#125; 2.对象对象的属性 对象具有的各种特征 每个对象的每个属性都拥有特定值对象的方法 对象可以执行的操作 使用对象的步骤: a. 创建对象(new) b. 使用对象 引用对象的属性:对象名.属性 引用对象的方法:对象名.方法 类是抽象的概念,对象是一个具体的实物 3.访问修饰符 访问修饰符 本类 同包 子类 其他 private √ 默认 √ √ protected √ √ √ public √ √ √ √ 属性通常设为private 外部调用对象属性通常通过对象的getter和setter方法 4.Object类的方法4.1 toString()方法默认:toString()方法默认返回的是对象的哈希码(对象的地址字符串)Override:返回的是对象的属性值 4.2 equals()方法默认:比较的是对象的引用是否指向同一块内存地址Override:比较对象的属性值(数据)信息]]></content>
       <categories>
         <category>Java</category>
       </categories>
       <tags>
         <tag>Java</tag>
         <tag>学习记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[FreeMaker 模板_数据模型]]></title>
-    <url>%2F2018%2F01%2F01%2FJava%2FFreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%2F</url>
-    <content type="text"><![CDATA[1. 模板 + 数据模型 = 输出1.1 模板 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如: 12345678910&lt;html&gt; &lt;head&gt; &lt;title&gt;Welcome!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Welcome $&#123;user&#125;!&lt;/h1&gt; &lt;p&gt;Our latest product: &lt;a href="$&#123;latestProduct.url&#125;"&gt;$&#123;latestProduct.name&#125;&lt;/a&gt;! &lt;/body&gt;&lt;/html&gt; ${…}：插值表达式(interpolation) FTL标签：FreeMarker模板的语言标签，标签的名字以 # 开头，用户自定义的FTL标签则需要使用 @ 来代替 # 注释：使用 &lt;#– and –&gt; 来标识 其他任何不是插值、FTL标签或注释的内容将被视为静态文本，直接在页面输出 1.2 数据模型为模板准备的数据整体被称作为数据模型数据模型是树形结构,例如: 123456789101112131415161718192021222324252627(root) | +- animals | | | +- mouse | | | | | +- size = "small" | | | | | +- price = 50 | | | +- elephant | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- python | | | +- size = "medium" | | | +- price = 4999 | +- message = "It is a test" | +- misc | +- foo = "Something" hashes (哈希表): 指变量中扮演目录角色(比如 root, animals, mouse, elephant, python, misc) 哈希表存储其他变量(被称为 子变量)， 它们可以通过名称来查找(比如 “animals”, “mouse” 或 “price”)。 scalars (标量): 指存储单值的变量 (size, price, message 和 foo) 如果要在模板中使用子变量， 那应该从根root开始指定它的路径，每级之间用点来分隔开。要访问 mouse 的 price ，要从root开始，首先进入到 animals ，之后访问 mouse ，最后访问 price 。就可以这样来写 animals.mouse.price。 sequences (序列): 像哈希表那样存储子变量，但是子变量没有名字，它们只是列表中的项。在下面这个数据模型中， animals 和 misc.fruits 就是序列： 1234567891011121314151617181920212223242526272829303132333435(root) | +- animals | | | +- (1st) | | | | | +- name = "mouse" | | | | | +- size = "small" | | | | | +- price = 50 | | | +- (2nd) | | | | | +- name = "elephant" | | | | | +- size = "large" | | | | | +- price = 5000 | | | +- (3rd) | | | +- name = "python" | | | +- size = "medium" | | | +- price = 4999 | +- misc | +- fruits | +- (1st) = "orange" | +- (2nd) = "banana" 要访问序列的子变量，可以使用方括号形式的数字索引下标。 索引下标从0开始(从0开始也是程序员的传统)，那么第一项的索引就是0， 第二项的索引就是1等等。要得到第一个动物的名称的话，可以这么来写代码 animals[0].name。 标量类型可以分为如下的类别： 字符串：就是文本，也就是任意的字符序列，比如上面提到的 ‘m’,’o’,’u’, ‘s’,’e’。比如 name 和 size 也是字符串。 数字：这是数值类型，就像上面的 price。 在FreeMarker中，字符串 “50” 和数字 50 是两种完全不同的类型。 日期/时间: 可以是日期-时间格式(存储某一天的日期和时间)， 或者是日期(只有日期，没有时间)，或者是时间(只有时间，没有日期)。 布尔值：对应着对/错(是/否，开/关等值)类似的值。 总结： 数据模型可以被看成是树形结构。 标量用于存储单一的值。这种类型的值可以是字符串，数字，日期/时间或者是布尔值。 哈希表是一种存储变量及其相关且有唯一标识名称的容器。 序列是存储有序变量的容器。存储的变量可以通过数字索引来检索，索引通常从0开始。]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>学习记录</tag>
-        <tag>FreeMaker</tag>
       </tags>
   </entry>
   <entry>
