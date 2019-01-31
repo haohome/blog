@@ -3,6 +3,28 @@
 
 
     
+  <url>
+    <loc>http://blog.haohome.top/2019/01/31/JavaScript/JS%E6%89%8B%E5%86%99%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%9E%E7%8E%B0/</loc>
+    <lastmod>2019-01-31T05:31:17.495Z</lastmod>
+    <data>
+        <display>
+        <title>JS手写状态管理的实现</title>
+        <pubTime>2019-01-30T16:00:00.000Z</pubTime>
+        
+        <tag>JS</tag>
+         
+        <tag>state</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://blog.haohome.top/2018/10/31/Program/Vue%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/</loc>
@@ -743,6 +765,48 @@
 
     
   <url>
+    <loc>http://blog.haohome.top/2018/01/21/JavaScript/Node_%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2018-04-10T05:53:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>Node基础</title>
+        <pubTime>2018-01-20T16:00:00.000Z</pubTime>
+        
+        <tag>node</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.haohome.top/2018/03/11/JavaScript/%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82%E7%9A%84%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/</loc>
+    <lastmod>2018-04-10T05:53:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>通俗易懂的原型与原型链</title>
+        <pubTime>2018-03-11T13:23:00.000Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>原型</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.haohome.top/2018/02/14/JavaScript/Vue%E7%9A%84%E7%82%B9%E8%B5%9E%E6%95%88%E6%9E%9C/</loc>
     <lastmod>2018-04-10T05:53:47.000Z</lastmod>
     <data>
@@ -787,41 +851,21 @@
 
     
   <url>
-    <loc>http://blog.haohome.top/2018/03/11/JavaScript/%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82%E7%9A%84%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/</loc>
-    <lastmod>2018-04-10T05:53:47.000Z</lastmod>
+    <loc>http://blog.haohome.top/2018/03/06/HTML5&CSS/%E5%88%A9%E7%94%A8H5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/</loc>
+    <lastmod>2018-04-10T05:53:46.000Z</lastmod>
     <data>
         <display>
-        <title>通俗易懂的原型与原型链</title>
-        <pubTime>2018-03-11T13:23:00.000Z</pubTime>
+        <title>利用H5画随机色圆</title>
+        <pubTime>2018-03-06T14:42:54.000Z</pubTime>
         
-        <tag>js</tag>
+        <tag>HTML5</tag>
          
-        <tag>原型</tag>
+        <tag>css3</tag>
          
          
            
              
-              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2018/01/21/JavaScript/Node_%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2018-04-10T05:53:47.000Z</lastmod>
-    <data>
-        <display>
-        <title>Node基础</title>
-        <pubTime>2018-01-20T16:00:00.000Z</pubTime>
-        
-        <tag>node</tag>
-         
-         
-           
-             
-              <breadCrumb title="JavaScript" url="http://blog.haohome.top/categories/JavaScript/"/>
+              <breadCrumb title="HTML5" url="http://blog.haohome.top/categories/HTML5/"/>
           
         </display>
     </data>
@@ -842,28 +886,6 @@
            
              
               <breadCrumb title="food" url="http://blog.haohome.top/categories/food/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.haohome.top/2018/03/06/HTML5&CSS/%E5%88%A9%E7%94%A8H5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/</loc>
-    <lastmod>2018-04-10T05:53:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>利用H5画随机色圆</title>
-        <pubTime>2018-03-06T14:42:54.000Z</pubTime>
-        
-        <tag>HTML5</tag>
-         
-        <tag>css3</tag>
-         
-         
-           
-             
-              <breadCrumb title="HTML5" url="http://blog.haohome.top/categories/HTML5/"/>
           
         </display>
     </data>
