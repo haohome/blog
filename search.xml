@@ -1,48 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>创新特征</title>
-    <url>/2020/11/08/%E5%B7%A5%E4%BD%9C%E6%80%9D%E7%BB%B4/%E5%88%9B%E6%96%B0%E7%89%B9%E5%BE%81/</url>
-    <content><![CDATA[<p>创新有两种形式：</p>
-<ol>
-<li>连续式创新：沿着同一条S曲线进步；</li>
-<li>非连续式创新：转换到新的S曲线；</li>
-</ol>
-<h2 id="一、连续性创新"><a href="#一、连续性创新" class="headerlink" title="一、连续性创新"></a>一、连续性创新</h2><img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108230818752.png" alt="image-20201108230818752" style="zoom:20%;" />
-
-<p>技术连续性创新的特征</p>
-<blockquote>
-<p>A. 沿着技术曲线持续改善原有的产品性能</p>
-<p>B. 定位于主流市场的主流消费者</p>
-<p>C. Better</p>
-</blockquote>
-<p>案例：</p>
-<blockquote>
-<ul>
-<li>英特尔不断推出性能更强的微处理器</li>
-<li>微软Windows操作系统的不断升级</li>
-<li>苹果iPhone的升级换代。</li>
-</ul>
-</blockquote>
-<h2 id="二、非连续创新"><a href="#二、非连续创新" class="headerlink" title="二、非连续创新"></a>二、非连续创新</h2><p>新旧技术之间不是继承关系，而是竞争关系，其交替过程就是技术的非连续性断层期。</p>
-<img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108231434104.png" alt="image-20201108231434104" style="zoom:20%;" />
-
-<h2 id="三、企业思维与市场思维"><a href="#三、企业思维与市场思维" class="headerlink" title="三、企业思维与市场思维"></a>三、企业思维与市场思维</h2><ul>
-<li><p>企业的基础假设是连续性，其焦点在于运营和管理; </p>
-</li>
-<li><p>市场的基础假设是不连续性，其重点则是创造与破坏。</p>
-</li>
-</ul>
-<p>市场速度超过个体公司速度的原因：市场是破坏性思维，公司是保护性思维</p>
-]]></content>
-      <categories>
-        <category>work</category>
-      </categories>
-      <tags>
-        <tag>思维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mac下使用iTerm2让SSH记录远程服务器账号和密码</title>
     <url>/2018/10/05/Mac&amp;PC/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8iTerm2%E8%AE%A9SSH%E8%AE%B0%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81/</url>
     <content><![CDATA[<p>iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。</p>
@@ -656,41 +614,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java中的static的使用</title>
-    <url>/2017/12/21/IT%E6%8A%80%E6%9C%AF/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h3 id="static静态变量的使用"><a href="#static静态变量的使用" class="headerlink" title="static静态变量的使用"></a>static静态变量的使用</h3><p>  通常我们可以基于一个类创建多个该类的对象，每个对象都拥有自己的成员，互相独立。然而在某些时候，我们更希望该类所有的对象共享同一个成员。static的作用在于此;</p>
-<ul>
-<li>Java 中被 static 修饰的成员称为静态成员或类成员。它属于整个类所有，而不是某个对象所有，即被类的所有对象所共享。静态成员可以使用类名直接访问，也可以使用对象名进行访问。</li>
-<li>使用 static 可以修饰变量、方法和代码块。<a id="more"></a>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">  <span class="keyword">static</span> String hobby=<span class="string">&quot;唱歌&quot;</span>;<span class="comment">//static修饰的变量为静态变量,所有类的对象共享hobby;</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;通过类名访问hobby: &quot;</span> +HelloWorld.hobby);</span><br><span class="line">    HelloWorld hello=<span class="keyword">new</span> HelloWorld();</span><br><span class="line">    System.out.println(<span class="string">&quot;通过对象名访问hobby: &quot;</span>+hello.hobby);</span><br><span class="line">    hello.hobby=<span class="string">&quot;跳舞&quot;</span>;<span class="comment">//通过对象名的形式修改静态变量的值</span></span><br><span class="line">    System.out.println(<span class="string">&quot;通过类名访问hobby: &quot;</span> +HelloWorld.hobby);<span class="comment">//再次使用类名访问静态变量,值已改变</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>静态成员属于整个类，当系统第一次使用该类时，就会为其分配内存空间,直到该类被卸载才会进行资源回收！</strong></p>
-</blockquote>
-</li>
-</ul>
-<h3 id="static静态方法的使用"><a href="#static静态方法的使用" class="headerlink" title="static静态方法的使用"></a>static静态方法的使用</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  print();<span class="comment">//直接调用同类中静态方法</span></span><br><span class="line">  HelloWorld.print();<span class="comment">//直接使用类名调用静态方法</span></span><br><span class="line">  HelloWorld hello=<span class="keyword">new</span> HelloWorld();</span><br><span class="line">  hello.print();<span class="comment">//通过实例化对象再调用;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用关键字声明静态方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;你好,世界!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意</p>
-</blockquote>
-<ul>
-<li>1.静态方法中可以直接调用同类中的静态成员，但不能直接调用非静态成员。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">  String name=<span class="string">&quot;小明&quot;</span>;<span class="comment">//费静态变量</span></span><br><span class="line">  <span class="keyword">static</span> String hobby=<span class="string">&quot;唱歌&quot;</span>;<span class="comment">//静态变量hobby</span></span><br><span class="line">  <span class="comment">//在静态方法中调用非静态变量</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// System.out.println(&quot;欢迎:&quot;+name+&quot;!&quot;);报错,不能直接调用非静态变量</span></span><br><span class="line">    System.out.println(<span class="string">&quot;爱好:&quot;</span>+hobby+<span class="string">&quot;!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>如果希望在静态方法中调用非静态变量，可以通过创建类的对象，然后通过对象来访问非静态变量</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//创建类的对象</span></span><br><span class="line">  HelloWorld hello=<span class="keyword">new</span> HelloWorld();</span><br><span class="line">  <span class="comment">//通过对象来实现在静态方法中调用非静态变量</span></span><br><span class="line">    System.out.println(<span class="string">&quot;欢迎:&quot;</span>+hello.name+<span class="string">&quot;!&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;爱好:&quot;</span>+hobby+<span class="string">&quot;!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>2.在普通成员方法中，则可以直接访问同类的非静态变量和静态变量<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String name=<span class="string">&quot;张三&quot;</span>; <span class="comment">//非静态变量</span></span><br><span class="line"><span class="keyword">static</span> String hobby=<span class="string">&quot;唱歌&quot;</span>;<span class="comment">//静态变量</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;欢迎:&quot;</span>+name+<span class="string">&quot;!&quot;</span>);</span><br><span class="line">  System.out.println(<span class="string">&quot;爱好:&quot;</span>+hobby+<span class="string">&quot;!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>3.静态方法中不能直接调用非静态方法，需要通过对象来访问非静态方法。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123; <span class="comment">//普通成员方法</span></span><br><span class="line">  System.out.println(<span class="string">&quot;你好欢迎您!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;欢迎来到这里&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">  HelloWorld hello=<span class="keyword">new</span> HelloWorld();</span><br><span class="line">  hello.show();<span class="comment">//普通成员方法必须通过对象调用</span></span><br><span class="line">  print();<span class="comment">//可以直接调用静态方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>学习记录</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS手写状态管理的实现</title>
     <url>/2019/01/31/IT%E6%8A%80%E6%9C%AF/JS%E6%89%8B%E5%86%99%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<blockquote>
@@ -754,6 +677,41 @@
       <tags>
         <tag>state</tag>
         <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java中的static的使用</title>
+    <url>/2017/12/21/IT%E6%8A%80%E6%9C%AF/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h3 id="static静态变量的使用"><a href="#static静态变量的使用" class="headerlink" title="static静态变量的使用"></a>static静态变量的使用</h3><p>  通常我们可以基于一个类创建多个该类的对象，每个对象都拥有自己的成员，互相独立。然而在某些时候，我们更希望该类所有的对象共享同一个成员。static的作用在于此;</p>
+<ul>
+<li>Java 中被 static 修饰的成员称为静态成员或类成员。它属于整个类所有，而不是某个对象所有，即被类的所有对象所共享。静态成员可以使用类名直接访问，也可以使用对象名进行访问。</li>
+<li>使用 static 可以修饰变量、方法和代码块。<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">  <span class="keyword">static</span> String hobby=<span class="string">&quot;唱歌&quot;</span>;<span class="comment">//static修饰的变量为静态变量,所有类的对象共享hobby;</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;通过类名访问hobby: &quot;</span> +HelloWorld.hobby);</span><br><span class="line">    HelloWorld hello=<span class="keyword">new</span> HelloWorld();</span><br><span class="line">    System.out.println(<span class="string">&quot;通过对象名访问hobby: &quot;</span>+hello.hobby);</span><br><span class="line">    hello.hobby=<span class="string">&quot;跳舞&quot;</span>;<span class="comment">//通过对象名的形式修改静态变量的值</span></span><br><span class="line">    System.out.println(<span class="string">&quot;通过类名访问hobby: &quot;</span> +HelloWorld.hobby);<span class="comment">//再次使用类名访问静态变量,值已改变</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>静态成员属于整个类，当系统第一次使用该类时，就会为其分配内存空间,直到该类被卸载才会进行资源回收！</strong></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="static静态方法的使用"><a href="#static静态方法的使用" class="headerlink" title="static静态方法的使用"></a>static静态方法的使用</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  print();<span class="comment">//直接调用同类中静态方法</span></span><br><span class="line">  HelloWorld.print();<span class="comment">//直接使用类名调用静态方法</span></span><br><span class="line">  HelloWorld hello=<span class="keyword">new</span> HelloWorld();</span><br><span class="line">  hello.print();<span class="comment">//通过实例化对象再调用;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用关键字声明静态方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;你好,世界!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意</p>
+</blockquote>
+<ul>
+<li>1.静态方法中可以直接调用同类中的静态成员，但不能直接调用非静态成员。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">  String name=<span class="string">&quot;小明&quot;</span>;<span class="comment">//费静态变量</span></span><br><span class="line">  <span class="keyword">static</span> String hobby=<span class="string">&quot;唱歌&quot;</span>;<span class="comment">//静态变量hobby</span></span><br><span class="line">  <span class="comment">//在静态方法中调用非静态变量</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// System.out.println(&quot;欢迎:&quot;+name+&quot;!&quot;);报错,不能直接调用非静态变量</span></span><br><span class="line">    System.out.println(<span class="string">&quot;爱好:&quot;</span>+hobby+<span class="string">&quot;!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果希望在静态方法中调用非静态变量，可以通过创建类的对象，然后通过对象来访问非静态变量</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//创建类的对象</span></span><br><span class="line">  HelloWorld hello=<span class="keyword">new</span> HelloWorld();</span><br><span class="line">  <span class="comment">//通过对象来实现在静态方法中调用非静态变量</span></span><br><span class="line">    System.out.println(<span class="string">&quot;欢迎:&quot;</span>+hello.name+<span class="string">&quot;!&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;爱好:&quot;</span>+hobby+<span class="string">&quot;!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>2.在普通成员方法中，则可以直接访问同类的非静态变量和静态变量<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String name=<span class="string">&quot;张三&quot;</span>; <span class="comment">//非静态变量</span></span><br><span class="line"><span class="keyword">static</span> String hobby=<span class="string">&quot;唱歌&quot;</span>;<span class="comment">//静态变量</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;欢迎:&quot;</span>+name+<span class="string">&quot;!&quot;</span>);</span><br><span class="line">  System.out.println(<span class="string">&quot;爱好:&quot;</span>+hobby+<span class="string">&quot;!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>3.静态方法中不能直接调用非静态方法，需要通过对象来访问非静态方法。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123; <span class="comment">//普通成员方法</span></span><br><span class="line">  System.out.println(<span class="string">&quot;你好欢迎您!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;欢迎来到这里&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">  HelloWorld hello=<span class="keyword">new</span> HelloWorld();</span><br><span class="line">  hello.show();<span class="comment">//普通成员方法必须通过对象调用</span></span><br><span class="line">  print();<span class="comment">//可以直接调用静态方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1379,6 +1337,58 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue的CSS作用域问题</title>
+    <url>/2018/02/12/IT%E6%8A%80%E6%9C%AF/Vue%E7%9A%84CSS%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="1-CSS-作用域问题"><a href="#1-CSS-作用域问题" class="headerlink" title="1. CSS 作用域问题"></a>1. CSS 作用域问题</h3><h4 id="1-1-style标签增加scoped属性"><a href="#1-1-style标签增加scoped属性" class="headerlink" title="1.1 style标签增加scoped属性"></a>1.1 style标签增加scoped属性</h4><p>CSS 只作用于当前组件中的元素,类似于 Shadow DOM 中的样式封装。</p>
+<blockquote>
+<p>原理: 通过使用 PostCSS 来实现转换</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.example</span> &#123;</span></span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;example&quot;</span>&gt;</span>hi<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>转换结果:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.example</span><span class="selector-attr">[data-v-f3f3eg9]</span> &#123;</span></span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;example&quot;</span> <span class="attr">data-v-f3f3eg9</span>&gt;</span>hi<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<h4 id="1-2-混用本地和全局样式"><a href="#1-2-混用本地和全局样式" class="headerlink" title="1.2 混用本地和全局样式"></a>1.2 混用本地和全局样式</h4><p>Vue中可以在一个组件中同时使用有作用域和无作用域的样式:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="comment">/* 全局样式 */</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css"><span class="comment">/* 本地样式 */</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-子组件的根元素"><a href="#1-3-子组件的根元素" class="headerlink" title="1.3 子组件的根元素"></a>1.3 子组件的根元素</h4><p>子组件使用了scoped后,父组件的样式不会渗透到子组件中,不过子组件的根节点会同时受到父组件和子组件的css影响</p>
+<blockquote>
+<p>设计目的：为了父组件可以从布局角度出发,调整其子组件根元素的样式</p>
+</blockquote>
+<h4 id="1-4深度作用选择器"><a href="#1-4深度作用选择器" class="headerlink" title="1.4深度作用选择器"></a>1.4深度作用选择器</h4><p>如果希望scoped样式中的某个样式作用的更深,如影响子组件,可以使用<code>&gt;&gt;&gt;</code>操作符:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.a</span> &gt;&gt;&gt; <span class="selector-class">.b</span> &#123; <span class="comment">/* ... */</span> &#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 解析成:  .a[data-v-f3f3eg9] .b &#123; /* ... */ &#125; --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>有些像 SASS 之类的预处理器无法正确解析 <code>&gt;&gt;&gt;</code>。这种情况下你可以使用 <code>/deep/</code> 操作符取而代之——这是一个 <code>&gt;&gt;&gt;</code>的别名，同样可以正常工作。</p>
+</blockquote>
+<h4 id="1-5动态生成的内容"><a href="#1-5动态生成的内容" class="headerlink" title="1.5动态生成的内容"></a>1.5动态生成的内容</h4><p>通过 <code>v-html</code> 创建的 DOM 内容不受作用域内的样式影响，但仍然可以通过深度作用选择器来为他们设置样式。</p>
+<h3 id="2-CSS-Modules"><a href="#2-CSS-Modules" class="headerlink" title="2. CSS Modules"></a>2. CSS Modules</h3><h4 id="2-1-使用"><a href="#2-1-使用" class="headerlink" title="2.1 使用"></a>2.1 使用</h4><p>CSS Modules是一个用于模块化和组合 CSS 的流行系统。</p>
+<p> 在<code>&lt;style&gt;</code> 上添加 <code>module</code> 属性：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">module</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.red</span> &#123;</span></span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.bold</span> &#123;</span></span><br><span class="line">  font-weight: bold;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这将为 <code>css-loader</code> 打开 CSS Modules 模式，生成的 CSS 对象将为组件注入一个名叫 <code>$style</code> 的计算属性，可以在模块中使用动态 class 绑定：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">&quot;$style.red&quot;</span>&gt;</span></span><br><span class="line">    This should be red</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>由于具有computed属性,也适用于<code>:class</code> 的 object/array 语法：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">&quot;&#123; [$style.red]: isRed &#125;&quot;</span>&gt;</span></span><br><span class="line">      Am I red?</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">&quot;[$style.red, $style.bold]&quot;</span>&gt;</span></span><br><span class="line">      Red and bold</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以在 JavaScript 访问它：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  created () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.$style.red)</span><br><span class="line">    <span class="comment">// -&gt; &quot;_1VyoJ-uZOjlOxP7jWUy19_0&quot;</span></span><br><span class="line">    <span class="comment">// an identifier generated based on filename and className.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-自定义注入名称"><a href="#2-2-自定义注入名称" class="headerlink" title="2.2 自定义注入名称"></a>2.2 自定义注入名称</h4><p>在 <code>.vue</code> 中你可以定义不止一个 <code>&lt;style&gt;</code>，为了避免被覆盖，可以通过设置 <code>module</code> 属性来为它们定义注入后计算属性的名称。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">module</span>=<span class="string">&quot;a&quot;</span>&gt;</span></span><br><span class="line"><span class="css">  <span class="comment">/* identifiers injected as a */</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">module</span>=<span class="string">&quot;b&quot;</span>&gt;</span></span><br><span class="line"><span class="css">  <span class="comment">/* identifiers injected as b */</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Framework</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue的点赞效果</title>
     <url>/2018/02/14/IT%E6%8A%80%E6%9C%AF/Vue%E7%9A%84%E7%82%B9%E8%B5%9E%E6%95%88%E6%9E%9C/</url>
     <content><![CDATA[<h3 id="1-原生-利用CSS3-Animation-实现"><a href="#1-原生-利用CSS3-Animation-实现" class="headerlink" title="1. 原生: 利用CSS3 Animation 实现"></a>1. 原生: 利用CSS3 Animation 实现</h3><p>animation的动画效果通常是连贯性的，简单的说就是线性渐变的动画。但有些效果不需要连贯性，只需要关键帧之间的跳跃，这时应该使用<code>steps</code> 过渡方式，称之为帧动画。</p>
@@ -1442,94 +1452,6 @@
       <tags>
         <tag>vue</tag>
         <tag>css3</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue的CSS作用域问题</title>
-    <url>/2018/02/12/IT%E6%8A%80%E6%9C%AF/Vue%E7%9A%84CSS%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="1-CSS-作用域问题"><a href="#1-CSS-作用域问题" class="headerlink" title="1. CSS 作用域问题"></a>1. CSS 作用域问题</h3><h4 id="1-1-style标签增加scoped属性"><a href="#1-1-style标签增加scoped属性" class="headerlink" title="1.1 style标签增加scoped属性"></a>1.1 style标签增加scoped属性</h4><p>CSS 只作用于当前组件中的元素,类似于 Shadow DOM 中的样式封装。</p>
-<blockquote>
-<p>原理: 通过使用 PostCSS 来实现转换</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.example</span> &#123;</span></span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;example&quot;</span>&gt;</span>hi<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>转换结果:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.example</span><span class="selector-attr">[data-v-f3f3eg9]</span> &#123;</span></span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;example&quot;</span> <span class="attr">data-v-f3f3eg9</span>&gt;</span>hi<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-
-<h4 id="1-2-混用本地和全局样式"><a href="#1-2-混用本地和全局样式" class="headerlink" title="1.2 混用本地和全局样式"></a>1.2 混用本地和全局样式</h4><p>Vue中可以在一个组件中同时使用有作用域和无作用域的样式:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="comment">/* 全局样式 */</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css"><span class="comment">/* 本地样式 */</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="1-3-子组件的根元素"><a href="#1-3-子组件的根元素" class="headerlink" title="1.3 子组件的根元素"></a>1.3 子组件的根元素</h4><p>子组件使用了scoped后,父组件的样式不会渗透到子组件中,不过子组件的根节点会同时受到父组件和子组件的css影响</p>
-<blockquote>
-<p>设计目的：为了父组件可以从布局角度出发,调整其子组件根元素的样式</p>
-</blockquote>
-<h4 id="1-4深度作用选择器"><a href="#1-4深度作用选择器" class="headerlink" title="1.4深度作用选择器"></a>1.4深度作用选择器</h4><p>如果希望scoped样式中的某个样式作用的更深,如影响子组件,可以使用<code>&gt;&gt;&gt;</code>操作符:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.a</span> &gt;&gt;&gt; <span class="selector-class">.b</span> &#123; <span class="comment">/* ... */</span> &#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 解析成:  .a[data-v-f3f3eg9] .b &#123; /* ... */ &#125; --&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>有些像 SASS 之类的预处理器无法正确解析 <code>&gt;&gt;&gt;</code>。这种情况下你可以使用 <code>/deep/</code> 操作符取而代之——这是一个 <code>&gt;&gt;&gt;</code>的别名，同样可以正常工作。</p>
-</blockquote>
-<h4 id="1-5动态生成的内容"><a href="#1-5动态生成的内容" class="headerlink" title="1.5动态生成的内容"></a>1.5动态生成的内容</h4><p>通过 <code>v-html</code> 创建的 DOM 内容不受作用域内的样式影响，但仍然可以通过深度作用选择器来为他们设置样式。</p>
-<h3 id="2-CSS-Modules"><a href="#2-CSS-Modules" class="headerlink" title="2. CSS Modules"></a>2. CSS Modules</h3><h4 id="2-1-使用"><a href="#2-1-使用" class="headerlink" title="2.1 使用"></a>2.1 使用</h4><p>CSS Modules是一个用于模块化和组合 CSS 的流行系统。</p>
-<p> 在<code>&lt;style&gt;</code> 上添加 <code>module</code> 属性：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">module</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.red</span> &#123;</span></span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.bold</span> &#123;</span></span><br><span class="line">  font-weight: bold;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这将为 <code>css-loader</code> 打开 CSS Modules 模式，生成的 CSS 对象将为组件注入一个名叫 <code>$style</code> 的计算属性，可以在模块中使用动态 class 绑定：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">&quot;$style.red&quot;</span>&gt;</span></span><br><span class="line">    This should be red</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>由于具有computed属性,也适用于<code>:class</code> 的 object/array 语法：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">&quot;&#123; [$style.red]: isRed &#125;&quot;</span>&gt;</span></span><br><span class="line">      Am I red?</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">:class</span>=<span class="string">&quot;[$style.red, $style.bold]&quot;</span>&gt;</span></span><br><span class="line">      Red and bold</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>可以在 JavaScript 访问它：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  created () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.$style.red)</span><br><span class="line">    <span class="comment">// -&gt; &quot;_1VyoJ-uZOjlOxP7jWUy19_0&quot;</span></span><br><span class="line">    <span class="comment">// an identifier generated based on filename and className.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-2-自定义注入名称"><a href="#2-2-自定义注入名称" class="headerlink" title="2.2 自定义注入名称"></a>2.2 自定义注入名称</h4><p>在 <code>.vue</code> 中你可以定义不止一个 <code>&lt;style&gt;</code>，为了避免被覆盖，可以通过设置 <code>module</code> 属性来为它们定义注入后计算属性的名称。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">module</span>=<span class="string">&quot;a&quot;</span>&gt;</span></span><br><span class="line"><span class="css">  <span class="comment">/* identifiers injected as a */</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">module</span>=<span class="string">&quot;b&quot;</span>&gt;</span></span><br><span class="line"><span class="css">  <span class="comment">/* identifiers injected as b */</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Framework</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>flex-shrink 新弹性和模型属性</title>
-    <url>/2017/11/09/IT%E6%8A%80%E6%9C%AF/flex-shrink%20%20%E6%96%B0%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%B1%9E%E6%80%A7/</url>
-    <content><![CDATA[<h4 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h4><ul>
-<li>flex-shrink：<number></li>
-<li>默认值：1</li>
-<li>适用于：flex子项</li>
-<li>继承性：无</li>
-<li>动画性：是</li>
-<li>计算值：指定值<a id="more"></a>
-<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4>设置或检索弹性盒的收缩比率。<br>根据弹性盒子元素所设置的收缩因子作为比率来收缩空间。<br>示例：a,b,c将按照1:1:3的比率来收缩空间<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;flex&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>a<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>b<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>c<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.flex</span>&#123;<span class="attribute">display</span>:flex;<span class="attribute">width</span>:<span class="number">400px</span>;<span class="attribute">margin</span>:<span class="number">0</span>;<span class="attribute">padding</span>:<span class="number">0</span>;<span class="attribute">list-style</span>:none;&#125;</span></span><br><span class="line"><span class="css"><span class="selector-class">.flex</span> <span class="selector-tag">li</span>&#123;<span class="attribute">width</span>:<span class="number">200px</span>;&#125;</span></span><br><span class="line"><span class="css"><span class="selector-class">.flex</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child(3)</span>&#123;<span class="attribute">flex-shrink</span>:<span class="number">3</span>;&#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><ol>
-<li>flex-shrink的默认值为1，如果没有显示定义该属性，将会自动按照默认值1在所有因子相加之后计算比率来进行空间收缩。</li>
-</ol>
-</li>
-</ul>
-<ol>
-<li>本例中c显式的定义了flex-shrink，a,b没有显式定义，但将根据默认值1来计算，可以看到总共将剩余空间分成了5份，其中a占1份，b占1份，c占3分，即1:1:3</li>
-<li>我们可以看到父容器定义为400px，子项被定义为200px，相加之后即为600px，超出父容器200px。那么这么超出的200px需要被a,b,c消化</li>
-<li>通过收缩因子，所以加权综合可得200<em>1+200</em>1+200*3=1000px；</li>
-<li>于是我们可以计算a,b,c将被移除的溢出量是多少：</li>
-</ol>
-<blockquote>
-<p> a被移除溢出量：(200*1/1000)*200，即约等于40px</p>
-<p> b被移除溢出量：(200*1/1000)*200，即约等于40px</p>
-<p> c被移除溢出量：(200*3/1000)*200，即约等于120px</p>
-<p> 最后a,b,c的实际宽度分别为：200-40=160px, 200-40=160px, 200-120=80px</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>flex</tag>
       </tags>
   </entry>
   <entry>
@@ -1706,6 +1628,42 @@
       </tags>
   </entry>
   <entry>
+    <title>flex-shrink 新弹性和模型属性</title>
+    <url>/2017/11/09/IT%E6%8A%80%E6%9C%AF/flex-shrink%20%20%E6%96%B0%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%B1%9E%E6%80%A7/</url>
+    <content><![CDATA[<h4 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h4><ul>
+<li>flex-shrink：<number></li>
+<li>默认值：1</li>
+<li>适用于：flex子项</li>
+<li>继承性：无</li>
+<li>动画性：是</li>
+<li>计算值：指定值<a id="more"></a>
+<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4>设置或检索弹性盒的收缩比率。<br>根据弹性盒子元素所设置的收缩因子作为比率来收缩空间。<br>示例：a,b,c将按照1:1:3的比率来收缩空间<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;flex&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>a<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>b<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>c<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.flex</span>&#123;<span class="attribute">display</span>:flex;<span class="attribute">width</span>:<span class="number">400px</span>;<span class="attribute">margin</span>:<span class="number">0</span>;<span class="attribute">padding</span>:<span class="number">0</span>;<span class="attribute">list-style</span>:none;&#125;</span></span><br><span class="line"><span class="css"><span class="selector-class">.flex</span> <span class="selector-tag">li</span>&#123;<span class="attribute">width</span>:<span class="number">200px</span>;&#125;</span></span><br><span class="line"><span class="css"><span class="selector-class">.flex</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child(3)</span>&#123;<span class="attribute">flex-shrink</span>:<span class="number">3</span>;&#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><ol>
+<li>flex-shrink的默认值为1，如果没有显示定义该属性，将会自动按照默认值1在所有因子相加之后计算比率来进行空间收缩。</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>本例中c显式的定义了flex-shrink，a,b没有显式定义，但将根据默认值1来计算，可以看到总共将剩余空间分成了5份，其中a占1份，b占1份，c占3分，即1:1:3</li>
+<li>我们可以看到父容器定义为400px，子项被定义为200px，相加之后即为600px，超出父容器200px。那么这么超出的200px需要被a,b,c消化</li>
+<li>通过收缩因子，所以加权综合可得200<em>1+200</em>1+200*3=1000px；</li>
+<li>于是我们可以计算a,b,c将被移除的溢出量是多少：</li>
+</ol>
+<blockquote>
+<p> a被移除溢出量：(200*1/1000)*200，即约等于40px</p>
+<p> b被移除溢出量：(200*1/1000)*200，即约等于40px</p>
+<p> c被移除溢出量：(200*3/1000)*200，即约等于120px</p>
+<p> 最后a,b,c的实际宽度分别为：200-40=160px, 200-40=160px, 200-120=80px</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>flex</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>get和post推荐使用场景</title>
     <url>/2017/12/10/IT%E6%8A%80%E6%9C%AF/get%E5%92%8Cpost%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</url>
     <content><![CDATA[<ul>
@@ -1750,55 +1708,6 @@
         <tag>JavaScript</tag>
         <tag>hash</tag>
         <tag>兼容性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS数组以及对象的深拷贝</title>
-    <url>/2018/02/22/IT%E6%8A%80%E6%9C%AF/javascript%20%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D/</url>
-    <content><![CDATA[<p>转载自 csdn博客 <strong>FengCms FungLeo</strong>  博客:<a href="http://blog.csdn.net/fungleo/article/details/54931379">原文链接</a></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在js中，数组和对象的复制如果使用<code>=</code>号来进行复制，那只是浅拷贝。如下图演示：<br><img src="https://haohome.top/18-4-10/66887533.jpg" alt="img"><br>如上，<code>arr</code>的修改，会影响<code>arr2</code>的值，这显然在绝大多数情况下，并不是我们所需要的结果。<br>因此，数组以及对象的深拷贝就是<code>javascript</code>的一个基本功了。</p>
-<h2 id="数组的深拷贝"><a href="#数组的深拷贝" class="headerlink" title="数组的深拷贝"></a>数组的深拷贝</h2><p>条条大道通罗马，实现数组的深拷贝，是有好几种方法的。举例如下：</p>
-<a id="more"></a>
-<h3 id="for-循环实现数组的深拷贝"><a href="#for-循环实现数组的深拷贝" class="headerlink" title="for 循环实现数组的深拷贝"></a>for 循环实现数组的深拷贝</h3><p>for循环是非常好用的。如果不知道高级方法，通过for循环能够完成我们大多数的需求。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">var</span> arr2 = copyArr(arr)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyArr</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">     res.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如上，通过对数组的for循环，即可实现对数组的深拷贝了。</p>
-<h3 id="slice-方法实现数组的深拷贝"><a href="#slice-方法实现数组的深拷贝" class="headerlink" title="slice 方法实现数组的深拷贝"></a>slice 方法实现数组的深拷贝</h3><p>这个代码实现非常简单。原理也比较好理解，他是将原数组中抽离部分出来形成一个新数组。我们只要设置为抽离全部，即可完成数组的深拷贝。代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">var</span> arr2 = arr.slice(<span class="number">0</span>)</span><br><span class="line">arr[<span class="number">2</span>] = <span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log(arr2)</span><br></pre></td></tr></table></figure>
-
-<p>运行结果如下：<br><img src="http://ww4.sinaimg.cn/large/0060lm7Tgy1fcj8i9uye5j305n03rmx8.jpg" alt="img"><br>更多 <code>slice</code> 内容请访问 <a href="http://www.w3school.com.cn/jsref/jsref_slice_array.asp">w3school JavaScript slice 方法 </a></p>
-<h3 id="concat-方法实现数组的深拷贝"><a href="#concat-方法实现数组的深拷贝" class="headerlink" title="concat 方法实现数组的深拷贝"></a>concat 方法实现数组的深拷贝</h3><p>这个代码也非常简单，原理更加粗暴。它是用于连接多个数组组成一个新的数组的方法。那么，我们只要连接它自己，即可完成数组的深拷贝。代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">var</span> arr2 = arr.concat()</span><br><span class="line">arr[<span class="number">2</span>] = <span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log(arr2)<span class="comment">//12345</span></span><br></pre></td></tr></table></figure>
-
-<p>运行结果如下：<br><img src="http://ww1.sinaimg.cn/large/0060lm7Tgy1fcj8mi1kvtj305g043t8s.jpg" alt="img"><br>更多 <code>concat</code> 内容请访问 <a href="http://www.w3school.com.cn/jsref/jsref_concat_array.asp">w3school JavaScript concat 方法 </a></p>
-<h3 id="2017年10月31日补充：ES6扩展运算符实现数组的深拷贝"><a href="#2017年10月31日补充：ES6扩展运算符实现数组的深拷贝" class="headerlink" title="2017年10月31日补充：ES6扩展运算符实现数组的深拷贝"></a>2017年10月31日补充：ES6扩展运算符实现数组的深拷贝</h3><p>OK，以上之前讲的方法全部过时了，用下面的方法实现数组的深拷贝是最简单的。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">var</span> [ ...arr2 ] = arr</span><br><span class="line">arr[<span class="number">2</span>] = <span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log(arr2)<span class="number">12345</span></span><br></pre></td></tr></table></figure>
-
-<p>运行结果如下：</p>
-<p><img src="http://img.blog.csdn.net/20171031142723093?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvRnVuZ0xlbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="ES6扩展运算符实现数组的深拷贝"></p>
-<h2 id="对象的深拷贝"><a href="#对象的深拷贝" class="headerlink" title="对象的深拷贝"></a>对象的深拷贝</h2><p>对象的深拷贝相比数组也没有困难许多，列举两个方法。</p>
-<h3 id="万能的for循环实现对象的深拷贝"><a href="#万能的for循环实现对象的深拷贝" class="headerlink" title="万能的for循环实现对象的深拷贝"></a>万能的for循环实现对象的深拷贝</h3><p>在很多时候，for循环能够解决大问题。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&#x27;FungLeo&#x27;</span>,</span><br><span class="line">  sex: <span class="string">&#x27;man&#x27;</span>,</span><br><span class="line">  old: <span class="string">&#x27;18&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj2 = copyObj(obj)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyObj</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> res = &#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    res[key] = obj[key]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="转换成json再转换成对象实现对象的深拷贝"><a href="#转换成json再转换成对象实现对象的深拷贝" class="headerlink" title="转换成json再转换成对象实现对象的深拷贝"></a>转换成json再转换成对象实现对象的深拷贝</h3><p>上面的代码实在是比较长，所以，用一个更暴力的方法吧！代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&#x27;FungLeo&#x27;</span>,</span><br><span class="line">  sex: <span class="string">&#x27;man&#x27;</span>,</span><br><span class="line">  old: <span class="string">&#x27;18&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj))</span><br></pre></td></tr></table></figure>
-
-<p>这个原理没什么好解释的，实在是够简单粗暴的啦！</p>
-<h3 id="2017年10月31日补充：-扩展运算符实现对象的深拷贝"><a href="#2017年10月31日补充：-扩展运算符实现对象的深拷贝" class="headerlink" title="2017年10月31日补充： 扩展运算符实现对象的深拷贝"></a>2017年10月31日补充： 扩展运算符实现对象的深拷贝</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&#x27;FungLeo&#x27;</span>,</span><br><span class="line">  sex: <span class="string">&#x27;man&#x27;</span>,</span><br><span class="line">  old: <span class="string">&#x27;18&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> &#123; ...obj2 &#125; = obj</span><br><span class="line">obj.old = <span class="string">&#x27;22&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj)</span><br><span class="line"><span class="built_in">console</span>.log(obj2)</span><br></pre></td></tr></table></figure>
-
-<p>运行结果如下：</p>
-<p><img src="http://img.blog.csdn.net/20171031143034799?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvRnVuZ0xlbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="扩展运算符实现对象的深拷贝"></p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>数组和对象的深拷贝是js中最常见的应用。理解各种方法是必须的。希望对大家有所帮助。<br>本文中并没有对异常进行处理，主要在讲原理。更多的数组以及对象的操作方法，可以参考<code>lodash</code>的源码，查看它的源码可以让你的js基础变得非常牢固。我也在学习中。</p>
-<blockquote>
-<p>2017年10月31日补充，使用es6提供的扩展运算符的方法实现深拷贝，简单，高效。并且，对象的深拷贝不会像使用 <code>JSON</code> 方法深拷贝一样，丢失函数等信息，只能用来深拷贝 <code>JSON</code> 数据格式的对象。推荐大家使用。</p>
-</blockquote>
-<h3 id="补充一个数组去重的方法"><a href="#补充一个数组去重的方法" class="headerlink" title="补充一个数组去重的方法"></a>补充一个数组去重的方法</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dedupe</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [...new <span class="built_in">Set</span>(array)]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(dedupe(arr))	<span class="comment">//[1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -1855,6 +1764,55 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>input</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS数组以及对象的深拷贝</title>
+    <url>/2018/02/22/IT%E6%8A%80%E6%9C%AF/javascript%20%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D/</url>
+    <content><![CDATA[<p>转载自 csdn博客 <strong>FengCms FungLeo</strong>  博客:<a href="http://blog.csdn.net/fungleo/article/details/54931379">原文链接</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在js中，数组和对象的复制如果使用<code>=</code>号来进行复制，那只是浅拷贝。如下图演示：<br><img src="https://haohome.top/18-4-10/66887533.jpg" alt="img"><br>如上，<code>arr</code>的修改，会影响<code>arr2</code>的值，这显然在绝大多数情况下，并不是我们所需要的结果。<br>因此，数组以及对象的深拷贝就是<code>javascript</code>的一个基本功了。</p>
+<h2 id="数组的深拷贝"><a href="#数组的深拷贝" class="headerlink" title="数组的深拷贝"></a>数组的深拷贝</h2><p>条条大道通罗马，实现数组的深拷贝，是有好几种方法的。举例如下：</p>
+<a id="more"></a>
+<h3 id="for-循环实现数组的深拷贝"><a href="#for-循环实现数组的深拷贝" class="headerlink" title="for 循环实现数组的深拷贝"></a>for 循环实现数组的深拷贝</h3><p>for循环是非常好用的。如果不知道高级方法，通过for循环能够完成我们大多数的需求。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">var</span> arr2 = copyArr(arr)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyArr</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">     res.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上，通过对数组的for循环，即可实现对数组的深拷贝了。</p>
+<h3 id="slice-方法实现数组的深拷贝"><a href="#slice-方法实现数组的深拷贝" class="headerlink" title="slice 方法实现数组的深拷贝"></a>slice 方法实现数组的深拷贝</h3><p>这个代码实现非常简单。原理也比较好理解，他是将原数组中抽离部分出来形成一个新数组。我们只要设置为抽离全部，即可完成数组的深拷贝。代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">var</span> arr2 = arr.slice(<span class="number">0</span>)</span><br><span class="line">arr[<span class="number">2</span>] = <span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log(arr2)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：<br><img src="http://ww4.sinaimg.cn/large/0060lm7Tgy1fcj8i9uye5j305n03rmx8.jpg" alt="img"><br>更多 <code>slice</code> 内容请访问 <a href="http://www.w3school.com.cn/jsref/jsref_slice_array.asp">w3school JavaScript slice 方法 </a></p>
+<h3 id="concat-方法实现数组的深拷贝"><a href="#concat-方法实现数组的深拷贝" class="headerlink" title="concat 方法实现数组的深拷贝"></a>concat 方法实现数组的深拷贝</h3><p>这个代码也非常简单，原理更加粗暴。它是用于连接多个数组组成一个新的数组的方法。那么，我们只要连接它自己，即可完成数组的深拷贝。代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">var</span> arr2 = arr.concat()</span><br><span class="line">arr[<span class="number">2</span>] = <span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log(arr2)<span class="comment">//12345</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：<br><img src="http://ww1.sinaimg.cn/large/0060lm7Tgy1fcj8mi1kvtj305g043t8s.jpg" alt="img"><br>更多 <code>concat</code> 内容请访问 <a href="http://www.w3school.com.cn/jsref/jsref_concat_array.asp">w3school JavaScript concat 方法 </a></p>
+<h3 id="2017年10月31日补充：ES6扩展运算符实现数组的深拷贝"><a href="#2017年10月31日补充：ES6扩展运算符实现数组的深拷贝" class="headerlink" title="2017年10月31日补充：ES6扩展运算符实现数组的深拷贝"></a>2017年10月31日补充：ES6扩展运算符实现数组的深拷贝</h3><p>OK，以上之前讲的方法全部过时了，用下面的方法实现数组的深拷贝是最简单的。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">var</span> [ ...arr2 ] = arr</span><br><span class="line">arr[<span class="number">2</span>] = <span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log(arr2)<span class="number">12345</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<p><img src="http://img.blog.csdn.net/20171031142723093?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvRnVuZ0xlbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="ES6扩展运算符实现数组的深拷贝"></p>
+<h2 id="对象的深拷贝"><a href="#对象的深拷贝" class="headerlink" title="对象的深拷贝"></a>对象的深拷贝</h2><p>对象的深拷贝相比数组也没有困难许多，列举两个方法。</p>
+<h3 id="万能的for循环实现对象的深拷贝"><a href="#万能的for循环实现对象的深拷贝" class="headerlink" title="万能的for循环实现对象的深拷贝"></a>万能的for循环实现对象的深拷贝</h3><p>在很多时候，for循环能够解决大问题。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&#x27;FungLeo&#x27;</span>,</span><br><span class="line">  sex: <span class="string">&#x27;man&#x27;</span>,</span><br><span class="line">  old: <span class="string">&#x27;18&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj2 = copyObj(obj)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyObj</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> res = &#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    res[key] = obj[key]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="转换成json再转换成对象实现对象的深拷贝"><a href="#转换成json再转换成对象实现对象的深拷贝" class="headerlink" title="转换成json再转换成对象实现对象的深拷贝"></a>转换成json再转换成对象实现对象的深拷贝</h3><p>上面的代码实在是比较长，所以，用一个更暴力的方法吧！代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&#x27;FungLeo&#x27;</span>,</span><br><span class="line">  sex: <span class="string">&#x27;man&#x27;</span>,</span><br><span class="line">  old: <span class="string">&#x27;18&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj))</span><br></pre></td></tr></table></figure>
+
+<p>这个原理没什么好解释的，实在是够简单粗暴的啦！</p>
+<h3 id="2017年10月31日补充：-扩展运算符实现对象的深拷贝"><a href="#2017年10月31日补充：-扩展运算符实现对象的深拷贝" class="headerlink" title="2017年10月31日补充： 扩展运算符实现对象的深拷贝"></a>2017年10月31日补充： 扩展运算符实现对象的深拷贝</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&#x27;FungLeo&#x27;</span>,</span><br><span class="line">  sex: <span class="string">&#x27;man&#x27;</span>,</span><br><span class="line">  old: <span class="string">&#x27;18&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> &#123; ...obj2 &#125; = obj</span><br><span class="line">obj.old = <span class="string">&#x27;22&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj)</span><br><span class="line"><span class="built_in">console</span>.log(obj2)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<p><img src="http://img.blog.csdn.net/20171031143034799?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvRnVuZ0xlbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="扩展运算符实现对象的深拷贝"></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>数组和对象的深拷贝是js中最常见的应用。理解各种方法是必须的。希望对大家有所帮助。<br>本文中并没有对异常进行处理，主要在讲原理。更多的数组以及对象的操作方法，可以参考<code>lodash</code>的源码，查看它的源码可以让你的js基础变得非常牢固。我也在学习中。</p>
+<blockquote>
+<p>2017年10月31日补充，使用es6提供的扩展运算符的方法实现深拷贝，简单，高效。并且，对象的深拷贝不会像使用 <code>JSON</code> 方法深拷贝一样，丢失函数等信息，只能用来深拷贝 <code>JSON</code> 数据格式的对象。推荐大家使用。</p>
+</blockquote>
+<h3 id="补充一个数组去重的方法"><a href="#补充一个数组去重的方法" class="headerlink" title="补充一个数组去重的方法"></a>补充一个数组去重的方法</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dedupe</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [...new <span class="built_in">Set</span>(array)]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(dedupe(arr))	<span class="comment">//[1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -2347,39 +2305,6 @@
       </tags>
   </entry>
   <entry>
-    <title>你不知道的JavaScript之词法作用域与动态作用域</title>
-    <url>/2018/10/20/IT%E6%8A%80%E6%9C%AF/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/</url>
-    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在写代码的过程中,我们经常分不清作用域中变量的值指向什么,主要原因是我们分不清楚是应该按照函数的调用顺序还是按照函数位置的嵌套顺序查找变量.作用域有两种工作模式:词法作用域和动态作用域,词法作用域也叫静态作用域.</p>
-<blockquote>
-<ul>
-<li>词法作用域关心函数在<strong>何处声明</strong>，作用域链基于作用域嵌套 </li>
-<li>动态作用域关心函数在<strong>何处调用</strong>，作用域链基于调用栈</li>
-</ul>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h2><p><a href="https://www.cnblogs.com/xiaohuochai/p/5700095.html">词法作用域是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变</a>.</p>
-<p>无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    bar();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br><span class="line">foo();  <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
-
-<p>因为bar函数是在全局声明的，所以是输出全局变量a的值</p>
-<p>词法作用域中又分为函数作用域和块级作用域,JavaScript没有动态作用域,它是基于函数作用域的,但同时也有块级作用域,如with关键字、try-catch语句的catch子句、let关键字（ES6）、const关键字（ES6）</p>
-<h2 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h2><p>我们经常会把词法作用域和this机制弄混淆,这是因为this机制从某种程度上与动态作用域类似.</p>
-<p>动态作用域并不关心函数和作用域是如何声明以及在任何处声明的，只关心它们从何处调用</p>
-<p>继续拿上面的例子,如果处于动态作用域,变量a应首先在bar()中查找,没有找到会顺着调用栈在调用bar()函数的地方也就是foo()函数中查找,找到赋值a为1,所以输出1</p>
-<blockquote>
-<p>两种作用域的区别，简而言之，词法作用域是在定义时确定的，而动态作用域是在运行时确定的</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>JS</tag>
-        <tag>YDKJS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>你不知道的JavaScript之this</title>
     <url>/2018/10/21/IT%E6%8A%80%E6%9C%AF/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8Bthis/</url>
     <content><![CDATA[<h2 id="初识this"><a href="#初识this" class="headerlink" title="初识this"></a>初识this</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identify</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.name.toUpperCase();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speak</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> greeting = <span class="string">&quot;Hello, I&#x27;m &quot;</span> + identify.call( <span class="built_in">this</span> );</span><br><span class="line">	<span class="built_in">console</span>.log( greeting );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> me = &#123;</span><br><span class="line">	name: <span class="string">&quot;Kyle&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> you = &#123;</span><br><span class="line">	name: <span class="string">&quot;Reader&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">identify.call( me ); <span class="comment">// KYLE</span></span><br><span class="line">identify.call( you ); <span class="comment">// READER</span></span><br><span class="line"></span><br><span class="line">speak.call( me ); <span class="comment">// Hello, I&#x27;m KYLE</span></span><br><span class="line">speak.call( you ); <span class="comment">// Hello, I&#x27;m READER</span></span><br></pre></td></tr></table></figure>
@@ -2499,6 +2424,39 @@
       </tags>
   </entry>
   <entry>
+    <title>你不知道的JavaScript之词法作用域与动态作用域</title>
+    <url>/2018/10/20/IT%E6%8A%80%E6%9C%AF/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在写代码的过程中,我们经常分不清作用域中变量的值指向什么,主要原因是我们分不清楚是应该按照函数的调用顺序还是按照函数位置的嵌套顺序查找变量.作用域有两种工作模式:词法作用域和动态作用域,词法作用域也叫静态作用域.</p>
+<blockquote>
+<ul>
+<li>词法作用域关心函数在<strong>何处声明</strong>，作用域链基于作用域嵌套 </li>
+<li>动态作用域关心函数在<strong>何处调用</strong>，作用域链基于调用栈</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h2><p><a href="https://www.cnblogs.com/xiaohuochai/p/5700095.html">词法作用域是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变</a>.</p>
+<p>无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    bar();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br><span class="line">foo();  <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<p>因为bar函数是在全局声明的，所以是输出全局变量a的值</p>
+<p>词法作用域中又分为函数作用域和块级作用域,JavaScript没有动态作用域,它是基于函数作用域的,但同时也有块级作用域,如with关键字、try-catch语句的catch子句、let关键字（ES6）、const关键字（ES6）</p>
+<h2 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h2><p>我们经常会把词法作用域和this机制弄混淆,这是因为this机制从某种程度上与动态作用域类似.</p>
+<p>动态作用域并不关心函数和作用域是如何声明以及在任何处声明的，只关心它们从何处调用</p>
+<p>继续拿上面的例子,如果处于动态作用域,变量a应首先在bar()中查找,没有找到会顺着调用栈在调用bar()函数的地方也就是foo()函数中查找,找到赋值a为1,所以输出1</p>
+<blockquote>
+<p>两种作用域的区别，简而言之，词法作用域是在定义时确定的，而动态作用域是在运行时确定的</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+        <tag>YDKJS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>你不知道的JavaScript之闭包</title>
     <url>/2018/10/18/IT%E6%8A%80%E6%9C%AF/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E9%97%AD%E5%8C%85/</url>
     <content><![CDATA[<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><blockquote>
@@ -2572,93 +2530,6 @@
       <tags>
         <tag>JS</tag>
         <tag>YDKJS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于递归计算</title>
-    <url>/2017/02/23/IT%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E9%80%92%E5%BD%92%E8%AE%A1%E7%AE%97/</url>
-    <content><![CDATA[<h3 id="什么是递归"><a href="#什么是递归" class="headerlink" title="什么是递归"></a>什么是递归</h3><p>在一个函数中直接或间接的调用自己的过程就是递归</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 自己调用自己，称为递归调用</span></span><br><span class="line">  fun();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;m2&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>递归的两种形式:</p>
-<ul>
-<li><strong>函数+变量</strong></li>
-<li><strong>函数+函数</strong></li>
-</ul>
-</blockquote>
-<a id="more"></a>
-
-<h4 id="函数-变量"><a href="#函数-变量" class="headerlink" title="函数+变量"></a>函数+变量</h4><h5 id="用递归来求5的阶乘"><a href="#用递归来求5的阶乘" class="headerlink" title="用递归来求5的阶乘"></a>用递归来求5的阶乘</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//(n! = n * (n-1)!)</span></span><br><span class="line"><span class="comment">//f(n)=n*f(n-1)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> n*func(n-<span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="递归的实现"><a href="#递归的实现" class="headerlink" title="递归的实现"></a>递归的实现</h5><p>1） 边界条件：决定递归何时向上返回</p>
-<p>2） 递归前进：只要没满足递归的边界条件，就一直向下调用自己</p>
-<p>3） 递归返回：当满足边界条件时，向上返回（将所有计算出来的值，依次返回给调用者）</p>
-<h4 id="函数-函数"><a href="#函数-函数" class="headerlink" title="函数+函数"></a>函数+函数</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">斐波拉契数列(兔子生兔子题目)--从出生后第<span class="number">3</span>个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子对数为多少</span><br><span class="line"><span class="comment">// 产量分析：1， 1， 2， 3， 5， 8， 13， 21 。。。</span></span><br><span class="line"><span class="comment">// 第n个月的兔子总数  =  第n-1个月的兔子总数 + 第n-2个月的兔子总数</span></span><br><span class="line"><span class="comment">// 问题： 求任意月兔子的总数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">calc</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(n==<span class="number">0</span>||n==<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> calc(n-<span class="number">1</span>)+calc(n-<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="一道面试题"><a href="#一道面试题" class="headerlink" title="一道面试题"></a>一道面试题</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj=&#123;		<span class="comment">//在页面渲染出value值</span></span><br><span class="line">  value:<span class="number">1</span>,</span><br><span class="line">  children:[</span><br><span class="line">    &#123;</span><br><span class="line">      value:<span class="number">2</span>,</span><br><span class="line">      children:[]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      value:<span class="number">3</span>,</span><br><span class="line">      children:[&#123;</span><br><span class="line">        value:<span class="number">4</span>,</span><br><span class="line">        children:[]</span><br><span class="line">      &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//采用无序列表</span></span><br><span class="line"><span class="keyword">var</span> arr=[<span class="string">&quot;&lt;ul&gt;&quot;</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> li=<span class="string">&quot;&lt;li&gt;&quot;</span>+obj.value+<span class="string">&quot;&lt;/li&gt;&quot;</span>;</span><br><span class="line">  arr.push(li);</span><br><span class="line">  obj.children.map(<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fun(val)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">fun(obj);</span><br><span class="line">arr.push(<span class="string">&quot;&lt;/ul&gt;&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> str=arr.join(<span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> div=<span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">div.innerHTML=str;</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(div);</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用H5画随机色圆</title>
-    <url>/2018/03/06/IT%E6%8A%80%E6%9C%AF/%E5%88%A9%E7%94%A8H5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/</url>
-    <content><![CDATA[<p>忽然想到曾经遇到的一个案例：</p>
-<p>​    <strong>在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。</strong></p>
-<p>在这里用代码重现下，首先分析下需求：</p>
-<ul>
-<li><p>绘制页面：</p>
-<ul>
-<li>生成随机数，根据随机数生成随机颜色</li>
-<li>利用svg绘图技术在页面绘制随机数量的圆</li>
-<li>将圆填充随机色</li>
-</ul>
-</li>
-<li><p>JS事件：</p>
-<ul>
-<li><p>为每个圆绑定单击事件</p>
-</li>
-<li><p>创建定时器</p>
-</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-
-
-<p>代码：</p>
-<ol>
-<li>生成随机数和随机颜色方法</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*获取指定范围内的随机数字*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomNum</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n=<span class="built_in">Math</span>.random()*(max-min)+min;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(n)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*生成随机色*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomColor</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> r=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> g=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> b=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> a=<span class="built_in">Math</span>.random();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`rgba(<span class="subst">$&#123;r&#125;</span>,<span class="subst">$&#123;g&#125;</span>,<span class="subst">$&#123;b&#125;</span>,<span class="subst">$&#123;a&#125;</span>)`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>利用svg绘图</li>
-</ol>
-<p>html:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">id</span>=<span class="string">&quot;svg&quot;</span> <span class="attr">width</span>=<span class="string">&quot;1000px&quot;</span>  <span class="attr">height</span>=<span class="string">&quot;500px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>JavaScript:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> svg=<span class="built_in">document</span>.getElementById(<span class="string">&quot;svg&quot;</span>); </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">50</span>;i++)&#123;</span><br><span class="line">    <span class="comment">//创建圆元素</span></span><br><span class="line">	<span class="keyword">var</span> c=<span class="built_in">document</span>.createElementNS(<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span>,<span class="string">&quot;circle&quot;</span>);</span><br><span class="line">    c.setAttribute(<span class="string">&quot;r&quot;</span>,randomNum(<span class="number">10</span>,<span class="number">80</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;cx&quot;</span>,randomNum(<span class="number">0</span>,<span class="number">800</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;cy&quot;</span>,randomNum(<span class="number">0</span>,<span class="number">400</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;fill&quot;</span>,randomColor(<span class="number">0</span>,<span class="number">255</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;fill-opacity&quot;</span>,<span class="built_in">Math</span>.random());</span><br><span class="line">    svg.appendChild(c)</span><br><span class="line">  <span class="comment">//绑定单击事件</span></span><br><span class="line">  c.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that=<span class="built_in">this</span>;</span><br><span class="line">    <span class="comment">//设置循环定时器</span></span><br><span class="line">    <span class="keyword">var</span> timer=<span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> r=that.getAttribute(<span class="string">&quot;r&quot;</span>);</span><br><span class="line">      r*=<span class="number">1.05</span>;</span><br><span class="line">      that.setAttribute(<span class="string">&quot;r&quot;</span>,r);</span><br><span class="line">      <span class="keyword">var</span> fillOpac=that.getAttribute(<span class="string">&quot;fill-opacity&quot;</span>);</span><br><span class="line">      fillOpac*=<span class="number">0.9</span>;</span><br><span class="line">      that.setAttribute(<span class="string">&quot;fill-opacity&quot;</span>,fillOpac);</span><br><span class="line">      <span class="comment">//设置循环定时器停止条件</span></span><br><span class="line">      <span class="keyword">if</span>(fillOpac&lt;<span class="number">0.001</span>)&#123;</span><br><span class="line">      	<span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        timer=<span class="literal">null</span>;</span><br><span class="line">       	svg.removeChild(that);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,<span class="number">20</span>)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>附上<a href="https://codepen.io/hfood/full/gvVovo/">codePen链接</a></p>
-<p>效果图:</p>
-<img src="https://haohome.top/18-3-8/79565300.jpg" width="80%">
-
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>css3</tag>
-        <tag>HTML5</tag>
       </tags>
   </entry>
   <entry>
@@ -2737,36 +2608,57 @@
       </tags>
   </entry>
   <entry>
-    <title>前端网摘</title>
-    <url>/2018/02/20/IT%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E7%BD%91%E6%91%98/</url>
-    <content><![CDATA[<h2 id="1-移动端网摘"><a href="#1-移动端网摘" class="headerlink" title="1. 移动端网摘"></a>1. 移动端网摘</h2><ol>
-<li><a href="https://www.w3cplus.com/css/viewports.html">viewports剖析</a></li>
-<li><a href="https://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html">使用Flexible实现手淘H5页面的终端适配</a></li>
-<li><a href="https://www.w3cplus.com/css/vw-for-layout.html">再聊移动端适配</a></li>
-<li><a href="https://www.w3cplus.com/mobile/vw-layout-in-vue.html">如何在Vue项目中使用vw实现移动端适配</a></li>
-<li><a href="https://material.io/devices/">谷歌device列表</a></li>
-<li><a href="http://www.shejidaren.com/examples/tools/chichun/ui-design-spec.html#nogo">最新Android &amp; iOS设计尺寸规范——2015</a></li>
-<li><a href="http://www.woshipm.com/pmd/176328.html">px、pt、ppi、dpi、dp、sp之间的关系</a></li>
+    <title>利用H5画随机色圆</title>
+    <url>/2018/03/06/IT%E6%8A%80%E6%9C%AF/%E5%88%A9%E7%94%A8H5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/</url>
+    <content><![CDATA[<p>忽然想到曾经遇到的一个案例：</p>
+<p>​    <strong>在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。</strong></p>
+<p>在这里用代码重现下，首先分析下需求：</p>
+<ul>
+<li><p>绘制页面：</p>
+<ul>
+<li>生成随机数，根据随机数生成随机颜色</li>
+<li>利用svg绘图技术在页面绘制随机数量的圆</li>
+<li>将圆填充随机色</li>
+</ul>
+</li>
+<li><p>JS事件：</p>
+<ul>
+<li><p>为每个圆绑定单击事件</p>
+</li>
+<li><p>创建定时器</p>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+
+<p>代码：</p>
+<ol>
+<li>生成随机数和随机颜色方法</li>
 </ol>
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>网摘</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>原生JS实现瀑布流效果</title>
-    <url>/2018/03/10/IT%E6%8A%80%E6%9C%AF/%E5%8E%9F%E7%94%9Fjs%E5%AE%9E%E7%8E%B0%E7%80%91%E5%B8%83%E6%B5%81%E6%95%88%E6%9E%9C/</url>
-    <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@name</span>:瀑布流</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:parent(容器元素)</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:oneGap(只有一列时元素的间距,其他列数自适应)</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>:自适应瀑布流,多列间距自适应</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    waterFall: <span class="function"><span class="keyword">function</span> (<span class="params">parent, oneGap = <span class="number">0</span>, padding = <span class="number">0</span></span>) </span>&#123;</span><br><span class="line">      <span class="comment">/**容器的宽度(包含内边距、边框) */</span></span><br><span class="line">      <span class="keyword">var</span> width = parent.offsetWidth - padding;</span><br><span class="line">      <span class="comment">/**容器内盒子元素的宽度(包含内边距、边框)  */</span></span><br><span class="line">      <span class="keyword">var</span> items = parent.children;</span><br><span class="line">      <span class="keyword">var</span> itemWidth = items[<span class="number">0</span>].offsetWidth;</span><br><span class="line">      <span class="comment">/* 所有空隙的宽度和*/</span></span><br><span class="line">      <span class="keyword">var</span> gap = (width - <span class="built_in">parseInt</span>(width / itemWidth) * itemWidth);</span><br><span class="line">      <span class="comment">/**计算每列放的盒子元素个数 */</span></span><br><span class="line">      <span class="keyword">var</span> columns = <span class="built_in">parseInt</span>(width / (itemWidth + gap / <span class="number">2</span>));</span><br><span class="line">      <span class="comment">/**定义一个空数组,用来储存每列元素的高度 */</span></span><br><span class="line">      <span class="keyword">var</span> arr = [];</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; items.length; i++) &#123;</span><br><span class="line">        <span class="comment">/**1.将第一行元素的高度都存到arr中 */</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt; columns) &#123;</span><br><span class="line">          items[i].style.top = padding + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">          items[i].style.left = (itemWidth + gap) * i + padding - padding * (i % <span class="number">2</span>) + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">          arr.push(items[i].offsetHeight);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">/**2.找到每一行的最小高度 */</span></span><br><span class="line">          <span class="keyword">var</span> minHeight = arr[<span class="number">0</span>];</span><br><span class="line">          <span class="keyword">var</span> index = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (minHeight &gt; arr[j]) &#123;</span><br><span class="line">              minHeight = arr[j]; <span class="comment">//获得当前行最小高度</span></span><br><span class="line">              index = j; <span class="comment">//记下当前列下标</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">/**3.设置下一行第一个盒子的位置,</span></span><br><span class="line"><span class="comment">           * top值就是最小高度值+gap</span></span><br><span class="line"><span class="comment">           * left值就是最小列距离左边的距离</span></span><br><span class="line"><span class="comment">           */</span></span><br><span class="line">          <span class="keyword">if</span> (gap != <span class="number">0</span>) &#123;</span><br><span class="line">            items[i].style.top = arr[index] + oneGap + padding + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            items[i].style.left = items[index].offsetLeft + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            <span class="comment">/**4.修改最小列的高度 </span></span><br><span class="line"><span class="comment">             * 最小列的高度 = 当前自己的高度 + 拼接过来的高度 + 间隙的高度</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            arr[index] = arr[index] + items[i].offsetHeight + oneGap;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            items[i].style.top = arr[index] + oneGap + padding + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            items[i].style.left = padding + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            arr[index] = arr[index] + items[i].offsetHeight + oneGap;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (columns === <span class="number">1</span>) &#123;</span><br><span class="line">          parent.style.height = arr[<span class="number">0</span>] + oneGap + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">var</span> height = arr[<span class="number">0</span>] &gt; arr[<span class="number">1</span>] ? arr[<span class="number">0</span>] : arr[<span class="number">1</span>]</span><br><span class="line">          <span class="keyword">if</span> (i &lt; items.length - <span class="number">1</span>) &#123;</span><br><span class="line">            parent.style.height = height + oneGap + padding + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            parent.style.height = height + padding * <span class="number">2</span> + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*获取指定范围内的随机数字*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomNum</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n=<span class="built_in">Math</span>.random()*(max-min)+min;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(n)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*生成随机色*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomColor</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> r=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> g=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> b=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> a=<span class="built_in">Math</span>.random();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`rgba(<span class="subst">$&#123;r&#125;</span>,<span class="subst">$&#123;g&#125;</span>,<span class="subst">$&#123;b&#125;</span>,<span class="subst">$&#123;a&#125;</span>)`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>利用svg绘图</li>
+</ol>
+<p>html:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">id</span>=<span class="string">&quot;svg&quot;</span> <span class="attr">width</span>=<span class="string">&quot;1000px&quot;</span>  <span class="attr">height</span>=<span class="string">&quot;500px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>JavaScript:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> svg=<span class="built_in">document</span>.getElementById(<span class="string">&quot;svg&quot;</span>); </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">50</span>;i++)&#123;</span><br><span class="line">    <span class="comment">//创建圆元素</span></span><br><span class="line">	<span class="keyword">var</span> c=<span class="built_in">document</span>.createElementNS(<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span>,<span class="string">&quot;circle&quot;</span>);</span><br><span class="line">    c.setAttribute(<span class="string">&quot;r&quot;</span>,randomNum(<span class="number">10</span>,<span class="number">80</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;cx&quot;</span>,randomNum(<span class="number">0</span>,<span class="number">800</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;cy&quot;</span>,randomNum(<span class="number">0</span>,<span class="number">400</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;fill&quot;</span>,randomColor(<span class="number">0</span>,<span class="number">255</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;fill-opacity&quot;</span>,<span class="built_in">Math</span>.random());</span><br><span class="line">    svg.appendChild(c)</span><br><span class="line">  <span class="comment">//绑定单击事件</span></span><br><span class="line">  c.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that=<span class="built_in">this</span>;</span><br><span class="line">    <span class="comment">//设置循环定时器</span></span><br><span class="line">    <span class="keyword">var</span> timer=<span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> r=that.getAttribute(<span class="string">&quot;r&quot;</span>);</span><br><span class="line">      r*=<span class="number">1.05</span>;</span><br><span class="line">      that.setAttribute(<span class="string">&quot;r&quot;</span>,r);</span><br><span class="line">      <span class="keyword">var</span> fillOpac=that.getAttribute(<span class="string">&quot;fill-opacity&quot;</span>);</span><br><span class="line">      fillOpac*=<span class="number">0.9</span>;</span><br><span class="line">      that.setAttribute(<span class="string">&quot;fill-opacity&quot;</span>,fillOpac);</span><br><span class="line">      <span class="comment">//设置循环定时器停止条件</span></span><br><span class="line">      <span class="keyword">if</span>(fillOpac&lt;<span class="number">0.001</span>)&#123;</span><br><span class="line">      	<span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        timer=<span class="literal">null</span>;</span><br><span class="line">       	svg.removeChild(that);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,<span class="number">20</span>)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>附上<a href="https://codepen.io/hfood/full/gvVovo/">codePen链接</a></p>
+<p>效果图:</p>
+<img src="https://haohome.top/18-3-8/79565300.jpg" width="80%">
 
 ]]></content>
       <categories>
         <category>IT技术</category>
       </categories>
       <tags>
-        <tag>js</tag>
+        <tag>css3</tag>
+        <tag>HTML5</tag>
       </tags>
   </entry>
   <entry>
@@ -2799,6 +2691,52 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于递归计算</title>
+    <url>/2017/02/23/IT%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E9%80%92%E5%BD%92%E8%AE%A1%E7%AE%97/</url>
+    <content><![CDATA[<h3 id="什么是递归"><a href="#什么是递归" class="headerlink" title="什么是递归"></a>什么是递归</h3><p>在一个函数中直接或间接的调用自己的过程就是递归</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 自己调用自己，称为递归调用</span></span><br><span class="line">  fun();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;m2&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">fun();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>递归的两种形式:</p>
+<ul>
+<li><strong>函数+变量</strong></li>
+<li><strong>函数+函数</strong></li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h4 id="函数-变量"><a href="#函数-变量" class="headerlink" title="函数+变量"></a>函数+变量</h4><h5 id="用递归来求5的阶乘"><a href="#用递归来求5的阶乘" class="headerlink" title="用递归来求5的阶乘"></a>用递归来求5的阶乘</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//(n! = n * (n-1)!)</span></span><br><span class="line"><span class="comment">//f(n)=n*f(n-1)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> n*func(n-<span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="递归的实现"><a href="#递归的实现" class="headerlink" title="递归的实现"></a>递归的实现</h5><p>1） 边界条件：决定递归何时向上返回</p>
+<p>2） 递归前进：只要没满足递归的边界条件，就一直向下调用自己</p>
+<p>3） 递归返回：当满足边界条件时，向上返回（将所有计算出来的值，依次返回给调用者）</p>
+<h4 id="函数-函数"><a href="#函数-函数" class="headerlink" title="函数+函数"></a>函数+函数</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">斐波拉契数列(兔子生兔子题目)--从出生后第<span class="number">3</span>个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子对数为多少</span><br><span class="line"><span class="comment">// 产量分析：1， 1， 2， 3， 5， 8， 13， 21 。。。</span></span><br><span class="line"><span class="comment">// 第n个月的兔子总数  =  第n-1个月的兔子总数 + 第n-2个月的兔子总数</span></span><br><span class="line"><span class="comment">// 问题： 求任意月兔子的总数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">calc</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(n==<span class="number">0</span>||n==<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> calc(n-<span class="number">1</span>)+calc(n-<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="一道面试题"><a href="#一道面试题" class="headerlink" title="一道面试题"></a>一道面试题</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj=&#123;		<span class="comment">//在页面渲染出value值</span></span><br><span class="line">  value:<span class="number">1</span>,</span><br><span class="line">  children:[</span><br><span class="line">    &#123;</span><br><span class="line">      value:<span class="number">2</span>,</span><br><span class="line">      children:[]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      value:<span class="number">3</span>,</span><br><span class="line">      children:[&#123;</span><br><span class="line">        value:<span class="number">4</span>,</span><br><span class="line">        children:[]</span><br><span class="line">      &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//采用无序列表</span></span><br><span class="line"><span class="keyword">var</span> arr=[<span class="string">&quot;&lt;ul&gt;&quot;</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> li=<span class="string">&quot;&lt;li&gt;&quot;</span>+obj.value+<span class="string">&quot;&lt;/li&gt;&quot;</span>;</span><br><span class="line">  arr.push(li);</span><br><span class="line">  obj.children.map(<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fun(val)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">fun(obj);</span><br><span class="line">arr.push(<span class="string">&quot;&lt;/ul&gt;&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> str=arr.join(<span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> div=<span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">div.innerHTML=str;</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(div);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>原生JS实现瀑布流效果</title>
+    <url>/2018/03/10/IT%E6%8A%80%E6%9C%AF/%E5%8E%9F%E7%94%9Fjs%E5%AE%9E%E7%8E%B0%E7%80%91%E5%B8%83%E6%B5%81%E6%95%88%E6%9E%9C/</url>
+    <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@name</span>:瀑布流</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:parent(容器元素)</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:oneGap(只有一列时元素的间距,其他列数自适应)</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@description</span>:自适应瀑布流,多列间距自适应</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    waterFall: <span class="function"><span class="keyword">function</span> (<span class="params">parent, oneGap = <span class="number">0</span>, padding = <span class="number">0</span></span>) </span>&#123;</span><br><span class="line">      <span class="comment">/**容器的宽度(包含内边距、边框) */</span></span><br><span class="line">      <span class="keyword">var</span> width = parent.offsetWidth - padding;</span><br><span class="line">      <span class="comment">/**容器内盒子元素的宽度(包含内边距、边框)  */</span></span><br><span class="line">      <span class="keyword">var</span> items = parent.children;</span><br><span class="line">      <span class="keyword">var</span> itemWidth = items[<span class="number">0</span>].offsetWidth;</span><br><span class="line">      <span class="comment">/* 所有空隙的宽度和*/</span></span><br><span class="line">      <span class="keyword">var</span> gap = (width - <span class="built_in">parseInt</span>(width / itemWidth) * itemWidth);</span><br><span class="line">      <span class="comment">/**计算每列放的盒子元素个数 */</span></span><br><span class="line">      <span class="keyword">var</span> columns = <span class="built_in">parseInt</span>(width / (itemWidth + gap / <span class="number">2</span>));</span><br><span class="line">      <span class="comment">/**定义一个空数组,用来储存每列元素的高度 */</span></span><br><span class="line">      <span class="keyword">var</span> arr = [];</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; items.length; i++) &#123;</span><br><span class="line">        <span class="comment">/**1.将第一行元素的高度都存到arr中 */</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt; columns) &#123;</span><br><span class="line">          items[i].style.top = padding + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">          items[i].style.left = (itemWidth + gap) * i + padding - padding * (i % <span class="number">2</span>) + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">          arr.push(items[i].offsetHeight);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">/**2.找到每一行的最小高度 */</span></span><br><span class="line">          <span class="keyword">var</span> minHeight = arr[<span class="number">0</span>];</span><br><span class="line">          <span class="keyword">var</span> index = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (minHeight &gt; arr[j]) &#123;</span><br><span class="line">              minHeight = arr[j]; <span class="comment">//获得当前行最小高度</span></span><br><span class="line">              index = j; <span class="comment">//记下当前列下标</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">/**3.设置下一行第一个盒子的位置,</span></span><br><span class="line"><span class="comment">           * top值就是最小高度值+gap</span></span><br><span class="line"><span class="comment">           * left值就是最小列距离左边的距离</span></span><br><span class="line"><span class="comment">           */</span></span><br><span class="line">          <span class="keyword">if</span> (gap != <span class="number">0</span>) &#123;</span><br><span class="line">            items[i].style.top = arr[index] + oneGap + padding + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            items[i].style.left = items[index].offsetLeft + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            <span class="comment">/**4.修改最小列的高度 </span></span><br><span class="line"><span class="comment">             * 最小列的高度 = 当前自己的高度 + 拼接过来的高度 + 间隙的高度</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            arr[index] = arr[index] + items[i].offsetHeight + oneGap;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            items[i].style.top = arr[index] + oneGap + padding + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            items[i].style.left = padding + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            arr[index] = arr[index] + items[i].offsetHeight + oneGap;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (columns === <span class="number">1</span>) &#123;</span><br><span class="line">          parent.style.height = arr[<span class="number">0</span>] + oneGap + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">var</span> height = arr[<span class="number">0</span>] &gt; arr[<span class="number">1</span>] ? arr[<span class="number">0</span>] : arr[<span class="number">1</span>]</span><br><span class="line">          <span class="keyword">if</span> (i &lt; items.length - <span class="number">1</span>) &#123;</span><br><span class="line">            parent.style.height = height + oneGap + padding + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            parent.style.height = height + padding * <span class="number">2</span> + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -3355,6 +3293,62 @@
       </tags>
   </entry>
   <entry>
+    <title>通俗易懂的原型与原型链</title>
+    <url>/2018/03/11/IT%E6%8A%80%E6%9C%AF/%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82%E7%9A%84%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/</url>
+    <content><![CDATA[<h2 id="普通对象与函数对象"><a href="#普通对象与函数对象" class="headerlink" title="普通对象与函数对象"></a>普通对象与函数对象</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> o1 = &#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> o2 =<span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="keyword">var</span> o3 = <span class="keyword">new</span> f1();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> f3 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">&#x27;str&#x27;</span>,<span class="string">&#x27;console.log(str)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Object</span>); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Function</span>); <span class="comment">//function  </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f1); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f2); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f3); <span class="comment">//function   </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o1); <span class="comment">//object </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o2); <span class="comment">//object </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o3); <span class="comment">//object</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的例子中: o1、o2、o3都是普通对象object，而f1、f2、f3是函数对象function</p>
+<blockquote>
+<p><strong>凡是通过 new Function() 创建的对象都是函数对象，其他的都是普通对象。f1、f2归根结底都是通过 new Function()的方式进行创建的。Function Object 也都是通过 New Function()创建的</strong>。</p>
+</blockquote>
+<a id="more"></a>    
+
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line"> <span class="built_in">this</span>.name = name;</span><br><span class="line"> <span class="built_in">this</span>.age = age;</span><br><span class="line"> <span class="built_in">this</span>.job = job;</span><br><span class="line"> <span class="built_in">this</span>.intr = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="built_in">this</span>.name+<span class="string">&quot;年龄是&quot;</span>+<span class="built_in">this</span>.age) &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> lilei = <span class="keyword">new</span> Student(<span class="string">&#x27;lilei&#x27;</span>, <span class="number">28</span>, <span class="string">&#x27;Software Engineer&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> hmm = <span class="keyword">new</span> Student(<span class="string">&#x27;hmm&#x27;</span>, <span class="number">23</span>, <span class="string">&#x27;Doctor&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中lilei、hmm都是构造函数Student的实例</p>
+<h2 id="原型对象"><a href="#原型对象" class="headerlink" title="原型对象"></a>原型对象</h2><p>JavaScript中,每定义一个对象,对象中都会包含一些预定义的属性,每个普通对象和函数对象都包含<code>__proto__</code> ，而每个函数对象都会有<code>prototype</code> 属性，指向函数的原型对象;</p>
+<p>看一个简单示意图:</p>
+<img src="https://haohome.top/18-3-11/88286547.jpg" width="70%">
+
+<p>例子中,<code>Student</code> 是构造函数(昵称”妈”),其<code>prototype</code>(原型对象)就是<code>Student.prototype</code> (昵称”爹”)，原型对象(爹)的构造函数属性(妈)是构造函数，而lilei和hmm都是构造函数Student(妈)的实例(儿子/女儿)，儿子/女儿都继承(<code>__proto__</code>)了爹，遗传了爹的方法和属性，用公式表示即：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Student===Student.prototype.constructor;	<span class="comment">//true</span></span><br><span class="line">lilei.__proto__===Student.prototype;			<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>构造函数具有<code>prototype</code> 属性，指向原型对象</li>
+<li>原型对象具有<code>constructor</code> 属性，指向构造函数</li>
+<li>实例对象具有<code>__protot__</code> 属性，指向原型对象</li>
+</ul>
+<blockquote>
+<p>从 ECMAScript 6 开始，<code>[[Prototype]]</code> 可以通过<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf"><code>Object.getPrototypeOf()</code></a>和<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf"><code>Object.setPrototypeOf()</code></a>访问器来访问。这个等同于 JavaScript 的非标准但许多浏览器实现的属性 <code>__proto__</code>。</p>
+</blockquote>
+<p>原型对象其实就是普通对象，但Function.prototype除外，它是函数对象，且没有prototype属性(前面说函数对象具有prototype属性)</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"> <span class="built_in">console</span>.log(Student.prototype) <span class="comment">//Student&#123;&#125; 空对象,具有constructor属性</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="keyword">typeof</span> Student.prototype) <span class="comment">//object</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Function</span>.prototype) <span class="comment">// function，这个特殊</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Object</span>.prototype) <span class="comment">// object</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Function</span>.prototype.prototype) <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="原型对象的应用"><a href="#原型对象的应用" class="headerlink" title="原型对象的应用"></a>原型对象的应用</h2><p>原型对象的应用主要就是继承</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Student = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name; <span class="comment">// tip: 当函数执行时这个 this 指该构造函数的实例</span></span><br><span class="line">  &#125;;</span><br><span class="line"><span class="comment">/*给Student添加getName方法*/</span></span><br><span class="line">  Student.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.name;  <span class="comment">// tip: 当函数执行时这个 this 指该构造函数的实例</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> lilei = <span class="keyword">new</span> Student(<span class="string">&#x27;lilei&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(lilei.name); <span class="comment">//&#x27;lilei&#x27; 此时 lilei 已经有 name 这个属性了</span></span><br><span class="line">  <span class="built_in">console</span>.log(lilei.getName()); <span class="comment">//lilei </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><img src="https://haohome.top/18-3-11/41073082.jpg" width="90%">
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">lilei.__proto__ 是Student.prototype</span><br><span class="line">Student.__proto__ 是<span class="built_in">Function</span>.prototype</span><br><span class="line">Student.prototype.__proto__ 是<span class="built_in">Object</span>.prototype</span><br><span class="line"><span class="built_in">Object</span>.__proto__ 是<span class="built_in">Function</span>.prototype,<span class="built_in">Object</span>也是构造函数</span><br><span class="line"><span class="built_in">Object</span>.prototype__proto__ 是<span class="literal">null</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h2><p>所有的函数对象的<code>__proto__</code> 都指向<code>Function.prototype</code> ,它是一个空函数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Number</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Boolean</span>.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">String</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"><span class="comment">// 所有的构造器都来自于Function.prototype，甚至包括根构造器Object及Function自身</span></span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.constructor == <span class="built_in">Function</span> <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 所有的构造器都来自于Function.prototype，甚至包括根构造器Object及Function自身</span></span><br><span class="line"><span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.__proto__ === <span class="built_in">Function</span>.prototype   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Array</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">RegExp</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">RegExp</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Error</span>.__proto__ === <span class="built_in">Function</span>.prototype   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Error</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Date</span>.__proto__ === <span class="built_in">Function</span>.prototype    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>JavaScript中有内置(build-in)构造器/对象共计12个（ES5中新加了JSON），这里列举了可访问的8个构造器。剩下如Global不能直接访问，Arguments仅在函数调用时由JS引擎创建，Math，JSON是以对象形式存在的，无需new。它们的<code>__proto__</code> 是Object.prototype。如下</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Math</span>.__proto__ === <span class="built_in">Object</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Math</span>.construrctor == <span class="built_in">Object</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">JSON</span>.__proto__ === <span class="built_in">Object</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">JSON</span>.construrctor == <span class="built_in">Object</span> <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p>本文借鉴了</p>
+<p>Yi罐可乐: <a href="https://www.jianshu.com/p/dee9f8b14771">最详尽的 JS 原型与原型链终极详解，没有「可能是」</a></p>
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+        <tag>原型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>跨域问题解决方案汇总</title>
     <url>/2018/10/22/IT%E6%8A%80%E6%9C%AF/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%B1%87%E6%80%BB/</url>
     <content><![CDATA[<p>同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的关键的安全机制。但是有时候跨域请求资源是合理的需求，本文尝试从多篇文章中汇总至今存在的所有跨域请求解决方案。</p>
@@ -3531,62 +3525,6 @@
       </tags>
   </entry>
   <entry>
-    <title>通俗易懂的原型与原型链</title>
-    <url>/2018/03/11/IT%E6%8A%80%E6%9C%AF/%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82%E7%9A%84%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/</url>
-    <content><![CDATA[<h2 id="普通对象与函数对象"><a href="#普通对象与函数对象" class="headerlink" title="普通对象与函数对象"></a>普通对象与函数对象</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> o1 = &#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> o2 =<span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="keyword">var</span> o3 = <span class="keyword">new</span> f1();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> f3 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">&#x27;str&#x27;</span>,<span class="string">&#x27;console.log(str)&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Object</span>); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Function</span>); <span class="comment">//function  </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f1); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f2); <span class="comment">//function </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> f3); <span class="comment">//function   </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o1); <span class="comment">//object </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o2); <span class="comment">//object </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> o3); <span class="comment">//object</span></span><br></pre></td></tr></table></figure>
-
-<p>上面的例子中: o1、o2、o3都是普通对象object，而f1、f2、f3是函数对象function</p>
-<blockquote>
-<p><strong>凡是通过 new Function() 创建的对象都是函数对象，其他的都是普通对象。f1、f2归根结底都是通过 new Function()的方式进行创建的。Function Object 也都是通过 New Function()创建的</strong>。</p>
-</blockquote>
-<a id="more"></a>    
-
-<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line"> <span class="built_in">this</span>.name = name;</span><br><span class="line"> <span class="built_in">this</span>.age = age;</span><br><span class="line"> <span class="built_in">this</span>.job = job;</span><br><span class="line"> <span class="built_in">this</span>.intr = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="built_in">this</span>.name+<span class="string">&quot;年龄是&quot;</span>+<span class="built_in">this</span>.age) &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> lilei = <span class="keyword">new</span> Student(<span class="string">&#x27;lilei&#x27;</span>, <span class="number">28</span>, <span class="string">&#x27;Software Engineer&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> hmm = <span class="keyword">new</span> Student(<span class="string">&#x27;hmm&#x27;</span>, <span class="number">23</span>, <span class="string">&#x27;Doctor&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>这个例子中lilei、hmm都是构造函数Student的实例</p>
-<h2 id="原型对象"><a href="#原型对象" class="headerlink" title="原型对象"></a>原型对象</h2><p>JavaScript中,每定义一个对象,对象中都会包含一些预定义的属性,每个普通对象和函数对象都包含<code>__proto__</code> ，而每个函数对象都会有<code>prototype</code> 属性，指向函数的原型对象;</p>
-<p>看一个简单示意图:</p>
-<img src="https://haohome.top/18-3-11/88286547.jpg" width="70%">
-
-<p>例子中,<code>Student</code> 是构造函数(昵称”妈”),其<code>prototype</code>(原型对象)就是<code>Student.prototype</code> (昵称”爹”)，原型对象(爹)的构造函数属性(妈)是构造函数，而lilei和hmm都是构造函数Student(妈)的实例(儿子/女儿)，儿子/女儿都继承(<code>__proto__</code>)了爹，遗传了爹的方法和属性，用公式表示即：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Student===Student.prototype.constructor;	<span class="comment">//true</span></span><br><span class="line">lilei.__proto__===Student.prototype;			<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>构造函数具有<code>prototype</code> 属性，指向原型对象</li>
-<li>原型对象具有<code>constructor</code> 属性，指向构造函数</li>
-<li>实例对象具有<code>__protot__</code> 属性，指向原型对象</li>
-</ul>
-<blockquote>
-<p>从 ECMAScript 6 开始，<code>[[Prototype]]</code> 可以通过<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf"><code>Object.getPrototypeOf()</code></a>和<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf"><code>Object.setPrototypeOf()</code></a>访问器来访问。这个等同于 JavaScript 的非标准但许多浏览器实现的属性 <code>__proto__</code>。</p>
-</blockquote>
-<p>原型对象其实就是普通对象，但Function.prototype除外，它是函数对象，且没有prototype属性(前面说函数对象具有prototype属性)</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"> <span class="built_in">console</span>.log(Student.prototype) <span class="comment">//Student&#123;&#125; 空对象,具有constructor属性</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="keyword">typeof</span> Student.prototype) <span class="comment">//object</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Function</span>.prototype) <span class="comment">// function，这个特殊</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Object</span>.prototype) <span class="comment">// object</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">Function</span>.prototype.prototype) <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="原型对象的应用"><a href="#原型对象的应用" class="headerlink" title="原型对象的应用"></a>原型对象的应用</h2><p>原型对象的应用主要就是继承</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Student = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name; <span class="comment">// tip: 当函数执行时这个 this 指该构造函数的实例</span></span><br><span class="line">  &#125;;</span><br><span class="line"><span class="comment">/*给Student添加getName方法*/</span></span><br><span class="line">  Student.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.name;  <span class="comment">// tip: 当函数执行时这个 this 指该构造函数的实例</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> lilei = <span class="keyword">new</span> Student(<span class="string">&#x27;lilei&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(lilei.name); <span class="comment">//&#x27;lilei&#x27; 此时 lilei 已经有 name 这个属性了</span></span><br><span class="line">  <span class="built_in">console</span>.log(lilei.getName()); <span class="comment">//lilei </span></span><br></pre></td></tr></table></figure>
-
-<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><img src="https://haohome.top/18-3-11/41073082.jpg" width="90%">
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">lilei.__proto__ 是Student.prototype</span><br><span class="line">Student.__proto__ 是<span class="built_in">Function</span>.prototype</span><br><span class="line">Student.prototype.__proto__ 是<span class="built_in">Object</span>.prototype</span><br><span class="line"><span class="built_in">Object</span>.__proto__ 是<span class="built_in">Function</span>.prototype,<span class="built_in">Object</span>也是构造函数</span><br><span class="line"><span class="built_in">Object</span>.prototype__proto__ 是<span class="literal">null</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h2><p>所有的函数对象的<code>__proto__</code> 都指向<code>Function.prototype</code> ,它是一个空函数</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Number</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Boolean</span>.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">String</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"><span class="comment">// 所有的构造器都来自于Function.prototype，甚至包括根构造器Object及Function自身</span></span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.constructor == <span class="built_in">Function</span> <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 所有的构造器都来自于Function.prototype，甚至包括根构造器Object及Function自身</span></span><br><span class="line"><span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.__proto__ === <span class="built_in">Function</span>.prototype   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Array</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">RegExp</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">RegExp</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Error</span>.__proto__ === <span class="built_in">Function</span>.prototype   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Error</span>.constructor == <span class="built_in">Function</span> <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Date</span>.__proto__ === <span class="built_in">Function</span>.prototype    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>JavaScript中有内置(build-in)构造器/对象共计12个（ES5中新加了JSON），这里列举了可访问的8个构造器。剩下如Global不能直接访问，Arguments仅在函数调用时由JS引擎创建，Math，JSON是以对象形式存在的，无需new。它们的<code>__proto__</code> 是Object.prototype。如下</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Math</span>.__proto__ === <span class="built_in">Object</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Math</span>.construrctor == <span class="built_in">Object</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">JSON</span>.__proto__ === <span class="built_in">Object</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">JSON</span>.construrctor == <span class="built_in">Object</span> <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-
-<p>本文借鉴了</p>
-<p>Yi罐可乐: <a href="https://www.jianshu.com/p/dee9f8b14771">最详尽的 JS 原型与原型链终极详解，没有「可能是」</a></p>
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-        <tag>原型</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>闭包与模块</title>
     <url>/2018/03/01/IT%E6%8A%80%E6%9C%AF/%E9%97%AD%E5%8C%85%E4%B8%8E%E6%A8%A1%E5%9D%97/</url>
     <content><![CDATA[<h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p>闭包是有重用机制，同时保护变量不被污染的一种机制</p>
@@ -3654,6 +3592,68 @@
       <tags>
         <tag>js</tag>
         <tag>function</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端网摘</title>
+    <url>/2018/02/20/IT%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E7%BD%91%E6%91%98/</url>
+    <content><![CDATA[<h2 id="1-移动端网摘"><a href="#1-移动端网摘" class="headerlink" title="1. 移动端网摘"></a>1. 移动端网摘</h2><ol>
+<li><a href="https://www.w3cplus.com/css/viewports.html">viewports剖析</a></li>
+<li><a href="https://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html">使用Flexible实现手淘H5页面的终端适配</a></li>
+<li><a href="https://www.w3cplus.com/css/vw-for-layout.html">再聊移动端适配</a></li>
+<li><a href="https://www.w3cplus.com/mobile/vw-layout-in-vue.html">如何在Vue项目中使用vw实现移动端适配</a></li>
+<li><a href="https://material.io/devices/">谷歌device列表</a></li>
+<li><a href="http://www.shejidaren.com/examples/tools/chichun/ui-design-spec.html#nogo">最新Android &amp; iOS设计尺寸规范——2015</a></li>
+<li><a href="http://www.woshipm.com/pmd/176328.html">px、pt、ppi、dpi、dp、sp之间的关系</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>网摘</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创新特征</title>
+    <url>/2020/11/08/%E5%B7%A5%E4%BD%9C%E6%80%9D%E7%BB%B4/%E5%88%9B%E6%96%B0%E7%89%B9%E5%BE%81/</url>
+    <content><![CDATA[<p>创新有两种形式：</p>
+<ol>
+<li>连续式创新：沿着同一条S曲线进步；</li>
+<li>非连续式创新：转换到新的S曲线；</li>
+</ol>
+<h2 id="一、连续性创新"><a href="#一、连续性创新" class="headerlink" title="一、连续性创新"></a>一、连续性创新</h2><img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108230818752.png" alt="image-20201108230818752" style="zoom:20%;" />
+
+<p>技术连续性创新的特征</p>
+<blockquote>
+<p>A. 沿着技术曲线持续改善原有的产品性能</p>
+<p>B. 定位于主流市场的主流消费者</p>
+<p>C. Better</p>
+</blockquote>
+<p>案例：</p>
+<blockquote>
+<ul>
+<li>英特尔不断推出性能更强的微处理器</li>
+<li>微软Windows操作系统的不断升级</li>
+<li>苹果iPhone的升级换代。</li>
+</ul>
+</blockquote>
+<h2 id="二、非连续创新"><a href="#二、非连续创新" class="headerlink" title="二、非连续创新"></a>二、非连续创新</h2><p>新旧技术之间不是继承关系，而是竞争关系，其交替过程就是技术的非连续性断层期。</p>
+<img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108231434104.png" alt="image-20201108231434104" style="zoom:20%;" />
+
+<h2 id="三、企业思维与市场思维"><a href="#三、企业思维与市场思维" class="headerlink" title="三、企业思维与市场思维"></a>三、企业思维与市场思维</h2><ul>
+<li><p>企业的基础假设是连续性，其焦点在于运营和管理; </p>
+</li>
+<li><p>市场的基础假设是不连续性，其重点则是创造与破坏。</p>
+</li>
+</ul>
+<p>市场速度超过个体公司速度的原因：市场是破坏性思维，公司是保护性思维</p>
+]]></content>
+      <categories>
+        <category>work</category>
+      </categories>
+      <tags>
+        <tag>思维</tag>
       </tags>
   </entry>
   <entry>
