@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.haohome.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="1.上外边距的溢出在某些特殊条件下，在为子元素设置上外边距时有可能会作用在父元素上    特殊条件：（同时满足）        1.父元素不能有上边框；        2.为第一个子元素设置上外边距时    解决方案：        1、 为父元素增加上边框：会影响父元素的高度        2、 使用父元素的上内边距来取代子元素的上外边距：会影响父元素的高度        3、 在子元素上增加一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS学习记录">
+<meta property="og:url" content="http://blog.haohome.top/2016/10/12/IT%E6%8A%80%E6%9C%AF/CSS%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="靖风行&#39;S blog">
+<meta property="og:description" content="1.上外边距的溢出在某些特殊条件下，在为子元素设置上外边距时有可能会作用在父元素上    特殊条件：（同时满足）        1.父元素不能有上边框；        2.为第一个子元素设置上外边距时    解决方案：        1、 为父元素增加上边框：会影响父元素的高度        2、 使用父元素的上内边距来取代子元素的上外边距：会影响父元素的高度        3、 在子元素上增加一">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-10-12T12:46:25.000Z">
+<meta property="article:modified_time" content="2020-12-05T14:13:23.919Z">
+<meta property="article:author" content="Yifoo">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="html5">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.haohome.top/2016/10/12/IT%E6%8A%80%E6%9C%AF/CSS%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>CSS学习记录 | 靖风行'S blog</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">靖风行'S blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%B8%8A%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E6%BA%A2%E5%87%BA"><span class="nav-number">1.</span> <span class="nav-text">1.上外边距的溢出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-CSS-Sprites%E9%9B%AA%E7%A2%A7%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">2.CSS Sprites雪碧图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%83%8C%E6%99%AF%E7%AE%80%E5%86%99%E5%B1%9E%E6%80%A7%E2%80%94%E2%80%94background"><span class="nav-number">3.</span> <span class="nav-text">3.背景简写属性——background</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%AD%97%E4%BD%93%E5%B1%9E%E6%80%A7%E7%AE%80%E5%86%99%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">4.字体属性简写方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">5.伪类选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E7%9B%AE%E6%A0%87%E4%BC%AA%E7%B1%BB-target"><span class="nav-number">5.1.</span> <span class="nav-text">1)目标伪类:  :target</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-before%E6%88%96-before"><span class="nav-number">5.2.</span> <span class="nav-text">2)  :before或::before</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-after%E6%88%96-after"><span class="nav-number">5.3.</span> <span class="nav-text">3)  :after或::after</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E5%9B%BE%E7%89%87%E5%92%8C%E8%A1%8C%E5%86%85%E5%BF%AB%E7%9A%84vertical-align%E5%B1%9E%E6%80%A7"><span class="nav-number">6.</span> <span class="nav-text">6.图片和行内快的vertical-align属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D%E5%AF%B9%E5%85%83%E7%B4%A0%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">7.</span> <span class="nav-text">7. 绝对定位对元素的影响</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80"><span class="nav-number">8.</span> <span class="nav-text">8.弹性布局</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#8-1-%E5%B1%9E%E6%80%A7-display"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 属性:display</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-2-%E5%B1%9E%E6%80%A7flex-wrap"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 属性flex-wrap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-3-justify-content"><span class="nav-number">8.3.</span> <span class="nav-text">8.3 justify-content</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%E8%BD%AC%E6%8D%A2-transform"><span class="nav-number">9.</span> <span class="nav-text">9.转换 transform</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-%E8%BF%87%E6%B8%A1"><span class="nav-number">10.</span> <span class="nav-text">10.过渡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-%E5%8A%A8%E7%94%BB"><span class="nav-number">11.</span> <span class="nav-text">11.动画</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#11-1%E5%8A%A8%E7%94%BB%E5%A3%B0%E6%98%8E%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="nav-number">11.1.</span> <span class="nav-text">11.1动画声明的浏览器兼容性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-2%E8%B0%83%E7%94%A8%E5%8A%A8%E7%94%BB%E7%AE%80%E5%86%99%E5%B1%9E%E6%80%A7-animation"><span class="nav-number">11.2.</span> <span class="nav-text">11.2调用动画简写属性:animation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-3%E5%8A%A8%E7%94%BB%E5%A1%AB%E5%85%85%E6%A8%A1%E5%BC%8F-animation-fill-mode"><span class="nav-number">11.3.</span> <span class="nav-text">11.3动画填充模式:animation-fill-mode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-4%E5%8A%A8%E7%94%BB%E6%92%AD%E6%94%BE%E7%8A%B6%E6%80%81animation-play-state"><span class="nav-number">11.4.</span> <span class="nav-text">11.4动画播放状态animation-play-state</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yifoo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Yifoo</p>
+  <div class="site-description" itemprop="description">独立 自由 分享 感悟</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yifoo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yifoo" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/wuhaofushan" title="微博 → http:&#x2F;&#x2F;weibo.com&#x2F;wuhaofushan" rel="noopener" target="_blank"><i class="weibo fa-fw"></i>微博</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      主页
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.haohome.top/" title="https:&#x2F;&#x2F;www.haohome.top&#x2F;" rel="noopener" target="_blank">靖风行</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2016/10/12/IT%E6%8A%80%E6%9C%AF/CSS%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yifoo">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS学习记录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-10-12 20:46:25" itemprop="dateCreated datePublished" datetime="2016-10-12T20:46:25+08:00">2016-10-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-05 22:13:23" itemprop="dateModified" datetime="2020-12-05T22:13:23+08:00">2020-12-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2016/10/12/IT%E6%8A%80%E6%9C%AF/CSS%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/10/12/IT技术/CSS学习记录/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="1-上外边距的溢出"><a href="#1-上外边距的溢出" class="headerlink" title="1.上外边距的溢出"></a>1.上外边距的溢出</h4><p>在某些特殊条件下，在为子元素设置上外边距时有可能会作用在父元素上<br>    特殊条件：（同时满足）<br>        1.父元素不能有上边框；<br>        2.为第一个子元素设置上外边距时<br>    解决方案：<br>        1、 为父元素增加上边框：会影响父元素的高度<br>        2、 使用父元素的上内边距来取代子元素的上外边距：会影响父元素的高度<br>        3、 在子元素上增加一个空的<table>元素即可</p>
+<a id="more"></a>
+<h4 id="2-CSS-Sprites雪碧图"><a href="#2-CSS-Sprites雪碧图" class="headerlink" title="2.CSS Sprites雪碧图"></a>2.CSS Sprites雪碧图</h4><p>将若干副不经常变换的图片封装到一幅大图中<br>配合背景图片以及背景图片定位将想看的图片显示出来<br>1） 在页面中创建一个与要显示区域大小一样的元素<br>2） 将雪碧图作为元素的背景图<br>3） 改变图片在元素中的位置（左上移动）</p>
+<h4 id="3-背景简写属性——background"><a href="#3-背景简写属性——background" class="headerlink" title="3.背景简写属性——background"></a>3.背景简写属性——background</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">background：color url( ) repeat attachment position;</span><br><span class="line">background: red;</span><br><span class="line">background: url(img&#x2F;mm.png) no-repeat 95% center;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-字体属性简写方式"><a href="#4-字体属性简写方式" class="headerlink" title="4.字体属性简写方式"></a>4.字体属性简写方式</h4><p>属性：font<br>取值：style variant(小型大写字母) weight size family<br>注意：一定要将Family写出来，否则无效</p>
+<h4 id="5-伪类选择器"><a href="#5-伪类选择器" class="headerlink" title="5.伪类选择器"></a>5.伪类选择器</h4><h5 id="1-目标伪类-target"><a href="#1-目标伪类-target" class="headerlink" title="1)目标伪类:  :target"></a>1)目标伪类:  :target</h5><p>对页面中的某个target元素指定样式，该样式只对在用户点击了页面中的超链接并且跳转到target元素后起作用</p>
+<h5 id="2-before或-before"><a href="#2-before或-before" class="headerlink" title="2)  :before或::before"></a>2)  :before或::before</h5><p>作用:匹配到某元素的内容区域之前</p>
+<ul>
+<li>特点:外边距溢出问题<h5 id="3-after或-after"><a href="#3-after或-after" class="headerlink" title="3)  :after或::after"></a>3)  :after或::after</h5>作用:匹配到某元素内容区域之后</li>
+<li>解决浮动元素父元素的高度问题 :after</li>
+<li>特点：1.在父元素的内容区域之后<pre><code>  2.增加一个“空”元素
+  3.必须是块级元素
+  4.必须设置clear:both</code></pre>
+</li>
+</ul>
+<h4 id="6-图片和行内快的vertical-align属性"><a href="#6-图片和行内快的vertical-align属性" class="headerlink" title="6.图片和行内快的vertical-align属性"></a>6.图片和行内快的vertical-align属性</h4><pre><code>控制图片或行内块元素两边的文本，相对于他们的对齐方式
+取值：
+1.    top
+2.    middle
+3.    bottom
+4.    baseline 基线对齐
+    a)    行内块：基线是在最后一行文本的底部
+    b)    图片：基线是在图片底部向下3px(不一定)位置处</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img&#123;vertical-align:bottom;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="7-绝对定位对元素的影响"><a href="#7-绝对定位对元素的影响" class="headerlink" title="7. 绝对定位对元素的影响"></a>7. 绝对定位对元素的影响</h4><ul>
+<li><ol>
+<li>脱离文档流，允许压在其他元素的上方<ol start="2">
+<li>绝对定位的元素会变成块级元素<br> .    margin可以正常使用，但是margin的左右auto值会失效<br> .    绝对定位的元素，将left，right，bottom，top四个值都设置为0 的情况下，margin:auto会让整个元素变得绝对居中</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="8-弹性布局"><a href="#8-弹性布局" class="headerlink" title="8.弹性布局"></a>8.弹性布局</h4><h5 id="8-1-属性-display"><a href="#8-1-属性-display" class="headerlink" title="8.1 属性:display"></a>8.1 属性:display</h5><p>取值:</p>
+<blockquote>
+<pre><code>1、flex：将块级元素变为弹性布局的容器
+2、inline-flex：将行内元素变为弹性布局的容器</code></pre>
+</blockquote>
+<p>注意：</p>
+<blockquote>
+<pre><code>  1、 容器中的项目们会自动变为块级元素，允许修改尺寸
+  2、 项目们的float、clear、vertical-align、全部失效
+  3、 容器的text-align属性也会失效</code></pre>
+</blockquote>
+<h5 id="8-2-属性flex-wrap"><a href="#8-2-属性flex-wrap" class="headerlink" title="8.2 属性flex-wrap"></a>8.2 属性flex-wrap</h5><p>取值:1.nowrap  2.wrap  3.wrap-reverse</p>
+<h5 id="8-3-justify-content"><a href="#8-3-justify-content" class="headerlink" title="8.3 justify-content"></a>8.3 justify-content</h5><p>作用：指定项目在主轴上的对齐方式<br>取值：</p>
+<ul>
+<li>1、 flex-start在轴的起点对齐</li>
+<li>2、 flex-end  在轴的终点对齐</li>
+<li>3、 center  居中对齐</li>
+<li>4、 <strong>space-between 两端对齐，项目之间的间隔都是相等的</strong></li>
+<li>5、 space-around  每个项目两边的空白间距是相等的</li>
+</ul>
+<h4 id="9-转换-transform"><a href="#9-转换-transform" class="headerlink" title="9.转换 transform"></a>9.转换 transform</h4><p>取值:</p>
+<blockquote>
+<pre><code>1.位移:translate(x)/translate(x,y)/translateX(x)/translateY(y)
+2.缩放:scale(value)/scale（x，y）/scaleX（x）/scaleY（y）
+3.旋转:rotate(ndeg)
+4.倾斜:skewX(ndeg)/skewY(ndeg)/skew(x)/skew(x,y)</code></pre>
+</blockquote>
+<p>9.1 转换原点</p>
+<blockquote>
+<pre><code>属性:transform-origin
+取值:1.    两个值：表示原点在x轴和y轴的位置
+     2.    三个值：表示原点在x轴、y轴和z轴的位置
+    可以取数值/百分比/关键字，多个值用空格隔开</code></pre>
+</blockquote>
+<p>9.2 3D转换(模拟人眼睛到3D转换物体的距离，取值越大，表示离物体越远，表示离物体越近)</p>
+<blockquote>
+<pre><code>属性:perspective
+取值:rotateX(xdeg)  以x轴为中心轴旋转
+     rotateY(ydeg)    以y轴为中心轴旋转
+     rotateZ(zdeg)    以z轴为中心轴旋转
+     rotate3D(x,y,z,ndeg)
+        x,y,z 取值大于0的话，则该轴参与旋转
+        x,y,z 取值为0的话，则该轴不参与旋转
+        rotate3D(1,0,0,45deg)==&gt;rotateX(45deg)</code></pre>
+</blockquote>
+<h4 id="10-过渡"><a href="#10-过渡" class="headerlink" title="10.过渡"></a>10.过渡</h4><ul>
+<li>属性:transition</li>
+<li>取值:property duration timing-function delay;<h4 id="11-动画"><a href="#11-动画" class="headerlink" title="11.动画"></a>11.动画</h4>样式表中,通过@keyframes规则来声明动画<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@keyframes 动画名称name&#123;</span><br><span class="line"> 	0%&#123;</span><br><span class="line"> 		&#x2F;*动画开始时，元素的样式*&#x2F;</span><br><span class="line"> 		属性：值;</span><br><span class="line"> 		属性: 值;</span><br><span class="line"> &#125;</span><br><span class="line"> 50%&#123;</span><br><span class="line"> 	&#x2F;*动画执行到一半时，元素的样式*&#x2F;</span><br><span class="line"> &#125;</span><br><span class="line"> 100%&#123;</span><br><span class="line"> 	&#x2F;*动画结束时，元素的样式*&#x2F;</span><br><span class="line"> 	属性: 值;</span><br><span class="line"> 	属性: 值;</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="11-1动画声明的浏览器兼容性"><a href="#11-1动画声明的浏览器兼容性" class="headerlink" title="11.1动画声明的浏览器兼容性"></a>11.1动画声明的浏览器兼容性</h5>  Firefox：@-moz-keyframes{  }<br>  Chrome &amp; Safari: @-webkit-keyframes{   }<br>  Oprea: @-o-keyframes{  }</li>
+</ul>
+<h5 id="11-2调用动画简写属性-animation"><a href="#11-2调用动画简写属性-animation" class="headerlink" title="11.2调用动画简写属性:animation"></a>11.2调用动画简写属性:animation</h5><p>取值:name duration timing-function delay iteration-count(播放次数) direction</p>
+<h5 id="11-3动画填充模式-animation-fill-mode"><a href="#11-3动画填充模式-animation-fill-mode" class="headerlink" title="11.3动画填充模式:animation-fill-mode"></a>11.3动画填充模式:animation-fill-mode</h5><ul>
+<li>取值:</li>
+</ul>
+<blockquote>
+<pre><code>  1.none   默认值，无任何效果
+  2.forwards   档动画播放完成后，元素将保持在最后一个帧的状态上
+  3.backwards  动画播放前，在延迟时间内，动画将保持在第一帧的状态上
+  4.both 动画播放前后，分别应用在第一帧和最后一个帧上</code></pre>
+</blockquote>
+<h5 id="11-4动画播放状态animation-play-state"><a href="#11-4动画播放状态animation-play-state" class="headerlink" title="11.4动画播放状态animation-play-state"></a>11.4动画播放状态animation-play-state</h5><ul>
+<li><p>取值</p>
+<ol>
+<li>paused：动画暂停<ol start="2">
+<li>   running：动画播放</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/css/" rel="tag"># css</a>
+              <a href="/tags/html5/" rel="tag"># html5</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/07/12/%E9%A3%9F%E5%93%81%E7%A7%91%E5%AD%A6/%E9%A4%90%E9%A5%AE%E7%A0%94%E5%8F%91%E5%91%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B4%A0%E8%B4%A8/" rel="prev" title="餐饮研发员的基本素质">
+                  <i class="fa fa-chevron-left"></i> 餐饮研发员的基本素质
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/11/02/IT%E6%8A%80%E6%9C%AF/CSS%E6%A0%B7%E5%BC%8F---%E6%96%87%E5%AD%97%E9%95%BF%E5%BA%A6%E6%BA%A2%E5%87%BA%E6%98%BE%E7%A4%BA%E7%9C%81%E7%95%A5%E5%8F%B7/" rel="next" title="CSS样式----文字长度溢出显示省略号">
+                  CSS样式----文字长度溢出显示省略号 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yifoo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  <script>
+  NexT.utils.loadComments('#SOHUCS', () => {
+    NexT.utils.getScript('https://changyan.sohu.com/upload/changyan.js', () => {
+      window.changyan.api.config({
+        appid: 'cytkKTQa0',
+        conf : '794856978265160f8c1b554418ce9792'
+      });
+    });
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

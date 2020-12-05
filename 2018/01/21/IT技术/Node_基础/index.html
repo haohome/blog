@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.haohome.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="1.HTTP模块 http模块是创建HTTP协议的服务器端应用(代替Apache和php)——接受客户端请求,解析并处理请求,返回响应消息. http模块还用于创建HTTP协议的客户端应用(模拟浏览器功能)——向其他的服务器发起请求，等待返回响应消息.  Node.js中使用http模块创建服务器端应用： 123456const http&#x3D;require(&amp;#x27;http&amp;#x27;);let">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node基础">
+<meta property="og:url" content="http://blog.haohome.top/2018/01/21/IT%E6%8A%80%E6%9C%AF/Node_%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="靖风行&#39;S blog">
+<meta property="og:description" content="1.HTTP模块 http模块是创建HTTP协议的服务器端应用(代替Apache和php)——接受客户端请求,解析并处理请求,返回响应消息. http模块还用于创建HTTP协议的客户端应用(模拟浏览器功能)——向其他的服务器发起请求，等待返回响应消息.  Node.js中使用http模块创建服务器端应用： 123456const http&#x3D;require(&amp;#x27;http&amp;#x27;);let">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://haohome.top/18-1-18/39090586.jpg">
+<meta property="article:published_time" content="2018-01-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-05T14:15:58.995Z">
+<meta property="article:author" content="Yifoo">
+<meta property="article:tag" content="node">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://haohome.top/18-1-18/39090586.jpg">
+
+
+<link rel="canonical" href="http://blog.haohome.top/2018/01/21/IT%E6%8A%80%E6%9C%AF/Node_%E5%9F%BA%E7%A1%80/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>Node基础 | 靖风行'S blog</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">靖风行'S blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HTTP%E6%A8%A1%E5%9D%97"><span class="nav-number">1.</span> <span class="nav-text">1.HTTP模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-fs%E6%A8%A1%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">2.fs模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-http%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97express"><span class="nav-number">3.</span> <span class="nav-text">3.http第三方模块express</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yifoo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Yifoo</p>
+  <div class="site-description" itemprop="description">独立 自由 分享 感悟</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yifoo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yifoo" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/wuhaofushan" title="微博 → http:&#x2F;&#x2F;weibo.com&#x2F;wuhaofushan" rel="noopener" target="_blank"><i class="weibo fa-fw"></i>微博</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      主页
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.haohome.top/" title="https:&#x2F;&#x2F;www.haohome.top&#x2F;" rel="noopener" target="_blank">靖风行</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/21/IT%E6%8A%80%E6%9C%AF/Node_%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yifoo">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Node基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-21 00:00:00" itemprop="dateCreated datePublished" datetime="2018-01-21T00:00:00+08:00">2018-01-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-05 22:15:58" itemprop="dateModified" datetime="2020-12-05T22:15:58+08:00">2020-12-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/21/IT%E6%8A%80%E6%9C%AF/Node_%E5%9F%BA%E7%A1%80/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/01/21/IT技术/Node_基础/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="1-HTTP模块"><a href="#1-HTTP模块" class="headerlink" title="1.HTTP模块"></a>1.HTTP模块</h3><ul>
+<li>http模块是创建HTTP协议的服务器端应用(代替Apache和php)——接受客户端请求,解析并处理请求,返回响应消息.</li>
+<li>http模块还用于创建HTTP协议的客户端应用(模拟浏览器功能)——向其他的服务器发起请求，等待返回响应消息.</li>
+</ul>
+<p>Node.js中使用http模块创建服务器端应用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http=<span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> server=http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//客户端请求消息 req.method/url/headers</span></span><br><span class="line">  <span class="comment">//服务器响应消息 res.write()/writeHead()/end</span></span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">3000</span>);<span class="comment">//监听3000端口</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>eg:http模块请求不同url,响应不同消息主体</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http=<span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> server=http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">  res.writeHead(<span class="number">200</span>, &#123;<span class="string">&#x27;Content-Type&#x27;</span>:<span class="string">&#x27;text/html;charset=UTF-8&#x27;</span>&#125;);</span><br><span class="line">  <span class="keyword">if</span>(req.url==<span class="string">&#x27;/index&#x27;</span>)&#123;</span><br><span class="line">    res.write(<span class="string">&#x27;&lt;h1&gt;这是首页&lt;/h1&gt;&#x27;</span>)</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(req.url==<span class="string">&#x27;/user/login&#x27;</span>)&#123;</span><br><span class="line">    res.write(<span class="string">&#x27;&lt;h1&gt;这是登录页&lt;/h1&gt;&#x27;</span>)</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(req.url==<span class="string">&#x27;/user/register&#x27;</span>)&#123;</span><br><span class="line">    res.write(<span class="string">&#x27;&lt;h1&gt;这是注册页&lt;/h1&gt;&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  res.end(<span class="string">&#x27;欢迎来到NodeJs&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">3000</span>);<span class="comment">//监听3000端口</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-fs模块"><a href="#2-fs模块" class="headerlink" title="2.fs模块"></a>2.fs模块</h3><ul>
+<li>fs模块提供了文件的读写、更名、删除、遍历目录等操作。</li>
+<li>fs模块中大多方法都带有同步和异步两种操作模式</li>
+</ul>
+<blockquote>
+<p>1)异步方法的最后一个参数都是一个回调函数<br>2)传给回调函数的参数取决于具体方法,但回调函数的第一个参数是error异常,如果有异常,会静默失败,需要手动处理;<br>3)同步方法中任何异常都会被立即抛出,可以使用 try/catch 来处理异常，或让异常向上冒泡。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//异步方法</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line">fs.unlink(<span class="string">&#x27;/tmp/hello&#x27;</span>, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;<span class="comment">//有异常则抛出异常</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;成功删除 /tmp/hello&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同步方法  方法名后+Sync</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line">fs.unlinkSync(<span class="string">&#x27;/tmp/hello&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;成功删除 /tmp/hello&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>2.1 判断文件是否存在<br>fs.stat方法:fs.stat(path, callback(err,stats))<br>第一个参数是path(路径),第二个参数是回调函数(第一个参数是异常error,第二个是统计信息描述对象)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.stat(<span class="string">&#x27;data.txt&#x27;</span>, <span class="function">(<span class="params">err, stats</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err.code);</span><br><span class="line">    <span class="keyword">throw</span> err;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(stats);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>2.2 文件路径转换<br>fs.realpath方法:fs.realpath(path[, options], callback(err,realpath)),将相对路径转为绝对路径</p>
+<blockquote>
+<p>在express中提供文件路径时用到</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fs.realpath(<span class="string">&#x27;./data.txt&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,resolvedPath</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//如果转换失败,则err中有值,否则为null</span></span><br><span class="line">  <span class="keyword">if</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(resolvedPath);<span class="comment">// e:\Github\Node\data.txt</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>2.3 文件重命名<br>fs.rename方法:fs.rename(oldPath, newPath, callback(err))</p>
+<p>2.4 文件读写<br>fs.readFile方法:fs.readFile(path[, options], callback(err,data))<br>fs.writeFile方法:fs.writeFile(file, data[, options], callback(err))</p>
+<ul>
+<li>options<blockquote>
+<ul>
+<li>encoding <string> | <null> 默认 = ‘utf8’<br>如果 data 是一个 buffer，则忽略 encoding 选项。它默认为 ‘utf8’.</li>
+<li>mode <integer> 默认 = 0o666</li>
+<li>flag <string> 默认 = ‘w’,表示”写”,flag==”a”,则为追加append</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(<span class="string">&#x27;data.txt&#x27;</span>, <span class="string">&#x27;Hello Node.js&#x27;</span>, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;The file has been saved!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">fs.writeFile(<span class="string">&#x27;message.txt&#x27;</span>, <span class="string">&#x27;Hello Node.js&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, callback);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>多次对同一文件使用 fs.writeFile 且不等待回调，是不安全的。 对于这种情况，强烈推荐使用 fs.createWriteStream。</p>
+</blockquote>
+<p>2.5 读写流</p>
+<ul>
+<li><p>读取流</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rs=fs.createReadStream(<span class="string">&#x27;./data.txt&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> temp=<span class="string">&quot;&quot;</span>;</span><br><span class="line">rs.on(<span class="string">&#x27;data&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123; <span class="comment">//每读取64kb执行data方法</span></span><br><span class="line">  <span class="built_in">console</span>.log(chunk);</span><br><span class="line">  <span class="comment">//看字符串</span></span><br><span class="line">  <span class="comment">// console.log(chunk.toString());</span></span><br><span class="line">  temp+=chunk;<span class="comment">//拼接所有的数据</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//读取流完毕后执行end</span></span><br><span class="line">rs.on(<span class="string">&#x27;end&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(temp);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写入流</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rs=fs.createReadStream(<span class="string">&#x27;./data.txt&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> ws=fs.createWriteStream(<span class="string">&#x27;./data_bak.txt&#x27;</span>);</span><br><span class="line">rs.on(<span class="string">&#x27;data&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</span><br><span class="line">  ws.write(chunk);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>pipe方法写入数据时,会等当前读出的数据全部写入后,才进行下一次的读取操作,内存利用充分,当时读取时间比较长</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rs=fs.createReadStream(<span class="string">&#x27;./data.txt&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> ws=fs.createWriteStream(<span class="string">&#x27;./data_bak.txt&#x27;</span>);</span><br><span class="line">rs.pipe(ws)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-http第三方模块express"><a href="#3-http第三方模块express" class="headerlink" title="3.http第三方模块express"></a>3.http第三方模块express</h3><ul>
+<li>使用步骤：<br> 1.安装<br>  2.使用http模块创建Web服务器，运行express，让其承担请求监听器的任务<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">http.createServer( app ).listen(<span class="number">80</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>3.为app对象添加特定URL的请求处理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/user&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;     </span><br><span class="line">  <span class="comment">//接收请求消息中的数据</span></span><br><span class="line">  req.query   <span class="comment">//获取查询字符串中的数据&#123; &#125;</span></span><br><span class="line">  req.params  <span class="comment">//获取请求参数(手册自学)</span></span><br><span class="line">  req.on(<span class="string">&#x27;data&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">buf</span>)</span>&#123;&#125;)  <span class="comment">//获取请求主体中的数据</span></span><br><span class="line">  <span class="comment">//发送响应消息</span></span><br><span class="line">  res.send(HTML文本);</span><br><span class="line">  res.sendFile(任意类型的文件);</span><br><span class="line">  res.json(对象/数组数据);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3.1 路由<br>路由，针对客户端的某个请求方法所请求的特定URL，如何给出响应消息的过程，称为“路由”<br>路由 = 请求方法 + 请求URL + 处理函数<br>一个典型的路由形如：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/user&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;     </span><br><span class="line">  <span class="comment">//接收请求消息中的数据</span></span><br><span class="line">  req.query   <span class="comment">//获取查询字符串中的数据&#123; &#125;</span></span><br><span class="line">  req.params  <span class="comment">//获取请求参数(手册自学)</span></span><br><span class="line">  req.on(<span class="string">&#x27;data&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">buf</span>)</span>&#123;&#125;)  <span class="comment">//获取请求主体中的数据</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//发送响应消息</span></span><br><span class="line">  res.send(HTML文本);</span><br><span class="line">  res.sendFile(任意类型的文件);</span><br><span class="line">  res.json(对象/数组数据);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>express.Router</strong></p>
+<blockquote>
+<p>在 app 目录下创建名为 birds.js 的文件，内容如下：<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 该路由使用的中间件</span></span><br><span class="line">router.use(<span class="function"><span class="keyword">function</span> <span class="title">timeLog</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Time: &#x27;</span>, <span class="built_in">Date</span>.now());</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 定义网站主页的路由</span></span><br><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">&#x27;Birds home page&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 定义 about 页面的路由</span></span><br><span class="line">router.get(<span class="string">&#x27;/about&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">&#x27;About birds&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure><br>然后在应用中加载路由模块：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> birds = <span class="built_in">require</span>(<span class="string">&#x27;./birds&#x27;</span>);</span><br><span class="line">...</span><br><span class="line">app.use(<span class="string">&#x27;/birds&#x27;</span>, birds);</span><br></pre></td></tr></table></figure>
+<p>应用即可处理发自 /birds 和 /birds/about 的请求，并且调用为该路由指定的 timeLog 中间件。</p>
+<ul>
+<li>3.2 中间件<br>中间件（Middleware） 是一个函数，它可以访问请求对象（request object (req)）, 响应对象（response object (res)）, 和 web 应用中处于请求-响应循环流程中的中间件，一般被命名为 next 的变量。<br>功能:<br>(1)执行任何代码。<br>(2)修改请求和响应对象。<br>(3)终结请求-响应循环。<br>(4)调用堆栈中的下一个中间件。<br><img src="https://haohome.top/18-1-18/39090586.jpg" alt="中间件"></li>
+</ul>
+<blockquote>
+<p>如果当前中间件没有终结请求-响应循环，则必须调用 next() 方法将控制权交给下一个中间件，否则请求就会挂起。</p>
+</blockquote>
+<ul>
+<li>应用级中间件<br>应用级中间件绑定到app对象使用app.use()和app.METHOD(),其中，METHOD是需要处理的HTTP请求的方法，例如GET,PUT,POST等等全部小写。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="comment">// 没有挂载路径的中间件，应用的每个请求都会执行该中间件</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Time:&#x27;</span>, <span class="built_in">Date</span>.now());</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 挂载至 /user/:id 的中间件，任何指向 /user/:id 的请求都会执行它</span></span><br><span class="line">app.use(<span class="string">&#x27;/user/:id&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Request Type:&#x27;</span>, req.method);</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 路由和句柄函数(中间件系统)，处理指向 /user/:id 的 GET 请求</span></span><br><span class="line">app.get(<span class="string">&#x27;/user/:id&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">&#x27;USER&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>3.2.1 在一个挂载点装载一组中间件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个中间件栈，对任何指向 /user/:id 的 HTTP 请求打印出相关信息</span></span><br><span class="line">app.use(<span class="string">&#x27;/user/:id&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Request URL:&#x27;</span>, req.originalUrl);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Request Type:&#x27;</span>, req.method);</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>3.2.2 下例为指向 /user/:id 的 GET 请求定义了两个路由,但第一个路由终止了请求-响应循环,第二个路由不会被执行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个中间件栈，处理指向 /user/:id 的 GET 请求</span></span><br><span class="line">app.get(<span class="string">&#x27;/user/:id&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;ID:&#x27;</span>, req.params.id);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">&#x27;User Info&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 处理 /user/:id， 打印出用户 id</span></span><br><span class="line">app.get(<span class="string">&#x27;/user/:id&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.end(req.params.id);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>3.2.3 如果需要在中间件栈中跳过剩余中间件，调用next(‘route’)方法将控制权交给下一个路由</p>
+<blockquote>
+<p>注意：next(‘route’)只对使用app.VERB()或router.VERB()加载的中间件有效。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个中间件栈，处理指向 /user/:id 的 GET 请求</span></span><br><span class="line">app.get(<span class="string">&#x27;/user/:id&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 如果 user id 为 0, 跳到下一个路由</span></span><br><span class="line">  <span class="keyword">if</span> (req.params.id == <span class="number">0</span>) next(<span class="string">&#x27;route&#x27;</span>);</span><br><span class="line">  <span class="comment">// 否则将控制权交给栈中下一个中间件</span></span><br><span class="line">  <span class="keyword">else</span> next(); <span class="comment">//</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 渲染常规页面</span></span><br><span class="line">  res.render(<span class="string">&#x27;regular&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理 /user/:id， 渲染一个特殊页面</span></span><br><span class="line">app.get(<span class="string">&#x27;/user/:id&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">&#x27;special&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>路由级中间件 使用方法与应用级中间件类似</p>
+<blockquote>
+<p>var router = express.Router();</p>
+</blockquote>
+</li>
+<li><p>错误处理中间件<br> 错误处理中间件有4个参数，定义错误处理中间件时必须使用这4个参数。即使不需要next对象，也必须在签名中声明它，否则中间件会被识别为一个常规中间件，不能处理错误。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.error(err.stack);</span><br><span class="line">  res.status(<span class="number">500</span>).send(<span class="string">&#x27;Something broke!&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> 项目中常用的中间件</p>
+</li>
+</ul>
+<ul>
+<li><p>(1)向客户端返回指定目录下的所有静态资源文件<br>  <code>app.use(express.static(&#39;./public&#39;));</code></p>
+</li>
+<li><p>(2)将客户端POST请求主体中的数据封装到req.body中</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm  i  body-parser</span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>);</span><br><span class="line">app.use( bodyParser.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">false</span>&#125;));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>(3)将请求头部中的Cookie数据封装到req.cookies中</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm   i   cookie-parser</span><br><span class="line"><span class="keyword">const</span> cookieParser = <span class="built_in">require</span>(<span class="string">&#x27;cookie-parser&#x27;</span>);</span><br><span class="line">app.use(cookieParser());  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>(4)解决跨域问题cors</p>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.use( cors(&#123;</span><br><span class="line">    origin: [<span class="string">&quot;http://127.0.0.1&quot;</span>, <span class="string">&quot;http://localhost:8080&quot;</span>],</span><br><span class="line">    credentials: <span class="literal">true</span></span><br><span class="line">&#125;) );</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>配置cors:</p>
+</blockquote>
+</li>
+</ul>
+<pre><code> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> cors = <span class="built_in">require</span>(<span class="string">&#x27;cors&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> app = express()</span><br><span class="line"><span class="keyword">var</span> corsOptions = &#123; <span class="comment">//配置跨域选项 </span></span><br><span class="line">  origin: <span class="string">&#x27;http://example.com&#x27;</span>,</span><br><span class="line">  optionsSuccessStatus: <span class="number">200</span> <span class="comment">// some legacy browsers (IE11, various SmartTVs) choke on 204 </span></span><br><span class="line">&#125;</span><br><span class="line"> app.get(<span class="string">&#x27;/products/:id&#x27;</span>, cors(corsOptions), <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.json(&#123;<span class="attr">msg</span>: <span class="string">&#x27;跨域仅限域名:example.com.&#x27;</span>&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"> app.listen(<span class="number">80</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;80端口服务器可以跨域&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/node/" rel="tag"># node</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/01/14/IT%E6%8A%80%E6%9C%AF/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/" rel="prev" title="跨域资源共享CORS">
+                  <i class="fa fa-chevron-left"></i> 跨域资源共享CORS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/01/21/IT%E6%8A%80%E6%9C%AF/Vue%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/" rel="next" title="Vue实现简单分页功能">
+                  Vue实现简单分页功能 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yifoo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  <script>
+  NexT.utils.loadComments('#SOHUCS', () => {
+    NexT.utils.getScript('https://changyan.sohu.com/upload/changyan.js', () => {
+      window.changyan.api.config({
+        appid: 'cytkKTQa0',
+        conf : '794856978265160f8c1b554418ce9792'
+      });
+    });
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

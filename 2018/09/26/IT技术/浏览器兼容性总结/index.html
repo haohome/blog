@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.haohome.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="1. 视频截取第一帧 问题: 在加载h5 的视频时,PC端一半都会默认加载首帧显示,而在移动端就会显示空白或者一片黑   解决方案: 在上传本地视频时,监听视频加载事件,获取第一帧图片,利用canvas绘制出图片并存储,作为移动端视频video的poster onloadeddata事件:  浏览器加载声频、视频当前帧结束后触发的事件(与下一帧是否下载完成无关)在音频和视频加载过程中,能够触发的事">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器兼容性">
+<meta property="og:url" content="http://blog.haohome.top/2018/09/26/IT%E6%8A%80%E6%9C%AF/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="靖风行&#39;S blog">
+<meta property="og:description" content="1. 视频截取第一帧 问题: 在加载h5 的视频时,PC端一半都会默认加载首帧显示,而在移动端就会显示空白或者一片黑   解决方案: 在上传本地视频时,监听视频加载事件,获取第一帧图片,利用canvas绘制出图片并存储,作为移动端视频video的poster onloadeddata事件:  浏览器加载声频、视频当前帧结束后触发的事件(与下一帧是否下载完成无关)在音频和视频加载过程中,能够触发的事">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-09-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-05T14:12:23.641Z">
+<meta property="article:author" content="Yifoo">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.haohome.top/2018/09/26/IT%E6%8A%80%E6%9C%AF/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7%E6%80%BB%E7%BB%93/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>浏览器兼容性 | 靖风行'S blog</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">靖风行'S blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%A7%86%E9%A2%91%E6%88%AA%E5%8F%96%E7%AC%AC%E4%B8%80%E5%B8%A7"><span class="nav-number">1.</span> <span class="nav-text">1. 视频截取第一帧</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yifoo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Yifoo</p>
+  <div class="site-description" itemprop="description">独立 自由 分享 感悟</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yifoo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yifoo" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/wuhaofushan" title="微博 → http:&#x2F;&#x2F;weibo.com&#x2F;wuhaofushan" rel="noopener" target="_blank"><i class="weibo fa-fw"></i>微博</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      主页
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.haohome.top/" title="https:&#x2F;&#x2F;www.haohome.top&#x2F;" rel="noopener" target="_blank">靖风行</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/09/26/IT%E6%8A%80%E6%9C%AF/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yifoo">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浏览器兼容性
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-26 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-26T00:00:00+08:00">2018-09-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-05 22:12:23" itemprop="dateModified" datetime="2020-12-05T22:12:23+08:00">2020-12-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/09/26/IT%E6%8A%80%E6%9C%AF/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7%E6%80%BB%E7%BB%93/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/09/26/IT技术/浏览器兼容性总结/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-视频截取第一帧"><a href="#1-视频截取第一帧" class="headerlink" title="1. 视频截取第一帧"></a>1. 视频截取第一帧</h2><ul>
+<li>问题: 在加载h5 的视频时,PC端一半都会默认加载首帧显示,而在移动端就会显示空白或者一片黑</li>
+</ul>
+<blockquote>
+<p><strong>解决方案</strong>: 在上传本地视频时,监听视频加载事件,获取第一帧图片,利用canvas绘制出图片并存储,作为移动端视频video的poster</p>
+<p>onloadeddata事件:  浏览器加载声频、视频当前帧结束后触发的事件(与下一帧是否下载完成无关)<br>在音频和视频加载过程中,能够触发的事件如下:</p>
+<ol>
+<li>开始读入媒体数据时触发的事件(<a target="_blank" rel="noopener" href="http://www.webkkl.com/api-v/onloadstart.php">onloadstart</a>)</li>
+<li>更改声频、视频的时长时(<a target="_blank" rel="noopener" href="http://www.webkkl.com/api-v/ondurationchange.php">ondurationchange</a>)</li>
+<li>浏览器已加载声频、视频的元数据时触发的事件(<a target="_blank" rel="noopener" href="http://www.webkkl.com/api-v/onloadedmetadata.php">onloadedmetadata</a>)</li>
+<li>浏览器加载声频、视频当前帧结束后(<a target="_blank" rel="noopener" href="http://www.webkkl.com/api-v/onloadeddata.php">onloadeddata</a>)</li>
+<li>浏览器正在下载媒体数据时(<a target="_blank" rel="noopener" href="http://www.webkkl.com/api-v/onprogress.php">onprogress</a>)</li>
+<li>浏览器可以播放媒体数据时(<a target="_blank" rel="noopener" href="http://www.webkkl.com/api-v/oncanplay.php">oncanplay</a>)</li>
+<li>当浏览器可以在不因缓冲而停顿的情况下播放时(<a target="_blank" rel="noopener" href="http://www.webkkl.com/api-v/oncanplaythrough.php">oncanplaythrough</a>)</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;h1&gt;视频获取第一帧&lt;/h1&gt;</span><br><span class="line">  &lt;hr&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;p&gt;本地上传&lt;/p&gt;</span><br><span class="line">      &lt;label <span class="keyword">for</span>=<span class="string">&quot;file&quot;</span>&gt;选择视频&lt;/label&gt; </span><br><span class="line">      &lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;&quot;</span> id=<span class="string">&quot;file&quot;</span><span class="string">&quot;&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">  &lt;hr&gt;</span></span><br><span class="line"><span class="string">  &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;p&gt;外链&lt;/p&gt;</span></span><br><span class="line"><span class="string">      &lt;input type=&quot;</span>text<span class="string">&quot; id=&#x27;link&#x27;&gt;&lt;button id=&quot;</span>btn<span class="string">&quot;&gt;提交&lt;/button&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">  &lt;hr&gt;</span></span><br><span class="line"><span class="string">  &lt;video id=&#x27;video&#x27;  preload=&quot;</span>meta<span class="string">&quot; style=&#x27;display:none&#x27; crossorigin=&quot;</span>anonymous<span class="string">&quot;&gt;&lt;/video&gt;</span></span><br><span class="line"><span class="string">  &lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;h2&gt;首帧图片显示&lt;/h2&gt;</span></span><br><span class="line"><span class="string">    &lt;img src=&quot;</span><span class="string">&quot; alt=&quot;</span><span class="string">&quot; id=&quot;</span>img<span class="string">&quot;&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;p&gt;外链视频: https://haohome.top/movie.mp4&lt;/p&gt;</span></span><br><span class="line"><span class="string">  &lt;script&gt;</span></span><br><span class="line"><span class="string">    var video = document.getElementById(&quot;</span>video<span class="string">&quot;)</span></span><br><span class="line"><span class="string">    var file = document.getElementById(&quot;</span>file<span class="string">&quot;)</span></span><br><span class="line"><span class="string">    var btn = document.getElementById(&quot;</span>btn<span class="string">&quot;)</span></span><br><span class="line"><span class="string">    var link = document.getElementById(&quot;</span>link<span class="string">&quot;)</span></span><br><span class="line"><span class="string">    file.addEventListener(&quot;</span>change<span class="string">&quot;,function()&#123;</span></span><br><span class="line"><span class="string">      var file  = this.files[0];</span></span><br><span class="line"><span class="string">      var src = URL.createObjectURL(file)</span></span><br><span class="line"><span class="string">      var newFile = new FileReader(file)</span></span><br><span class="line"><span class="string">      video.src = src</span></span><br><span class="line"><span class="string">    &#125;)</span></span><br><span class="line"><span class="string">    btn.onclick=function()&#123;</span></span><br><span class="line"><span class="string">      video.src =link.value</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">     video.addEventListener(&quot;</span>loadeddata<span class="string">&quot;, function () &#123;</span></span><br><span class="line"><span class="string">      var canvas = document.createElement(&quot;</span>canvas<span class="string">&quot;);</span></span><br><span class="line"><span class="string">      canvas.width = this.videoWidth;</span></span><br><span class="line"><span class="string">      canvas.height = this.videoHeight;</span></span><br><span class="line"><span class="string">      setTimeout(() =&gt; &#123;</span></span><br><span class="line"><span class="string">        canvas.getContext(&#x27;2d&#x27;).drawImage(video, 0, 0, canvas.width, canvas.height);</span></span><br><span class="line"><span class="string">        var imgSrc = &#x27;&#x27;;</span></span><br><span class="line"><span class="string">        try &#123;</span></span><br><span class="line"><span class="string">          imgSrc = canvas.toDataURL(&quot;</span>image/png<span class="string">&quot;);</span></span><br><span class="line"><span class="string">          img.src = imgSrc</span></span><br><span class="line"><span class="string">        &#125; catch (e) &#123;</span></span><br><span class="line"><span class="string">          document.write(&quot;</span>只能截取当前域名视频图片! <span class="string">&quot;, e);</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;, 200)</span></span><br><span class="line"><span class="string">    &#125;, false);</span></span><br><span class="line"><span class="string">  &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br></pre></td></tr></table></figure>
+
+<iframe width="100%" height="300" src="//jsrun.net/PqhKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p><strong>当采用链接视频时,会存在视频的跨域问题,需要在video上添加属性crossOrigin=’Anonymous’ 即可</strong>(IE由于安全性问题,会报SecurityError)</p>
+<blockquote>
+<p>Tips:</p>
+<p>获取本地地址两种方法:</p>
+<ol>
+<li><p><code>URL.createObjectURL</code>: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> src = URL.createObjectURL(file)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>FileReader</code></strong>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fr=<span class="keyword">new</span> FileReader();</span><br><span class="line">fr.onload=<span class="function"><span class="keyword">function</span> (<span class="params">file</span>) </span>&#123;</span><br><span class="line"> <span class="keyword">var</span> src =<span class="built_in">this</span>.result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当前监听video视频获取首帧图片时,采用了延时200ms,是为了给视频加载以一定时间</p>
+</li>
+</ol>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/08/28/IT%E6%8A%80%E6%9C%AF/js%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81/" rel="prev" title="JS判断当前文本输入状态">
+                  <i class="fa fa-chevron-left"></i> JS判断当前文本输入状态
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/09/28/IT%E6%8A%80%E6%9C%AF/Data%E7%B1%BB%E5%9E%8B%E7%9A%84Url%E7%AE%80%E4%BB%8B/" rel="next" title="Data类型的url简介">
+                  Data类型的url简介 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yifoo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  <script>
+  NexT.utils.loadComments('#SOHUCS', () => {
+    NexT.utils.getScript('https://changyan.sohu.com/upload/changyan.js', () => {
+      window.changyan.api.config({
+        appid: 'cytkKTQa0',
+        conf : '794856978265160f8c1b554418ce9792'
+      });
+    });
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

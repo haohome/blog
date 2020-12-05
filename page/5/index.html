@@ -220,7 +220,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -281,7 +281,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/21/JavaScript/Node_%E5%9F%BA%E7%A1%80/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/21/IT%E6%8A%80%E6%9C%AF/Vue%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -294,7 +294,120 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/01/21/JavaScript/Node_%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">Node基础</a>
+          <a href="/2018/01/21/IT%E6%8A%80%E6%9C%AF/Vue%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/" class="post-title-link" itemprop="url">Vue实现简单分页功能</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-21 21:30:00" itemprop="dateCreated datePublished" datetime="2018-01-21T21:30:00+08:00">2018-01-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Framework/" itemprop="url" rel="index"><span itemprop="name">Framework</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/21/IT%E6%8A%80%E6%9C%AF/Vue%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://blog.haohome.top/2018/01/21/IT%E6%8A%80%E6%9C%AF/Vue%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/" class="cy_cmt_count" data-xid="2018/01/21/IT技术/Vue实现简单分页功能/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>分页功能在列表查询中是一个比较重要的组成部分,按结构划分可分为页码与上一页/下一页:</p>
+<ul>
+<li><p>页码:通过点击数字,并将页码数字传递到后台查询获取相应的页码内容</p>
+</li>
+<li><p>上一页/下一页:可以共用一个方法,利用不同参数识别,查询数据逻辑与页码类似;</p>
+</li>
+</ul>
+<blockquote>
+<p>页面显示页码:可以采用计算属性computed获得</p>
+</blockquote>
+<p>下面的案例是我从自己的vue项目中摘取出来:</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/01/21/IT%E6%8A%80%E6%9C%AF/Vue%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/21/IT%E6%8A%80%E6%9C%AF/Node_%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yifoo">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/21/IT%E6%8A%80%E6%9C%AF/Node_%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">Node基础</a>
         </h2>
 
         <div class="post-meta-container">
@@ -312,7 +425,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
+        <time title="修改时间：2020-12-05 22:15:58" itemprop="dateModified" datetime="2020-12-05T22:15:58+08:00">2020-12-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -320,7 +433,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
         </span>
     </span>
 
@@ -334,8 +447,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/21/JavaScript/Node_%E5%9F%BA%E7%A1%80/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://blog.haohome.top/2018/01/21/JavaScript/Node_%E5%9F%BA%E7%A1%80/" class="cy_cmt_count" data-xid="2018/01/21/JavaScript/Node_基础/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/21/IT%E6%8A%80%E6%9C%AF/Node_%E5%9F%BA%E7%A1%80/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://blog.haohome.top/2018/01/21/IT%E6%8A%80%E6%9C%AF/Node_%E5%9F%BA%E7%A1%80/" class="cy_cmt_count" data-xid="2018/01/21/IT技术/Node_基础/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -358,7 +471,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http=<span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> server=http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//客户端请求消息 req.method/url/headers</span></span><br><span class="line">  <span class="comment">//服务器响应消息 res.write()/writeHead()/end</span></span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">3000</span>);<span class="comment">//监听3000端口</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2018/01/21/JavaScript/Node_%E5%9F%BA%E7%A1%80/#more" rel="contents">
+              <a class="btn" href="/2018/01/21/IT%E6%8A%80%E6%9C%AF/Node_%E5%9F%BA%E7%A1%80/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -389,7 +502,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/14/JavaScript/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/14/IT%E6%8A%80%E6%9C%AF/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -402,7 +515,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/01/14/JavaScript/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/" class="post-title-link" itemprop="url">跨域资源共享CORS</a>
+          <a href="/2018/01/14/IT%E6%8A%80%E6%9C%AF/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/" class="post-title-link" itemprop="url">跨域资源共享CORS</a>
         </h2>
 
         <div class="post-meta-container">
@@ -420,7 +533,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
+        <time title="修改时间：2020-12-05 22:11:37" itemprop="dateModified" datetime="2020-12-05T22:11:37+08:00">2020-12-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -428,7 +541,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
         </span>
     </span>
 
@@ -442,8 +555,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/14/JavaScript/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://blog.haohome.top/2018/01/14/JavaScript/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/" class="cy_cmt_count" data-xid="2018/01/14/JavaScript/跨域资源共享 CORS/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/14/IT%E6%8A%80%E6%9C%AF/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://blog.haohome.top/2018/01/14/IT%E6%8A%80%E6%9C%AF/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/" class="cy_cmt_count" data-xid="2018/01/14/IT技术/跨域资源共享 CORS/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -462,7 +575,7 @@
 <h3 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h3><p>CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。<br>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。<br>因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2018/01/14/JavaScript/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/#more" rel="contents">
+              <a class="btn" href="/2018/01/14/IT%E6%8A%80%E6%9C%AF/%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%20CORS/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -493,7 +606,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/13/JavaScript/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9Cslice%E3%80%81substr%E3%80%81substring%E6%AF%94%E8%BE%83/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/13/IT%E6%8A%80%E6%9C%AF/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9Cslice%E3%80%81substr%E3%80%81substring%E6%AF%94%E8%BE%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -506,7 +619,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/01/13/JavaScript/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9Cslice%E3%80%81substr%E3%80%81substring%E6%AF%94%E8%BE%83/" class="post-title-link" itemprop="url">字符串操作slice、substr、sbustring比较</a>
+          <a href="/2018/01/13/IT%E6%8A%80%E6%9C%AF/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9Cslice%E3%80%81substr%E3%80%81substring%E6%AF%94%E8%BE%83/" class="post-title-link" itemprop="url">字符串操作slice、substr、sbustring比较</a>
         </h2>
 
         <div class="post-meta-container">
@@ -524,7 +637,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
+        <time title="修改时间：2020-12-05 22:13:15" itemprop="dateModified" datetime="2020-12-05T22:13:15+08:00">2020-12-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -532,7 +645,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
         </span>
     </span>
 
@@ -546,8 +659,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/13/JavaScript/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9Cslice%E3%80%81substr%E3%80%81substring%E6%AF%94%E8%BE%83/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://blog.haohome.top/2018/01/13/JavaScript/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9Cslice%E3%80%81substr%E3%80%81substring%E6%AF%94%E8%BE%83/" class="cy_cmt_count" data-xid="2018/01/13/JavaScript/字符串操作slice、substr、substring比较/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/13/IT%E6%8A%80%E6%9C%AF/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9Cslice%E3%80%81substr%E3%80%81substring%E6%AF%94%E8%BE%83/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://blog.haohome.top/2018/01/13/IT%E6%8A%80%E6%9C%AF/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9Cslice%E3%80%81substr%E3%80%81substring%E6%AF%94%E8%BE%83/" class="cy_cmt_count" data-xid="2018/01/13/IT技术/字符串操作slice、substr、substring比较/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -575,7 +688,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">&quot;HelloWorld&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.slice(<span class="number">3</span>));<span class="comment">//&quot;loworld&quot;  </span></span><br><span class="line"><span class="built_in">console</span>.log(str.slice(<span class="number">3</span>,<span class="number">7</span>)); <span class="comment">//&#x27;loWo&#x27;  </span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2018/01/13/JavaScript/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9Cslice%E3%80%81substr%E3%80%81substring%E6%AF%94%E8%BE%83/#more" rel="contents">
+              <a class="btn" href="/2018/01/13/IT%E6%8A%80%E6%9C%AF/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9Cslice%E3%80%81substr%E3%80%81substring%E6%AF%94%E8%BE%83/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -606,7 +719,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/07/Java/Java%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/07/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -619,7 +732,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/01/07/Java/Java%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">Java中的接口</a>
+          <a href="/2018/01/07/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">Java中的接口</a>
         </h2>
 
         <div class="post-meta-container">
@@ -637,7 +750,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
+        <time title="修改时间：2020-12-05 22:14:57" itemprop="dateModified" datetime="2020-12-05T22:14:57+08:00">2020-12-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -645,7 +758,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
         </span>
     </span>
 
@@ -659,8 +772,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/07/Java/Java%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://blog.haohome.top/2018/01/07/Java/Java%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/" class="cy_cmt_count" data-xid="2018/01/07/Java/Java中的接口/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/07/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://blog.haohome.top/2018/01/07/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/" class="cy_cmt_count" data-xid="2018/01/07/IT技术/Java中的接口/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -724,7 +837,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/Java/Java%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -737,7 +850,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/01/01/Java/Java%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Java中super关键字的使用</a>
+          <a href="/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Java中super关键字的使用</a>
         </h2>
 
         <div class="post-meta-container">
@@ -755,7 +868,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
+        <time title="修改时间：2020-12-05 22:15:10" itemprop="dateModified" datetime="2020-12-05T22:15:10+08:00">2020-12-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -763,7 +876,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
         </span>
     </span>
 
@@ -777,8 +890,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/01/Java/Java%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://blog.haohome.top/2018/01/01/Java/Java%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2018/01/01/Java/Java中super关键字的使用/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://blog.haohome.top/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%ADsuper%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2018/01/01/IT技术/Java中super关键字的使用/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -824,7 +937,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -837,7 +950,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">Java中的类和对象</a>
+          <a href="/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">Java中的类和对象</a>
         </h2>
 
         <div class="post-meta-container">
@@ -855,7 +968,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
+        <time title="修改时间：2020-12-05 22:15:01" itemprop="dateModified" datetime="2020-12-05T22:15:01+08:00">2020-12-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -863,7 +976,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
         </span>
     </span>
 
@@ -877,8 +990,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://blog.haohome.top/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" class="cy_cmt_count" data-xid="2018/01/01/Java/Java中的类和对象/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://blog.haohome.top/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" class="cy_cmt_count" data-xid="2018/01/01/IT技术/Java中的类和对象/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -986,7 +1099,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/Java/FreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -999,7 +1112,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/01/01/Java/FreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">FreeMaker 模板_数据模型</a>
+          <a href="/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB/" class="post-title-link" itemprop="url">Java中的抽象类</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1017,7 +1130,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
+        <time title="修改时间：2020-12-05 22:14:52" itemprop="dateModified" datetime="2020-12-05T22:14:52+08:00">2020-12-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1025,7 +1138,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
         </span>
     </span>
 
@@ -1039,215 +1152,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/01/Java/FreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://blog.haohome.top/2018/01/01/Java/FreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/" class="cy_cmt_count" data-xid="2018/01/01/Java/FreeMaker 模板_数据模型/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-模板-数据模型-输出"><a href="#1-模板-数据模型-输出" class="headerlink" title="1. 模板 + 数据模型 = 输出"></a>1. 模板 + 数据模型 = 输出</h2><h3 id="1-1-模板"><a href="#1-1-模板" class="headerlink" title="1.1 模板"></a>1.1 模板</h3><p> 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如:<br>  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome $&#123;user&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Our latest product:</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;$&#123;latestProduct.url&#125;&quot;</span>&gt;</span>$&#123;latestProduct.name&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span>!</span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/01/01/Java/FreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yifoo">
-      <meta itemprop="description" content="独立 自由 分享 感悟">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="靖风行'S blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" class="post-title-link" itemprop="url">Java中的多态</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-01-01T00:00:00+08:00">2018-01-01</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://blog.haohome.top/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" class="cy_cmt_count" data-xid="2018/01/01/Java/Java中的多态/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><h4 id="1-引用多态"><a href="#1-引用多态" class="headerlink" title="1.引用多态"></a>1.引用多态</h4><ul>
-<li>父类的引用可以指向本类的对象</li>
-<li>父类的引用可以指向子类的对象<h4 id="2-方法多态"><a href="#2-方法多态" class="headerlink" title="2.方法多态"></a>2.方法多态</h4></li>
-<li>创建本类对象时,调用的方法为本类方法</li>
-<li>创建子类对象时,调用的方法为<strong>子类重写的方法或者继承的方法</strong><h4 id="3-引用类型转换"><a href="#3-引用类型转换" class="headerlink" title="3.引用类型转换"></a>3.引用类型转换</h4></li>
-<li>向上类型转换(隐式/自动类型转换),是小类型向大类型转换</li>
-<li><strong>向下类型转换(强制类型转换),是大类型到小类型转换</strong>(存在数据溢出风险)</li>
-<li>instanceof运算符:避免类型转换出现的安全问题<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Dog dog=<span class="keyword">new</span> Dog();</span><br><span class="line">Animal animal=dog;<span class="comment">//(向上类型转换)</span></span><br><span class="line"><span class="keyword">if</span> (animal <span class="keyword">instanceof</span> Dog) &#123;</span><br><span class="line">  Dog dog2=(Dog)animal;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;无法进行类型转换&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yifoo">
-      <meta itemprop="description" content="独立 自由 分享 感悟">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="靖风行'S blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB/" class="post-title-link" itemprop="url">Java中的抽象类</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-01-01T00:00:00+08:00">2018-01-01</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://blog.haohome.top/2018/01/01/Java/Java%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB/" class="cy_cmt_count" data-xid="2018/01/01/Java/Java中的抽象类/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://blog.haohome.top/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%B1%BB/" class="cy_cmt_count" data-xid="2018/01/01/IT技术/Java中的抽象类/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -1298,7 +1204,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2017/12/21/Java/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -1311,7 +1217,111 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/12/21/Java/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Java中的static的使用</a>
+          <a href="/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" class="post-title-link" itemprop="url">Java中的多态</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-01-01T00:00:00+08:00">2018-01-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-05 22:14:55" itemprop="dateModified" datetime="2020-12-05T22:14:55+08:00">2020-12-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://blog.haohome.top/2018/01/01/IT%E6%8A%80%E6%9C%AF/Java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" class="cy_cmt_count" data-xid="2018/01/01/IT技术/Java中的多态/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><h4 id="1-引用多态"><a href="#1-引用多态" class="headerlink" title="1.引用多态"></a>1.引用多态</h4><ul>
+<li>父类的引用可以指向本类的对象</li>
+<li>父类的引用可以指向子类的对象<h4 id="2-方法多态"><a href="#2-方法多态" class="headerlink" title="2.方法多态"></a>2.方法多态</h4></li>
+<li>创建本类对象时,调用的方法为本类方法</li>
+<li>创建子类对象时,调用的方法为<strong>子类重写的方法或者继承的方法</strong><h4 id="3-引用类型转换"><a href="#3-引用类型转换" class="headerlink" title="3.引用类型转换"></a>3.引用类型转换</h4></li>
+<li>向上类型转换(隐式/自动类型转换),是小类型向大类型转换</li>
+<li><strong>向下类型转换(强制类型转换),是大类型到小类型转换</strong>(存在数据溢出风险)</li>
+<li>instanceof运算符:避免类型转换出现的安全问题<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Dog dog=<span class="keyword">new</span> Dog();</span><br><span class="line">Animal animal=dog;<span class="comment">//(向上类型转换)</span></span><br><span class="line"><span class="keyword">if</span> (animal <span class="keyword">instanceof</span> Dog) &#123;</span><br><span class="line">  Dog dog2=(Dog)animal;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;无法进行类型转换&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2017/12/21/IT%E6%8A%80%E6%9C%AF/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yifoo">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/12/21/IT%E6%8A%80%E6%9C%AF/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Java中的static的使用</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1329,7 +1339,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
+        <time title="修改时间：2020-12-05 22:14:49" itemprop="dateModified" datetime="2020-12-05T22:14:49+08:00">2020-12-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1337,7 +1347,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
         </span>
     </span>
 
@@ -1351,8 +1361,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2017/12/21/Java/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://blog.haohome.top/2017/12/21/Java/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2017/12/21/Java/Java 中的 static 使用/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2017/12/21/IT%E6%8A%80%E6%9C%AF/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://blog.haohome.top/2017/12/21/IT%E6%8A%80%E6%9C%AF/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2017/12/21/IT技术/Java 中的 static 使用/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -1373,7 +1383,7 @@
 <li>使用 static 可以修饰变量、方法和代码块。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2017/12/21/Java/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/#more" rel="contents">
+              <a class="btn" href="/2017/12/21/IT%E6%8A%80%E6%9C%AF/Java%20%E4%B8%AD%E7%9A%84%20static%20%E4%BD%BF%E7%94%A8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
