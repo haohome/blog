@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>创新特征</title>
+    <url>/2020/11/08/%E5%B7%A5%E4%BD%9C%E6%80%9D%E7%BB%B4/%E5%88%9B%E6%96%B0%E7%89%B9%E5%BE%81/</url>
+    <content><![CDATA[<p>创新有两种形式：</p>
+<ol>
+<li>连续式创新：沿着同一条S曲线进步；</li>
+<li>非连续式创新：转换到新的S曲线；</li>
+</ol>
+<h2 id="一、连续性创新"><a href="#一、连续性创新" class="headerlink" title="一、连续性创新"></a>一、连续性创新</h2><img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108230818752.png" alt="image-20201108230818752" style="zoom:20%;" />
+
+<p>技术连续性创新的特征</p>
+<blockquote>
+<p>A. 沿着技术曲线持续改善原有的产品性能</p>
+<p>B. 定位于主流市场的主流消费者</p>
+<p>C. Better</p>
+</blockquote>
+<p>案例：</p>
+<blockquote>
+<ul>
+<li>英特尔不断推出性能更强的微处理器</li>
+<li>微软Windows操作系统的不断升级</li>
+<li>苹果iPhone的升级换代。</li>
+</ul>
+</blockquote>
+<h2 id="二、非连续创新"><a href="#二、非连续创新" class="headerlink" title="二、非连续创新"></a>二、非连续创新</h2><p>新旧技术之间不是继承关系，而是竞争关系，其交替过程就是技术的非连续性断层期。</p>
+<img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108231434104.png" alt="image-20201108231434104" style="zoom:20%;" />
+
+<h2 id="三、企业思维与市场思维"><a href="#三、企业思维与市场思维" class="headerlink" title="三、企业思维与市场思维"></a>三、企业思维与市场思维</h2><ul>
+<li><p>企业的基础假设是连续性，其焦点在于运营和管理; </p>
+</li>
+<li><p>市场的基础假设是不连续性，其重点则是创造与破坏。</p>
+</li>
+</ul>
+<p>市场速度超过个体公司速度的原因：市场是破坏性思维，公司是保护性思维</p>
+]]></content>
+      <categories>
+        <category>work</category>
+      </categories>
+      <tags>
+        <tag>思维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mac下使用iTerm2让SSH记录远程服务器账号和密码</title>
+    <url>/2018/10/05/Mac&amp;PC/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8iTerm2%E8%AE%A9SSH%E8%AE%B0%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81/</url>
+    <content><![CDATA[<p>iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。</p>
+<p> 下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。</p>
+<p> 第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车</p>
+<p> 第二步：新建一个文件，命名为example吧，里面写入内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">set user root</span><br><span class="line">set host 114.114.114.114</span><br><span class="line">set password ********</span><br><span class="line"> </span><br><span class="line">spawn ssh $user@$host</span><br><span class="line">expect &quot;*assword:*&quot;</span><br><span class="line">send &quot;$password\r&quot;</span><br><span class="line">interact</span><br><span class="line">expect eof</span><br></pre></td></tr></table></figure>
+
+<p> 第三步：到官方<a href="http://www.iterm2.com/">http://www.iterm2.com/</a>下载并打开iTerm2，菜单栏找到『Profiles』→『Open Profiles…』,打开面板上，点击右下角『Edit  Profiles…』</p>
+<p> 第四步：在打开面板，左边应该是选中默认default，右边找到Command，默认应该是Login shell，选中Command，里面输入：expect ~/.ssh/example</p>
+<p> 第五步，下次打开iTerm2，是不是默认就登录上服务器了？极大提升效率。<br> 按照以上方法，可以配置profile,对应很多个服务器。这样每次启动可以选择默认操作，然后再profile下拉选中中执行对应的VPS profile，则可以实现自动登录！</p>
+<blockquote>
+<p>Tips:  如果重新添加相同ip的实例,需要在~/.ssh/known_hosts 里删除该ip的ssh-rsa码</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Mac&amp;PC</category>
+      </categories>
+      <tags>
+        <tag>电脑技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iTerm终端设置代理</title>
+    <url>/2018/10/10/Mac&amp;PC/iTerm%20%E7%BB%88%E7%AB%AF%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p>某些站点必须爬墙才能访问，但在mac上设置的全局代理，对终端又不起作用，终端需要单独设置代理。<br>在终端中执行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export ALL_PROXY=socks5://127.0.0.1:1086/</span><br></pre></td></tr></table></figure>
+
+<p>如果是http的代理:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export http_proxy=http://127.0.0.1:1087/</span><br><span class="line">export https_proxy=http://127.0.0.1:1087/</span><br></pre></td></tr></table></figure>
+
+<p>如果需要开机自动设置，把上面的代码加到~/.bash_profile里</p>
+<p><code>source  ~/.bash_profile</code> 使文件生效</p>
+<p>测试当前终端标签/窗口是否走代理：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl ip.gs</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Mac&amp;PC</category>
+      </categories>
+      <tags>
+        <tag>电脑技巧</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>58同城面试总结</title>
     <url>/2017/11/15/IT%E6%8A%80%E6%9C%AF/58%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>前言:面试中问了一些基础的问题,非常能反映基本功是否扎实,很佩服58的工程师!</p>
@@ -3569,91 +3654,6 @@
       <tags>
         <tag>js</tag>
         <tag>function</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mac下使用iTerm2让SSH记录远程服务器账号和密码</title>
-    <url>/2018/10/05/Mac&amp;PC/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8iTerm2%E8%AE%A9SSH%E8%AE%B0%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81/</url>
-    <content><![CDATA[<p>iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。</p>
-<p> 下面说下，如何让iTerm2记住远程服务器SSH登录账号和密码。</p>
-<p> 第一步：打开Finder，在菜单栏找到『前往』→ 『前往文件夹…』，输入：~/.ssh/ 然后回车</p>
-<p> 第二步：新建一个文件，命名为example吧，里面写入内容：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">set user root</span><br><span class="line">set host 114.114.114.114</span><br><span class="line">set password ********</span><br><span class="line"> </span><br><span class="line">spawn ssh $user@$host</span><br><span class="line">expect &quot;*assword:*&quot;</span><br><span class="line">send &quot;$password\r&quot;</span><br><span class="line">interact</span><br><span class="line">expect eof</span><br></pre></td></tr></table></figure>
-
-<p> 第三步：到官方<a href="http://www.iterm2.com/">http://www.iterm2.com/</a>下载并打开iTerm2，菜单栏找到『Profiles』→『Open Profiles…』,打开面板上，点击右下角『Edit  Profiles…』</p>
-<p> 第四步：在打开面板，左边应该是选中默认default，右边找到Command，默认应该是Login shell，选中Command，里面输入：expect ~/.ssh/example</p>
-<p> 第五步，下次打开iTerm2，是不是默认就登录上服务器了？极大提升效率。<br> 按照以上方法，可以配置profile,对应很多个服务器。这样每次启动可以选择默认操作，然后再profile下拉选中中执行对应的VPS profile，则可以实现自动登录！</p>
-<blockquote>
-<p>Tips:  如果重新添加相同ip的实例,需要在~/.ssh/known_hosts 里删除该ip的ssh-rsa码</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Mac&amp;PC</category>
-      </categories>
-      <tags>
-        <tag>电脑技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iTerm终端设置代理</title>
-    <url>/2018/10/10/Mac&amp;PC/iTerm%20%E7%BB%88%E7%AB%AF%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<p>某些站点必须爬墙才能访问，但在mac上设置的全局代理，对终端又不起作用，终端需要单独设置代理。<br>在终端中执行：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export ALL_PROXY=socks5://127.0.0.1:1086/</span><br></pre></td></tr></table></figure>
-
-<p>如果是http的代理:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export http_proxy=http://127.0.0.1:1087/</span><br><span class="line">export https_proxy=http://127.0.0.1:1087/</span><br></pre></td></tr></table></figure>
-
-<p>如果需要开机自动设置，把上面的代码加到~/.bash_profile里</p>
-<p><code>source  ~/.bash_profile</code> 使文件生效</p>
-<p>测试当前终端标签/窗口是否走代理：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl ip.gs</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Mac&amp;PC</category>
-      </categories>
-      <tags>
-        <tag>电脑技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创新特征</title>
-    <url>/2020/11/08/%E5%B7%A5%E4%BD%9C%E6%80%9D%E7%BB%B4/%E5%88%9B%E6%96%B0%E7%89%B9%E5%BE%81/</url>
-    <content><![CDATA[<p>创新有两种形式：</p>
-<ol>
-<li>连续式创新：沿着同一条S曲线进步；</li>
-<li>非连续式创新：转换到新的S曲线；</li>
-</ol>
-<h2 id="一、连续性创新"><a href="#一、连续性创新" class="headerlink" title="一、连续性创新"></a>一、连续性创新</h2><img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108230818752.png" alt="image-20201108230818752" style="zoom:20%;" />
-
-<p>技术连续性创新的特征</p>
-<blockquote>
-<p>A. 沿着技术曲线持续改善原有的产品性能</p>
-<p>B. 定位于主流市场的主流消费者</p>
-<p>C. Better</p>
-</blockquote>
-<p>案例：</p>
-<blockquote>
-<ul>
-<li>英特尔不断推出性能更强的微处理器</li>
-<li>微软Windows操作系统的不断升级</li>
-<li>苹果iPhone的升级换代。</li>
-</ul>
-</blockquote>
-<h2 id="二、非连续创新"><a href="#二、非连续创新" class="headerlink" title="二、非连续创新"></a>二、非连续创新</h2><p>新旧技术之间不是继承关系，而是竞争关系，其交替过程就是技术的非连续性断层期。</p>
-<img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108231434104.png" alt="image-20201108231434104" style="zoom:20%;" />
-
-<h2 id="三、企业思维与市场思维"><a href="#三、企业思维与市场思维" class="headerlink" title="三、企业思维与市场思维"></a>三、企业思维与市场思维</h2><ul>
-<li><p>企业的基础假设是连续性，其焦点在于运营和管理; </p>
-</li>
-<li><p>市场的基础假设是不连续性，其重点则是创造与破坏。</p>
-</li>
-</ul>
-<p>市场速度超过个体公司速度的原因：市场是破坏性思维，公司是保护性思维</p>
-]]></content>
-      <categories>
-        <category>work</category>
-      </categories>
-      <tags>
-        <tag>思维</tag>
       </tags>
   </entry>
   <entry>
