@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.haohome.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="最近在做关于移动端图片上传方面,项目中主要需要实现图片的本地预览、压缩和上传  1. 图片选择和预览添加accept属性,控制选择文件的类型为拍照和图像文件,设置multiple支持图片文件多选,监听input的change事件获取选择对象文件,每个文件都是Blob类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图片上传与压缩">
+<meta property="og:url" content="http://blog.haohome.top/2018/09/30/IT%E6%8A%80%E6%9C%AF/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%8E%8B%E7%BC%A9/index.html">
+<meta property="og:site_name" content="靖风行&#39;S blog">
+<meta property="og:description" content="最近在做关于移动端图片上传方面,项目中主要需要实现图片的本地预览、压缩和上传  1. 图片选择和预览添加accept属性,控制选择文件的类型为拍照和图像文件,设置multiple支持图片文件多选,监听input的change事件获取选择对象文件,每个文件都是Blob类型">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-09-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-05T14:13:05.839Z">
+<meta property="article:author" content="Yifoo">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://blog.haohome.top/2018/09/30/IT%E6%8A%80%E6%9C%AF/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%8E%8B%E7%BC%A9/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>图片上传与压缩 | 靖风行'S blog</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">靖风行'S blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9B%BE%E7%89%87%E9%80%89%E6%8B%A9%E5%92%8C%E9%A2%84%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">1. 图片选择和预览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%9B%BE%E7%89%87%E7%9A%84%E5%8E%8B%E7%BC%A9"><span class="nav-number">2.</span> <span class="nav-text">2. 图片的压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0"><span class="nav-number">3.</span> <span class="nav-text">3. 图片上传</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yifoo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Yifoo</p>
+  <div class="site-description" itemprop="description">独立 自由 分享 感悟</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yifoo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yifoo" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/wuhaofushan" title="微博 → http:&#x2F;&#x2F;weibo.com&#x2F;wuhaofushan" rel="noopener" target="_blank"><i class="weibo fa-fw"></i>微博</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      主页
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.haohome.top/" title="https:&#x2F;&#x2F;www.haohome.top&#x2F;" rel="noopener" target="_blank">靖风行</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/09/30/IT%E6%8A%80%E6%9C%AF/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%8E%8B%E7%BC%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yifoo">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图片上传与压缩
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-30 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-30T00:00:00+08:00">2018-09-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-05 22:13:05" itemprop="dateModified" datetime="2020-12-05T22:13:05+08:00">2020-12-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IT%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">IT技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/09/30/IT%E6%8A%80%E6%9C%AF/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%8E%8B%E7%BC%A9/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/09/30/IT技术/图片上传与压缩/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p> 最近在做关于移动端图片上传方面,项目中主要需要实现图片的本地预览、压缩和上传</p>
+</blockquote>
+<h2 id="1-图片选择和预览"><a href="#1-图片选择和预览" class="headerlink" title="1. 图片选择和预览"></a>1. 图片选择和预览</h2><p>添加<code>accept</code>属性,控制选择文件的类型为拍照和图像文件,设置multiple支持图片文件多选,监听<code>input</code>的<code>change</code>事件获取选择对象文件,每个文件都是Blob类型</p>
+<a id="more"></a>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;file2&quot;</span>&gt;</span>多个图片上传<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">accept</span>=<span class="string">&quot;image/gif,image/jpeg,image/png&quot;</span> <span class="attr">multiple</span> <span class="attr">id</span>=<span class="string">&#x27;file2&#x27;</span> /&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;preview2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="comment">// 模拟jQuery</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> $ = <span class="function"><span class="params">selector</span> =&gt;</span> <span class="built_in">document</span>.querySelector(selector)</span></span><br><span class="line"><span class="javascript"><span class="comment">// 多个图片</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> file2 = $(<span class="string">&quot;#file2&quot;</span>)</span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> preview2 = $(<span class="string">&#x27;#preview2&#x27;</span>)</span></span><br><span class="line"><span class="javascript">file2.onchange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> fileList = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">this</span>.files)</span></span><br><span class="line"><span class="javascript">    fileList.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> domImg = <span class="keyword">new</span> Image();</span></span><br><span class="line">        domImg.src = URL.createObjectURL(item)</span><br><span class="line">        preview2.appendChild(domImg)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-图片的压缩"><a href="#2-图片的压缩" class="headerlink" title="2. 图片的压缩"></a>2. 图片的压缩</h2><p>当前手机拍照质量月来越高,带来的问题就是大小也越来越大,直接上传原图,上传速度会很低,甚至很可能上传失败,而且后续加载也影响速度</p>
+<p>下面是封装了一个压缩图片的方法,实现的原理是,利用canvas将图片绘制出来,并导出canvas图片.主要通过图片的缩放和控制canvas导出图片质量来实现图片的体积压缩</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 压缩图片</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param <span class="type">&#123;file&#125;</span> </span>输入图片</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param <span class="type">&#123;quality&#125;</span> </span>图片质量</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span> </span>resolved promise 返回压缩后的新图片</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compressImg</span>(<span class="params">file, quality</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">      img.src = URL.createObjectURL(file)</span><br><span class="line">      img.onerror = <span class="function"><span class="params">error</span> =&gt;</span> reject(error)</span><br><span class="line">      img.onload = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">&#x27;canvas&#x27;</span>)</span><br><span class="line">          <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line">          <span class="keyword">var</span> canvasWidth = <span class="built_in">document</span>.documentElement.clientWidth * <span class="built_in">window</span>.devicePixelRatio</span><br><span class="line">          <span class="keyword">var</span> canvasHeight = <span class="built_in">document</span>.documentElement.clientHeight * <span class="built_in">window</span>.devicePixelRatio</span><br><span class="line">          <span class="comment">// 水平方向想缩放比</span></span><br><span class="line">          <span class="keyword">var</span> scaleX = canvasWidth / img.width</span><br><span class="line">          <span class="keyword">var</span> scaleY = canvasHeight / img.height</span><br><span class="line">          <span class="comment">// 取缩放比更小的比例</span></span><br><span class="line">          <span class="keyword">var</span> scale = <span class="built_in">Math</span>.min(scaleX, scaleY)</span><br><span class="line">          <span class="comment">// 画布上绘制的图片尺寸</span></span><br><span class="line">          <span class="keyword">const</span> imageWidth = img.width * scale</span><br><span class="line">          <span class="keyword">const</span> imageHeight = img.height * scale</span><br><span class="line">          canvas.width = imageWidth</span><br><span class="line">          canvas.height = imageHeight</span><br><span class="line">          ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>, imageWidth, imageHeight)</span><br><span class="line">          canvas.toBlob(<span class="function"><span class="params">file</span> =&gt;</span> resolve(file), <span class="string">&quot;image/jpeg&quot;</span>, quality);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">file2.onchange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fileList = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">this</span>.files)</span><br><span class="line">    fileList.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">        compressImg(imgfile, <span class="number">.5</span>).then(<span class="function"><span class="params">blobFile</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">var</span> domImg = <span class="keyword">new</span> Image();</span><br><span class="line">            domImg.src = URL.createObjectURL(blobFile)</span><br><span class="line">            preview2.appendChild(domImg)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-图片上传"><a href="#3-图片上传" class="headerlink" title="3. 图片上传"></a>3. 图片上传</h2><p>文件上传是通过<code>FormData</code>创建表单数据，并发起 ajax <code>POST</code>请求;</p>
+<blockquote>
+<p>发送<code>FormData</code>数据时，浏览器会自动设置<code>Content-Type</code>为合适的值</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 上传图片</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param <span class="type">&#123;File&#125;</span> </span>file 待上传的文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return <span class="type">&#123;Promise&#125;</span> </span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">uploadFile</span>(<span class="params">file,url</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 准备表单数据</span></span><br><span class="line">        <span class="keyword">const</span> formData = <span class="keyword">new</span> FormData()</span><br><span class="line">        formData.append(<span class="string">&#x27;file&#x27;</span>, file)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 提交请求</span></span><br><span class="line">        <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">        xhr.open(<span class="string">&#x27;POST&#x27;</span>, url)</span><br><span class="line">        xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (<span class="built_in">this</span>.readyState === XMLHttpRequest.DONE &amp;&amp; <span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">            resolve(<span class="built_in">JSON</span>.parse(<span class="built_in">this</span>.responseText))</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            reject(<span class="built_in">this</span>.responseText)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.send(formData)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>最后奉上JSrun的demo:</p>
+<iframe width="100%" height="300" src="//jsrun.net/kyhKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/09/28/IT%E6%8A%80%E6%9C%AF/Data%E7%B1%BB%E5%9E%8B%E7%9A%84Url%E7%AE%80%E4%BB%8B/" rel="prev" title="Data类型的url简介">
+                  <i class="fa fa-chevron-left"></i> Data类型的url简介
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/10/05/Mac&PC/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8iTerm2%E8%AE%A9SSH%E8%AE%B0%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81/" rel="next" title="Mac下使用iTerm2让SSH记录远程服务器账号和密码">
+                  Mac下使用iTerm2让SSH记录远程服务器账号和密码 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yifoo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  <script>
+  NexT.utils.loadComments('#SOHUCS', () => {
+    NexT.utils.getScript('https://changyan.sohu.com/upload/changyan.js', () => {
+      window.changyan.api.config({
+        appid: 'cytkKTQa0',
+        conf : '794856978265160f8c1b554418ce9792'
+      });
+    });
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>
