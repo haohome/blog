@@ -1,25 +1,640 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
 
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.haohome.top","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="1. 前言最近做了一个内嵌在APP的H5项目,起初是准备自己选择vue框架和UI库搭建项目框架,后来发现已经有项目组采用了一个muse-ui库.为了APP的页面整体统一性,我只好clone了小伙伴的项目,在其基础上继续开发. 项目开发过程中遇到了不少坑,这个迭代开发结束就来逐步总结下.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue项目总结">
+<meta property="og:url" content="http://blog.haohome.top/2018/10/31/Program/Vue%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="靖风行&#39;S blog">
+<meta property="og:description" content="1. 前言最近做了一个内嵌在APP的H5项目,起初是准备自己选择vue框架和UI库搭建项目框架,后来发现已经有项目组采用了一个muse-ui库.为了APP的页面整体统一性,我只好clone了小伙伴的项目,在其基础上继续开发. 项目开发过程中遇到了不少坑,这个迭代开发结束就来逐步总结下.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://haohome.top/18-11-8/51395595.jpg">
+<meta property="article:published_time" content="2018-10-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-05T12:26:25.591Z">
+<meta property="article:author" content="Yifoo">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="项目总结">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://haohome.top/18-11-8/51395595.jpg">
+
+
+<link rel="canonical" href="http://blog.haohome.top/2018/10/31/Program/Vue%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>Vue项目总结 | 靖风行'S blog</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">靖风行'S blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%85%B3%E4%BA%8Emuse-ui"><span class="nav-number">2.</span> <span class="nav-text">2. 关于muse-ui</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9F%BA%E4%BA%8Emuse-ui%E5%B0%81%E8%A3%85%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">3. 基于muse-ui封装表单组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E7%BB%84%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9Av-model"><span class="nav-number">3.0.1.</span> <span class="nav-text">3.1 组件数据双向绑定v-model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E5%88%97%E8%A1%A8%E9%81%8D%E5%8E%86v-for%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0"><span class="nav-number">3.0.2.</span> <span class="nav-text">3.2 列表遍历v-for删除指定元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%8B%8D%E7%85%A7%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E4%B8%8A%E4%BC%A0"><span class="nav-number">4.</span> <span class="nav-text">4. 移动端拍照图片压缩上传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-webkit-overflow-scrolling%E7%9A%84%E5%9D%91"><span class="nav-number">5.</span> <span class="nav-text">5. -webkit-overflow-scrolling的坑</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yifoo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Yifoo</p>
+  <div class="site-description" itemprop="description">独立 自由 分享 感悟</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yifoo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yifoo" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://weibo.com/wuhaofushan" title="微博 → http:&#x2F;&#x2F;weibo.com&#x2F;wuhaofushan" rel="noopener" target="_blank"><i class="weibo fa-fw"></i>微博</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      主页
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.haohome.top/" title="https:&#x2F;&#x2F;www.haohome.top&#x2F;" rel="noopener" target="_blank">靖风行</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.haohome.top/2018/10/31/Program/Vue%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yifoo">
+      <meta itemprop="description" content="独立 自由 分享 感悟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="靖风行'S blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue项目总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-10-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-31T00:00:00+08:00">2018-10-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-05 20:26:25" itemprop="dateModified" datetime="2020-12-05T20:26:25+08:00">2020-12-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Framework/" itemprop="url" rel="index"><span itemprop="name">Framework</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/10/31/Program/Vue%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/10/31/Program/Vue项目总结/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>最近做了一个内嵌在APP的H5项目,起初是准备自己选择vue框架和UI库搭建项目框架,后来发现已经有项目组采用了一个muse-ui库.为了APP的页面整体统一性,我只好clone了小伙伴的项目,在其基础上继续开发.</p>
+<p>项目开发过程中遇到了不少坑,这个迭代开发结束就来逐步总结下.</p>
+<a id="more"></a>
+
+<p>闲话不多说,开始正题:</p>
+<h2 id="2-关于muse-ui"><a href="#2-关于muse-ui" class="headerlink" title="2. 关于muse-ui"></a>2. 关于muse-ui</h2><p>这个框架采用material风格,对vue的支持就很友好,图标也是Google官方推荐的<code>Material Icons</code>字体包,用起来也很方便。官方有详细的安装介绍,<code>import</code>后采用<code>Vue.use()</code>即可:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> MuseUI <span class="keyword">from</span> <span class="string">&#x27;muse-ui&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;muse-ui/dist/muse-ui.css&#x27;</span></span><br><span class="line">Vue.use(MuseUI)</span><br></pre></td></tr></table></figure>
+
+<p>我们的项目采用的是muse2.1版本,官方现在已经是3.0版本的了,2.1版本的API文档写的不是详细,所以当遇到坑时就头疼了.</p>
+<h2 id="3-基于muse-ui封装表单组件"><a href="#3-基于muse-ui封装表单组件" class="headerlink" title="3. 基于muse-ui封装表单组件"></a>3. 基于muse-ui封装表单组件</h2><p>由于我们项目此次主要是表单,里面有大量的<code>input</code>、<code>textarea</code>、<code>select</code>等表单的应用场景,我们选择了对muse-ui表单组件进行二次封装,以利于ui组件适用于本项目移动端的样式,同时表单组件可随处复用。</p>
+<h4 id="3-1-组件数据双向绑定v-model"><a href="#3-1-组件数据双向绑定v-model" class="headerlink" title="3.1 组件数据双向绑定v-model"></a>3.1 组件数据双向绑定v-model</h4><p>数据双向绑定是vue中比较实用的一个功能,如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">&#x27;formInput&#x27;</span>, &#123;</span><br><span class="line">   data:&#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">      val:<span class="string">&quot;&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">`&lt;input v-model=&#x27;val&#x27;&gt;`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>而在父组件中,如何去实现实时获取子组件<code>formInput</code>的<code>value</code>呢?</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">&#x27;parent&#x27;</span>,&#123;</span><br><span class="line">    data:&#123;</span><br><span class="line">        <span class="keyword">return</span>&#123;</span><br><span class="line">        	inputVal:<span class="string">&quot;&quot;</span></span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template: <span class="string">`&lt;form-input v-model=&quot;inputVal&quot;&gt;&lt;/form-input&gt;`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>vue的父子组件传递有一个口诀:<code>props down,events up</code>即父组件通过<code>props</code>向子组件传值,子组件通过<code>evens</code>向父组件传值,另外在官方文档中有这样的介绍:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-model&#x3D;&quot;searchText&quot;&gt;</span><br><span class="line">&lt;!-- 等价于 --&gt;</span><br><span class="line">&lt;input</span><br><span class="line">  v-bind:value&#x3D;&quot;searchText&quot;</span><br><span class="line">  v-on:input&#x3D;&quot;searchText &#x3D; $event.target.value&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>当用在组件上时:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;custom-input</span><br><span class="line">  v-bind:value&#x3D;&quot;searchText&quot;</span><br><span class="line">  v-on:input&#x3D;&quot;searchText &#x3D; $event&quot;&gt;</span><br><span class="line">&lt;&#x2F;custom-input&gt;</span><br><span class="line">即</span><br><span class="line">&lt;custom-input v-model&#x3D;&quot;searchText&quot;&gt;&lt;&#x2F;custom-input&gt;</span><br></pre></td></tr></table></figure>
+
+<p>为了能正常传值,组件内的 <code>&lt;input&gt;</code> 必须：</p>
+<ul>
+<li>将其 <code>value</code> 特性绑定到一个名叫 <code>value</code> 的 prop 上</li>
+<li>在其 <code>input</code> 事件被触发时，将新的值通过自定义的 <code>input</code> 事件抛出</li>
+</ul>
+<p>这段相当于让自定义组件通过<code>input</code>事件触发父组件的自定义事件,并传值给父组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">&#x27;custom-input&#x27;</span>, &#123;</span><br><span class="line">  props: [<span class="string">&#x27;value&#x27;</span>],</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;input</span></span><br><span class="line"><span class="string">      v-bind:value=&quot;value&quot;</span></span><br><span class="line"><span class="string">      v-on:input=&quot;$emit(&#x27;input&#x27;, $event.target.value)&quot;</span></span><br><span class="line"><span class="string">    &gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样就能达到我们想要的目的了.</p>
+<p>在单选框和复选框这类可能会将<code>value</code>用作不同的特性,vue提供了另一种方式:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">&#x27;base-checkbox&#x27;</span>, &#123;</span><br><span class="line">  model: &#123;</span><br><span class="line">    prop: <span class="string">&#x27;checked&#x27;</span>,</span><br><span class="line">    event: <span class="string">&#x27;change&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    checked: <span class="built_in">Boolean</span></span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;input</span></span><br><span class="line"><span class="string">      type=&quot;checkbox&quot;</span></span><br><span class="line"><span class="string">      v-bind:checked=&quot;checked&quot;</span></span><br><span class="line"><span class="string">      v-on:change=&quot;$emit(&#x27;change&#x27;, $event.target.checked)&quot;</span></span><br><span class="line"><span class="string">    &gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 组件上</span></span><br><span class="line">&lt;base-checkbox v-model=<span class="string">&quot;lovingVue&quot;</span>&gt;&lt;/base-checkbox&gt;</span><br><span class="line"><span class="comment">// lovingVue 的值将会传入这个名为 checked 的 prop</span></span><br><span class="line"><span class="comment">// ! 需要在组件的 props 选项里声明 checked 这个 prop。</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-列表遍历v-for删除指定元素"><a href="#3-2-列表遍历v-for删除指定元素" class="headerlink" title="3.2 列表遍历v-for删除指定元素"></a>3.2 列表遍历v-for删除指定元素</h4><p>有时数组列表渲染我们比较喜欢采用数组本身的下标索引作为v-for绑定的key值如:</p>
+<iframe width="100%" height="300" src="//jsrun.net/jqXKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>在做图片上传的时候,需要添加上传进度和删除图片,彼此间互不干扰,这就需要每个组件都需要具备独立的功能:</p>
+<blockquote>
+<ul>
+<li>图片预览</li>
+<li>图片自动压缩</li>
+<li>图片上传</li>
+<li>上传进度动态展示</li>
+<li>删除图片</li>
+<li>上传失败错误图标</li>
+<li>点击错误图标重传</li>
+</ul>
+</blockquote>
+<p>我写了两个组件,一个是图片<code>single</code>组件,一个是图片<code>list</code>组件,在实际运行的时候发现,删除某一张图片会自动删除最后一张图片,通过<code>console.log</code>控制台打印索引<code>index</code>,删除的索引是正确的,百思不得其解!最后百度才发现问题出在了循环<code>v-for</code>的<code>:key</code>上了</p>
+<p>为方便理解,先举个例子:</p>
+<iframe width="100%" height="300" src="//jsrun.net/z8hKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p><code>single</code>图片组件具备了上述功能,选择一个图片后在<code>list</code>组件及时<code>push</code>一个图片的对象<code>this.arr.push(item)</code>,这样页面就能通过<code>v-for</code>动态渲染,但使用后发现直接删除<code>arr</code>某个元素就只会删除集合最后一个元素.</p>
+<p>这是由于列表的生成是通过绑定的arr数组来生成的，当arr删除掉一项时，列表的dom对象自然也会减少一项。但是由于v-for循环的是子组件，子组件内部显示数据并未绑定arr数组里的属性，因此子组件的显示数据并未按新数组重新渲染，体现出来的结果就是最后一个元素被删掉了</p>
+<p>针对<code>arr</code>添加唯一性的索引就能解决这个问题,<code>this.arr.push(&#123; id: this.id, data: item &#125;);</code>,将<code>:key</code>绑定到<code>id</code></p>
+<blockquote>
+<p>由于v-for循环的是子组件，子组件内部显示数据并未绑定fileList数组里的属性,子组件的显示数据并未按新数组重新渲染,<strong>体现出来的结果</strong>就是最后一个元素被删掉了。</p>
+</blockquote>
+<h2 id="4-移动端拍照图片压缩上传"><a href="#4-移动端拍照图片压缩上传" class="headerlink" title="4. 移动端拍照图片压缩上传"></a>4. 移动端拍照图片压缩上传</h2><p>移动端图片上传存在两个问题:</p>
+<ol>
+<li><p>图片压缩</p>
+<p>当前手机拍出来的照片像素高、尺寸大，而且使用 base64 编码的照片会比原照片大，用 canvas 来渲染这照片的速度会相对比较慢，那么上传的时候进行压缩就非常有必要的</p>
+<p>图片压缩可以有两个阶段可以控制：</p>
+<ul>
+<li>控制<code>canvas</code>画布大小</li>
+<li><code>canvas</code>转<code>blob</code>对象或<code>base64</code>,控制质量比例</li>
+</ul>
+<p><strong>Tips:</strong></p>
+<p>1.1 <code>canvas</code>转<code>blob</code>对象:<code>canvas.toBlob(callback, type, radio)</code></p>
+<blockquote>
+<p> callback: 回调函数，可获得一个单独的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob"><code>Blob</code></a>对象参数<br> type: 指定图片格式，默认格式为<code>image/png</code><br> radio: 当请求图片格式为<code>image/jpeg</code>或者<code>image/webp</code>时用来指定图片展示质量</p>
+</blockquote>
+<p>Blob 对象相当于一个容器，可以用于存放二进制数据。它有两个属性，size 属性表示字节长度，type 属性表示 MIME 类型。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">canvas.toBlob(<span class="function"><span class="keyword">function</span>(<span class="params">blob</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> url = URL.createObjectURL(blob);</span><br><span class="line">  <span class="keyword">var</span> newImg = <span class="keyword">new</span> Image();</span><br><span class="line">  newImg.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    URL.revokeObjectURL(url)	<span class="comment">// URL.revokeObjectURL():释放一个之前通过调用 URL.createObjectURL() 创建的已经存在的 URL 对象。当你结束使用某个 URL 对象时，应该通过调用这个方法来让浏览器知道不再需要保持这个文件的引用,避免消耗资源</span></span><br><span class="line">  &#125;;</span><br><span class="line">  newImg.src=url;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//生成JPEG格式的图片</span></span><br><span class="line">canvas.toBlob(<span class="function"><span class="keyword">function</span>(<span class="params">blob</span>)</span>&#123;...&#125;, <span class="string">&quot;image/jpeg&quot;</span>, <span class="number">0.95</span>); <span class="comment">// JPEG at 95% quality</span></span><br></pre></td></tr></table></figure>
+
+<p><code>canvas.toBlob</code>方法在低版本的<code>ios</code>存在兼容性问题,需要添加一下代码实现兼容:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!HTMLCanvasElement.prototype.toBlob) &#123;</span><br><span class="line"> <span class="built_in">Object</span>.defineProperty(HTMLCanvasElement.prototype, <span class="string">&#x27;toBlob&#x27;</span>, &#123;</span><br><span class="line"> value: <span class="function"><span class="keyword">function</span> (<span class="params">callback, type, quality</span>) </span>&#123;</span><br><span class="line"> <span class="keyword">var</span> binStr = atob( <span class="built_in">this</span>.toDataURL(type, quality).split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">1</span>] ),</span><br><span class="line">len = binStr.length,</span><br><span class="line">arr = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(len);</span><br><span class="line"> 	<span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;len; i++ ) &#123;</span><br><span class="line">   arr[i] = binStr.charCodeAt(i);</span><br><span class="line"> 	&#125;</span><br><span class="line">	  callback( <span class="keyword">new</span> Blob( [arr], &#123;<span class="attr">type</span>: type || <span class="string">&#x27;image/png&#x27;</span>&#125; ) );</span><br><span class="line"> 	&#125;</span><br><span class="line"> &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.2 <code>canvas</code>转<code>base64</code>:直接调用方法<code>canvas.toDataURL(type, radio)</code></p>
+<blockquote>
+<p>type: 图片格式，默认为 <code>image/png</code></p>
+<p>radio: 当请求图片格式为<code>image/jpeg</code>或者<code>image/webp</code>时用来指定图片展示质量</p>
+<p>与转blob对象不同的是,<code>canvas.toDataURL</code>直接返回base64 的图片</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newImg = <span class="keyword">new</span> Image();</span><br><span class="line">newImg.src=canvas.toDataURL(<span class="string">&quot;image/png&quot;</span>,<span class="number">0.8</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上传进度展示</p>
+<p>文件上传需要用到<code>XMLHttpRequest:progress</code>方法,在<code>axios</code>的api中提供了现成的<code>onUploadProgress</code>方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.$axios(&#123;</span><br><span class="line">  url:<span class="string">&#x27;/upload&#x27;</span></span><br><span class="line">  method: <span class="string">&quot;post&quot;</span>,</span><br><span class="line">  data: data,</span><br><span class="line">  onUploadProgress: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.lengthComputable) &#123;</span><br><span class="line">      self.radio = (event.loaded / event.total) * <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当上传存在跨域的时候,浏览器在跨域请求前会默认发个<code>options</code>请求来验证是否跨域,这是后端服务器需要处理<code>options</code>请求</p>
+<blockquote>
+<p><code>OPTIONS</code> 方法用来查询针对请求 URI 指定的资源支持的方法。</p>
+</blockquote>
+<img src='https://haohome.top/18-11-8/51395595.jpg' width="50%">
+
+<table>
+<thead>
+<tr>
+<th>请求</th>
+<th>OPTIONS*HTTP/1.1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Host</td>
+<td><a target="_blank" rel="noopener" href="http://www.zhongguo.com/upload">www.zhongguo.com/upload</a></td>
+</tr>
+<tr>
+<td>响应</td>
+<td>HTTP/1.1 200 OK</td>
+</tr>
+<tr>
+<td>Allow</td>
+<td>GET, POST, HEAD, OPTIONS(返回服务器支持的方法)</td>
+</tr>
+</tbody></table>
+<p>如果后端未对<code>OPTIONS</code>请求做处理,前端文件<code>post</code>上传文件会失败的</p>
+<p><strong>当后端对<code>OPTIONS</code>请求做出响应200时,前端才会继续发送<code>post</code>请求</strong>,这就是我们在调试时看到文件上传时会默认发<code>OPTIONS</code>和<code>post</code>两个请求的原因</p>
+</li>
+<li><p>拍照图片旋转</p>
+<p>在手机上通过H5网页<code>input</code>标签拍照上传图片，有一些手机会出现图片旋转了90°的问题,这些手机竖着拍的时候才会出现这种问题，横拍出来的照片就正常显示。因此，可以通过获取手机拍照角度来对照片进行旋转，从而解决这个问题。</p>
+<p><code>Orientation</code>:通过这个参数可以识别图片的拍摄角度,手机拍出来的图片会带有这个参数</p>
+<table>
+<thead>
+<tr>
+<th align="center">旋转角度</th>
+<th align="center">参数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0°</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">顺时针90°</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">逆时针90°</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">180°</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<p>想要获取 <code>Orientation</code> 参数，可以通过 <code>exif.js</code> 库来操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue项目可直接安装</span></span><br><span class="line">npm i exif-js -D</span><br><span class="line"><span class="comment">//在图片组件中直接引入</span></span><br><span class="line"><span class="keyword">import</span> Exif <span class="keyword">from</span> <span class="string">&#x27;exif-js&#x27;</span></span><br><span class="line">Exif.getData(file, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">  <span class="keyword">var</span> Orientation = Exif.getTag(<span class="built_in">this</span>, <span class="string">&#x27;Orientation&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在对图片进行<code>canvas</code>绘图时,就可以针对<code>Orientation</code>参数做判断处理:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Orientation &amp;&amp; Orientation != <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="keyword">switch</span> (Orientation) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">6</span>:     <span class="comment">// 旋转90度</span></span><br><span class="line">      canvas.width = imgHeight;</span><br><span class="line">      canvas.height = imgWidth;</span><br><span class="line">      ctx.rotate(<span class="built_in">Math</span>.PI / <span class="number">2</span>);</span><br><span class="line">      <span class="comment">// (0,-imgHeight) 从旋转原理图那里获得的起始点</span></span><br><span class="line">      ctx.drawImage(img, <span class="number">0</span>, -imgHeight, imgWidth, imgHeight);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:     <span class="comment">// 旋转180度</span></span><br><span class="line">      ctx.rotate(<span class="built_in">Math</span>.PI);</span><br><span class="line">      ctx.drawImage(img, -imgWidth, -imgHeight, imgWidth, imgHeight);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">8</span>:     <span class="comment">// 旋转-90度</span></span><br><span class="line">      canvas.width = imgHeight;</span><br><span class="line">      canvas.height = imgWidth;</span><br><span class="line">      ctx.rotate(<span class="number">3</span> * <span class="built_in">Math</span>.PI / <span class="number">2</span>);</span><br><span class="line">      ctx.drawImage(img, -imgWidth, <span class="number">0</span>, imgWidth, imgHeight);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  canvas.width = imgWidth;</span><br><span class="line">  canvas.height = imgHeight;</span><br><span class="line">  ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>, imgWidth, imgHeight)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Demo: <a href="./%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%8E%8B%E7%BC%A9.md">图片上传与压缩</a></p>
+</li>
+</ol>
+<h2 id="5-webkit-overflow-scrolling的坑"><a href="#5-webkit-overflow-scrolling的坑" class="headerlink" title="5. -webkit-overflow-scrolling的坑"></a>5. -webkit-overflow-scrolling的坑</h2><p>项目中有一个获取数据后纯展示的页面,在ios平台上滑动不流畅,经过查询才了解到在ios的safari浏览器和app内核浏览器中，当一个h5页面内容超出屏幕高度，我们手指去滑动屏幕的时候，只要手势一离开屏幕，滚动立刻结束,按照教程我按下面设置了:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">   <span class="attribute">-webkit-overflow-scrolling</span>: touch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果在app中出现了fixed 定位元素失效</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JS/" rel="tag"># JS</a>
+              <a href="/tags/vue/" rel="tag"># vue</a>
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" rel="tag"># 项目总结</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/10/22/Interview/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%B1%87%E6%80%BB/" rel="prev" title="跨域问题解决方案汇总">
+                  <i class="fa fa-chevron-left"></i> 跨域问题解决方案汇总
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/11/18/JavaScript/%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/" rel="next" title="自己动手实现一个前端路由">
+                  自己动手实现一个前端路由 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yifoo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  <script>
+  NexT.utils.loadComments('#SOHUCS', () => {
+    NexT.utils.getScript('https://changyan.sohu.com/upload/changyan.js', () => {
+      window.changyan.api.config({
+        appid: 'cytkKTQa0',
+        conf : '794856978265160f8c1b554418ce9792'
+      });
+    });
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>
