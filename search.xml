@@ -515,6 +515,62 @@
       </tags>
   </entry>
   <entry>
+    <title>FreeMaker模板_数据模型</title>
+    <url>/2018/01/01/IT%E6%8A%80%E6%9C%AF/FreeMaker%20%E6%A8%A1%E6%9D%BF_%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<h2 id="1-模板-数据模型-输出"><a href="#1-模板-数据模型-输出" class="headerlink" title="1. 模板 + 数据模型 = 输出"></a>1. 模板 + 数据模型 = 输出</h2><h3 id="1-1-模板"><a href="#1-1-模板" class="headerlink" title="1.1 模板"></a>1.1 模板</h3><p> 模板与静态HTML类似,区别是包含了一些指令,使网页内容可以动态生成，例如:<br>  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome $&#123;user&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Our latest product:</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;$&#123;latestProduct.url&#125;&quot;</span>&gt;</span>$&#123;latestProduct.name&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span>!</span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><br>  <a id="more"></a></p>
+<ul>
+<li><p>${…}：插值表达式(interpolation)</p>
+</li>
+<li><p>FTL标签：FreeMarker模板的语言标签，标签的名字以 # 开头，用户自定义的FTL标签则需要使用 @ 来代替 #</p>
+</li>
+<li><p>注释：使用 &lt;#– and –&gt; 来标识</p>
+<blockquote>
+<p>其他任何不是插值、FTL标签或注释的内容将被视为静态文本，直接在页面输出</p>
+</blockquote>
+<h3 id="1-2-数据模型"><a href="#1-2-数据模型" class="headerlink" title="1.2 数据模型"></a>1.2 数据模型</h3><p>为模板准备的数据整体被称作为<strong>数据模型</strong><br>数据模型是树形结构,例如:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">(root)</span><br><span class="line"> |</span><br><span class="line"> +- animals</span><br><span class="line"> |   |</span><br><span class="line"> |   +- mouse</span><br><span class="line"> |   |   |   </span><br><span class="line"> |   |   +- size = <span class="string">&quot;small&quot;</span></span><br><span class="line"> |   |   |   </span><br><span class="line"> |   |   +- price = <span class="number">50</span></span><br><span class="line"> |   |</span><br><span class="line"> |   +- elephant</span><br><span class="line"> |   |   |   </span><br><span class="line"> |   |   +- size = <span class="string">&quot;large&quot;</span></span><br><span class="line"> |   |   |   </span><br><span class="line"> |   |   +- price = <span class="number">5000</span></span><br><span class="line"> |   |</span><br><span class="line"> |   +- python</span><br><span class="line"> |       |   </span><br><span class="line"> |       +- size = <span class="string">&quot;medium&quot;</span></span><br><span class="line"> |       |   </span><br><span class="line"> |       +- price = <span class="number">4999</span></span><br><span class="line"> |</span><br><span class="line"> +- message = <span class="string">&quot;It is a test&quot;</span></span><br><span class="line"> |</span><br><span class="line"> +- misc</span><br><span class="line">     |</span><br><span class="line">     +- foo = <span class="string">&quot;Something&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>hashes (哈希表): 指变量中扮演目录角色(比如 root, animals, mouse, elephant, python, misc)</p>
+<blockquote>
+<p>哈希表存储其他变量(被称为 子变量)， 它们可以通过名称来查找(比如 “animals”, “mouse” 或 “price”)。</p>
+</blockquote>
+</li>
+<li><p>scalars (标量): 指存储单值的变量 (size, price, message 和 foo)</p>
+<blockquote>
+<p>如果要在模板中使用子变量， 那应该从根root开始指定它的路径，每级之间用点来分隔开。要访问 mouse 的 price ，要从root开始，首先进入到 animals ，之后访问 mouse ，最后访问 price 。就可以这样来写 animals.mouse.price。</p>
+</blockquote>
+</li>
+<li><p>sequences (序列): 像哈希表那样存储子变量，但是子变量没有名字，它们只是列表中的项。在下面这个数据模型中， animals 和 misc.fruits 就是序列：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">(root)</span><br><span class="line">  |</span><br><span class="line">  +- animals</span><br><span class="line">  |   |</span><br><span class="line">  |   +- (1st)</span><br><span class="line">  |   |   |</span><br><span class="line">  |   |   +- name = <span class="string">&quot;mouse&quot;</span></span><br><span class="line">  |   |   |</span><br><span class="line">  |   |   +- size = <span class="string">&quot;small&quot;</span></span><br><span class="line">  |   |   |</span><br><span class="line">  |   |   +- price = <span class="number">50</span></span><br><span class="line">  |   |</span><br><span class="line">  |   +- (2nd)</span><br><span class="line">  |   |   |</span><br><span class="line">  |   |   +- name = <span class="string">&quot;elephant&quot;</span></span><br><span class="line">  |   |   |</span><br><span class="line">  |   |   +- size = <span class="string">&quot;large&quot;</span></span><br><span class="line">  |   |   |</span><br><span class="line">  |   |   +- price = <span class="number">5000</span></span><br><span class="line">  |   |</span><br><span class="line">  |   +- (3rd)</span><br><span class="line">  |       |</span><br><span class="line">  |       +- name = <span class="string">&quot;python&quot;</span></span><br><span class="line">  |       |</span><br><span class="line">  |       +- size = <span class="string">&quot;medium&quot;</span></span><br><span class="line">  |       |</span><br><span class="line">  |       +- price = <span class="number">4999</span></span><br><span class="line">  |</span><br><span class="line">  +- misc</span><br><span class="line">      |</span><br><span class="line">      +- fruits</span><br><span class="line">          |</span><br><span class="line">          +- (1st) = <span class="string">&quot;orange&quot;</span></span><br><span class="line">          |</span><br><span class="line">          +- (2nd) = <span class="string">&quot;banana&quot;</span></span><br></pre></td></tr></table></figure>
+<p>要访问序列的子变量，可以使用方括号形式的数字索引下标。 索引下标从0开始(从0开始也是程序员的传统)，那么第一项的索引就是0， 第二项的索引就是1等等。要得到第一个动物的名称的话，可以这么来写代码 <code>animals[0].name</code>。</p>
+</li>
+</ul>
+<p>  <strong>标量类型可以分为如下的类别：</strong></p>
+<ul>
+<li>字符串：就是文本，也就是任意的字符序列，比如上面提到的 ‘m’,’o’,’u’, ‘s’,’e’。比如 name 和 size 也是字符串。</li>
+<li>数字：这是数值类型，就像上面的 price。 在FreeMarker中，字符串 “50” 和数字 50 是两种完全不同的类型。</li>
+<li>日期/时间: 可以是日期-时间格式(存储某一天的日期和时间)， 或者是日期(只有日期，没有时间)，或者是时间(只有时间，没有日期)。</li>
+<li>布尔值：对应着对/错(是/否，开/关等值)类似的值。</li>
+</ul>
+<blockquote>
+<p>总结：</p>
+<ul>
+<li>数据模型可以被看成是树形结构。</li>
+<li>标量用于存储单一的值。这种类型的值可以是字符串，数字，日期/时间或者是布尔值。</li>
+<li>哈希表是一种存储变量及其相关且有唯一标识名称的容器。</li>
+<li>序列是存储有序变量的容器。存储的变量可以通过数字索引来检索，索引通常从0开始。</li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>学习记录</tag>
+        <tag>Java</tag>
+        <tag>FreeMaker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS手写状态管理的实现</title>
     <url>/2019/01/31/IT%E6%8A%80%E6%9C%AF/JS%E6%89%8B%E5%86%99%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<blockquote>
@@ -953,114 +1009,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vuex入门基础</title>
-    <url>/2018/05/14/IT%E6%8A%80%E6%9C%AF/Vuex%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h2 id="1-Vuex-概念"><a href="#1-Vuex-概念" class="headerlink" title="1. Vuex 概念"></a>1. Vuex 概念</h2><p>Vuex 是一个<strong>状态管理模式</strong>,它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</p>
-<p>每一个 Vuex 应用的核心就是 store(仓库)，在store中包含组件中的共享<strong>状态</strong><code>state</code>和改变状态的<strong>方法</strong><code>mutations</code>。</p>
-<p><strong>store仓库</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span>;</span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        increment (state) &#123;</span><br><span class="line">            state.count++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ol>
-<li>Vuex 的状态存储是响应式的</li>
-<li>不能直接改变 store 中的状态,需显式地<strong>提交 (commit) mutation</strong></li>
-</ol>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="2-State单一状态树"><a href="#2-State单一状态树" class="headerlink" title="2. State单一状态树"></a>2. State单一状态树</h2><p>用一个对象包含全部的应用层级状态</p>
-<p>Vuex 通过 <code>store</code> 选项，将状态从根组件“注入”到每一个子组件中,子组件需调用 <code>Vue.use(Vuex)</code>：</p>
-<p>根组件:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//根组件:</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  store, <span class="comment">// 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件</span></span><br><span class="line">  components: &#123; Counter &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>子组件: 通过<code>computed</code>(计算属性)返回<code>this.$store.state.count</code>来获取相应数据</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Counter = &#123;</span><br><span class="line">  computed: &#123;</span><br><span class="line">    count () &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">this</span>.$store.state.count	<span class="comment">//获取根组件的state</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="mapState-辅助函数"><a href="#mapState-辅助函数" class="headerlink" title="mapState 辅助函数"></a>mapState 辅助函数</h3><p>简化生成计算属性</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapState &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    computed: mapState (&#123;</span><br><span class="line">        count: <span class="function"><span class="params">state</span> =&gt;</span> state.count,</span><br><span class="line">        countAlias: <span class="string">&#x27;count&#x27;</span>,    <span class="comment">// 别名 `count` 等价于 state =&gt; state.count</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>还可以更简化:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">computed: mapState([</span><br><span class="line">  <span class="comment">// 映射 this.count 为 store.state.count</span></span><br><span class="line">  <span class="string">&#x27;count&#x27;</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-Getter-从-store-中的-state-派生出状态"><a href="#3-Getter-从-store-中的-state-派生出状态" class="headerlink" title="3. Getter 从 store 中的 state 派生出状态"></a>3. Getter 从 store 中的 state 派生出状态</h2><p>如果我们需要对<code>state</code>对象进行做处理计算，如对列表进行过滤并计数:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    doneTodosCount () &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.$store.state.todos.filter(<span class="function"><span class="params">todo</span> =&gt;</span> todo.done).length</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果多个组件都要进行这样的处理，那么就要在多个组件中复制该函数,这样效率低下。</p>
-<p>Vuex中<code>getters</code>对象，可以方便我们在<code>store</code>中做集中的处理,Getters接受<code>state</code>作为第一个参数：:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    todos: [</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">text</span>: <span class="string">&#x27;...&#x27;</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">text</span>: <span class="string">&#x27;...&#x27;</span>, <span class="attr">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    doneTodos: <span class="function"><span class="params">state</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.todos.filter(<span class="function"><span class="params">todo</span> =&gt;</span> todo.done)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>Getter 会暴露为 <code>store.getters</code> 对象，可以以属性的形式访问这些值：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">store.getters.doneTodos <span class="comment">// -&gt; [&#123; id: 1, text: &#x27;...&#x27;, done: true &#125;]</span></span><br></pre></td></tr></table></figure>
-
-<p>Getter 也可以接受其他 getter 作为第二个参数：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">getters: &#123;</span><br><span class="line">  doneTodosCount: <span class="function">(<span class="params">state, getters</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> getters.doneTodos.length</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">store.getters.doneTodosCount <span class="comment">// -&gt; 1</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="mapGetters辅助函数"><a href="#mapGetters辅助函数" class="headerlink" title="mapGetters辅助函数"></a>mapGetters辅助函数</h3><p>与<code>mapState</code>类似，都能达到简化代码的效果<br><code>mapGetters</code>辅助函数仅仅是将store中的getters映射到局部计算属性：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapGetters &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  computed: &#123;</span><br><span class="line">    <span class="comment">// 使用对象展开运算符将 getters 混入 computed 对象中</span></span><br><span class="line">    ...mapGetters([</span><br><span class="line">      <span class="string">&#x27;doneTodosCount&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;anotherGetter&#x27;</span>,</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>也可写作:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">computed: mapGetters([</span><br><span class="line">    <span class="string">&#x27;doneTodosCount&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;anotherGetter&#x27;</span>,</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
-
-<p>所以在Vue的<code>computed</code>计算属性中会存在两种辅助函数：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapState, mapGetters &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    computed: &#123;</span><br><span class="line">        mapState(&#123; ... &#125;),</span><br><span class="line">        mapGetter(&#123; ... &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-Mutation-更改-Vuex-的-store-中的状态"><a href="#4-Mutation-更改-Vuex-的-store-中的状态" class="headerlink" title="4. Mutation 更改 Vuex 的 store 中的状态"></a>4. Mutation 更改 Vuex 的 store 中的状态</h2><p>每个 mutation 都有一个字符串的 <strong>事件类型 (type)</strong> 和 一个 <strong>回调函数 (handler)</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    increment (state) &#123;	<span class="comment">//type:&#x27;increment&#x27;</span></span><br><span class="line">      <span class="comment">// 变更状态</span></span><br><span class="line">      state.count++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>要唤醒一个 mutation handler，你需要调用 <strong>store.commit</strong> 方法调用<code>mutation type</code>: <code>store.commit(&#39;increment&#39;)</code></p>
-<h3 id="提交载荷（Payload）"><a href="#提交载荷（Payload）" class="headerlink" title="提交载荷（Payload）"></a>提交载荷（Payload）</h3><p> 向 <code>store.commit</code> 传入第二个参数,也就是mutation的<code>payload</code>:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">  increment (state, n) &#123;</span><br><span class="line">    state.count += n</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">store.commit(<span class="string">&#x27;increment&#x27;</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
-<p>单单传入一个<code>n</code>，可能并不能满足我们的业务需要，这时候我们可以选择传入一个<code>payload</code>对象：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">mutation: &#123;</span><br><span class="line">    increment (state, payload) &#123;</span><br><span class="line">        state.totalPrice += payload.price + payload.count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="对象风格的提交方式"><a href="#对象风格的提交方式" class="headerlink" title="对象风格的提交方式"></a>对象风格的提交方式</h3><p>提交 mutation 的另一种方式是直接使用包含 <code>type</code> 属性的对象：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">store.commit(&#123;</span><br><span class="line">  type: <span class="string">&#x27;increment&#x27;</span>,</span><br><span class="line">  amount: <span class="number">10</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="mapMutations函数"><a href="#mapMutations函数" class="headerlink" title="mapMutations函数"></a>mapMutations函数</h3><p>使用<code>mapMutations</code>辅助函数将组件中的<code>methods</code>映射为<code>store.commit</code>调用。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapMutations &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapMutations([</span><br><span class="line">      <span class="string">&#x27;increment&#x27;</span> <span class="comment">// 映射 this.increment() 为 this.$store.commit(&#x27;increment&#x27;)</span></span><br><span class="line">    ]),</span><br><span class="line">    ...mapMutations(&#123;</span><br><span class="line">      add: <span class="string">&#x27;increment&#x27;</span> <span class="comment">// 映射 this.add() 为 this.$store.commit(&#x27;increment&#x27;)</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-Action"><a href="#5-Action" class="headerlink" title="5.Action"></a>5.Action</h2><ul>
-<li>Action 提交的是 mutation，而不是直接变更状态。</li>
-<li>Action 可以包含任意异步操作。</li>
-</ul>
-<p>在vuex中,mutation是同步事件:<code>store.commit(&#39;increment&#39;)</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    increment (state) &#123;</span><br><span class="line">      state.count++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    increment (context) &#123;</span><br><span class="line">      context.commit(<span class="string">&#x27;increment&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>Action 函数接受一个与 store 实例具有相同方法和属性的 context 对象，因此你可以调用 <code>context.commit</code> 提交一个 mutation，或者通过 <code>context.state</code> 和 <code>context.getters</code> 来获取 state 和 getters。</p>
-<h3 id="分发Action"><a href="#分发Action" class="headerlink" title="分发Action"></a>分发Action</h3><p>Action 通过 <code>store.dispatch</code> 方法触发：<code>store.dispatch(&#39;increment&#39;)</code>;</p>
-<p>Actions 支持同样的载荷方式和对象方式进行分发：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 以载荷形式分发</span></span><br><span class="line">store.dispatch(<span class="string">&#x27;incrementAsync&#x27;</span>, &#123;</span><br><span class="line">  amount: <span class="number">10</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以对象形式分发</span></span><br><span class="line">store.dispatch(&#123;</span><br><span class="line">  type: <span class="string">&#x27;incrementAsync&#x27;</span>,</span><br><span class="line">  amount: <span class="number">10</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="在组件中分发Action"><a href="#在组件中分发Action" class="headerlink" title="在组件中分发Action"></a>在组件中分发Action</h3><p>在组件中使用 <code>this.$store.dispatch(&#39;xxx&#39;)</code> 分发 action，或者使用 <code>mapActions</code> 辅助函数将组件的 methods 映射为 <code>store.dispatch</code> 调用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapActions &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapActions([</span><br><span class="line">      <span class="string">&#x27;increment&#x27;</span>, <span class="comment">// 将 `this.increment()` 映射为 `this.$store.dispatch(&#x27;increment&#x27;)`</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// `mapActions` 也支持载荷：</span></span><br><span class="line">      <span class="string">&#x27;incrementBy&#x27;</span> <span class="comment">// 将 `this.incrementBy(amount)` 映射为 `this.$store.dispatch(&#x27;incrementBy&#x27;, amount)`</span></span><br><span class="line">    ]),</span><br><span class="line">    ...mapActions(&#123;</span><br><span class="line">      add: <span class="string">&#x27;increment&#x27;</span> <span class="comment">// 将 `this.add()` 映射为 `this.$store.dispatch(&#x27;increment&#x27;)`</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="组合-Action"><a href="#组合-Action" class="headerlink" title="组合 Action"></a>组合 Action</h3><p>Action 通常是异步的，如何知道 action 什么时候结束呢？更重要的是，我们如何才能组合多个 action，以处理更加复杂的异步流程？</p>
-<p>首先，你需要明白 <code>store.dispatch</code> 可以处理被触发的 action 的处理函数返回的 Promise，并且 <code>store.dispatch</code> 仍旧返回 Promise：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  actionA (&#123; commit &#125;) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        commit(<span class="string">&#x27;someMutation&#x27;</span>)</span><br><span class="line">        resolve()</span><br><span class="line">      &#125;, <span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样就可以:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">store.dispatch(<span class="string">&#x27;actionA&#x27;</span>).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>在另外一个 action 中也可以：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  actionB (&#123; dispatch, commit &#125;) &#123;</span><br><span class="line">    <span class="keyword">return</span> dispatch(<span class="string">&#x27;actionA&#x27;</span>).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      commit(<span class="string">&#x27;someOtherMutation&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果我们利用 <a href="https://tc39.github.io/ecmascript-asyncawait/">async / await</a>，我们可以如下组合 action：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 假设 getData() 和 getOtherData() 返回的是 Promise</span></span><br><span class="line"></span><br><span class="line">actions: &#123;</span><br><span class="line">  <span class="keyword">async</span> actionA (&#123; commit &#125;) &#123;</span><br><span class="line">    commit(<span class="string">&#x27;gotData&#x27;</span>, <span class="keyword">await</span> getData())</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">async</span> actionB (&#123; dispatch, commit &#125;) &#123;</span><br><span class="line">    <span class="keyword">await</span> dispatch(<span class="string">&#x27;actionA&#x27;</span>) <span class="comment">// 等待 actionA 完成</span></span><br><span class="line">    commit(<span class="string">&#x27;gotOtherData&#x27;</span>, <span class="keyword">await</span> getOtherData())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>一个 <code>store.dispatch</code> 在不同模块中可以触发多个 action 函数。在这种情况下，只有当所有触发函数完成后，返回的 Promise 才会执行。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Node基础</title>
     <url>/2018/01/21/IT%E6%8A%80%E6%9C%AF/Node_%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h3 id="1-HTTP模块"><a href="#1-HTTP模块" class="headerlink" title="1.HTTP模块"></a>1.HTTP模块</h3><ul>
@@ -1198,6 +1146,154 @@
       </tags>
   </entry>
   <entry>
+    <title>Vuex入门基础</title>
+    <url>/2018/05/14/IT%E6%8A%80%E6%9C%AF/Vuex%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h2 id="1-Vuex-概念"><a href="#1-Vuex-概念" class="headerlink" title="1. Vuex 概念"></a>1. Vuex 概念</h2><p>Vuex 是一个<strong>状态管理模式</strong>,它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</p>
+<p>每一个 Vuex 应用的核心就是 store(仓库)，在store中包含组件中的共享<strong>状态</strong><code>state</code>和改变状态的<strong>方法</strong><code>mutations</code>。</p>
+<p><strong>store仓库</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span>;</span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        increment (state) &#123;</span><br><span class="line">            state.count++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ol>
+<li>Vuex 的状态存储是响应式的</li>
+<li>不能直接改变 store 中的状态,需显式地<strong>提交 (commit) mutation</strong></li>
+</ol>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="2-State单一状态树"><a href="#2-State单一状态树" class="headerlink" title="2. State单一状态树"></a>2. State单一状态树</h2><p>用一个对象包含全部的应用层级状态</p>
+<p>Vuex 通过 <code>store</code> 选项，将状态从根组件“注入”到每一个子组件中,子组件需调用 <code>Vue.use(Vuex)</code>：</p>
+<p>根组件:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//根组件:</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  store, <span class="comment">// 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件</span></span><br><span class="line">  components: &#123; Counter &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>子组件: 通过<code>computed</code>(计算属性)返回<code>this.$store.state.count</code>来获取相应数据</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Counter = &#123;</span><br><span class="line">  computed: &#123;</span><br><span class="line">    count () &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">this</span>.$store.state.count	<span class="comment">//获取根组件的state</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="mapState-辅助函数"><a href="#mapState-辅助函数" class="headerlink" title="mapState 辅助函数"></a>mapState 辅助函数</h3><p>简化生成计算属性</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapState &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    computed: mapState (&#123;</span><br><span class="line">        count: <span class="function"><span class="params">state</span> =&gt;</span> state.count,</span><br><span class="line">        countAlias: <span class="string">&#x27;count&#x27;</span>,    <span class="comment">// 别名 `count` 等价于 state =&gt; state.count</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还可以更简化:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">computed: mapState([</span><br><span class="line">  <span class="comment">// 映射 this.count 为 store.state.count</span></span><br><span class="line">  <span class="string">&#x27;count&#x27;</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Getter-从-store-中的-state-派生出状态"><a href="#3-Getter-从-store-中的-state-派生出状态" class="headerlink" title="3. Getter 从 store 中的 state 派生出状态"></a>3. Getter 从 store 中的 state 派生出状态</h2><p>如果我们需要对<code>state</code>对象进行做处理计算，如对列表进行过滤并计数:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    doneTodosCount () &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.$store.state.todos.filter(<span class="function"><span class="params">todo</span> =&gt;</span> todo.done).length</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果多个组件都要进行这样的处理，那么就要在多个组件中复制该函数,这样效率低下。</p>
+<p>Vuex中<code>getters</code>对象，可以方便我们在<code>store</code>中做集中的处理,Getters接受<code>state</code>作为第一个参数：:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    todos: [</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">text</span>: <span class="string">&#x27;...&#x27;</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">text</span>: <span class="string">&#x27;...&#x27;</span>, <span class="attr">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    doneTodos: <span class="function"><span class="params">state</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.todos.filter(<span class="function"><span class="params">todo</span> =&gt;</span> todo.done)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>Getter 会暴露为 <code>store.getters</code> 对象，可以以属性的形式访问这些值：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">store.getters.doneTodos <span class="comment">// -&gt; [&#123; id: 1, text: &#x27;...&#x27;, done: true &#125;]</span></span><br></pre></td></tr></table></figure>
+
+<p>Getter 也可以接受其他 getter 作为第二个参数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">getters: &#123;</span><br><span class="line">  doneTodosCount: <span class="function">(<span class="params">state, getters</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> getters.doneTodos.length</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">store.getters.doneTodosCount <span class="comment">// -&gt; 1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="mapGetters辅助函数"><a href="#mapGetters辅助函数" class="headerlink" title="mapGetters辅助函数"></a>mapGetters辅助函数</h3><p>与<code>mapState</code>类似，都能达到简化代码的效果<br><code>mapGetters</code>辅助函数仅仅是将store中的getters映射到局部计算属性：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapGetters &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  computed: &#123;</span><br><span class="line">    <span class="comment">// 使用对象展开运算符将 getters 混入 computed 对象中</span></span><br><span class="line">    ...mapGetters([</span><br><span class="line">      <span class="string">&#x27;doneTodosCount&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;anotherGetter&#x27;</span>,</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可写作:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">computed: mapGetters([</span><br><span class="line">    <span class="string">&#x27;doneTodosCount&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;anotherGetter&#x27;</span>,</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>所以在Vue的<code>computed</code>计算属性中会存在两种辅助函数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapState, mapGetters &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    computed: &#123;</span><br><span class="line">        mapState(&#123; ... &#125;),</span><br><span class="line">        mapGetter(&#123; ... &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Mutation-更改-Vuex-的-store-中的状态"><a href="#4-Mutation-更改-Vuex-的-store-中的状态" class="headerlink" title="4. Mutation 更改 Vuex 的 store 中的状态"></a>4. Mutation 更改 Vuex 的 store 中的状态</h2><p>每个 mutation 都有一个字符串的 <strong>事件类型 (type)</strong> 和 一个 <strong>回调函数 (handler)</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    increment (state) &#123;	<span class="comment">//type:&#x27;increment&#x27;</span></span><br><span class="line">      <span class="comment">// 变更状态</span></span><br><span class="line">      state.count++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>要唤醒一个 mutation handler，你需要调用 <strong>store.commit</strong> 方法调用<code>mutation type</code>: <code>store.commit(&#39;increment&#39;)</code></p>
+<h3 id="提交载荷（Payload）"><a href="#提交载荷（Payload）" class="headerlink" title="提交载荷（Payload）"></a>提交载荷（Payload）</h3><p> 向 <code>store.commit</code> 传入第二个参数,也就是mutation的<code>payload</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">  increment (state, n) &#123;</span><br><span class="line">    state.count += n</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">store.commit(<span class="string">&#x27;increment&#x27;</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p>单单传入一个<code>n</code>，可能并不能满足我们的业务需要，这时候我们可以选择传入一个<code>payload</code>对象：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">mutation: &#123;</span><br><span class="line">    increment (state, payload) &#123;</span><br><span class="line">        state.totalPrice += payload.price + payload.count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="对象风格的提交方式"><a href="#对象风格的提交方式" class="headerlink" title="对象风格的提交方式"></a>对象风格的提交方式</h3><p>提交 mutation 的另一种方式是直接使用包含 <code>type</code> 属性的对象：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">store.commit(&#123;</span><br><span class="line">  type: <span class="string">&#x27;increment&#x27;</span>,</span><br><span class="line">  amount: <span class="number">10</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="mapMutations函数"><a href="#mapMutations函数" class="headerlink" title="mapMutations函数"></a>mapMutations函数</h3><p>使用<code>mapMutations</code>辅助函数将组件中的<code>methods</code>映射为<code>store.commit</code>调用。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapMutations &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapMutations([</span><br><span class="line">      <span class="string">&#x27;increment&#x27;</span> <span class="comment">// 映射 this.increment() 为 this.$store.commit(&#x27;increment&#x27;)</span></span><br><span class="line">    ]),</span><br><span class="line">    ...mapMutations(&#123;</span><br><span class="line">      add: <span class="string">&#x27;increment&#x27;</span> <span class="comment">// 映射 this.add() 为 this.$store.commit(&#x27;increment&#x27;)</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-Action"><a href="#5-Action" class="headerlink" title="5.Action"></a>5.Action</h2><ul>
+<li>Action 提交的是 mutation，而不是直接变更状态。</li>
+<li>Action 可以包含任意异步操作。</li>
+</ul>
+<p>在vuex中,mutation是同步事件:<code>store.commit(&#39;increment&#39;)</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    count: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    increment (state) &#123;</span><br><span class="line">      state.count++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    increment (context) &#123;</span><br><span class="line">      context.commit(<span class="string">&#x27;increment&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>Action 函数接受一个与 store 实例具有相同方法和属性的 context 对象，因此你可以调用 <code>context.commit</code> 提交一个 mutation，或者通过 <code>context.state</code> 和 <code>context.getters</code> 来获取 state 和 getters。</p>
+<h3 id="分发Action"><a href="#分发Action" class="headerlink" title="分发Action"></a>分发Action</h3><p>Action 通过 <code>store.dispatch</code> 方法触发：<code>store.dispatch(&#39;increment&#39;)</code>;</p>
+<p>Actions 支持同样的载荷方式和对象方式进行分发：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 以载荷形式分发</span></span><br><span class="line">store.dispatch(<span class="string">&#x27;incrementAsync&#x27;</span>, &#123;</span><br><span class="line">  amount: <span class="number">10</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以对象形式分发</span></span><br><span class="line">store.dispatch(&#123;</span><br><span class="line">  type: <span class="string">&#x27;incrementAsync&#x27;</span>,</span><br><span class="line">  amount: <span class="number">10</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="在组件中分发Action"><a href="#在组件中分发Action" class="headerlink" title="在组件中分发Action"></a>在组件中分发Action</h3><p>在组件中使用 <code>this.$store.dispatch(&#39;xxx&#39;)</code> 分发 action，或者使用 <code>mapActions</code> 辅助函数将组件的 methods 映射为 <code>store.dispatch</code> 调用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapActions &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapActions([</span><br><span class="line">      <span class="string">&#x27;increment&#x27;</span>, <span class="comment">// 将 `this.increment()` 映射为 `this.$store.dispatch(&#x27;increment&#x27;)`</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// `mapActions` 也支持载荷：</span></span><br><span class="line">      <span class="string">&#x27;incrementBy&#x27;</span> <span class="comment">// 将 `this.incrementBy(amount)` 映射为 `this.$store.dispatch(&#x27;incrementBy&#x27;, amount)`</span></span><br><span class="line">    ]),</span><br><span class="line">    ...mapActions(&#123;</span><br><span class="line">      add: <span class="string">&#x27;increment&#x27;</span> <span class="comment">// 将 `this.add()` 映射为 `this.$store.dispatch(&#x27;increment&#x27;)`</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="组合-Action"><a href="#组合-Action" class="headerlink" title="组合 Action"></a>组合 Action</h3><p>Action 通常是异步的，如何知道 action 什么时候结束呢？更重要的是，我们如何才能组合多个 action，以处理更加复杂的异步流程？</p>
+<p>首先，你需要明白 <code>store.dispatch</code> 可以处理被触发的 action 的处理函数返回的 Promise，并且 <code>store.dispatch</code> 仍旧返回 Promise：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  actionA (&#123; commit &#125;) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        commit(<span class="string">&#x27;someMutation&#x27;</span>)</span><br><span class="line">        resolve()</span><br><span class="line">      &#125;, <span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">store.dispatch(<span class="string">&#x27;actionA&#x27;</span>).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在另外一个 action 中也可以：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  actionB (&#123; dispatch, commit &#125;) &#123;</span><br><span class="line">    <span class="keyword">return</span> dispatch(<span class="string">&#x27;actionA&#x27;</span>).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      commit(<span class="string">&#x27;someOtherMutation&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们利用 <a href="https://tc39.github.io/ecmascript-asyncawait/">async / await</a>，我们可以如下组合 action：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 假设 getData() 和 getOtherData() 返回的是 Promise</span></span><br><span class="line"></span><br><span class="line">actions: &#123;</span><br><span class="line">  <span class="keyword">async</span> actionA (&#123; commit &#125;) &#123;</span><br><span class="line">    commit(<span class="string">&#x27;gotData&#x27;</span>, <span class="keyword">await</span> getData())</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">async</span> actionB (&#123; dispatch, commit &#125;) &#123;</span><br><span class="line">    <span class="keyword">await</span> dispatch(<span class="string">&#x27;actionA&#x27;</span>) <span class="comment">// 等待 actionA 完成</span></span><br><span class="line">    commit(<span class="string">&#x27;gotOtherData&#x27;</span>, <span class="keyword">await</span> getOtherData())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一个 <code>store.dispatch</code> 在不同模块中可以触发多个 action 函数。在这种情况下，只有当所有触发函数完成后，返回的 Promise 才会执行。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue实现简单分页功能</title>
+    <url>/2018/01/21/IT%E6%8A%80%E6%9C%AF/Vue%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/</url>
+    <content><![CDATA[<p>分页功能在列表查询中是一个比较重要的组成部分,按结构划分可分为页码与上一页/下一页:</p>
+<ul>
+<li><p>页码:通过点击数字,并将页码数字传递到后台查询获取相应的页码内容</p>
+</li>
+<li><p>上一页/下一页:可以共用一个方法,利用不同参数识别,查询数据逻辑与页码类似;</p>
+</li>
+</ul>
+<blockquote>
+<p>页面显示页码:可以采用计算属性computed获得</p>
+</blockquote>
+<p>下面的案例是我从自己的vue项目中摘取出来:</p>
+<a id="more"></a>
+
+<ul>
+<li><p>实现分页的CSS部分</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>:<span class="number">#999</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">min-width</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>:<span class="number">#f8b551</span>;</span><br><span class="line">    <span class="attribute">color</span>:<span class="number">#f8b551</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span> <span class="selector-tag">a</span><span class="selector-class">.cur</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>:<span class="number">#f8b551</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f8b551</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span> <span class="selector-tag">a</span><span class="selector-class">.default</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">color</span>:<span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">cursor</span>: default;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现分页的template</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span> @<span class="attr">click.self.prevent</span>=<span class="string">&quot;togglePage(-1)&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;default:pno&lt;=1&#125;&quot;</span>&gt;</span>上一页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">v-for</span>=<span class="string">&quot;(temp,key) in realPage&quot;</span> <span class="attr">:key</span>=<span class="string">key</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;cur:pno==temp&#125;&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span> @<span class="attr">click.self.prevent</span>=<span class="string">&quot;changePage(temp)&quot;</span>&gt;</span>&#123;&#123;temp&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span> @<span class="attr">click.self.prevent</span>=<span class="string">&quot;togglePage(1)&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;default:pno&gt;=pageCount&#125;&quot;</span>&gt;</span>下一页	<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--利用事件修饰符 @click.self.prevent阻止对元素自身的点击。--&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现分页的Js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  data ()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      newsList:[],</span><br><span class="line">      pno:<span class="number">1</span>,</span><br><span class="line">      pageCount:<span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.getList()  <span class="comment">//挂载的时候获取新闻列表</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="function"><span class="title">getList</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> self=<span class="built_in">this</span>;</span><br><span class="line">      self.$axios(&#123;</span><br><span class="line">        method: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">        baseURL:<span class="string">&#x27;http://127.0.0.1:3000/&#x27;</span>,</span><br><span class="line">        url: <span class="string">&#x27;/news/list/&#x27;</span>+self.pno,</span><br><span class="line">        withCredentials: <span class="literal">true</span>,</span><br><span class="line">        responseType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">        transformResponse:<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">          self.newsList=response.data;</span><br><span class="line">          self.pageCount=response.pageCount;</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 点击页面切换</span></span><br><span class="line">    <span class="function"><span class="title">changePage</span>(<span class="params">index</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> self=<span class="built_in">this</span>;</span><br><span class="line">      self.pno=index;</span><br><span class="line">      self.$axios(&#123;</span><br><span class="line">        method: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">        baseURL:<span class="string">&#x27;http://127.0.0.1:3000/&#x27;</span>,</span><br><span class="line">        url: <span class="string">&#x27;/news/list/&#x27;</span>+self.pno,</span><br><span class="line">        withCredentials: <span class="literal">true</span>,</span><br><span class="line">        responseType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">        transformResponse:<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">          self.newsList=response.data;</span><br><span class="line">          self.pageCount=response.pageCount;</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//点击上一页/下一页事件</span></span><br><span class="line">    <span class="function"><span class="title">togglePage</span>(<span class="params">index</span>)</span>&#123;<span class="comment">//通过对index赋值来识别按钮</span></span><br><span class="line">      <span class="keyword">var</span> self=<span class="built_in">this</span>;</span><br><span class="line">      <span class="keyword">if</span>(index&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(self.pno&gt;=self.pageCount)<span class="keyword">return</span>;</span><br><span class="line">        self.pno++;</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(self.pno&lt;=<span class="number">1</span>)<span class="keyword">return</span></span><br><span class="line">        self.pno--;</span><br><span class="line">      &#125;</span><br><span class="line">      self.$axios(&#123;</span><br><span class="line">        method: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">        baseURL:<span class="string">&#x27;http://127.0.0.1:3000/&#x27;</span>,</span><br><span class="line">        url: <span class="string">&#x27;/news/list/&#x27;</span>+self.pno,</span><br><span class="line">        withCredentials: <span class="literal">true</span>,</span><br><span class="line">        responseType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">        transformResponse:<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">          self.newsList=response.data;</span><br><span class="line">          self.pageCount=response.pageCount;</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed :&#123;  <span class="comment">//vue内置的计算属性,可以直接使用realPage,相当于java的getter方法</span></span><br><span class="line">    realPage:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> left=<span class="number">1</span>;</span><br><span class="line">      <span class="keyword">let</span> right=<span class="built_in">this</span>.pageCount;</span><br><span class="line">      <span class="keyword">var</span> realCount=[];<span class="comment">//当前可显示的页码数组,如[4,5,6]</span></span><br><span class="line">      <span class="keyword">if</span>(right&gt;=<span class="number">3</span>)&#123;<span class="comment">//控制最多显示3页</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span>.pno&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">this</span>.pno+<span class="number">1</span>&lt;<span class="built_in">this</span>.pageCount)&#123;</span><br><span class="line">          left=<span class="built_in">this</span>.pno-<span class="number">1</span>;</span><br><span class="line">          right=<span class="built_in">this</span>.pno+<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">if</span>(<span class="built_in">this</span>.pno&lt;=<span class="number">3</span>)&#123;</span><br><span class="line">          left=<span class="number">1</span>;</span><br><span class="line">          right=<span class="number">3</span>;</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           left=<span class="built_in">this</span>.pageCount-<span class="number">2</span>;</span><br><span class="line">           right=<span class="built_in">this</span>.pageCount;</span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span>(left&lt;=right)&#123; <span class="comment">//通过循环将当前可显示的页码存到realCount数组中</span></span><br><span class="line">        realCount.push(left);</span><br><span class="line">        left++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> realCount;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当页面发生变化,如果需要通知其他组件做出相应变化,可以再增加watch监听页面变化</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">  pno: <span class="function"><span class="keyword">function</span>(<span class="params">newValue,oldValue</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Framework</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue的CSS作用域问题</title>
     <url>/2018/02/12/IT%E6%8A%80%E6%9C%AF/Vue%E7%9A%84CSS%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h3 id="1-CSS-作用域问题"><a href="#1-CSS-作用域问题" class="headerlink" title="1. CSS 作用域问题"></a>1. CSS 作用域问题</h3><h4 id="1-1-style标签增加scoped属性"><a href="#1-1-style标签增加scoped属性" class="headerlink" title="1.1 style标签增加scoped属性"></a>1.1 style标签增加scoped属性</h4><p>CSS 只作用于当前组件中的元素,类似于 Shadow DOM 中的样式封装。</p>
@@ -1246,46 +1342,6 @@
       </categories>
       <tags>
         <tag>css</tag>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue实现简单分页功能</title>
-    <url>/2018/01/21/IT%E6%8A%80%E6%9C%AF/Vue%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/</url>
-    <content><![CDATA[<p>分页功能在列表查询中是一个比较重要的组成部分,按结构划分可分为页码与上一页/下一页:</p>
-<ul>
-<li><p>页码:通过点击数字,并将页码数字传递到后台查询获取相应的页码内容</p>
-</li>
-<li><p>上一页/下一页:可以共用一个方法,利用不同参数识别,查询数据逻辑与页码类似;</p>
-</li>
-</ul>
-<blockquote>
-<p>页面显示页码:可以采用计算属性computed获得</p>
-</blockquote>
-<p>下面的案例是我从自己的vue项目中摘取出来:</p>
-<a id="more"></a>
-
-<ul>
-<li><p>实现分页的CSS部分</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>:<span class="number">#999</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">min-width</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>:<span class="number">#f8b551</span>;</span><br><span class="line">    <span class="attribute">color</span>:<span class="number">#f8b551</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span> <span class="selector-tag">a</span><span class="selector-class">.cur</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>:<span class="number">#f8b551</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f8b551</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pages</span> <span class="selector-tag">a</span><span class="selector-class">.default</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">color</span>:<span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">cursor</span>: default;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>实现分页的template</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span> @<span class="attr">click.self.prevent</span>=<span class="string">&quot;togglePage(-1)&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;default:pno&lt;=1&#125;&quot;</span>&gt;</span>上一页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">v-for</span>=<span class="string">&quot;(temp,key) in realPage&quot;</span> <span class="attr">:key</span>=<span class="string">key</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;cur:pno==temp&#125;&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span> @<span class="attr">click.self.prevent</span>=<span class="string">&quot;changePage(temp)&quot;</span>&gt;</span>&#123;&#123;temp&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span> @<span class="attr">click.self.prevent</span>=<span class="string">&quot;togglePage(1)&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;default:pno&gt;=pageCount&#125;&quot;</span>&gt;</span>下一页	<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--利用事件修饰符 @click.self.prevent阻止对元素自身的点击。--&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>实现分页的Js</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  data ()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      newsList:[],</span><br><span class="line">      pno:<span class="number">1</span>,</span><br><span class="line">      pageCount:<span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.getList()  <span class="comment">//挂载的时候获取新闻列表</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="function"><span class="title">getList</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> self=<span class="built_in">this</span>;</span><br><span class="line">      self.$axios(&#123;</span><br><span class="line">        method: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">        baseURL:<span class="string">&#x27;http://127.0.0.1:3000/&#x27;</span>,</span><br><span class="line">        url: <span class="string">&#x27;/news/list/&#x27;</span>+self.pno,</span><br><span class="line">        withCredentials: <span class="literal">true</span>,</span><br><span class="line">        responseType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">        transformResponse:<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">          self.newsList=response.data;</span><br><span class="line">          self.pageCount=response.pageCount;</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 点击页面切换</span></span><br><span class="line">    <span class="function"><span class="title">changePage</span>(<span class="params">index</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> self=<span class="built_in">this</span>;</span><br><span class="line">      self.pno=index;</span><br><span class="line">      self.$axios(&#123;</span><br><span class="line">        method: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">        baseURL:<span class="string">&#x27;http://127.0.0.1:3000/&#x27;</span>,</span><br><span class="line">        url: <span class="string">&#x27;/news/list/&#x27;</span>+self.pno,</span><br><span class="line">        withCredentials: <span class="literal">true</span>,</span><br><span class="line">        responseType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">        transformResponse:<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">          self.newsList=response.data;</span><br><span class="line">          self.pageCount=response.pageCount;</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//点击上一页/下一页事件</span></span><br><span class="line">    <span class="function"><span class="title">togglePage</span>(<span class="params">index</span>)</span>&#123;<span class="comment">//通过对index赋值来识别按钮</span></span><br><span class="line">      <span class="keyword">var</span> self=<span class="built_in">this</span>;</span><br><span class="line">      <span class="keyword">if</span>(index&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(self.pno&gt;=self.pageCount)<span class="keyword">return</span>;</span><br><span class="line">        self.pno++;</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(self.pno&lt;=<span class="number">1</span>)<span class="keyword">return</span></span><br><span class="line">        self.pno--;</span><br><span class="line">      &#125;</span><br><span class="line">      self.$axios(&#123;</span><br><span class="line">        method: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">        baseURL:<span class="string">&#x27;http://127.0.0.1:3000/&#x27;</span>,</span><br><span class="line">        url: <span class="string">&#x27;/news/list/&#x27;</span>+self.pno,</span><br><span class="line">        withCredentials: <span class="literal">true</span>,</span><br><span class="line">        responseType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">        transformResponse:<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">          self.newsList=response.data;</span><br><span class="line">          self.pageCount=response.pageCount;</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed :&#123;  <span class="comment">//vue内置的计算属性,可以直接使用realPage,相当于java的getter方法</span></span><br><span class="line">    realPage:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> left=<span class="number">1</span>;</span><br><span class="line">      <span class="keyword">let</span> right=<span class="built_in">this</span>.pageCount;</span><br><span class="line">      <span class="keyword">var</span> realCount=[];<span class="comment">//当前可显示的页码数组,如[4,5,6]</span></span><br><span class="line">      <span class="keyword">if</span>(right&gt;=<span class="number">3</span>)&#123;<span class="comment">//控制最多显示3页</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span>.pno&gt;<span class="number">1</span> &amp;&amp; <span class="built_in">this</span>.pno+<span class="number">1</span>&lt;<span class="built_in">this</span>.pageCount)&#123;</span><br><span class="line">          left=<span class="built_in">this</span>.pno-<span class="number">1</span>;</span><br><span class="line">          right=<span class="built_in">this</span>.pno+<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">if</span>(<span class="built_in">this</span>.pno&lt;=<span class="number">3</span>)&#123;</span><br><span class="line">          left=<span class="number">1</span>;</span><br><span class="line">          right=<span class="number">3</span>;</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           left=<span class="built_in">this</span>.pageCount-<span class="number">2</span>;</span><br><span class="line">           right=<span class="built_in">this</span>.pageCount;</span><br><span class="line">         &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span>(left&lt;=right)&#123; <span class="comment">//通过循环将当前可显示的页码存到realCount数组中</span></span><br><span class="line">        realCount.push(left);</span><br><span class="line">        left++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> realCount;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当页面发生变化,如果需要通知其他组件做出相应变化,可以再增加watch监听页面变化</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">  pno: <span class="function"><span class="keyword">function</span>(<span class="params">newValue,oldValue</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Framework</category>
-      </categories>
-      <tags>
         <tag>vue</tag>
       </tags>
   </entry>
@@ -1581,6 +1637,37 @@
       </tags>
   </entry>
   <entry>
+    <title>hashchange事件</title>
+    <url>/2018/08/28/IT%E6%8A%80%E6%9C%AF/hashchange%E4%BA%8B%E4%BB%B6/</url>
+    <content><![CDATA[<blockquote>
+<p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p>
+</blockquote>
+<p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;hashchange&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>hashchange 事件回调函数对象主要有两个参数会用到:</p>
+<ul>
+<li><p>newURL: 当前页面新的URL</p>
+</li>
+<li><p>oldURL: 当前页面旧的URL</p>
+</li>
+</ul>
+<p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">	<span class="built_in">window</span>.addEventListener(<span class="string">&quot;hashchange&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">Object</span>.defineProperty(event,<span class="string">&quot;oldURL&quot;</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line">		<span class="built_in">Object</span>.defineProperty(event,<span class="string">&quot;newURL&quot;</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">		lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>hash</tag>
+        <tag>兼容性</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS数组以及对象的深拷贝</title>
     <url>/2018/02/22/IT%E6%8A%80%E6%9C%AF/javascript%20%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D/</url>
     <content><![CDATA[<p>转载自 csdn博客 <strong>FengCms FungLeo</strong>  博客:<a href="http://blog.csdn.net/fungleo/article/details/54931379">原文链接</a></p>
@@ -1627,37 +1714,6 @@
       <tags>
         <tag>js</tag>
         <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hashchange事件</title>
-    <url>/2018/08/28/IT%E6%8A%80%E6%9C%AF/hashchange%E4%BA%8B%E4%BB%B6/</url>
-    <content><![CDATA[<blockquote>
-<p>最近在写公司的后台管理系统，因为需求需要刷新后保持原来页面,原有的单页面组件跳转方式不能满足，所以在原有项目基础上增加了路由功能,目前比较简单的路由切换就是通过监听hash变化，实现不同页面的加载。</p>
-</blockquote>
-<p>当 一个窗口地址的 hash （URL 中 # 后面的部分）改变时就会触发 hashchange 事件:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.onhashchange = handleHashChange;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;hashchange&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//hash变化的处理逻辑</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<p>hashchange 事件回调函数对象主要有两个参数会用到:</p>
-<ul>
-<li><p>newURL: 当前页面新的URL</p>
-</li>
-<li><p>oldURL: 当前页面旧的URL</p>
-</li>
-</ul>
-<p>但在IE浏览器里,这两个属性不被支持,需要在绑定hashchange事件前添加以下代码:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.HashChangeEvent)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">	<span class="built_in">window</span>.addEventListener(<span class="string">&quot;hashchange&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">Object</span>.defineProperty(event,<span class="string">&quot;oldURL&quot;</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:lastURL&#125;);</span><br><span class="line">		<span class="built_in">Object</span>.defineProperty(event,<span class="string">&quot;newURL&quot;</span>,&#123;<span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="attr">configurable</span>:<span class="literal">true</span>,<span class="attr">value</span>:<span class="built_in">document</span>.URL&#125;);</span><br><span class="line">		lastURL=<span class="built_in">document</span>.URL;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>hash</tag>
-        <tag>兼容性</tag>
       </tags>
   </entry>
   <entry>
@@ -2206,39 +2262,6 @@
       </tags>
   </entry>
   <entry>
-    <title>你不知道的JavaScript之词法作用域与动态作用域</title>
-    <url>/2018/10/20/IT%E6%8A%80%E6%9C%AF/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/</url>
-    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在写代码的过程中,我们经常分不清作用域中变量的值指向什么,主要原因是我们分不清楚是应该按照函数的调用顺序还是按照函数位置的嵌套顺序查找变量.作用域有两种工作模式:词法作用域和动态作用域,词法作用域也叫静态作用域.</p>
-<blockquote>
-<ul>
-<li>词法作用域关心函数在<strong>何处声明</strong>，作用域链基于作用域嵌套 </li>
-<li>动态作用域关心函数在<strong>何处调用</strong>，作用域链基于调用栈</li>
-</ul>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h2><p><a href="https://www.cnblogs.com/xiaohuochai/p/5700095.html">词法作用域是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变</a>.</p>
-<p>无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    bar();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br><span class="line">foo();  <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
-
-<p>因为bar函数是在全局声明的，所以是输出全局变量a的值</p>
-<p>词法作用域中又分为函数作用域和块级作用域,JavaScript没有动态作用域,它是基于函数作用域的,但同时也有块级作用域,如with关键字、try-catch语句的catch子句、let关键字（ES6）、const关键字（ES6）</p>
-<h2 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h2><p>我们经常会把词法作用域和this机制弄混淆,这是因为this机制从某种程度上与动态作用域类似.</p>
-<p>动态作用域并不关心函数和作用域是如何声明以及在任何处声明的，只关心它们从何处调用</p>
-<p>继续拿上面的例子,如果处于动态作用域,变量a应首先在bar()中查找,没有找到会顺着调用栈在调用bar()函数的地方也就是foo()函数中查找,找到赋值a为1,所以输出1</p>
-<blockquote>
-<p>两种作用域的区别，简而言之，词法作用域是在定义时确定的，而动态作用域是在运行时确定的</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>JS</tag>
-        <tag>YDKJS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>你不知道的JavaScript之this</title>
     <url>/2018/10/21/IT%E6%8A%80%E6%9C%AF/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8Bthis/</url>
     <content><![CDATA[<h2 id="初识this"><a href="#初识this" class="headerlink" title="初识this"></a>初识this</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identify</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.name.toUpperCase();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speak</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> greeting = <span class="string">&quot;Hello, I&#x27;m &quot;</span> + identify.call( <span class="built_in">this</span> );</span><br><span class="line">	<span class="built_in">console</span>.log( greeting );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> me = &#123;</span><br><span class="line">	name: <span class="string">&quot;Kyle&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> you = &#123;</span><br><span class="line">	name: <span class="string">&quot;Reader&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">identify.call( me ); <span class="comment">// KYLE</span></span><br><span class="line">identify.call( you ); <span class="comment">// READER</span></span><br><span class="line"></span><br><span class="line">speak.call( me ); <span class="comment">// Hello, I&#x27;m KYLE</span></span><br><span class="line">speak.call( you ); <span class="comment">// Hello, I&#x27;m READER</span></span><br></pre></td></tr></table></figure>
@@ -2358,6 +2381,39 @@
       </tags>
   </entry>
   <entry>
+    <title>你不知道的JavaScript之词法作用域与动态作用域</title>
+    <url>/2018/10/20/IT%E6%8A%80%E6%9C%AF/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在写代码的过程中,我们经常分不清作用域中变量的值指向什么,主要原因是我们分不清楚是应该按照函数的调用顺序还是按照函数位置的嵌套顺序查找变量.作用域有两种工作模式:词法作用域和动态作用域,词法作用域也叫静态作用域.</p>
+<blockquote>
+<ul>
+<li>词法作用域关心函数在<strong>何处声明</strong>，作用域链基于作用域嵌套 </li>
+<li>动态作用域关心函数在<strong>何处调用</strong>，作用域链基于调用栈</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h2><p><a href="https://www.cnblogs.com/xiaohuochai/p/5700095.html">词法作用域是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变</a>.</p>
+<p>无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    bar();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br><span class="line">foo();  <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<p>因为bar函数是在全局声明的，所以是输出全局变量a的值</p>
+<p>词法作用域中又分为函数作用域和块级作用域,JavaScript没有动态作用域,它是基于函数作用域的,但同时也有块级作用域,如with关键字、try-catch语句的catch子句、let关键字（ES6）、const关键字（ES6）</p>
+<h2 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h2><p>我们经常会把词法作用域和this机制弄混淆,这是因为this机制从某种程度上与动态作用域类似.</p>
+<p>动态作用域并不关心函数和作用域是如何声明以及在任何处声明的，只关心它们从何处调用</p>
+<p>继续拿上面的例子,如果处于动态作用域,变量a应首先在bar()中查找,没有找到会顺着调用栈在调用bar()函数的地方也就是foo()函数中查找,找到赋值a为1,所以输出1</p>
+<blockquote>
+<p>两种作用域的区别，简而言之，词法作用域是在定义时确定的，而动态作用域是在运行时确定的</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+        <tag>YDKJS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>你不知道的JavaScript之闭包</title>
     <url>/2018/10/18/IT%E6%8A%80%E6%9C%AF/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B9%8B%E9%97%AD%E5%8C%85/</url>
     <content><![CDATA[<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><blockquote>
@@ -2467,80 +2523,6 @@
       </tags>
   </entry>
   <entry>
-    <title>利用H5画随机色圆</title>
-    <url>/2018/03/06/IT%E6%8A%80%E6%9C%AF/%E5%88%A9%E7%94%A8H5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/</url>
-    <content><![CDATA[<p>忽然想到曾经遇到的一个案例：</p>
-<p>​    <strong>在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。</strong></p>
-<p>在这里用代码重现下，首先分析下需求：</p>
-<ul>
-<li><p>绘制页面：</p>
-<ul>
-<li>生成随机数，根据随机数生成随机颜色</li>
-<li>利用svg绘图技术在页面绘制随机数量的圆</li>
-<li>将圆填充随机色</li>
-</ul>
-</li>
-<li><p>JS事件：</p>
-<ul>
-<li><p>为每个圆绑定单击事件</p>
-</li>
-<li><p>创建定时器</p>
-</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-
-
-<p>代码：</p>
-<ol>
-<li>生成随机数和随机颜色方法</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*获取指定范围内的随机数字*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomNum</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n=<span class="built_in">Math</span>.random()*(max-min)+min;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(n)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*生成随机色*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomColor</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> r=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> g=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> b=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> a=<span class="built_in">Math</span>.random();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`rgba(<span class="subst">$&#123;r&#125;</span>,<span class="subst">$&#123;g&#125;</span>,<span class="subst">$&#123;b&#125;</span>,<span class="subst">$&#123;a&#125;</span>)`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>利用svg绘图</li>
-</ol>
-<p>html:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">id</span>=<span class="string">&quot;svg&quot;</span> <span class="attr">width</span>=<span class="string">&quot;1000px&quot;</span>  <span class="attr">height</span>=<span class="string">&quot;500px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>JavaScript:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> svg=<span class="built_in">document</span>.getElementById(<span class="string">&quot;svg&quot;</span>); </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">50</span>;i++)&#123;</span><br><span class="line">    <span class="comment">//创建圆元素</span></span><br><span class="line">	<span class="keyword">var</span> c=<span class="built_in">document</span>.createElementNS(<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span>,<span class="string">&quot;circle&quot;</span>);</span><br><span class="line">    c.setAttribute(<span class="string">&quot;r&quot;</span>,randomNum(<span class="number">10</span>,<span class="number">80</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;cx&quot;</span>,randomNum(<span class="number">0</span>,<span class="number">800</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;cy&quot;</span>,randomNum(<span class="number">0</span>,<span class="number">400</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;fill&quot;</span>,randomColor(<span class="number">0</span>,<span class="number">255</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;fill-opacity&quot;</span>,<span class="built_in">Math</span>.random());</span><br><span class="line">    svg.appendChild(c)</span><br><span class="line">  <span class="comment">//绑定单击事件</span></span><br><span class="line">  c.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that=<span class="built_in">this</span>;</span><br><span class="line">    <span class="comment">//设置循环定时器</span></span><br><span class="line">    <span class="keyword">var</span> timer=<span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> r=that.getAttribute(<span class="string">&quot;r&quot;</span>);</span><br><span class="line">      r*=<span class="number">1.05</span>;</span><br><span class="line">      that.setAttribute(<span class="string">&quot;r&quot;</span>,r);</span><br><span class="line">      <span class="keyword">var</span> fillOpac=that.getAttribute(<span class="string">&quot;fill-opacity&quot;</span>);</span><br><span class="line">      fillOpac*=<span class="number">0.9</span>;</span><br><span class="line">      that.setAttribute(<span class="string">&quot;fill-opacity&quot;</span>,fillOpac);</span><br><span class="line">      <span class="comment">//设置循环定时器停止条件</span></span><br><span class="line">      <span class="keyword">if</span>(fillOpac&lt;<span class="number">0.001</span>)&#123;</span><br><span class="line">      	<span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        timer=<span class="literal">null</span>;</span><br><span class="line">       	svg.removeChild(that);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,<span class="number">20</span>)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>附上<a href="https://codepen.io/hfood/full/gvVovo/">codePen链接</a></p>
-<p>效果图:</p>
-<img src="https://haohome.top/18-3-8/79565300.jpg" width="80%">
-
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>css3</tag>
-        <tag>HTML5</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>前端网摘</title>
-    <url>/2018/02/20/IT%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E7%BD%91%E6%91%98/</url>
-    <content><![CDATA[<h2 id="1-移动端网摘"><a href="#1-移动端网摘" class="headerlink" title="1. 移动端网摘"></a>1. 移动端网摘</h2><ol>
-<li><a href="https://www.w3cplus.com/css/viewports.html">viewports剖析</a></li>
-<li><a href="https://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html">使用Flexible实现手淘H5页面的终端适配</a></li>
-<li><a href="https://www.w3cplus.com/css/vw-for-layout.html">再聊移动端适配</a></li>
-<li><a href="https://www.w3cplus.com/mobile/vw-layout-in-vue.html">如何在Vue项目中使用vw实现移动端适配</a></li>
-<li><a href="https://material.io/devices/">谷歌device列表</a></li>
-<li><a href="http://www.shejidaren.com/examples/tools/chichun/ui-design-spec.html#nogo">最新Android &amp; iOS设计尺寸规范——2015</a></li>
-<li><a href="http://www.woshipm.com/pmd/176328.html">px、pt、ppi、dpi、dp、sp之间的关系</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>IT技术</category>
-      </categories>
-      <tags>
-        <tag>网摘</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>创建对象的Object.create与new</title>
     <url>/2018/04/07/IT%E6%8A%80%E6%9C%AF/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84Object.create%E4%B8%8Enew/</url>
     <content><![CDATA[<p>创建对象有几种方式:</p>
@@ -2613,6 +2595,80 @@
       <tags>
         <tag>js</tag>
         <tag>对象</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用H5画随机色圆</title>
+    <url>/2018/03/06/IT%E6%8A%80%E6%9C%AF/%E5%88%A9%E7%94%A8H5%E7%94%BB%E9%9A%8F%E6%9C%BA%E8%89%B2%E5%9C%86/</url>
+    <content><![CDATA[<p>忽然想到曾经遇到的一个案例：</p>
+<p>​    <strong>在页面上绘制随机数量的圆并填充随机色，但鼠标点击圆时该圆逐渐放大，同时透明度降低，直至消失。</strong></p>
+<p>在这里用代码重现下，首先分析下需求：</p>
+<ul>
+<li><p>绘制页面：</p>
+<ul>
+<li>生成随机数，根据随机数生成随机颜色</li>
+<li>利用svg绘图技术在页面绘制随机数量的圆</li>
+<li>将圆填充随机色</li>
+</ul>
+</li>
+<li><p>JS事件：</p>
+<ul>
+<li><p>为每个圆绑定单击事件</p>
+</li>
+<li><p>创建定时器</p>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+
+<p>代码：</p>
+<ol>
+<li>生成随机数和随机颜色方法</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*获取指定范围内的随机数字*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomNum</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n=<span class="built_in">Math</span>.random()*(max-min)+min;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(n)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*生成随机色*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomColor</span>(<span class="params">min,max</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> r=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> g=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> b=randomNum(min,max);</span><br><span class="line">    <span class="keyword">var</span> a=<span class="built_in">Math</span>.random();</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`rgba(<span class="subst">$&#123;r&#125;</span>,<span class="subst">$&#123;g&#125;</span>,<span class="subst">$&#123;b&#125;</span>,<span class="subst">$&#123;a&#125;</span>)`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>利用svg绘图</li>
+</ol>
+<p>html:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">id</span>=<span class="string">&quot;svg&quot;</span> <span class="attr">width</span>=<span class="string">&quot;1000px&quot;</span>  <span class="attr">height</span>=<span class="string">&quot;500px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>JavaScript:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> svg=<span class="built_in">document</span>.getElementById(<span class="string">&quot;svg&quot;</span>); </span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">50</span>;i++)&#123;</span><br><span class="line">    <span class="comment">//创建圆元素</span></span><br><span class="line">	<span class="keyword">var</span> c=<span class="built_in">document</span>.createElementNS(<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span>,<span class="string">&quot;circle&quot;</span>);</span><br><span class="line">    c.setAttribute(<span class="string">&quot;r&quot;</span>,randomNum(<span class="number">10</span>,<span class="number">80</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;cx&quot;</span>,randomNum(<span class="number">0</span>,<span class="number">800</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;cy&quot;</span>,randomNum(<span class="number">0</span>,<span class="number">400</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;fill&quot;</span>,randomColor(<span class="number">0</span>,<span class="number">255</span>));</span><br><span class="line">    c.setAttribute(<span class="string">&quot;fill-opacity&quot;</span>,<span class="built_in">Math</span>.random());</span><br><span class="line">    svg.appendChild(c)</span><br><span class="line">  <span class="comment">//绑定单击事件</span></span><br><span class="line">  c.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that=<span class="built_in">this</span>;</span><br><span class="line">    <span class="comment">//设置循环定时器</span></span><br><span class="line">    <span class="keyword">var</span> timer=<span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> r=that.getAttribute(<span class="string">&quot;r&quot;</span>);</span><br><span class="line">      r*=<span class="number">1.05</span>;</span><br><span class="line">      that.setAttribute(<span class="string">&quot;r&quot;</span>,r);</span><br><span class="line">      <span class="keyword">var</span> fillOpac=that.getAttribute(<span class="string">&quot;fill-opacity&quot;</span>);</span><br><span class="line">      fillOpac*=<span class="number">0.9</span>;</span><br><span class="line">      that.setAttribute(<span class="string">&quot;fill-opacity&quot;</span>,fillOpac);</span><br><span class="line">      <span class="comment">//设置循环定时器停止条件</span></span><br><span class="line">      <span class="keyword">if</span>(fillOpac&lt;<span class="number">0.001</span>)&#123;</span><br><span class="line">      	<span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        timer=<span class="literal">null</span>;</span><br><span class="line">       	svg.removeChild(that);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,<span class="number">20</span>)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>附上<a href="https://codepen.io/hfood/full/gvVovo/">codePen链接</a></p>
+<p>效果图:</p>
+<img src="https://haohome.top/18-3-8/79565300.jpg" width="80%">
+
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>css3</tag>
+        <tag>HTML5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端网摘</title>
+    <url>/2018/02/20/IT%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF%E7%BD%91%E6%91%98/</url>
+    <content><![CDATA[<h2 id="1-移动端网摘"><a href="#1-移动端网摘" class="headerlink" title="1. 移动端网摘"></a>1. 移动端网摘</h2><ol>
+<li><a href="https://www.w3cplus.com/css/viewports.html">viewports剖析</a></li>
+<li><a href="https://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html">使用Flexible实现手淘H5页面的终端适配</a></li>
+<li><a href="https://www.w3cplus.com/css/vw-for-layout.html">再聊移动端适配</a></li>
+<li><a href="https://www.w3cplus.com/mobile/vw-layout-in-vue.html">如何在Vue项目中使用vw实现移动端适配</a></li>
+<li><a href="https://material.io/devices/">谷歌device列表</a></li>
+<li><a href="http://www.shejidaren.com/examples/tools/chichun/ui-design-spec.html#nogo">最新Android &amp; iOS设计尺寸规范——2015</a></li>
+<li><a href="http://www.woshipm.com/pmd/176328.html">px、pt、ppi、dpi、dp、sp之间的关系</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>IT技术</category>
+      </categories>
+      <tags>
+        <tag>网摘</tag>
       </tags>
   </entry>
   <entry>
@@ -3516,26 +3572,6 @@
       </tags>
   </entry>
   <entry>
-    <title>iTerm终端设置代理</title>
-    <url>/2018/10/10/Mac&amp;PC/iTerm%20%E7%BB%88%E7%AB%AF%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<p>某些站点必须爬墙才能访问，但在mac上设置的全局代理，对终端又不起作用，终端需要单独设置代理。<br>在终端中执行：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export ALL_PROXY=socks5://127.0.0.1:1086/</span><br></pre></td></tr></table></figure>
-
-<p>如果是http的代理:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export http_proxy=http://127.0.0.1:1087/</span><br><span class="line">export https_proxy=http://127.0.0.1:1087/</span><br></pre></td></tr></table></figure>
-
-<p>如果需要开机自动设置，把上面的代码加到~/.bash_profile里</p>
-<p><code>source  ~/.bash_profile</code> 使文件生效</p>
-<p>测试当前终端标签/窗口是否走代理：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl ip.gs</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Mac&amp;PC</category>
-      </categories>
-      <tags>
-        <tag>电脑技巧</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mac下使用iTerm2让SSH记录远程服务器账号和密码</title>
     <url>/2018/10/05/Mac&amp;PC/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8iTerm2%E8%AE%A9SSH%E8%AE%B0%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81/</url>
     <content><![CDATA[<p>iTerm2和Macbook自带的Terminal差不多，但是功能更强大，强烈推荐使用。</p>
@@ -3559,50 +3595,65 @@
       </tags>
   </entry>
   <entry>
-    <title>浅谈餐饮的标准化</title>
-    <url>/2016/05/12/%E9%A3%9F%E5%93%81%E7%A7%91%E5%AD%A6/%E6%B5%85%E8%B0%88%E9%A4%90%E9%A5%AE%E7%9A%84%E6%A0%87%E5%87%86%E5%8C%96/</url>
-    <content><![CDATA[<img src="/images/西红柿炒鸡蛋.jpg" width=50%>
-<p>对于餐饮，我其实第一感觉就是不喜欢，因为不规范。</p>
-<p>餐饮从业者大部分都是厨师，他们有丰富的厨艺和从业经验，可以说他们炒一个菜是分分钟的事。但是，并不是每一位厨师都是大师，更多的是一个厨子。</p>  <a id="more"></a>
-<p>当前餐饮连锁店都倡导标准化转化，厨师也做起了研发，一道“西红柿炒鸡蛋”可以分解成几种原料形式，分别打包在独立包装，用时拆包混合就行。似乎看起来很简单，但实际做的时候没有那么简单。做一锅一人份的和一锅100人份的西红柿炒鸡蛋的配方和工艺完全不一样，加工的时间、加热的温度、所需要的原辅料添加重量、添加的顺序都需要重新计算，不再是适量、少许、火候、爆香等传统厨师用语来衡量，必须由准确的数据来定量每一道工序，普通的厨师做得到吗？</p>  <p>现在的餐饮必然会是厨师+食品专业技术人员结合，由厨师做出一道菜，专业人员负责从食材的选择、工艺记录、产品标准制定等整个过程。不仅仅是这样，专业人员还需要研究这道菜在做出来后的风味变化，采用什么的工艺、包装以及储存条件才能让菜品风味保存更久，口感达到最佳的一个状态。这个就需要科学的理论支持。</p>
-  <p>现在我们总是自以为是，以为自己什么都会，厨师可以去研究专业理论，食品专业的人可以去做菜。**真正的资源最大化利用是取长补短，由食品专业的人科普食品加工知识，厨师传授做菜的经验。**</p>
-  >一道“西红柿炒鸡蛋”可以有几十种口味，但一份工艺只会产出一种口味或者说几种相近的口味，这就是标准化的能力。
+    <title>iTerm终端设置代理</title>
+    <url>/2018/10/10/Mac&amp;PC/iTerm%20%E7%BB%88%E7%AB%AF%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p>某些站点必须爬墙才能访问，但在mac上设置的全局代理，对终端又不起作用，终端需要单独设置代理。<br>在终端中执行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export ALL_PROXY=socks5://127.0.0.1:1086/</span><br></pre></td></tr></table></figure>
 
-<p>现在的研发厨师不一定会编制这样的工艺，但都懂这样的标准化工艺带来的好处。但进一步的说,如何将这样标准化的菜品提升，可能才是餐饮标准化的核心技术。</p>
-<p>菜品进一步分解：</p>
-> * 选择不同的食材、采用不同的工艺技术，做出不同等级的菜品；
-> * 利用食品添加剂，改善菜品最终的成色和口感；
-> * 通过杀菌技术和包装技术，最大程度的延长货架期和保留风味；
-> * 总结菜品的加工规律，利用数据分析菜品加工变化，优化菜品加工工艺；
+<p>如果是http的代理:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export http_proxy=http://127.0.0.1:1087/</span><br><span class="line">export https_proxy=http://127.0.0.1:1087/</span><br></pre></td></tr></table></figure>
 
-<p>知识是为人服务的并指引正确方向的，资源也是要共享的，餐饮的标准化一定是厨师传授专业人员做菜过程，专业人员用科学的方法指引厨师做菜提升菜品品质。
-
-
-
-]]></content>
+<p>如果需要开机自动设置，把上面的代码加到~/.bash_profile里</p>
+<p><code>source  ~/.bash_profile</code> 使文件生效</p>
+<p>测试当前终端标签/窗口是否走代理：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl ip.gs</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>food</category>
+        <category>Mac&amp;PC</category>
       </categories>
       <tags>
-        <tag>工作感想</tag>
+        <tag>电脑技巧</tag>
       </tags>
   </entry>
   <entry>
-    <title>苹果为什么会褐变</title>
-    <url>/2016/04/19/%E9%A3%9F%E5%93%81%E7%A7%91%E5%AD%A6/%E8%8B%B9%E6%9E%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A4%90%E5%8F%98/</url>
-    <content><![CDATA[<p><img src="https://haohome.top/Apple-whole-fresh-and-brown.jpg" alt="image"><br>    当切开的苹果不及时吃掉，它就会由白色苹果慢慢变成暗淡的棕褐色苹果，影响你的食欲。最好的消息是它依然是安全的苹果，你可以吃掉它。导致苹果变色的原因是酶促褐变，当植物组织内存在的酶与多酚类物质结合在氧气的环境下产生的分子反应，产生的黑色素。 <a id="more"></a></p>
-<p>不仅苹果有这种现象，其他水果如梨、香蕉、鳄梨、茄子和土豆都存在酶促褐变，因为他们都存在酶的底物————酚类化合物。<br><img src="https://haohome.top/Banana-whole-fresh-and-brown.jpg" alt="image"></p>
+    <title>创新特征</title>
+    <url>/2020/11/08/%E5%B7%A5%E4%BD%9C%E6%80%9D%E7%BB%B4/%E5%88%9B%E6%96%B0%E7%89%B9%E5%BE%81/</url>
+    <content><![CDATA[<p>创新有两种形式：</p>
+<ol>
+<li>连续式创新：沿着同一条S曲线进步；</li>
+<li>非连续式创新：转换到新的S曲线；</li>
+</ol>
+<h2 id="一、连续性创新"><a href="#一、连续性创新" class="headerlink" title="一、连续性创新"></a>一、连续性创新</h2><img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108230818752.png" alt="image-20201108230818752" style="zoom:20%;" />
+
+<p>技术连续性创新的特征</p>
 <blockquote>
-<p>切块的苹果让细胞组织破碎，原本分开的酚类物质和酶相结合，同时当你切开苹果时，酚类物质与酶的混合物就会暴露在空气中，就会产生氧化褐变过程。这个过程持续时间越长，褐变程度越深，直到酚类物质消耗完，这时苹果也就变成棕色的了。</p>
+<p>A. 沿着技术曲线持续改善原有的产品性能</p>
+<p>B. 定位于主流市场的主流消费者</p>
+<p>C. Better</p>
 </blockquote>
-<p><img src="https://haohome.top/Avocado-whole-diced-fresh-brown.jpg" alt="image"><br>酶只是普通的蛋白质，但是它在自然界中有特殊的功能。大多数化学反应需要较高的活化能才能进行，而酶可以降低化学反应的活化能促使一些反应发生。酶是一种催化剂，它能加快化学反应速率。本身酶在反应过程中不被消耗，也不影响反应的化学平衡。但它会不断催化化学反应进行。有些反应是不可逆的，如水果切块的酶促褐变反应，</p>
-<p>但酶在食品中也有重要的积极作用，举个例子：凝乳酶可以促使液态来凝结成奶酪，乳糖酶可以分解我们人体内的乳糖（除非你有乳糖不耐症），食品工业中还利用酶含量来判断海鲜的新鲜度、巴氏杀菌奶的安全以及其他积极应用。此外，酶促褐变反应还有利于茶、咖啡和葡萄干形成理想的色泽。<br><img src="https://haohome.top/Potato-whole-fresh-and-brown1.jpg" alt="image"></p>
+<p>案例：</p>
+<blockquote>
+<ul>
+<li>英特尔不断推出性能更强的微处理器</li>
+<li>微软Windows操作系统的不断升级</li>
+<li>苹果iPhone的升级换代。</li>
+</ul>
+</blockquote>
+<h2 id="二、非连续创新"><a href="#二、非连续创新" class="headerlink" title="二、非连续创新"></a>二、非连续创新</h2><p>新旧技术之间不是继承关系，而是竞争关系，其交替过程就是技术的非连续性断层期。</p>
+<img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108231434104.png" alt="image-20201108231434104" style="zoom:20%;" />
+
+<h2 id="三、企业思维与市场思维"><a href="#三、企业思维与市场思维" class="headerlink" title="三、企业思维与市场思维"></a>三、企业思维与市场思维</h2><ul>
+<li><p>企业的基础假设是连续性，其焦点在于运营和管理; </p>
+</li>
+<li><p>市场的基础假设是不连续性，其重点则是创造与破坏。</p>
+</li>
+</ul>
+<p>市场速度超过个体公司速度的原因：市场是破坏性思维，公司是保护性思维</p>
 ]]></content>
       <categories>
-        <category>food</category>
+        <category>work</category>
       </categories>
       <tags>
-        <tag>保鲜知识</tag>
+        <tag>思维</tag>
       </tags>
   </entry>
   <entry>
@@ -3778,6 +3829,53 @@
       </tags>
   </entry>
   <entry>
+    <title>浅谈餐饮的标准化</title>
+    <url>/2016/05/12/%E9%A3%9F%E5%93%81%E7%A7%91%E5%AD%A6/%E6%B5%85%E8%B0%88%E9%A4%90%E9%A5%AE%E7%9A%84%E6%A0%87%E5%87%86%E5%8C%96/</url>
+    <content><![CDATA[<img src="/images/西红柿炒鸡蛋.jpg" width=50%>
+<p>对于餐饮，我其实第一感觉就是不喜欢，因为不规范。</p>
+<p>餐饮从业者大部分都是厨师，他们有丰富的厨艺和从业经验，可以说他们炒一个菜是分分钟的事。但是，并不是每一位厨师都是大师，更多的是一个厨子。</p>  <a id="more"></a>
+<p>当前餐饮连锁店都倡导标准化转化，厨师也做起了研发，一道“西红柿炒鸡蛋”可以分解成几种原料形式，分别打包在独立包装，用时拆包混合就行。似乎看起来很简单，但实际做的时候没有那么简单。做一锅一人份的和一锅100人份的西红柿炒鸡蛋的配方和工艺完全不一样，加工的时间、加热的温度、所需要的原辅料添加重量、添加的顺序都需要重新计算，不再是适量、少许、火候、爆香等传统厨师用语来衡量，必须由准确的数据来定量每一道工序，普通的厨师做得到吗？</p>  <p>现在的餐饮必然会是厨师+食品专业技术人员结合，由厨师做出一道菜，专业人员负责从食材的选择、工艺记录、产品标准制定等整个过程。不仅仅是这样，专业人员还需要研究这道菜在做出来后的风味变化，采用什么的工艺、包装以及储存条件才能让菜品风味保存更久，口感达到最佳的一个状态。这个就需要科学的理论支持。</p>
+  <p>现在我们总是自以为是，以为自己什么都会，厨师可以去研究专业理论，食品专业的人可以去做菜。**真正的资源最大化利用是取长补短，由食品专业的人科普食品加工知识，厨师传授做菜的经验。**</p>
+  >一道“西红柿炒鸡蛋”可以有几十种口味，但一份工艺只会产出一种口味或者说几种相近的口味，这就是标准化的能力。
+
+<p>现在的研发厨师不一定会编制这样的工艺，但都懂这样的标准化工艺带来的好处。但进一步的说,如何将这样标准化的菜品提升，可能才是餐饮标准化的核心技术。</p>
+<p>菜品进一步分解：</p>
+> * 选择不同的食材、采用不同的工艺技术，做出不同等级的菜品；
+> * 利用食品添加剂，改善菜品最终的成色和口感；
+> * 通过杀菌技术和包装技术，最大程度的延长货架期和保留风味；
+> * 总结菜品的加工规律，利用数据分析菜品加工变化，优化菜品加工工艺；
+
+<p>知识是为人服务的并指引正确方向的，资源也是要共享的，餐饮的标准化一定是厨师传授专业人员做菜过程，专业人员用科学的方法指引厨师做菜提升菜品品质。
+
+
+
+]]></content>
+      <categories>
+        <category>food</category>
+      </categories>
+      <tags>
+        <tag>工作感想</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>苹果为什么会褐变</title>
+    <url>/2016/04/19/%E9%A3%9F%E5%93%81%E7%A7%91%E5%AD%A6/%E8%8B%B9%E6%9E%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%A4%90%E5%8F%98/</url>
+    <content><![CDATA[<p><img src="https://haohome.top/Apple-whole-fresh-and-brown.jpg" alt="image"><br>    当切开的苹果不及时吃掉，它就会由白色苹果慢慢变成暗淡的棕褐色苹果，影响你的食欲。最好的消息是它依然是安全的苹果，你可以吃掉它。导致苹果变色的原因是酶促褐变，当植物组织内存在的酶与多酚类物质结合在氧气的环境下产生的分子反应，产生的黑色素。 <a id="more"></a></p>
+<p>不仅苹果有这种现象，其他水果如梨、香蕉、鳄梨、茄子和土豆都存在酶促褐变，因为他们都存在酶的底物————酚类化合物。<br><img src="https://haohome.top/Banana-whole-fresh-and-brown.jpg" alt="image"></p>
+<blockquote>
+<p>切块的苹果让细胞组织破碎，原本分开的酚类物质和酶相结合，同时当你切开苹果时，酚类物质与酶的混合物就会暴露在空气中，就会产生氧化褐变过程。这个过程持续时间越长，褐变程度越深，直到酚类物质消耗完，这时苹果也就变成棕色的了。</p>
+</blockquote>
+<p><img src="https://haohome.top/Avocado-whole-diced-fresh-brown.jpg" alt="image"><br>酶只是普通的蛋白质，但是它在自然界中有特殊的功能。大多数化学反应需要较高的活化能才能进行，而酶可以降低化学反应的活化能促使一些反应发生。酶是一种催化剂，它能加快化学反应速率。本身酶在反应过程中不被消耗，也不影响反应的化学平衡。但它会不断催化化学反应进行。有些反应是不可逆的，如水果切块的酶促褐变反应，</p>
+<p>但酶在食品中也有重要的积极作用，举个例子：凝乳酶可以促使液态来凝结成奶酪，乳糖酶可以分解我们人体内的乳糖（除非你有乳糖不耐症），食品工业中还利用酶含量来判断海鲜的新鲜度、巴氏杀菌奶的安全以及其他积极应用。此外，酶促褐变反应还有利于茶、咖啡和葡萄干形成理想的色泽。<br><img src="https://haohome.top/Potato-whole-fresh-and-brown1.jpg" alt="image"></p>
+]]></content>
+      <categories>
+        <category>food</category>
+      </categories>
+      <tags>
+        <tag>保鲜知识</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>餐饮研发员的基本素质</title>
     <url>/2016/07/12/%E9%A3%9F%E5%93%81%E7%A7%91%E5%AD%A6/%E9%A4%90%E9%A5%AE%E7%A0%94%E5%8F%91%E5%91%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B4%A0%E8%B4%A8/</url>
     <content><![CDATA[<p>餐饮属于快节奏的行业，对研发员的工作是很大的挑战。</p>
@@ -3805,48 +3903,6 @@
       </categories>
       <tags>
         <tag>工作感想</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创新特征</title>
-    <url>/2020/11/08/%E5%B7%A5%E4%BD%9C%E6%80%9D%E7%BB%B4/%E5%88%9B%E6%96%B0%E7%89%B9%E5%BE%81/</url>
-    <content><![CDATA[<p>创新有两种形式：</p>
-<ol>
-<li>连续式创新：沿着同一条S曲线进步；</li>
-<li>非连续式创新：转换到新的S曲线；</li>
-</ol>
-<h2 id="一、连续性创新"><a href="#一、连续性创新" class="headerlink" title="一、连续性创新"></a>一、连续性创新</h2><img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108230818752.png" alt="image-20201108230818752" style="zoom:20%;" />
-
-<p>技术连续性创新的特征</p>
-<blockquote>
-<p>A. 沿着技术曲线持续改善原有的产品性能</p>
-<p>B. 定位于主流市场的主流消费者</p>
-<p>C. Better</p>
-</blockquote>
-<p>案例：</p>
-<blockquote>
-<ul>
-<li>英特尔不断推出性能更强的微处理器</li>
-<li>微软Windows操作系统的不断升级</li>
-<li>苹果iPhone的升级换代。</li>
-</ul>
-</blockquote>
-<h2 id="二、非连续创新"><a href="#二、非连续创新" class="headerlink" title="二、非连续创新"></a>二、非连续创新</h2><p>新旧技术之间不是继承关系，而是竞争关系，其交替过程就是技术的非连续性断层期。</p>
-<img src="https://gitee.com/hfood/img-cloud/raw/master/202012/image-20201108231434104.png" alt="image-20201108231434104" style="zoom:20%;" />
-
-<h2 id="三、企业思维与市场思维"><a href="#三、企业思维与市场思维" class="headerlink" title="三、企业思维与市场思维"></a>三、企业思维与市场思维</h2><ul>
-<li><p>企业的基础假设是连续性，其焦点在于运营和管理; </p>
-</li>
-<li><p>市场的基础假设是不连续性，其重点则是创造与破坏。</p>
-</li>
-</ul>
-<p>市场速度超过个体公司速度的原因：市场是破坏性思维，公司是保护性思维</p>
-]]></content>
-      <categories>
-        <category>work</category>
-      </categories>
-      <tags>
-        <tag>思维</tag>
       </tags>
   </entry>
   <entry>
